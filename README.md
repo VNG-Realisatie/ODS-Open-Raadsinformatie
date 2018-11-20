@@ -12,7 +12,7 @@ Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API
 * Definition of Done
 * Hoe u kunt bijdragen
 * Omgangsvormen
-* [Technische specificaties](https://github.com/VNG-Realisatie/Openraadsinformatie/tree/master/api-specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Open-Raadsinformatie/master/api-specificatie/openapi.yaml)
+* [Technische specificaties] (https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/api-specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Open-Raadsinformatie/master/api-specificatie/openapi.yaml)
 * Ontwerpkeuzes staan in het document [Design decisions](https://github.com/VNG-Realisatie/Open-Raadsinformatie/blob/master/docs/design_decisions.md)
 
 ## Bronnen
