@@ -20,7 +20,8 @@ Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API
 * [API strategie en URI strategie](https://aandeslagmetdeomgevingswet.nl/digitaal-stelsel/documenten/documenten/api-uri-strategie/)
 
 ## Contactpersonen:
-* Projectleider: Tom Kunzler Tom.Kunzler@VNG.NL
+* Projectleider: Sander Bakker Sander.Bakker@VNG.NL
+* Informatieanalist - Modelontwerper : Remko de Haas Remko.deHaas@VNG.nl
 * Berichtontwerper: Johan Boer johan.boer@vng.nl
 
 ## Licentie
