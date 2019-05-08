@@ -165,7 +165,7 @@ paths:
       - Aanwezigedeelnemers
   /vergadering{vergaderingsidentificatie}/aanwezigedeelnemers:
     get:
-      operationId: aanwezigedeelnemers
+      operationId: aanwezigedeelnemers2
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert."
       parameters: 
         - in: query
