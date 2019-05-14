@@ -1,13 +1,12 @@
 openapi: 3.0.0
 servers:
-  - description: "SwaggerHub API Auto Mocking"
+# Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/VNGRealisatie/api/open_raadsinformatie/v1
-  - description: "Referentie-implementatie"
-    url: https://www.voorbeeldgemeente.nl/api/open_raadsinformatie/v1
 info:
   title: Open Raadsinformatie
   description: ""
-  version: "1.0"
+  version: "1.0.0"
   contact:
     url: https://github.com/VNG-Realisatie/Open-Raadsinformatie
   license:
@@ -163,145 +162,9 @@ paths:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
       tags: 
       - Aanwezigedeelnemers
-  /vergadering{vergaderingsidentificatie}/aanwezigedeelnemers:
-    get:
-      operationId: aanwezigedeelnemers2
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert."
-      parameters: 
-        - in: query
-          name: page
-          description: "Een pagina binnen de gepagineerde resultatenset."
-          required: false
-          schema:
-            type: integer
-            minimum: 1
-      responses:
-        '200':
-          description: "Zoekactie geslaagd"
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-            warning:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
-            X-Pagination-Page:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Pagination_Page"
-            X-Pagination-Limit:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Pagination_Limit"
-            X-Rate-Limit-Limit:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
-            X-Rate-Limit-Remaining:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
-            X-Rate-Limit-Reset:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
-          content:
-            application/hal+json:
-              schema:
-                type: object
-                properties:
-                  _links:
-                    $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalPaginationLinks"
-                  _embedded:
-                    type: object
-                    properties:
-                      aanwezigedeelnemers:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/AanwezigeDeelnemer'
-        '400':
-          description: Bad Request
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/ValidatieFoutbericht"
-        '401':
-          description: Unauthorized
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '403':
-          description: Forbidden
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '406':
-          description: Not Acceptable
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '409':
-          description: Conflict
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '410':
-          description: Gone
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '415':
-          description: Unsupported Media Type
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '429':
-          description: Too Many Requests
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '500':
-          description: Internal Server Error
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        'default':
-          description: Er is een onverwachte fout opgetreden.
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-      tags: 
-      - Aanwezigedeelnemers
   /aanwezigedeelnemers/{aanwezigedeelnemeridentificatie}:
     get:
-      operationId: aanwezigedeelnemers
+      operationId: aanwezigedeelnemer
       description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert."
       parameters: 
         - in: path
@@ -423,10 +286,9 @@ paths:
       - Aanwezigedeelnemers
   /agendapunten/{agendapuntnummer}:
     get:
-      operationId: getVergaderingen
-      description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert."
+      operationId: getagendapunt
+      description: "Het bericht dat de JSON/REST API voor het ophalen van gegevens van een agendapunt retourneert."
       parameters: 
-        - $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/parameters.yaml#/expand"
         - in: path
           name: agendapuntnummer
           description: "Het nummer van het agendapunt op de agenda."
@@ -546,7 +408,7 @@ paths:
       - Agendapunten
   /agendapunten:
     get:
-      operationId: agendapunten
+      operationId: Getagendapunten
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert."
       parameters: 
         - in: query
@@ -556,7 +418,6 @@ paths:
           schema:
             type: integer
             minimum: 1
-        - $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/parameters.yaml#/expand"
         - in: query
           name: agendapuntomschrijving
           description: "De omschrijving van het agendapunt"
@@ -689,8 +550,8 @@ paths:
       - Agendapunten
   /amendementen/{informatieobjectidentificatie}:
     get:
-      operationId: amendementen
-      description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert."
+      operationId: Getamendement
+      description: "Het bericht dat de JSON/REST API voor het ophalen van gegevens van een amendement retourneert."
       parameters: 
         - in: path
           name: informatieobjectidentificatie
@@ -811,8 +672,8 @@ paths:
       - Amendementen
   /amendementen:
     get:
-      operationId: amendementen
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert."
+      operationId: Getamendementen
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie amendementen retourneert."
       parameters: 
         - in: query
           name: page
@@ -1015,8 +876,8 @@ paths:
       - Amendementen
   /besluitvormingsstukken:
     get:
-      operationId: amendementen
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert."
+      operationId: Getbesluitvormingsstukken
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie besluitvormingsstukken retourneert."
       parameters: 
         - in: query
           name: page
@@ -1121,10 +982,10 @@ paths:
                   _embedded:
                     type: object
                     properties:
-                      amendementen Moties voorstellen:
+                      ingekomenstuk:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Amendement Motie Voorstel'
+                          $ref: '#/components/schemas/IngekomenStuk'
         '400':
           description: Bad Request
           headers:
@@ -1216,10 +1077,10 @@ paths:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
       tags: 
-      - Amendementen
+      - Besluitvormingsstukken
   /besluitvormingsstukken/{informatieobjectidentificatie}:
     get:
-      operationId: besluitvormingsstukken
+      operationId: Getbesluitvormingsstuk
       description: "Het bericht dat de JSON/REST API voor het ophalen van een besluitvormingsstuk retourneert."
       parameters: 
         - in: path
@@ -1246,7 +1107,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Amendement Motie Voorstel'
+                $ref: '#/components/schemas/IngekomenStuk'
         '401':
           description: Unauthorized
           headers:
@@ -1341,8 +1202,8 @@ paths:
       - Besluitvormingsstukken
   /antwoorden:
     get:
-      operationId: antwoorden
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert."
+      operationId: Getantwoorden
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie antwoorden retourneert."
       parameters: 
         - in: query
           name: page
@@ -1435,7 +1296,7 @@ paths:
                   _embedded:
                     type: object
                     properties:
-                      :
+                      antwoorden:
                         type: array
                         items:
                           $ref: '#/components/schemas/Antwoord'
@@ -1533,8 +1394,8 @@ paths:
       - Antwoorden
   /antwoorden/{informatieobjectidentificatie}:
     get:
-      operationId: antwoorden
-      description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert."
+      operationId: Getantwoord
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een antwoord retourneert."
       parameters: 
         - in: path
           name: informatieobjectidentificatie
@@ -1655,7 +1516,7 @@ paths:
       - Antwoorden
   /besluiten/{besluitidentificatie}:
     get:
-      operationId: besluiten
+      operationId: Getbesluit
       description: "Het bericht dat de JSON/REST API voor het ophalen van besluit gegevens retourneert."
       parameters: 
         - in: path
@@ -1777,7 +1638,7 @@ paths:
       - Besluiten
   /besluiten:
     get:
-      operationId: besluiten
+      operationId: Getbesluiten
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie besluiten retourneert."
       parameters: 
         - in: query
@@ -1980,10 +1841,10 @@ paths:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
       tags: 
       - Besluiten
-  /colleges:
+  /dagelijksebesturen:
     get:
-      operationId: colleges
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie fracties retourneert."
+      operationId: Getdagelijksebesturen
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie dagelijkse besturen retourneert."
       parameters: 
         - in: query
           name: page
@@ -1993,7 +1854,7 @@ paths:
             type: integer
             minimum: 1
         - in: query
-          name: collegenaam
+          name: dagelijksbestuurnaam
           description: "De naam van het dagelijkse bestuur verschilt per bestuurslaag"
           required: false
           schema:
@@ -2027,10 +1888,10 @@ paths:
                   _embedded:
                     type: object
                     properties:
-                      colleges:
+                      dagelijksebesturen:
                         type: array
                         items:
-                          $ref: '#/components/schemas/College'
+                          $ref: '#/components/schemas/DagelijksBestuur'
         '400':
           description: Bad Request
           headers:
@@ -2122,14 +1983,14 @@ paths:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
       tags: 
-      - Colleges
-  /colleges/{collegeidentificatie}:
+      - Dagelijkse Besturen
+  /dagelijksebesturen/{dagelijksbestuuridentificatie}:
     get:
-      operationId: colleges
-      description: "Het bericht dat de JSON/REST API voor het ophalen van fractie gegevens retourneert."
+      operationId: Getdagelijksbestuur
+      description: "Het bericht dat de JSON/REST API voor het ophalen van dagelijks bestuur gegevens retourneert."
       parameters: 
         - in: path
-          name: collegeidentificatie
+          name: dagelijksbestuuridentificatie
           description: ""
           required: true
           schema:
@@ -2152,7 +2013,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/College'
+                $ref: '#/components/schemas/DagelijksBestuur'
         '401':
           description: Unauthorized
           headers:
@@ -2244,11 +2105,11 @@ paths:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
       tags: 
-      - Colleges
-  /collegelidmaatschappen:
+      - Dagelijkse Besturen
+  /dagelijksbestuurlidmaatschappen:
     get:
-      operationId: collegelidmaatschappen
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie fracties retourneert."
+      operationId: Getdagelijksbestuurlidmaatschappen
+      description: "Het bericht dat de JSON/REST API voor het ophalen van lidmaatschappen van het dagelijks bestuur retourneert."
       parameters: 
         - in: query
           name: page
@@ -2258,13 +2119,13 @@ paths:
             type: integer
             minimum: 1
         - in: query
-          name: datumbegincollegelidmaatschap
+          name: datumbegindagelijksbestuurlidmaatschap
           description: "De datum en tijdstip waarop het lidmaatschap van het dagelijkse bestuur begon"
           required: false
           schema:
             type: string
         - in: query
-          name: datumeindecollegelidmaatschap
+          name: datumeindedagelijksbestuurlidmaatschap
           description: "De datum en tijdstip waarop het lidmaatschap van het dagelijkse bestuur geëindigd is."
           required: false
           schema:
@@ -2297,10 +2158,10 @@ paths:
                   _embedded:
                     type: object
                     properties:
-                      collegelidmaatschappen:
+                      dagelijksbestuurlidmaatschappen:
                         type: array
                         items:
-                          $ref: '#/components/schemas/CollegeLidmaatschap'
+                          $ref: '#/components/schemas/DagelijksBestuurLidmaatschap'
         '400':
           description: Bad Request
           headers:
@@ -2392,10 +2253,10 @@ paths:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
       tags: 
-      - Collegelidmaatschappen
+      - Dagelijksbestuurlidmaatschappen
   /fracties/{fractienummer}:
     get:
-      operationId: fracties
+      operationId: Getfractie
       description: "Het bericht dat de JSON/REST API voor het ophalen van fractie gegevens retourneert."
       parameters: 
         - in: path
@@ -2517,7 +2378,7 @@ paths:
       - Fracties
   /fracties:
     get:
-      operationId: fracties
+      operationId: Getfracties
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie fracties retourneert."
       parameters: 
         - in: query
@@ -2660,8 +2521,8 @@ paths:
       - Fracties
   /fractielidmaatschappen:
     get:
-      operationId: fracties
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie fracties retourneert."
+      operationId: Getfractielidmaatschappen
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie fractielidmaatschappen retourneert."
       parameters: 
         - in: query
           name: page
@@ -2821,8 +2682,8 @@ paths:
       - Fractielidmaatschappen
   /ingekomenstukken/{informatieobjectidentificatie}:
     get:
-      operationId: aanwezigedeelnemers
-      description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert."
+      operationId: Getingekomenstuk
+      description: "Het bericht dat de JSON/REST API voor het ophalen van ingekomeens stuk-gegevens retourneert."
       parameters: 
         - in: path
           name: informatieobjectidentificatie
@@ -2943,8 +2804,8 @@ paths:
       - Ingekomenstukken
   /ingekomenstukken:
     get:
-      operationId: aanwezigedeelnemers
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert."
+      operationId: Getingekomenstukken
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie ingekomen stukken retourneert."
       parameters: 
         - in: query
           name: page
@@ -3119,9 +2980,314 @@ paths:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
       tags: 
       - Ingekomenstukken
+  /mededelingen:
+    get:
+      operationId: Getmededelingen
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie mededelingen retourneert."
+      parameters: 
+        - in: query
+          name: page
+          description: "Een pagina binnen de gepagineerde resultatenset."
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - in: query
+          name: auteur
+          description: "De persoon of organisatie die in de eerste plaats verantwoordelijk is voor het creëren van de inhoud van het INFORMATIEOBJECT. Het kan zowel een medewerker of organisatorische eenheid van de zaakbehandelende organisatie betreffen als een externe partij (persoon of organisatie). Het betreft het Dublin Core metadata-element ‘Creator’ met als toelichting: Examples of Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity. Van een ontvangen informatieobject kan de afzender de auteur zijn maar dat kan ook een ander zijn bijvoorbeeld in het geval dat de afzender een document van een derde meestuurt. Indien het informatieobject in een geautomatiseerd proces is vervaardigd, dan wordt als auteur vermeld degene die dat informatieobject ondertekend zou hebben dan wel, bij informatieobjecten waarbij van ondertekening geen sprake is (zoals bijvoorbeeld bij het omzetten van de zaakgegevens naar een duurzaam bewaarbaar informatieobject in pdf), degene die verantwoordelijk is voor de inhoud van het informatieobject vanuit zijn of haar rol bij de zaak (veelal degene in de rol van Zaakcoördinator). De naamgegevens van de auteur zijnde een betrokkene die in een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon of organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend."
+          required: false
+          schema:
+            type: string
+            maxLength: 200
+        - in: query
+          name: bronorganisatie
+          description: "bronorganisatie bronorganisatie Het RSIN van de Niet-natuurlijk persoon zijnde de organisatie die het informatieobject heeft gecreëerd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd. Het betreft het RSIN (Rechtspersonen en Samenwerkingsverbanden InformatieNummer) zoals dat door de KvK in het NHR aan elk rechtspersoon en samenwerkingsverband is toegekend. Dit identificeert uniek de organisatie, zijnde een rechtspersoon of samenwerkingsverband, dat het informatieobject heeft gecreëerd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd. Met het laatste doelen we er op dat bij uitwisseling van een informatieobject tussen samenwerkende organisaties de unieke aanduiding van het informatieobject niet wijzigt mits de ontvangende organisatie geen wijzigingen in het informatieobject aanbrengt. In het laatste geval ontstaat een nieuw informatieobject. Het RSIN staat in het Handelsregister (NHR) en op het daaraan te ontlenen uittreksel. Deze attribuutsoort vormt tezamen met de Informatieobjectidentificatie de unieke aanduiding van een informatieobject voor geheel Nederland. De waarde van dit attribuutsoort wijzigt niet, ook niet indien (de behandeling van) het informatieobject over zou gaan naar een andere organisatie. Er is immers maar één organisatie die het informatieobject gecreëerd of als eerste vastgelegd heeft. De in het NHR voorkomende unieke identificaties van rechtspersonen en samenwerkingsverbanden."
+          required: false
+          schema:
+            type: integer
+            maximum: 9.99999999E8
+        - in: query
+          name: creatiedatum
+          description: "creatiedatum creatiedatum Een datum of een gebeurtenis in de levenscyclus van het INFORMATIEOBJECT. Een datum of een gebeurtenis in de levenscyclus van het INFORMATIEOBJECT. Deze datum verwijst gewoonlijk naar de creatie van het INFORMATIEOBJECT. Het betreft het Dublin Core metadata-element ‘Date’ met als toelichting: Typically, Date will be associated with the creation or availability of the resource. Recommended best practice for encoding the date value is defined in a profile of ISO 8601 (W3CDTF) and includes (among others) dates of the form YYYY-MM-DD. Alle geldige datums gelegen op of voor de huidige datum en tijd"
+          required: false
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: datumingediend
+          description: "De datum waarop het BESLUITVORMINGSSTUK is ingediend"
+          required: false
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: informatieobjectidentificatie
+          description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreëerd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de ‘gegeven context’). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort ‘Bronorganisatie’, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element ‘Identifier’ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
+          required: false
+          schema:
+            type: string
+            maxLength: 40
+        - in: query
+          name: motietype
+          description: "de classificatie van de MOTIE"
+          required: false
+          schema:
+              $ref: "#/components/schemas/MotieType"
+        - in: query
+          name: omschrijving
+          description: "De omschrijving van het BESLUITVORMINGSSTUK Dit kan de omschrijving zijn van de MOTIE, het AMENDEMENT of het VOORSTEL"
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Pagination-Page:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Pagination_Page"
+            X-Pagination-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Pagination_Limit"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/hal+json:
+              schema:
+                type: object
+                properties:
+                  _links:
+                    $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalPaginationLinks"
+                  _embedded:
+                    type: object
+                    properties:
+                      mededelingen:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Mededeling'
+        '400':
+          description: Bad Request
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/ValidatieFoutbericht"
+        '401':
+          description: Unauthorized
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Mededelingen
+  /mededelingen/{informatieobjectidentificatie}:
+    get:
+      operationId: Getmededeling
+      description: "Het bericht dat de JSON/REST API voor het ophalen van mededeling gegevens retourneert."
+      parameters: 
+        - in: path
+          name: informatieobjectidentificatie
+          description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreëerd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de ‘gegeven context’). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort ‘Bronorganisatie’, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element ‘Identifier’ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
+          required: true
+          schema:
+            type: string
+            maxLength: 40
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Mededeling'
+        '401':
+          description: Unauthorized
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Mededelingen
   /moties/{informatieobjectidentificatie}:
     get:
-      operationId: informatieobjecten
+      operationId: Getmotie
       description: "Het bericht dat de JSON/REST API voor het ophalen van motie gegevens retourneert."
       parameters: 
         - in: path
@@ -3243,7 +3409,7 @@ paths:
       - Moties
   /moties:
     get:
-      operationId: informatieobjecten
+      operationId: Getmoties
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie moties retourneert."
       parameters: 
         - in: query
@@ -3426,7 +3592,7 @@ paths:
       - Moties
   /natuurlijkpersonen/{nummernatuurlijkpersoon}:
     get:
-      operationId: natuurlijkPersonen
+      operationId: GetnatuurlijkPersoon
       description: "Het bericht dat de JSON/REST API voor het ophalen van persoonsgegevens retourneert."
       parameters: 
         - in: path
@@ -3548,7 +3714,7 @@ paths:
       - Natuurlijkpersonen
   /natuurlijkpersonen:
     get:
-      operationId: natuurlijkPersonen
+      operationId: GetnatuurlijkPersonen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie personen retourneert."
       parameters: 
         - in: query
@@ -3710,7 +3876,7 @@ paths:
       - Natuurlijkpersonen
   /spreekfragmenten:
     get:
-      operationId: spreekfragmenten
+      operationId: Getspreekfragmenten
       description: "Het bericht dat de JSON/REST API voor het ophalen van een spreekfragment retourneert."
       parameters: 
         - in: query
@@ -3907,7 +4073,7 @@ paths:
       - Spreekfragmenten
   /spreekfragmenten/{spreekfragmentidentificatie}:
     get:
-      operationId: spreekfragmenten
+      operationId: Getspreekfragment
       description: "Het bericht dat de JSON/REST API voor het ophalen van een spreekfragment retourneert."
       parameters: 
         - in: path
@@ -4028,7 +4194,7 @@ paths:
       - Spreekfragmenten
   /stemmen:
     get:
-      operationId: spreekfragmenten
+      operationId: Getstemmen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een spreekfragment retourneert."
       parameters: 
         - in: query
@@ -4170,7 +4336,7 @@ paths:
       - Stemmen
   /stemmingen:
     get:
-      operationId: stemmingen
+      operationId: Getstemmingen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie stemmingen retourneert."
       parameters: 
         - in: query
@@ -4312,7 +4478,7 @@ paths:
       - Stemmingen
   /stemmingen/{stemmingsidentificatie}:
     get:
-      operationId: stemmingen
+      operationId: Getstemming
       description: "Het bericht dat de JSON/REST API voor het ophalen van fractie gegevens retourneert."
       parameters: 
         - in: path
@@ -4434,7 +4600,7 @@ paths:
       - Stemmingen
   /stemresultatenperfractie:
     get:
-      operationId: stemresultatenperfractie
+      operationId: Getstemresultatenperfractie
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie stemresultatenperfractie retourneert."
       parameters: 
         - in: query
@@ -4581,9 +4747,314 @@ paths:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
       tags: 
       - Stemresultatenperfractie
+  /toezeggingen/{informatieobjectidentificatie}:
+    get:
+      operationId: Gettoezegging
+      description: "Het bericht dat de JSON/REST API voor het ophalen van toezegging gegevens retourneert."
+      parameters: 
+        - in: path
+          name: informatieobjectidentificatie
+          description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreëerd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de ‘gegeven context’). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort ‘Bronorganisatie’, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element ‘Identifier’ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
+          required: true
+          schema:
+            type: string
+            maxLength: 40
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Toezegging'
+        '401':
+          description: Unauthorized
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '404':
+          description: Not Found
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Toezeggingen
+  /toezeggingen:
+    get:
+      operationId: Gettoezeggingen
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie toezeggingen retourneert."
+      parameters: 
+        - in: query
+          name: page
+          description: "Een pagina binnen de gepagineerde resultatenset."
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - in: query
+          name: auteur
+          description: "De persoon of organisatie die in de eerste plaats verantwoordelijk is voor het creëren van de inhoud van het INFORMATIEOBJECT. Het kan zowel een medewerker of organisatorische eenheid van de zaakbehandelende organisatie betreffen als een externe partij (persoon of organisatie). Het betreft het Dublin Core metadata-element ‘Creator’ met als toelichting: Examples of Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity. Van een ontvangen informatieobject kan de afzender de auteur zijn maar dat kan ook een ander zijn bijvoorbeeld in het geval dat de afzender een document van een derde meestuurt. Indien het informatieobject in een geautomatiseerd proces is vervaardigd, dan wordt als auteur vermeld degene die dat informatieobject ondertekend zou hebben dan wel, bij informatieobjecten waarbij van ondertekening geen sprake is (zoals bijvoorbeeld bij het omzetten van de zaakgegevens naar een duurzaam bewaarbaar informatieobject in pdf), degene die verantwoordelijk is voor de inhoud van het informatieobject vanuit zijn of haar rol bij de zaak (veelal degene in de rol van Zaakcoördinator). De naamgegevens van de auteur zijnde een betrokkene die in een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon of organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend."
+          required: false
+          schema:
+            type: string
+            maxLength: 200
+        - in: query
+          name: bronorganisatie
+          description: "bronorganisatie bronorganisatie Het RSIN van de Niet-natuurlijk persoon zijnde de organisatie die het informatieobject heeft gecreëerd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd. Het betreft het RSIN (Rechtspersonen en Samenwerkingsverbanden InformatieNummer) zoals dat door de KvK in het NHR aan elk rechtspersoon en samenwerkingsverband is toegekend. Dit identificeert uniek de organisatie, zijnde een rechtspersoon of samenwerkingsverband, dat het informatieobject heeft gecreëerd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd. Met het laatste doelen we er op dat bij uitwisseling van een informatieobject tussen samenwerkende organisaties de unieke aanduiding van het informatieobject niet wijzigt mits de ontvangende organisatie geen wijzigingen in het informatieobject aanbrengt. In het laatste geval ontstaat een nieuw informatieobject. Het RSIN staat in het Handelsregister (NHR) en op het daaraan te ontlenen uittreksel. Deze attribuutsoort vormt tezamen met de Informatieobjectidentificatie de unieke aanduiding van een informatieobject voor geheel Nederland. De waarde van dit attribuutsoort wijzigt niet, ook niet indien (de behandeling van) het informatieobject over zou gaan naar een andere organisatie. Er is immers maar één organisatie die het informatieobject gecreëerd of als eerste vastgelegd heeft. De in het NHR voorkomende unieke identificaties van rechtspersonen en samenwerkingsverbanden."
+          required: false
+          schema:
+            type: integer
+            maximum: 9.99999999E8
+        - in: query
+          name: creatiedatum
+          description: "creatiedatum creatiedatum Een datum of een gebeurtenis in de levenscyclus van het INFORMATIEOBJECT. Een datum of een gebeurtenis in de levenscyclus van het INFORMATIEOBJECT. Deze datum verwijst gewoonlijk naar de creatie van het INFORMATIEOBJECT. Het betreft het Dublin Core metadata-element ‘Date’ met als toelichting: Typically, Date will be associated with the creation or availability of the resource. Recommended best practice for encoding the date value is defined in a profile of ISO 8601 (W3CDTF) and includes (among others) dates of the form YYYY-MM-DD. Alle geldige datums gelegen op of voor de huidige datum en tijd"
+          required: false
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: datumingediend
+          description: "De datum waarop het BESLUITVORMINGSSTUK is ingediend"
+          required: false
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: informatieobjectidentificatie
+          description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreëerd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de ‘gegeven context’). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort ‘Bronorganisatie’, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element ‘Identifier’ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
+          required: false
+          schema:
+            type: string
+            maxLength: 40
+        - in: query
+          name: motietype
+          description: "de classificatie van de MOTIE"
+          required: false
+          schema:
+              $ref: "#/components/schemas/MotieType"
+        - in: query
+          name: omschrijving
+          description: "De omschrijving van het BESLUITVORMINGSSTUK Dit kan de omschrijving zijn van de MOTIE, het AMENDEMENT of het VOORSTEL"
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/warning"
+            X-Pagination-Page:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Pagination_Page"
+            X-Pagination-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Pagination_Limit"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/X_Rate_Limit_Reset"
+          content:
+            application/hal+json:
+              schema:
+                type: object
+                properties:
+                  _links:
+                    $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalPaginationLinks"
+                  _embedded:
+                    type: object
+                    properties:
+                      toezeggingen:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Toezegging'
+        '400':
+          description: Bad Request
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/ValidatieFoutbericht"
+        '401':
+          description: Unauthorized
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '403':
+          description: Forbidden
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '406':
+          description: Not Acceptable
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '409':
+          description: Conflict
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '410':
+          description: Gone
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '415':
+          description: Unsupported Media Type
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '429':
+          description: Too Many Requests
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '500':
+          description: Internal Server Error
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        'default':
+          description: Er is een onverwachte fout opgetreden.
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+      tags: 
+      - Toezeggingen
   /vergaderingen:
     get:
-      operationId: vergaderingen
+      operationId: Getvergaderingen
       description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert."
       parameters: 
         - in: query
@@ -4746,7 +5217,7 @@ paths:
       - Vergaderingen
   /vergaderingen/{vergaderingsidentificatie}:
     get:
-      operationId: vergaderingen
+      operationId: Getvergadering
       description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert."
       parameters: 
         - $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/parameters.yaml#/expand"
@@ -4870,8 +5341,8 @@ paths:
       - Vergaderingen
   /voorstellen:
     get:
-      operationId: vergaderingen
-      description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert."
+      operationId: Getvoorstellen
+      description: "Het bericht dat de JSON/REST API voor het ophalen van voorstelgegevens retourneert."
       parameters: 
         - in: query
           name: page
@@ -5062,7 +5533,7 @@ paths:
       - Voorstellen
   /voorstellen/{informatieobjectidentificatie}:
     get:
-      operationId: voorstellen
+      operationId: Getvoorstel
       description: "Het bericht dat de JSON/REST API voor het ophalen van voorstel gegevens retourneert."
       parameters: 
         - in: path
@@ -5184,7 +5655,7 @@ paths:
       - Voorstellen
   /vragen/{informatieobjectidentificatie}:
     get:
-      operationId: vragen
+      operationId: Getvraag
       description: "Het bericht dat de JSON/REST API voor het ophalen van vraag-gegevens retourneert."
       parameters: 
         - in: path
@@ -5306,7 +5777,7 @@ paths:
       - Vragen
   /vragen:
     get:
-      operationId: vragen
+      operationId: Getvragen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie vragen retourneert."
       parameters: 
         - in: query
@@ -5494,6 +5965,15 @@ components:
       type: "object"
       description: "De NATUURLIJKe PERSOON die deelneemt aan een VERGADERING"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         aanvangAanwezigheid:
           type: "string"
           title: "Aanvang aanwezigheid"
@@ -5515,7 +5995,7 @@ components:
           description: "De einde van de aanwezigheid"
         rolnaam:
           $ref: "#/components/schemas/RolNaam"
-        vertegenwoordigdOrganisatie:
+        vertegenwoordigtOrganisatie:
           type: "string"
           title: "Vertegenwoordigde organisatie"
           description: "De naam van de organisatie die iemand vertegenwoordigt."
@@ -5528,9 +6008,19 @@ components:
         \ Een AGENDAPUNT kan weer onderverdeeld zijn naar subAGENDAPUNTen."
       required:
       - "agendapuntnummer"
+      - "indicatieHamerstuk"
       - "indicatorBehandeld"
       - "indicatorBesloten"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         agendapuntKenmerk:
           type: "string"
           title: "Agendapunt kenmerk"
@@ -5578,6 +6068,11 @@ components:
           title: "Geplande starttijd"
           description: "De geplande datum en tijdstip waarop de behandeling van de\
             \ agendapunt start"
+        indicatieHamerstuk:
+          type: "boolean"
+          title: "Indicatie hamerstuk"
+          description: ""
+          example: "true"
         indicatorBehandeld:
           type: "boolean"
           title: "Indicator behandeld"
@@ -5596,8 +6091,6 @@ components:
             \ is gestart"
         _links:
           $ref: "#/components/schemas/Agendapunt_links"
-        _embedded:
-          $ref: "#/components/schemas/Agendapunt_embedded"
     Amendement:
       allOf:
       - $ref: "#/components/schemas/Besluitvormingsstuk"
@@ -5685,6 +6178,16 @@ components:
       - "ingangsdatum"
       - "verantwoordelijkeOrganisatie"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+
         besluitdatum:
           type: "string"
           title: "Besluitdatum"
@@ -5800,34 +6303,52 @@ components:
           format: "date"
         _links:
           $ref: "#/components/schemas/Besluit_links"
-    College:
+    DagelijksBestuur:
       type: "object"
       description: "Het dagelijkse bestuur van de gemeente (college) of provincie\
         \ (gedeputeerde staten) bereidt het beleid voor en voert dit beleid uit."
       required:
-      - "collegeidentificatie"
-      - "collegenaam"
+      - "dagelijksBestuurIdentificatie"
+      - "dagelijksBestuurNaam"
       properties:
-        collegeidentificatie:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        dagelijksBestuurIdentificatie:
           type: "string"
-          title: "collegeidentificatie"
+          title: "dagelijksBestuurIdentificatie"
           description: ""
           maxLength: 10
           minLength: 1
-        collegenaam:
+        dagelijksBestuurNaam:
           type: "string"
           title: "Naam bestuurstype"
           description: "De naam van het dagelijkse bestuur verschilt per bestuurslaag"
           maxLength: 200
           minLength: 1
         _links:
-          $ref: "#/components/schemas/College_links"
-    CollegeLidmaatschap:
+          $ref: "#/components/schemas/DagelijksBestuur_links"
+    DagelijksBestuurLidmaatschap:
       type: "object"
       description: "De lidmaatschap van het dagelijkse bestuur"
       required:
       - "collegelidmaatschapidentificatie"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         collegelidmaatschapidentificatie:
           type: "string"
           title: "collegelidmaatschapidentificatie"
@@ -5845,7 +6366,7 @@ components:
           description: "De datum en tijdstip waarop het lidmaatschap van het dagelijkse\
             \ bestuur geëindigd is."
         _links:
-          $ref: "#/components/schemas/CollegeLidmaatschap_links"
+          $ref: "#/components/schemas/DagelijksBestuurLidmaatschap_links"
     Fractie:
       type: "object"
       description: "Is een deel van een gekozen volksvertegenwoordiging"
@@ -5853,6 +6374,15 @@ components:
       - "fractienaam"
       - "fractienummer"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         fractienaam:
           type: "string"
           title: "Fractienaam"
@@ -5876,6 +6406,15 @@ components:
       - "fractieLidmaatschapIdentificatie"
       - "indicatieVoorzitter"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         datumBeginFractieLidmaatschap:
           type: "string"
           title: "Datum begin fractie lidmaatschap"
@@ -5913,6 +6452,22 @@ components:
             description: ""
           _links:
             $ref: "#/components/schemas/IngekomenStuk_links"
+    Mededeling:
+      allOf:
+      - $ref: "#/components/schemas/EnkelvoudigInformatieobject"
+      - type: "object"
+        description: "Een mededeling die gedaan wordt bij de vergadering Een mededeling\
+          \ die gedaan wordt bij de vergadering Een mededeling die gedaan wordt bij\
+          \ de vergadering Kan vaak een antwoord zijn op een toezegging."
+        properties:
+          mededelingomschrijving:
+            type: "string"
+            title: "Mededelingomschrijving"
+            description: "De omschrijving van de mededeling De omschrijving van de\
+              \ mededeling"
+            example: "Dit is de tekst die in een mededeling zou kunnen worden opgenomen."
+          _links:
+            $ref: "#/components/schemas/Mededeling_links"
     NatuurlijkPersoon:
       type: "object"
       description: "Een PERSOON zijnde een mens. Een PERSOON zijnde een mens. Het\
@@ -5927,6 +6482,15 @@ components:
       - "nummerNatuurlijkPersoon"
       - "naamNatuurlijkPersoon"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         functie:
           $ref: "#/components/schemas/Functie"
         geslachtsaanduiding:
@@ -5955,6 +6519,15 @@ components:
       required:
       - "spreekfragmentidentificatie"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         aanvangSpreekfragment:
           type: "string"
           title: "Aanvang spreekfragment"
@@ -6017,6 +6590,15 @@ components:
       - "keuzeMondelingeStemming"
       - "stemIdentificatie"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         keuzeMondelingeStemming:
           $ref: "#/components/schemas/StemKeuze"
         stemIdentificatie:
@@ -6036,6 +6618,15 @@ components:
       required:
       - "stemmingsidentificatie"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         resultaatMondelingeStemming:
           $ref: "#/components/schemas/StemmingResultaat"
         resultaatStemmingOverPersonen:
@@ -6065,6 +6656,15 @@ components:
       required:
       - "stemresultaatperfractieidentificatie"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         fractiestemresultaat:
           $ref: "#/components/schemas/FractieStemResultaat"
         stemresultaatperfractieidentificatie:
@@ -6075,6 +6675,24 @@ components:
           minLength: 1
         _links:
           $ref: "#/components/schemas/StemresultaatPerFractie_links"
+    Toezegging:
+      allOf:
+      - $ref: "#/components/schemas/EnkelvoudigInformatieobject"
+      - type: "object"
+        description: "Een toezegging van een gedeputeerde of raadslid Een toezegging\
+          \ van een gedeputeerde of raadslid Een toezegging van een gedeputeerde of\
+          \ raadslid"
+        required:
+        - "toezeggingsomschrijving"
+        properties:
+          toezeggingsomschrijving:
+            type: "string"
+            title: "Toezeggingsomschrijving"
+            description: "De omschrijving van een toezegging De omschrijving van een\
+              \ toezegging"
+            minLength: 1
+          _links:
+            $ref: "#/components/schemas/Toezegging_links"
     Vergadering:
       type: "object"
       description: "Een VERGADERING is een bijeenkomst van meerdere mensen die met\
@@ -6083,6 +6701,15 @@ components:
       - "vergaderingsidentificatie"
       - "vergaderingstype"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         aanvangVergadering:
           type: "string"
           title: "Aanvang vergadering"
@@ -6161,8 +6788,6 @@ components:
           $ref: "#/components/schemas/Gremium"
         _links:
           $ref: "#/components/schemas/Vergadering_links"
-        _embedded:
-          $ref: "#/components/schemas/Vergadering_embedded"
     Vraag:
       allOf:
       - $ref: "#/components/schemas/EnkelvoudigInformatieobject"
@@ -6241,7 +6866,7 @@ components:
           type: "boolean"
           title: "Indicator bezoldigd"
           description: "Indicator of de nevenfunctie uitgevoerd wordt tegen betaling."
-        indicatorInFunctieVanRaadslidmaatschap:
+        indicatorInFunctieVanLidmaatschap:
           type: "boolean"
           title: "Indicator nevenfunctie vanwege lidmaatschap"
           description: "Indicator die aangeeft of de nevenfunctie wordt vervuld vanwege\
@@ -6286,12 +6911,20 @@ components:
       - "gremiumidentificatie"
       - "gremiumNaam"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         gremiumidentificatie:
           type: "string"
-          title: "Gremiumidentificatie"
-          description: "De identificatie van een gremium De identificatie van een\
-            \ gremium De eerste vier karakter zijn de gemeentecode, gevolgd door een\
-            \ volgnummer van 7 cijfers met voorloopnullen."
+          title: "gremiumidentificatie"
+          description: "De identificatie van een gremium De eerste vier karakter zijn\
+            \ de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen."
           maxLength: 10
           minLength: 1
         gremiumNaam:
@@ -6486,6 +7119,15 @@ components:
       - "informatieobjectidentificatie"
       - "titel"
       properties:
+        "@context":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@type":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         auteur:
           type: "string"
           title: "Auteur"
@@ -6599,9 +7241,19 @@ components:
             \ Nb: De attribuutsoort is in versie 2.0 verplaatst van ENKELVOUDIG INFORMATIEOBJECT\
             \ naar INFORMATIEOBJECT. Alle alfanumerieke tekens m.u.v. diacrieten"
           maxLength: 5
+      discriminator:
+        propertyName: type
     AanwezigeDeelnemer_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         stemmen:
@@ -6636,6 +7288,14 @@ components:
     Agendapunt_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         informatieobjecten:
@@ -6645,17 +7305,17 @@ components:
             \ hebben"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
-        subagendapunten:
-          title: "heeftAlsSub-agendapunt"
-          type: "array"
-          description: "Een AGENDAPUNT kan uit één of meer subAGENDAPUNTen en een\
-            \ subAGENDAPUNT kan weer bestaan uit één of meer sub(sub)AGENDAPUNTen."
-          items:
-            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         spreekfragmenten:
           title: "vindtPlaatsTijdens"
           type: "array"
           description: "Een AANWEZIGE DEELNEMER spreekt tijdens een AGENDAPUNT"
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
+        agendapunten:
+          title: "heeftAlsSubagendapunt"
+          type: "array"
+          description: "Een AGENDAPUNT kan uit één of meer subAGENDAPUNTen en een\
+            \ subAGENDAPUNT kan weer bestaan uit één of meer sub(sub)AGENDAPUNTen."
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         stemmingen:
@@ -6680,6 +7340,14 @@ components:
     Amendement_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         amendementen:
@@ -6699,16 +7367,40 @@ components:
     Motie_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
     Voorstel_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
     Antwoord_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         vragen:
@@ -6721,6 +7413,14 @@ components:
     Besluit_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         stemmingen:
@@ -6729,9 +7429,17 @@ components:
           description: "De uitslag van een STEMMING leidt een BESLUIT"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
-    College_links:
+    DagelijksBestuur_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         voorstellen:
@@ -6749,9 +7457,17 @@ components:
             \ college of van de commissaris en gedeputeerden van de gedeputeerde staten"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
-    CollegeLidmaatschap_links:
+    DagelijksBestuurLidmaatschap_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         colleges:
@@ -6771,6 +7487,14 @@ components:
     Fractie_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         stemresultatenperfractie:
@@ -6793,6 +7517,14 @@ components:
     FractieLidmaatschap_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         fracties:
@@ -6814,11 +7546,52 @@ components:
     IngekomenStuk_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
+        self:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
+        natuurlijkPersonen:
+          title: "isIngediendDoor"
+          type: "array"
+          description: ""
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
+        organisatorischeEenheden:
+          title: "isIngedienDoor"
+          type: "array"
+          description: "een INFORMATIEOBJECT kan ingediend zijn door een VERGADERDEELNEMER"
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
+    Mededeling_links:
+      type: "object"
+      properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
     NatuurlijkPersoon_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         fractielidmaatschappen:
@@ -6844,6 +7617,14 @@ components:
     Spreekfragment_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         agendapunten:
@@ -6863,6 +7644,14 @@ components:
     Stem_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         aanwezigeDeelnemers:
@@ -6888,6 +7677,14 @@ components:
     Stemming_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         besluitvormingsstukken:
@@ -6939,6 +7736,14 @@ components:
     StemresultaatPerFractie_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         fracties:
@@ -6963,18 +7768,45 @@ components:
           properties:
             href:
               $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Href"
+    Toezegging_links:
+      type: "object"
+      properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
+        self:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
     Vergadering_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
-        vergaderingen:
+        aanwezigeDeelnemers:
+          title: "isAanwezigBij"
+          type: "array"
+          description: "persoon met een functie neemt deel aan een vergadering"
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
+        agendapunten:
           title: "wordtBehandeldTijdens"
           type: "array"
           description: "Een AGENDAPUNT wordt behandeld tijdens een VERGADERING."
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
-        antwoorden:
+        informatieobjecten:
           title: "heeftAlsBijlage"
           type: "array"
           description: "Een VERGADERING kan ook één of meer VERGADERSTUKKEN als bijlage\
@@ -6982,40 +7814,23 @@ components:
             \ vorige VERGADERING"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
-        amendementen:
-          title: "heeftAlsBijlage"
+        vergaderingen:
+          title: "heeftAlsDeelvergadering"
           type: "array"
-          description: "Een AGENDAPUNT kan één of meerdere VERGADERSTUKken als bijlage\
-            \ hebben"
-          items:
-            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
-        vragen:
-          title: "heeftAlsBijlage"
-          type: "array"
-          description: "Een VERGADERING kan ook één of meer VERGADERSTUKKEN als bijlage\
-            \ hebben. Dit zijn bijvoorbeeld de notulen en de besluitenlijst van de\
-            \ vorige VERGADERING"
-          items:
-            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
-        voorstellen:
-          title: "heeftAlsBijlage"
-          type: "array"
-          description: "Een VERGADERING kan ook één of meer VERGADERSTUKKEN als bijlage\
-            \ hebben. Dit zijn bijvoorbeeld de notulen en de besluitenlijst van de\
-            \ vorige VERGADERING"
-          items:
-            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
-        moties:
-          title: "heeftAlsBijlage"
-          type: "array"
-          description: "Een VERGADERING kan ook één of meer VERGADERSTUKKEN als bijlage\
-            \ hebben. Dit zijn bijvoorbeeld de notulen en de besluitenlijst van de\
-            \ vorige VERGADERING"
+          description: "Een VERGADERING kan uit één of meerdere deel-VERGADERINGen bestaan"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
     Vraag_links:
       type: "object"
       properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"        
         self:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         antwoorden:
@@ -7024,38 +7839,6 @@ components:
           description: "het antwoord behorend bij een eerder gestelde vraag"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
-    Agendapunt_embedded:
-      type: "object"
-      properties:
-        subagendapunten:
-          title: "heeft als sub-agendapunt"
-          type: "array"
-          description: "Een AGENDAPUNT kan uit één of meer subAGENDAPUNTen en een\
-            \ subAGENDAPUNT kan weer bestaan uit één of meer sub(sub)AGENDAPUNTen."
-          items:
-            $ref: "#/components/schemas/Agendapunt"
-    Vergadering_embedded:
-      type: "object"
-      properties:
-        vergaderingen:
-          title: "heeft als deel-vergadering"
-          type: "array"
-          description: "Een VERGADERING kan uit één of meerdere deel-VERGADERINGen\
-            \ bestaan Dit is een recursieve relatie"
-          items:
-            $ref: "#/components/schemas/Vergadering"
-    MotieType:
-      type: "string"
-      description: "duiding van het type van een MOTIE:\n* `R` - Voorstel\n* `A` -\
-        \ Afkeuring\n* `T` - Treurnis\n* `W` - Wantrouwen\n* `V` - Vreemd\n* `O` -\
-        \ Overig"
-      enum:
-      - "R"
-      - "A"
-      - "T"
-      - "W"
-      - "V"
-      - "O"
     VraagType:
       type: "string"
       description: "de type van de vraag de type van de vraagde type van de vraag:\n\
@@ -7100,12 +7883,26 @@ components:
       - "V"
       - "T"
       - "G"
+    MotieType:
+      type: "string"
+      description: "duiding van het type van een MOTIE:\n* `R` - Voorstel\n* `A` -\
+        \ Afkeuring\n* `T` - Treurnis\n* `W` - Wantrouwen\n* `V` - Vreemd\n* `O` -\
+        \ Overig"
+      enum:
+      - "R"
+      - "A"
+      - "T"
+      - "W"
+      - "V"
+      - "O"
     Functie:
       type: "string"
       description: "de mogelijke functies die een persoon heeft binnen de raadsVERGADERING:\n\
         * `BM` - Burgemeester\n* `W` - Wethouder\n* `R` - Raadslid\n* `BL` - Burgerlid\n\
         * `G` - Griffier\n* `GS` - Gemeentesecretaris\n* `A` - Ambtenaar/Medewerker\n\
-        * `AD` - Adviseur of Deskundige\n* `O` - Overig"
+        * `AD` - Adviseur of Deskundige\n* `O` - Overig\n* `CK` - Commissaris van\
+        \ de Koning\n* `GD` - Gedeputeerde\n* `PS` - Provinciesecretaris\n* `S` -\
+        \ Statenlid"
       enum:
       - "BM"
       - "W"
@@ -7116,6 +7913,10 @@ components:
       - "A"
       - "AD"
       - "O"
+      - "CK"
+      - "GD"
+      - "PS"
+      - "S"
     Vervalreden:
       type: "string"
       description: "Benamingen van de gronden op basis waarvan een besluit is of komt\
@@ -7138,13 +7939,15 @@ components:
       type: "string"
       description: "duiding van de rollen van een natuurlijke persoon tijdens een\
         \ vergadering:\n* `V` - Voorzitter\n* `VV` - Vice-voorzitter\n* `R` - Raadslid\n\
-        * `I` - Inspreker\n* `O` - Overig"
+        * `I` - Inspreker\n* `O` - Overig\n* `P` - Portefeuillehouder\n* `S` - Statenlid"
       enum:
       - "V"
       - "VV"
       - "R"
       - "I"
       - "O"
+      - "P"
+      - "S"
     Geslacht:
       type: "string"
       description: "duiding van het geslacht van een persoon:\n* `M` - Man\n* `V`\
