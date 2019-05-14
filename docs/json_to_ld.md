@@ -4,6 +4,7 @@ JSON-HAL and JSON-LD are pretty popular formats for desiging APIs. They both hav
 
 Let’s start with a JSON-HAL body object from the docs.
 
+'''
 {
   "_links": {
     "self": { "href": "/orders/523" },
@@ -13,7 +14,8 @@ Let’s start with a JSON-HAL body object from the docs.
   "currency": "USD",
   "status": "shipped",
   "total": 10.20
-}
+}'''
+
 To identify the main resource, we add an @id value:
 
 {
