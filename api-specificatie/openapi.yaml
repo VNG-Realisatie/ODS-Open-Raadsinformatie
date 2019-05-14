@@ -1,14 +1,15 @@
 openapi: 3.0.0
 servers:
 # Added by API Auto Mocking Plugin
+# Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/King4/test/1.0.0
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/VNGRealisatie/api/open_raadsinformatie/v1
 info:
   title: Open Raadsinformatie
-  description: "Dit is de concept-versie van de API-documentatie voor Open RaadsInformatie. Deze versie is gebaseerd op de 2e versie/ 
-  /en op de verbetervoorstellen die op het discussie-platform "discussie.kinggemeenten.nl/discussie/gemma/koppelvlak-open-raadsinformatie/eeste-iteratie-voor-de-api-documentatie-beschikbaar" /
-  /zijn geplaatst. Daarnaast is in deze versie een toevoeging gedaan [(zie documentatie)](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"waardoor de API ook JSON-LD compliant is.Vooralsnog wordt er/
-  /geen centraal context-bestand gepubliceerd, maar de standaard is wel voorbereid op het gebruik van een context bestand. "
+  description: "Dit is de concept-versie van de API-documentatie voor Open RaadsInformatie. Deze versie is gebaseerd op de 2e versie en op de verbetervoorstellen die op het [discussie-platform](discussie.kinggemeenten.nl/discussie/gemma/koppelvlak-open-raadsinformatie/eeste-iteratie-voor-de-api-documentatie-beschikbaar) zijn geplaatst. Daarnaast is in deze versie een toevoeging gedaan [(zie documentatie)](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) waardoor de API ook JSON-LD compliant is.Vooralsnog wordt er geen centraal context-bestand gepubliceerd, maar de standaard is wel voorbereid op het gebruik van een context bestand.
+    "
   version: "1.0.0"
   contact:
     url: https://github.com/VNG-Realisatie/Open-Raadsinformatie
