@@ -1,4 +1,4 @@
-# Upgrade JSON-HAL to JSON-LD
+# [Upgrade JSON-HAL to JSON-LD](http://ontola.io/blog/json-hal-ld/)
 
 [Joep Meindertsma, ](https://twitter.com/@joepmeindertsma)29 Aug 2018
 
