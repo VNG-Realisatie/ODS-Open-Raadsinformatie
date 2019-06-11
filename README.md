@@ -23,6 +23,7 @@ Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API
 * Projectleider: Sander Bakker Sander.Bakker@VNG.NL
 * Informatieanalist - Modelontwerper : Remko de Haas Remko.deHaas@VNG.nl
 * Berichtontwerper: Johan Boer johan.boer@vng.nl
+* Productowner: Tom Kunzler
 
 ## Licentie
 De koppelvlakstandaard, inclusief alle onderdelen die erbij horen (volgens productvisie en/of definition of done) zijn gelicenceerd onder [EUPL](https://eupl.eu/1.2/nl/).
