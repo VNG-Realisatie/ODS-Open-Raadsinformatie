@@ -18,8 +18,8 @@ info:
 paths:
   /aanwezigedeelnemers:
     get:
-      operationId: aanwezigedeelnemers
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert."
+      operationId: getAanwezigeDeelnemers
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie AANWEZIGEDEELNEMERS retourneert."
       parameters: 
         - in: query
           name: page
@@ -30,7 +30,7 @@ paths:
             minimum: 1
         - in: query
           name: rolnaam
-          description: "De rol waarin de persoon aanwezig is bij de vergadering"
+          description: "De rol waarin de PERSOON is bij de vergadering"
           required: false
           schema:
               $ref: "#/components/schemas/RolNaam"
@@ -166,8 +166,8 @@ paths:
       tags: 
       - Aanwezigedeelnemers
     post:
-      operationId: postAanwezigedeelnemers
-      description: "Registreer een aanwezige deelnemer."
+      operationId: postAanwezigeDeelnemer
+      description: "Registreer een AANWEZIGEDEELNEMER."
       responses:
         '201':
           description: ''
@@ -279,8 +279,8 @@ paths:
               $ref: '#/components/schemas/AanwezigeDeelnemer'
         required: true
     put:
-      operationId: putAanwezigedeelnemers
-      description: "Wijzig een bestaande aanwezigdeelnemer"
+      operationId: putAanwezigeDeelnemer
+      description: "Wijzig een bestaande AANWEZIGEDEELNEMER"
       responses:
         '200':
           description: "Zoekactie geslaagd"
@@ -394,8 +394,8 @@ paths:
     parameters: []
   /aanwezigedeelnemers/{aanwezigedeelnemeridentificatie}:
     get:
-      operationId: aanwezigedeelnemer
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een aanwezige deelnemer retourneert."
+      operationId: getAanwezigeDeelnemer
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een AANWEZIGEDEELNEMER retourneert."
       parameters: 
         - in: path
           name: aanwezigedeelnemeridentificatie
@@ -515,8 +515,8 @@ paths:
       tags: 
       - Aanwezigedeelnemers
     delete:
-      operationId: delaanwezigedeelnemer
-      description: "Het bericht dat de JSON/REST API voor het verwijderen van aanwezige deelnemer."
+      operationId: delAanwezigeDeelnemer
+      description: "Het bericht dat de JSON/REST API voor het verwijderen van AANZEZIGEDEELNEMER. Als een AANWEZIGEDEELNEMER wordt verwijderd is het de rol van de provider om de gerelateerde STEMMEN en SPREEKFRAGMENTEN te verwijderen."
       parameters: 
         - in: path
           name: aanwezigedeelnemeridentificatie
@@ -544,7 +544,7 @@ paths:
         - Aanwezigedeelnemers
   /agendapunten/{agendapuntnummer}:
     get:
-      operationId: getagendapunt
+      operationId: getAgendapunt
       description: "Het bericht dat de JSON/REST API voor het ophalen van gegevens van een agendapunt retourneert."
       parameters: 
         - in: path
@@ -665,7 +665,7 @@ paths:
       tags: 
       - Agendapunten
     delete:
-      operationId: delagendapunt
+      operationId: delAgendapunt
       description: "Het bericht dat de JSON/REST API voor het verwijderen van aganedapunt."
       parameters: 
         - in: path
@@ -694,7 +694,7 @@ paths:
         - Agendapunten
   /agendapunten:
     get:
-      operationId: Getagendapunten
+      operationId: getAgendapunten
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert."
       parameters: 
         - in: query
@@ -835,7 +835,7 @@ paths:
       tags: 
       - Agendapunten
     post:
-      operationId: postAgendapunten
+      operationId: postAgendapunt
       description: "Registreer een agendapunt."
       responses:
         '201':
@@ -1061,7 +1061,7 @@ paths:
     parameters: []
   /amendementen/{informatieobjectidentificatie}:
     get:
-      operationId: Getamendement
+      operationId: getAmendement
       description: "Het bericht dat de JSON/REST API voor het ophalen van gegevens van een amendement retourneert."
       parameters: 
         - in: path
@@ -1215,7 +1215,7 @@ paths:
         - Amendementen
   /amendementen:
     get:
-      operationId: Getamendementen
+      operationId: getAmendementen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie amendementen retourneert."
       parameters: 
         - in: query
@@ -1398,7 +1398,7 @@ paths:
       tags: 
       - Amendementen
     post:
-      operationId: postAmendementen
+      operationId: postAmendement
       description: "Registreer een amendement."
       responses:
         '201':
@@ -1623,7 +1623,7 @@ paths:
         required: true
   /besluitvormingsstukken:
     get:
-      operationId: Getbesluitvormingsstukken
+      operationId: getBesluitvormingsstukken
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie besluitvormingsstukken retourneert."
       parameters: 
         - in: query
@@ -1826,7 +1826,7 @@ paths:
       tags: 
       - Besluitvormingsstukken
     post:
-      operationId: postbesluitvormingsstukken
+      operationId: postBesluitvormingsstuk
       description: "Registreer een besluitvormingsstuk."
       responses:
         '201':
@@ -1937,7 +1937,7 @@ paths:
               $ref: '#/components/schemas/Besluitvormingsstuk'
         required: true
     put:
-      operationId: putbesluitvormingsstuk
+      operationId: putBesluitvormingsstuk
       description: "Wijzig een bestaand Besluitvormingsstuk"
       responses:
         '200':
@@ -2051,7 +2051,7 @@ paths:
         required: true
   /besluitvormingsstukken/{informatieobjectidentificatie}:
     get:
-      operationId: Getbesluitvormingsstuk
+      operationId: getBesluitvormingsstuk
       description: "Het bericht dat de JSON/REST API voor het ophalen van een besluitvormingsstuk retourneert."
       parameters: 
         - in: path
@@ -2172,7 +2172,7 @@ paths:
       tags: 
       - Besluitvormingsstukken
     delete:
-      operationId: delbesluitvormingsstuk
+      operationId: delBesluitvormingsstuk
       description: "Het bericht dat de JSON/REST API voor het verwijderen van een besluitvormingsstuk"
       parameters: 
         - in: path
@@ -2205,7 +2205,7 @@ paths:
         - Besluitvormingsstukken
   /antwoorden:
     get:
-      operationId: Getantwoorden
+      operationId: GetAntwoorden
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie antwoorden retourneert."
       parameters: 
         - in: query
@@ -2396,7 +2396,7 @@ paths:
       tags: 
       - Antwoorden
     post:
-      operationId: postantwoorden
+      operationId: postAntwoord
       description: "Registreer een antwoord."
       responses:
         '201':
@@ -2621,7 +2621,7 @@ paths:
         required: true
   /antwoorden/{informatieobjectidentificatie}:
     get:
-      operationId: Getantwoord
+      operationId: getAntwoord
       description: "Het bericht dat de JSON/REST API voor het ophalen van een antwoord retourneert."
       parameters: 
         - in: path
@@ -2742,7 +2742,7 @@ paths:
       tags: 
       - Antwoorden
     delete:
-      operationId: delantwoord
+      operationId: delAntwoord
       description: "Het bericht dat de JSON/REST API voor het verwijderen van een antwoord"
       parameters: 
         - in: path
@@ -2775,7 +2775,7 @@ paths:
         - Antwoorden
   /besluiten/{besluitidentificatie}:
     get:
-      operationId: Getbesluit
+      operationId: getBesluit
       description: "Het bericht dat de JSON/REST API voor het ophalen van besluit gegevens retourneert."
       parameters: 
         - in: path
@@ -2929,7 +2929,7 @@ paths:
         - Besluiten
   /besluiten:
     get:
-      operationId: Getbesluiten
+      operationId: getBesluiten
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie besluiten retourneert."
       parameters: 
         - in: query
@@ -3133,7 +3133,7 @@ paths:
       tags: 
       - Besluiten
     post:
-      operationId: postBesluiten
+      operationId: postBesluit
       description: "Registreer een Besluit."
       responses:
         '201':
@@ -3358,7 +3358,7 @@ paths:
         required: true
   /dagelijksebesturen:
     get:
-      operationId: Getdagelijksebesturen
+      operationId: getDagelijkseBesturen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie dagelijkse besturen retourneert."
       parameters: 
         - in: query
@@ -3725,7 +3725,7 @@ paths:
         required: true
   /dagelijksebesturen/{dagelijksbestuuridentificatie}:
     get:
-      operationId: Getdagelijksbestuur
+      operationId: getDagelijksBestuur
       description: "Het bericht dat de JSON/REST API voor het ophalen van dagelijks bestuur gegevens retourneert."
       parameters: 
         - in: path
@@ -3847,7 +3847,7 @@ paths:
       - Dagelijkse Besturen
     delete:
       operationId: delDagelijksBestuur
-      description: "Het bericht dat de JSON/REST API voor het verwijderen van een DagelijksBestuur. Bij het verwijderen van een Dagelijks Bestuur is het de taak van de provider om een cascade-delete te doen van de gerelateerde DagelijksBestuurlidmaatschappen. "
+      description: "Het bericht dat de JSON/REST API voor het verwijderen van een DAGELIJKSBESTUUR. Bij het verwijderen van een DAGELIJKSBESTUUR is het de taak van de provider de gerelateerde DaAGELIJKSBESTUURLIDMAATSCHAPen te verwijderen middels om een cascade-delete. "
       parameters: 
         - in: path
           name: dagelijksbestuuridentificatie
@@ -3879,7 +3879,7 @@ paths:
         - Dagelijkse Besturen
   /dagelijksbestuurlidmaatschappen:
     get:
-      operationId: Getdagelijksbestuurlidmaatschappen
+      operationId: getDagelijksBestuurLidmaatschappen
       description: "Het bericht dat de JSON/REST API voor het ophalen van lidmaatschappen van het dagelijks bestuur retourneert."
       parameters: 
         - in: query
@@ -4246,7 +4246,7 @@ paths:
         required: true
   /fracties/{fractienummer}:
     get:
-      operationId: Getfractie
+      operationId: getFractie
       description: "Het bericht dat de JSON/REST API voor het ophalen van fractie gegevens retourneert."
       parameters: 
         - in: path
@@ -4367,8 +4367,8 @@ paths:
       tags: 
       - Fracties
     delete:
-      operationId: delFracties
-      description: "Het bericht dat de JSON/REST API voor het verwijderen van een Fractie. Bij het verwijderen van een Fractie is het de rol van de provider om de gerelateerde Fractielidmaatschappen ook te verwijderen middels een cascade delete"
+      operationId: delFractie
+      description: "Het bericht dat de JSON/REST API voor het verwijderen van een FRACTIE. Bij het verwijderen van een FRACTIE is het de rol van de provider om de gerelateerde FRACTIELIDMAATSCHAPPEN en STEMRESULTAATPERFRACTIE ook te verwijderen middels een cascade delete"
       parameters: 
         - in: path
           name: fractienummer
@@ -4400,7 +4400,7 @@ paths:
         - Fracties
   /fracties:
     get:
-      operationId: Getfracties
+      operationId: getFracties
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie fracties retourneert."
       parameters: 
         - in: query
@@ -4542,7 +4542,7 @@ paths:
       tags: 
       - Fracties
     post:
-      operationId: postFracties
+      operationId: postFractie
       description: "Registreer een Fractie"
       responses:
         '201':
@@ -4767,7 +4767,7 @@ paths:
         required: true
   /fractielidmaatschappen:
     get:
-      operationId: Getfractielidmaatschappen
+      operationId: getFractieLidmaatschappen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie fractielidmaatschappen retourneert."
       parameters: 
         - in: query
@@ -4927,7 +4927,7 @@ paths:
       tags: 
       - Fractielidmaatschappen
     post:
-      operationId: postFractielidmaatschap
+      operationId: postFractieLidmaatschap
       description: "Registreer een Fractielidmaatschap"
       responses:
         '201':
@@ -5038,7 +5038,7 @@ paths:
               $ref: '#/components/schemas/FractieLidmaatschap'
         required: true
     put:
-      operationId: putFractielidmaatschap
+      operationId: putFractieLidmaatschap
       description: "Wijzig een bestaand Fractielidmaatschap"
       responses:
         '200':
@@ -5152,7 +5152,7 @@ paths:
         required: true
   /ingekomenstukken/{informatieobjectidentificatie}:
     get:
-      operationId: Getingekomenstuk
+      operationId: getIngekomenStuk
       description: "Het bericht dat de JSON/REST API voor het ophalen van ingekomeens stuk-gegevens retourneert."
       parameters: 
         - in: path
@@ -5273,7 +5273,7 @@ paths:
       tags: 
       - Ingekomenstukken
     delete:
-      operationId: delIngekomenStukken
+      operationId: delIngekomenStuk
       description: "Het bericht dat de JSON/REST API voor het verwijderen van een Ingekomen Stuk"
       parameters: 
         - in: path
@@ -5306,7 +5306,7 @@ paths:
         - Ingekomenstukken
   /ingekomenstukken:
     get:
-      operationId: Getingekomenstukken
+      operationId: getIngekomenStukken
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie ingekomen stukken retourneert."
       parameters: 
         - in: query
@@ -5483,7 +5483,7 @@ paths:
       tags: 
       - Ingekomenstukken
     post:
-      operationId: postIngekomenStukken
+      operationId: postIngekomenStuk
       description: "Registreer een Ingekomen Stuk"
       responses:
         '201':
@@ -5594,7 +5594,7 @@ paths:
               $ref: '#/components/schemas/IngekomenStuk'
         required: true
     put:
-      operationId: putIngekomenstuk
+      operationId: putIngekomenStuk
       description: "Wijzig een bestaand IngekomenStuk"
       responses:
         '200':
@@ -5708,7 +5708,7 @@ paths:
         required: true
   /mededelingen:
     get:
-      operationId: Getmededelingen
+      operationId: getMededelingen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie mededelingen retourneert."
       parameters: 
         - in: query
@@ -6115,7 +6115,7 @@ paths:
         required: true
   /mededelingen/{informatieobjectidentificatie}:
     get:
-      operationId: Getmededeling
+      operationId: getMededeling
       description: "Het bericht dat de JSON/REST API voor het ophalen van mededeling gegevens retourneert."
       parameters: 
         - in: path
@@ -6236,7 +6236,7 @@ paths:
       tags: 
       - Mededelingen
     delete:
-      operationId: delMededelingen
+      operationId: delMededeling
       description: "Het bericht dat de JSON/REST API voor het verwijderen van een Mededeling"
       parameters: 
         - in: path
@@ -6269,7 +6269,7 @@ paths:
         - Mededelingen
   /moties/{informatieobjectidentificatie}:
     get:
-      operationId: Getmotie
+      operationId: getMotie
       description: "Het bericht dat de JSON/REST API voor het ophalen van motie gegevens retourneert."
       parameters: 
         - in: path
@@ -6390,7 +6390,7 @@ paths:
       tags: 
       - Moties
     delete:
-      operationId: delMoties
+      operationId: delMotie
       description: "Het bericht dat de JSON/REST API voor het verwijderen van een Motie"
       parameters: 
         - in: path
@@ -6423,7 +6423,7 @@ paths:
         - Moties
   /moties:
     get:
-      operationId: Getmoties
+      operationId: getMoties
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie moties retourneert."
       parameters: 
         - in: query
@@ -6605,7 +6605,7 @@ paths:
       tags: 
       - Moties
     post:
-      operationId: postMoties
+      operationId: postMotie
       description: "Registreer een Motie"
       responses:
         '201':
@@ -6830,7 +6830,7 @@ paths:
         required: true
   /natuurlijkpersonen/{nummernatuurlijkpersoon}:
     get:
-      operationId: GetnatuurlijkPersoon
+      operationId: getNatuurlijkPersoon
       description: "Het bericht dat de JSON/REST API voor het ophalen van persoonsgegevens retourneert."
       parameters: 
         - in: path
@@ -6951,8 +6951,8 @@ paths:
       tags: 
       - Natuurlijkpersonen
     delete:
-      operationId: delnatuurlijkPersonen
-      description: "Het bericht dat de JSON/REST API voor het verwijderen van een Motie"
+      operationId: delNatuurlijkPersoon
+      description: "Het bericht dat de JSON/REST API voor het verwijderen van een NATUURLIJKPERSOON. Bij het verwijderen van een DAGELIJKSBESTUUR is het de taak van de provider de gerelateerde DaAGELIJKSBESTUURLIDMAATSCHAPen te verwijderen middels om een cascade-delete. "
       parameters: 
         - in: path
           name: nummernatuurlijkpersoon
@@ -6984,7 +6984,7 @@ paths:
         - Natuurlijkpersonen
   /natuurlijkpersonen:
     get:
-      operationId: GetnatuurlijkPersonen
+      operationId: getNatuurlijkPersonen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie personen retourneert."
       parameters: 
         - in: query
@@ -7145,7 +7145,7 @@ paths:
       tags: 
       - Natuurlijkpersonen
     post:
-      operationId: postNatuurlijkPersonen
+      operationId: postNatuurlijkPersoon
       description: "Registreer een NatuurlijkPersoon"
       responses:
         '201':
@@ -7256,7 +7256,7 @@ paths:
               $ref: '#/components/schemas/NatuurlijkPersoon'
         required: true
     put:
-      operationId: putnatuurlijkPersoon
+      operationId: putNatuurlijkPersoon
       description: "Wijzig een bestaand NatuurlijkPersoon"
       responses:
         '200':
@@ -7370,7 +7370,7 @@ paths:
         required: true
   /spreekfragmenten:
     get:
-      operationId: Getspreekfragmenten
+      operationId: getSpreekfragmenten
       description: "Het bericht dat de JSON/REST API voor het ophalen van een spreekfragment retourneert."
       parameters: 
         - in: query
@@ -7791,7 +7791,7 @@ paths:
         required: true
   /spreekfragmenten/{spreekfragmentidentificatie}:
     get:
-      operationId: Getspreekfragment
+      operationId: getSpreekfragment
       description: "Het bericht dat de JSON/REST API voor het ophalen van een spreekfragment retourneert."
       parameters: 
         - in: path
@@ -7943,7 +7943,7 @@ paths:
         - Spreekfragmenten
   /stemmen:
     get:
-      operationId: Getstemmen
+      operationId: getStemmen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een spreekfragment retourneert."
       parameters: 
         - in: query
@@ -8309,7 +8309,7 @@ paths:
         required: true
   /stemmingen:
     get:
-      operationId: Getstemmingen
+      operationId: getStemmingen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie stemmingen retourneert."
       parameters: 
         - in: query
@@ -8675,7 +8675,7 @@ paths:
         required: true
   /stemmingen/{stemmingsidentificatie}:
     get:
-      operationId: Getstemming
+      operationId: getStemming
       description: "Het bericht dat de JSON/REST API voor het ophalen van fractie gegevens retourneert."
       parameters: 
         - in: path
@@ -8797,7 +8797,7 @@ paths:
       - Stemmingen
     delete:
       operationId: delStemming
-      description: "Het bericht dat de JSON/REST API voor het verwijderen van een Stemming. Bij het verwijderen van een Stemming is het de taak van de provider om een cascade-delete te doen van de gerelateerde Stemmen. "
+      description: "Het bericht dat de JSON/REST API voor het verwijderen van een STEMMING. Bij het verwijderen van een STEMMING is het de taak van de provider om gerelateerde STEMen enSTEMRESULTAATPERFRACTIEs te verwijderen middels een cascade-delete."
       parameters: 
         - in: path
           name: stemmingsidentificatie
@@ -8829,7 +8829,7 @@ paths:
         - Stemmingen
   /stemresultatenperfractie:
     get:
-      operationId: Getstemresultatenperfractie
+      operationId: getStemResultatenPerFractie
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie stemresultatenperfractie retourneert."
       parameters: 
         - in: path
@@ -8964,7 +8964,7 @@ paths:
       tags: 
       - Stemresultatenperfractie
     post:
-      operationId: postStemresultatenperfractie
+      operationId: postStemResultaatPerFractie
       description: "Registreer een Stemresultatenperfractie"
       responses:
         '201':
@@ -9075,7 +9075,7 @@ paths:
               $ref: '#/components/schemas/StemresultaatPerFractie'
         required: true
     put:
-      operationId: putStemresultatenperfractie
+      operationId: putStemResultaatPerFractie
       description: "Wijzig een bestaand Stemresultatenperfractie"
       responses:
         '200':
@@ -9189,7 +9189,7 @@ paths:
         required: true
   /toezeggingen/{informatieobjectidentificatie}:
     get:
-      operationId: Gettoezegging
+      operationId: getToezegging
       description: "Het bericht dat de JSON/REST API voor het ophalen van toezegging gegevens retourneert."
       parameters: 
         - in: path
@@ -9343,7 +9343,7 @@ paths:
         - Toezeggingen
   /toezeggingen:
     get:
-      operationId: Gettoezeggingen
+      operationId: getToezeggingen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie toezeggingen retourneert."
       parameters: 
         - in: query
@@ -9750,7 +9750,7 @@ paths:
         required: true
   /vergaderingen:
     get:
-      operationId: Getvergaderingen
+      operationId: getVergaderingen
       description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert."
       parameters: 
         - in: query
@@ -10137,7 +10137,7 @@ paths:
         required: true
   /vergaderingen/{vergaderingsidentificatie}:
     get:
-      operationId: Getvergadering
+      operationId: getVergadering
       description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert."
       parameters: 
         - in: path
@@ -10293,7 +10293,7 @@ paths:
         - Vergaderingen
   /voorstellen:
     get:
-      operationId: Getvoorstellen
+      operationId: getVoorstellen
       description: "Het bericht dat de JSON/REST API voor het ophalen van voorstelgegevens retourneert."
       parameters: 
         - in: query
@@ -10709,7 +10709,7 @@ paths:
         required: true
   /voorstellen/{informatieobjectidentificatie}:
     get:
-      operationId: Getvoorstel
+      operationId: getVoorstel
       description: "Het bericht dat de JSON/REST API voor het ophalen van voorstel gegevens retourneert."
       parameters: 
         - in: path
@@ -10863,7 +10863,7 @@ paths:
         - Voorstellen
   /vragen/{informatieobjectidentificatie}:
     get:
-      operationId: Getvraag
+      operationId: getVraag
       description: "Het bericht dat de JSON/REST API voor het ophalen van vraag-gegevens retourneert."
       parameters: 
         - in: path
@@ -11017,7 +11017,7 @@ paths:
         - Vragen
   /vragen:
     get:
-      operationId: Getvragen
+      operationId: getVragen
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie vragen retourneert."
       parameters: 
         - in: query
@@ -11979,7 +11979,7 @@ components:
           $ref: "#/components/schemas/NatuurlijkPersoon_links"
     Spreekfragment:
       type: "object"
-      description: "Een AANWEZIGE DEELNEMER spreekt tijdens een AGENDAPUNT"
+      description: "Een AANWEZIGEDEELNEMER spreekt tijdens een AGENDAPUNT"
       required:
       - "spreekfragmentidentificatie"
       properties:
@@ -12739,7 +12739,7 @@ components:
         spreekfragmenten:
           title: "spreekt"
           type: "array"
-          description: "Een AANWEZIGE DEELNEMER spreekt tijdens een AGENDAPUNT"
+          description: "Een AANWEZIGEDEELNEMER spreekt tijdens een AGENDAPUNT"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         vergaderingen:
@@ -12772,7 +12772,7 @@ components:
         spreekfragmenten:
           title: "vindtPlaatsTijdens"
           type: "array"
-          description: "Een AANWEZIGE DEELNEMER spreekt tijdens een AGENDAPUNT"
+          description: "Een AANWEZIGEDEELNEMER spreekt tijdens een AGENDAPUNT"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/HalLink"
         agendapunten:
@@ -13094,14 +13094,14 @@ components:
         agendapunten:
           title: "vindtPlaatsTijdens"
           type: "object"
-          description: "Een AANWEZIGE DEELNEMER spreekt tijdens een AGENDAPUNT"
+          description: "Een AANWEZIGEDEELNEMER spreekt tijdens een AGENDAPUNT"
           properties:
             href:
               $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Href"
         aanwezigedeelnemers:
           title: "wordtGesprokenDoor"
           type: "object"
-          description: "Een AANWEZIGE DEELNEMER spreekt tijdens een AGENDAPUNT"
+          description: "Een AANWEZIGEDEELNEMER spreekt tijdens een AGENDAPUNT"
           properties:
             href:
               $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Href"
