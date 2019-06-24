@@ -6,9 +6,8 @@ servers:
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/VNGRealisatie/api/open_raadsinformatie/v1
 info:
-  title: Open Raads- en StatenIinformatie
-  description: "Dit is de concept-versie van de API-documentatie voor Open RaadsInformatie. Deze versie is gebaseerd op de 2e versie en op de verbetervoorstellen die op het [discussie-platform](discussie.kinggemeenten.nl/discussie/gemma/koppelvlak-open-raadsinformatie/eeste-iteratie-voor-de-api-documentatie-beschikbaar) zijn geplaatst. Daarnaast is in deze versie een toevoeging gedaan [(zie documentatie)](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) waardoor de API ook JSON-LD compliant is.Vooralsnog wordt er geen centraal context-bestand gepubliceerd, maar de standaard is wel voorbereid op het gebruik van een context bestand.
-    "
+  title: Open Raads- en StatenInformatie
+  description: "Dit is de concept-versie van de API-documentatie voor Open RaadsInformatie. Deze versie is gebaseerd op de 2e versie en op de verbetervoorstellen die op het [discussie-platform](discussie.kinggemeenten.nl/discussie/gemma/koppelvlak-open-raadsinformatie/eeste-iteratie-voor-de-api-documentatie-beschikbaar) zijn geplaatst. Daarnaast is in deze versie een toevoeging gedaan [(zie documentatie)](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) waardoor de API ook JSON-LD compliant is.Vooralsnog wordt er geen centraal context-bestand gepubliceerd, maar de standaard is wel voorbereid op het gebruik van een context bestand."
   version: "1.0.0"
   contact:
     url: https://github.com/VNG-Realisatie/Open-Raadsinformatie
@@ -212,12 +211,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/AanwezigeDeelnemer'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -251,12 +250,12 @@ paths:
           headers:
             api-version:
               $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -303,12 +302,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Agendapunt'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -342,12 +341,12 @@ paths:
           headers:
             api-version:
               $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -455,6 +454,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -498,6 +499,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -551,12 +554,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Amendement'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -594,12 +597,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -749,6 +752,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -792,6 +797,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -967,6 +974,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1010,6 +1019,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1062,12 +1073,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Besluitvormingsstuk'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1105,15 +1116,26 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          $ref: "#/components/responses/401"
+        '403':
+          $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
+        '406':
+          $ref: "#/components/responses/406"
+        '409':
+          $ref: "#/components/responses/409"
+        '410':
+          $ref: "#/components/responses/410"
+        '415':
+          $ref: "#/components/responses/415"
+        '429':
+          $ref: "#/components/responses/429"
+        '500':
+          $ref: "#/components/responses/500"
         'default':
-          description: Er is een onverwachte fout opgetreden.
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+          $ref: "#/components/responses/default"
       tags: 
         - Besluitvormingsstukken
   /antwoorden:
@@ -1257,6 +1279,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1300,6 +1324,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1352,12 +1378,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Antwoord'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1395,12 +1421,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1447,12 +1473,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Besluit'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1490,12 +1516,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1666,6 +1692,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1709,6 +1737,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1823,6 +1853,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1866,6 +1898,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1918,12 +1952,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/DagelijksBestuur'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1961,12 +1995,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2075,6 +2109,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2118,6 +2154,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2213,12 +2251,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2292,6 +2330,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2327,6 +2367,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2370,6 +2412,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2502,6 +2546,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2545,6 +2591,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2597,12 +2645,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/IngekomenStuk'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2640,12 +2688,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2789,6 +2837,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2832,6 +2882,8 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -3081,12 +3133,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Mededeling'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -3124,15 +3176,26 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          $ref: "#/components/responses/401"
+        '403':
+          $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
+        '406':
+          $ref: "#/components/responses/406"
+        '409':
+          $ref: "#/components/responses/409"
+        '410':
+          $ref: "#/components/responses/410"
+        '415':
+          $ref: "#/components/responses/415"
+        '429':
+          $ref: "#/components/responses/429"
+        '500':
+          $ref: "#/components/responses/500"
         'default':
-          description: Er is een onverwachte fout opgetreden.
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+          $ref: "#/components/responses/default"
       tags: 
         - Mededelingen
   /moties/{informatieobjectidentificatie}:
@@ -3208,15 +3271,26 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          $ref: "#/components/responses/401"
+        '403':
+          $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
+        '406':
+          $ref: "#/components/responses/406"
+        '409':
+          $ref: "#/components/responses/409"
+        '410':
+          $ref: "#/components/responses/410"
+        '415':
+          $ref: "#/components/responses/415"
+        '429':
+          $ref: "#/components/responses/429"
+        '500':
+          $ref: "#/components/responses/500"
         'default':
-          description: Er is een onverwachte fout opgetreden.
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+          $ref: "#/components/responses/default"
       tags: 
         - Moties
   /moties:
@@ -3446,12 +3520,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/NatuurlijkPersoon'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -3489,12 +3563,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -3927,12 +4001,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Spreekfragment'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -3969,12 +4043,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -4333,12 +4407,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Stemming'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -4376,12 +4450,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -4621,12 +4695,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -5048,12 +5122,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Vergadering'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -5092,12 +5166,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -5350,12 +5424,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Voorstel'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -5393,15 +5467,26 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+        '401':
+          $ref: "#/components/responses/401"
+        '403':
+          $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
+        '406':
+          $ref: "#/components/responses/406"
+        '409':
+          $ref: "#/components/responses/409"
+        '410':
+          $ref: "#/components/responses/410"
+        '415':
+          $ref: "#/components/responses/415"
+        '429':
+          $ref: "#/components/responses/429"
+        '500':
+          $ref: "#/components/responses/500"
         'default':
-          description: Er is een onverwachte fout opgetreden.
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+          $ref: "#/components/responses/default"
       tags: 
         - Voorstellen
   /vragen/{informatieobjectidentificatie}:
@@ -5434,12 +5519,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Vraag'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -5477,12 +5562,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -7723,7 +7808,7 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+            $ref: "https://raw.githubusercontent.com/JohanBoer/Haal-Centraal-BRP-bevragen/master/api-specificatie/components.yaml#/Foutbericht_401"
     '403':
       description: Forbidden
       headers:
@@ -7733,6 +7818,15 @@ components:
         application/problem+json:
           schema:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht"
+    '404':
+      description: Not Found
+      headers:
+        api-version:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/headers.yaml#/api_version"
+      content:
+        application/problem+json:
+          schema:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/master/api-specificatie/components.yaml#/Foutbericht_404"
     '406':
       description: Not Acceptable
       headers:
