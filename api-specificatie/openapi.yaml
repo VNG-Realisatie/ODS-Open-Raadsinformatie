@@ -302,8 +302,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Agendapunt'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
@@ -556,8 +554,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Amendement'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
@@ -721,8 +717,6 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
-        '404':
-          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -945,8 +939,6 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
-        '404':
-          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1081,8 +1073,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Besluitvormingsstuk'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
@@ -1254,8 +1244,6 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
-        '404':
-          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1390,8 +1378,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Antwoord'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
@@ -1487,8 +1473,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Besluit'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
@@ -1673,8 +1657,6 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
-        '404':
-          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1836,8 +1818,6 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
-        '404':
-          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -1972,8 +1952,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/DagelijksBestuur'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
@@ -2096,8 +2074,6 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
-        '404':
-          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2238,8 +2214,6 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
-        '404':
-          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2537,8 +2511,6 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
-        '404':
-          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -2673,8 +2645,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/IngekomenStuk'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
@@ -2832,8 +2802,6 @@ paths:
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
-        '404':
-          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -3165,12 +3133,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Mededeling'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -3552,12 +3520,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/NatuurlijkPersoon'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -4033,12 +4001,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Spreekfragment'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -4439,12 +4407,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Stemming'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -5154,12 +5122,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Vergadering'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -5456,12 +5424,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Voorstel'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
@@ -5551,12 +5519,12 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Vraag'
-        '400':
-          $ref: "#/components/responses/400"
         '401':
           $ref: "#/components/responses/401"
         '403':
           $ref: "#/components/responses/403"
+        '404':
+          $ref: "#/components/responses/404"
         '406':
           $ref: "#/components/responses/406"
         '409':
