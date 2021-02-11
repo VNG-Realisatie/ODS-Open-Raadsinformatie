@@ -1,0 +1,1305 @@
+openapi: 3.0.0
+servers:
+# Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/VNGRealisatie/api/open_raadsinformatie/v1
+info:
+  title: Open Raads- en StatenInformatie
+  description: |
+                Dit is de concept-versie van de API-documentatie voor Open RaadsInformatie. Deze versie is gebaseerd op de ervaringen die opgedaan zijn tijdens het maken van een referentie-implentatie. Met deze specificatie kan een deel van de gegevens die in het informatiemodel beschreven zijn ontsloten worden. Daarnaast is in deze versie een toevoeging gedaan [(zie documentatie)](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) waardoor de API ook JSON-LD compliant is.Vooralsnog wordt er geen centraal context-bestand gepubliceerd, maar de standaard is wel voorbereid op het gebruik van een context bestand."
+  version: "0.9.0"
+  contact:
+    url: https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+paths:
+  /agendapunten/{agendapuntnummer}:
+    get:
+      operationId: GetAgendapunt
+      summary: Raadpleeg agendapunt op unieke identificatie.
+      description: |
+                    Het bericht dat de JSON/REST API voor het ophalen van gegevens van een agendapunt retourneert."
+      parameters:
+        - in: path
+          name: agendapuntnummer
+          description: |
+                        Unieke identificatie van het agendapunt.
+          required: true
+          schema:
+            type: string
+            maxLength: 10
+      responses:
+        '200':
+          description: |
+                        Zoekactie geslaagd
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Reset"
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Agendapunt'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Agendapunten
+    delete:
+      operationId: DelAgendapunt
+      summary: Verwijder agendapunt
+      description: |
+                    Het bericht dat de JSON/REST API voor het verwijderen van agendapunt.
+      parameters:
+        - in: path
+          name: agendapuntnummer
+          description: |
+                        Unieke identificatie van het agendapunt.
+          required: true
+          schema:
+            type: string
+            maxLength: 10
+      responses:
+        "204":
+          description: ""
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+        - Agendapunten
+  /agendapunten:
+    get:
+      operationId: GetAgendapunten
+      summary: Zoek agendapunten
+      description: |
+                    Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert.
+      parameters:
+        - in: query
+          name: pagina
+          description: |
+                        Een pagina binnen de gepagineerde resultatenset.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - in: query
+          name: agendapuntomschrijving
+          description: |
+                        De omschrijving van het agendapunt.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/warning"
+            X-Pagination-Page:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Pagination_Page"
+            X-Pagination-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Pagination_Limit"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Reset"
+          content:
+            application/hal+json:
+              schema:
+                type: object
+                properties:
+                  _links:
+                    $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalPaginationLinks"
+                  _embedded:
+                    type: object
+                    properties:
+                      agendapunten:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Agendapunt'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Agendapunten
+    post:
+      operationId: PostAgendapunt
+      summary: Opslaan agendapunt
+      description: |
+                    Registreer een agendapunt.
+      responses:
+        '201':
+          description: ""
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agendapunt'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Agendapunten
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agendapunt'
+        required: true
+    put:
+      operationId: PutAgendapunt
+      summary: Wijzig agendapunt
+      description: |
+                    Wijzig een bestaand Agendapunt
+      responses:
+        '202':
+          description: ""
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/warning"
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Agendapunt'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Agendapunten
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agendapunt'
+        required: true
+  /informatieobjecten/{informatieobjectidentificatie}:
+    get:
+      operationId: GetInformatieobject
+      summary: Raadpleeg informatieobject
+      description: |
+                    Het bericht dat de JSON/REST API voor het ophalen van gegevens van een informatieobject retourneert.
+      parameters:
+        - in: path
+          name: informatieobjectidentificatie
+          description: |
+                        Unieke identificatie van een informatieobject.
+          required: true
+          schema:
+            type: string
+            maxLength: 40
+      responses:
+        '200':
+          description: |
+                        Zoekactie geslaagd
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Reset"
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Informatieobject'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Informatieobjecten
+    delete:
+      operationId: DelInformatieobject
+      summary: Verwijder informatieobject
+      description: |
+                    Het bericht dat de JSON/REST API voor het verwijderen van informatieobject.
+      parameters:
+        - in: path
+          name: informatieobjectidentificatie
+          description: |
+                        Unieke identificatie van het informatieobject.
+          required: true
+          schema:
+            type: string
+            maxLength: 40
+      responses:
+        "204":
+          description: ""
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Foutbericht"
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+        - Informatieobjecten
+  /informatieobjecten:
+    get:
+      operationId: GetInformatieobjecten
+      summary: Zoek informatieobjecten
+      description: |
+                    Het bericht dat de JSON/REST API voor het ophalen van een collectie informatieobjecten retourneert.
+      parameters:
+        - in: query
+          name: pagina
+          description: "Een pagina binnen de gepagineerde resultatenset."
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - in: query
+          name: auteur
+          description: |
+                        De persoon of organisatie die in de eerste plaats verantwoordelijk is voor het creëren van de inhoud van het INFORMATIEOBJECT.
+          required: false
+          schema:
+            type: string
+            maxLength: 200
+        - in: query
+          name: bronorganisatie
+          description: |
+                        Het RSIN van de Niet-natuurlijk persoon zijnde de organisatie die het informatieobject heeft gecreëerd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd.
+          required: false
+          schema:
+            type: integer
+            maximum: 9.99999999E8
+        - in: query
+          name: creatiedatum
+          description: |
+                        Een datum of een gebeurtenis in de levenscyclus van het INFORMATIEOBJECT.
+          required: false
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: datumingediend
+          description: |
+                        De datum waarop het informatieobject is ingediend"
+          required: false
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: omschrijving
+          description: |
+                        De omschrijving van het informatieobject
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: ontvangstdatum
+          description: |
+                        De datum waarop het INFORMATIEOBJECT ontvangen is.
+          required: false
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: taal
+          description: |
+                        Een taal van de intellectuele inhoud van het informatieobject.
+          required: false
+          schema:
+            type: string
+            maxLength: 20
+        - in: query
+          name: titel
+          description: |
+                        De naam waaronder het INFORMATIEOBJECT formeel bekend is.
+          required: false
+          schema:
+            type: string
+            maxLength: 200
+        - in: query
+          name: versie
+          description: |
+                        Aanduiding van de bewerkingsfase van het informatieobject
+          required: false
+          schema:
+            type: string
+            maxLength: 5
+      responses:
+        '200':
+          description: |
+                        Zoekactie geslaagd
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/warning"
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Informatieobject'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Informatieobjecten
+    post:
+      operationId: PostInformatieobject
+      summary: Opslaan informatieobject
+      description: |
+                    Registreer een informatieobject.
+      responses:
+        '201':
+          description: ""
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Informatieobject'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Informatieobjecten
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Informatieobject'
+        required: true
+    put:
+      operationId: PutInformatieobject
+      summary: Wijzig informatieobject
+      description: |
+                    Wijzig een bestaand Informnatieobject"
+      responses:
+        '200':
+          description: |
+                        Zoekactie geslaagd
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/warning"
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Informatieobject'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Informatieobjecten
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Informatieobject'
+        required: true
+  /vergaderingen:
+    get:
+      operationId: GetVergaderingen
+      description: |
+                    Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert.
+      parameters:
+        - in: query
+          name: pagina
+          description: |
+                        Een pagina binnen de gepagineerde resultatenset.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/parameters/expand"
+        - in: query
+          name: naam
+          description: |
+                        De naam van de vergadering
+          required: false
+          schema:
+            type: string
+            maxLength: 100
+        - in: query
+          name: status
+          description: |
+                        De status van de vergadering
+          required: false
+          schema:
+              $ref: "#/components/schemas/VergaderingStatus"
+        - in: query
+          name: vergaderdatum
+          description: |
+                        De datum van de vergadering
+          required: false
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: vergaderingstype
+          description: |
+                        De type-aanduiding van de vergadering.
+          required: false
+          schema:
+              $ref: "#/components/schemas/VergaderingsType"
+      responses:
+        '200':
+          description: |
+                        Zoekactie geslaagd
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/warning"
+            X-Pagination-Page:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Pagination_Page"
+            X-Pagination-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Pagination_Limit"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Reset"
+          content:
+            application/hal+json:
+              schema:
+                type: object
+                properties:
+                  _links:
+                    $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalPaginationLinks"
+                  _embedded:
+                    type: object
+                    properties:
+                      vergaderingen:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Vergadering'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Vergaderingen
+    post:
+      operationId: postVergadering
+      description: |
+                    Registreer een Vergadering
+      responses:
+        '201':
+          description: ''
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vergadering'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Vergaderingen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vergadering'
+        required: true
+    put:
+      operationId: PutVergadering
+      description: |
+                    Wijzig een bestaand Vergadering"
+      responses:
+        '200':
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/warning"
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Vergadering'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Vergaderingen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vergadering'
+        required: true
+  /vergaderingen/{vergaderingsidentificatie}:
+    get:
+      operationId: GetVergadering
+      description: |
+                    Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert.
+      parameters:
+        - in: path
+          name: vergaderingsidentificatie
+          description: |
+                        De identificatie een VERGADERING De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.
+          required: true
+          schema:
+            type: string
+            maxLength: 10
+          example: 1234567890
+      responses:
+        '200':
+          description: |
+                        Zoekactie geslaagd
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/X_Rate_Limit_Reset"
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Vergadering'
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+      - Vergaderingen
+    delete:
+      operationId: DelVergadering
+      description: |
+                    Het bericht dat de JSON/REST API voor het verwijderen van een Vergadering.
+      parameters:
+        - in: path
+          name: vergaderingsidentificatie
+          description: |
+                        De identificatie een VERGADERING De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen."
+          required: true
+          schema:
+            type: string
+            maxLength: 10
+          example: 1234567890
+      responses:
+        "204":
+          description: ""
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Foutbericht"
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '404':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/404"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '501':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/501"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+        'default':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/default"
+      tags:
+        - Vergaderingen
+components:
+  schemas:
+    Agendapunt:
+      type: "object"
+      description: |
+                    Een onderdeel van de agenda dat als één geheel wordt behandeld. Een AGENDAPUNT kan weer onderverdeeld zijn naar subAGENDAPUNTen.
+      required:
+      - "agendapuntnummer"
+      - "indicatieHamerstuk"
+      - "indicatorBehandeld"
+      - "indicatorBesloten"
+      properties:
+        "@context":
+          type: string
+          description: |
+                        T.b.v. het parsen vabn JSON-LD. Zie [documentatie](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/tree/master/docs/json_to_ld.md).
+        "@id":
+          type: string
+          description: |
+                          Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting
+        "@type":
+          type: string
+          description: |
+                        Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting
+        agendapuntKenmerk:
+          type: "string"
+          title: "Agendapunt kenmerk"
+          description: |
+                        De weergave van het Agendapuntvolgnummer op de agenda. Dit is de letterlijke volgorde van een Agendapunt wordt bij gehouden d.m.v attribuut 'Agendapuntvolgnummer'. Hoe het Agendapunt getoond wordt op de Agenda wordt beschreven met attribuut 'Agendapunt kenmerk'.
+          maxLength: 20
+        agendapuntnummer:
+          type: "string"
+          title: "Agendapuntnummer"
+          description: |
+                        Het nummer van het agendapunt op de agenda.
+          maxLength: 10
+          minLength: 1
+        agendapuntOmschrijving:
+          type: "string"
+          title: "Agendapunt omschrijving"
+          description: |
+                        De omschrijving van het agendapunt
+        agendapuntvolgnummer:
+          type: "string"
+          title: "Agendapuntvolgnummer"
+          description: |
+                        Dit is het volgnummer van het AGENDAPUNT tijdens de vergadering. Dit is de letterlijke volgorde en zegt niets over hoe dit volgnummer getoond wordt. Hoe het Agendapunt getoond wordt op de Agenda wordt beschreven met attribuut 'Agendapunt kenmerk'.
+          maxLength: 3
+        eindtijd:
+          type: "string"
+          title: "Eindtijd"
+          description: |
+                        De datum en tijdstip waarop de behandeling van de agendapunt is geëindigd Moet voor komen als Starttijd voorkomt
+        geplandAgendapuntvolgnummer:
+          type: "string"
+          title: "Gepland agendapuntvolgnummer"
+          description: |
+                        Dit is het geplande volgnummer van het AGENDAPUNT van een vergadering.
+          maxLength: 10
+        geplandeEindtijd:
+          type: "string"
+          title: "Geplande eindtijd"
+          description: |
+                        De geplande datum en tijdstip waarop de behandeling van de agendapunt eindigt
+        geplandeStarttijd:
+          type: "string"
+          title: "Geplande starttijd"
+          description: |
+                        De geplande datum en tijdstip waarop de behandeling van de agendapunt start
+        indicatieHamerstuk:
+          type: "boolean"
+          title: "Indicatie hamerstuk"
+          description: ""
+          example: "true"
+        indicatorBehandeld:
+          type: "boolean"
+          title: "Indicator behandeld"
+          description: |
+                        Indicator geeft aan of het AGENDAPUNT is behandeld tijdens de VERGADERING. Is eventueel af te leiden als Starttijd en/of Eindtijd zijn ingevuld defaultwaarde = nee
+        indicatorBesloten:
+          type: "boolean"
+          title: "Indicator besloten"
+          description: |
+                        Indicator of een AGENDAPUNT besloten wordt behandeld defaultwaarde = nee
+        starttijd:
+          type: "string"
+          title: "Starttijd"
+          description: |
+                        De datum en tijdstip waarop de behandeling van de agendapunt is gestart
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
+        _links:
+          $ref: "#/components/schemas/Agendapunt_links"
+    Vergadering:
+      type: "object"
+      description: |
+                    Een VERGADERING is een bijeenkomst van meerdere mensen die met elkaar spreken en/of afspraken maken over onderwerpen die op de agenda staan.
+      required:
+      - "vergaderingsidentificatie"
+      - "vergaderingstype"
+      properties:
+        "@context":
+          type: string
+          description: |
+                        Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting
+        "@id":
+          type: string
+          description: |
+                        Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting
+        "@type":
+          type: "string"
+          description: |
+                        Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting
+        aanvangVergadering:
+          type: "string"
+          title: "Aanvang vergadering"
+          description: |
+                        De datum en tijdstip waarop de vergadering is gestart Komt zeker voor als Einde vergadering ook is ingevuld
+          example: "2017-02-10T18:25:00:000Z"
+        audioLink:
+          type: "string"
+          title: "Audio link"
+          description: |
+                        De link naar de audio opname van de VERGADERING
+          format: "uri"
+          example: "https://www.voorbeeldgemeente.nl/audio/link"
+        eindeVergadering:
+          type: "string"
+          title: "Einde vergadering"
+          description: |
+                        De datum en tijdstip waarop de vergadering is geëindigd
+          example: "2017-02-10T21:12:00:000Z"
+        geplandeAanvangVergadering:
+          type: "string"
+          title: "Geplande aanvang vergadering"
+          description: |
+                        De geplande datum en tijdstip waarop de vergadering start
+          example: "2017-02-09T18:25:00:000Z"
+        geplandeEindeVergadering:
+          type: "string"
+          title: "Geplande einde vergadering"
+          description: |
+                        De geplande datum en tijdstip waarop de vergadering eindigt
+          example: "2017-02-09T21:25:00:000Z"
+        geplandeVergaderdatum:
+          type: "string"
+          title: "Geplande vergaderdatum"
+          description: |
+                        De geplande datum van de VERGADERING
+          format: "date"
+          example: "2017-02-09"
+        locatie:
+          type: "string"
+          title: "Locatie"
+          description: |
+                        Omschrijving van de locatie waar de vergadering wordt gehouden
+          maxLength: 100
+          example: "Raadszaal, Stadskantoor, Overtoom 2"
+        naam:
+          type: "string"
+          title: "Naam"
+          description: |
+                        De naam van de vergadering
+          maxLength: 100
+          example: "Raadsvergadering"
+        status:
+          $ref: "#/components/schemas/VergaderingStatus"
+        vergaderdatum:
+          type: "string"
+          title: "Vergaderdatum"
+          description: |
+                        De datum van de VERGADERING
+          format: "date"
+          example: "2017-02-10"
+        vergaderingsidentificatie:
+          type: "string"
+          title: "Vergaderingsidentificatie"
+          description: |
+                        De identificatie een VERGADERING De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen."
+          maxLength: 10
+          minLength: 1
+          example: "1234567890"
+        vergaderingstype:
+          $ref: "#/components/schemas/VergaderingsType"
+        vergaderToelichting:
+          type: "string"
+          title: "Vergader toelichting"
+          description: |
+                        De toelichting of nadere omschrijving van de vergadering
+          example: "Regulier geplande raadsvergadering van mei"
+        videoLink:
+          type: "string"
+          title: "Video link"
+          description: |
+                        De link naar de video opname van de VERGADERING
+          format: "uri"
+          example: "https://www.voorbeeldgemeente.nl/video/link"
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
+        _links:
+          $ref: "#/components/schemas/Vergadering_links"
+    Informatieobject:
+      type: "object"
+      description: |
+                    Deze resource correspondeert met het enkelvoudig informatieobject en al zijn specialisaties. Voor de implementatie zijn alle objecttype die onder het informatieobject voorkomen samengevoegd in deze resource.
+      required:
+      - "auteur"
+      - "bronorganisatie"
+      - "creatiedatum"
+      - "informatieobjectidentificatie"
+      - "titel"
+      - "informatieobjecttype"
+      properties:
+        "@context":
+          type: string
+          description: |
+                        Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting
+        "@id":
+          type: string
+          description: |
+                        Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting
+        "@type":
+          type: string
+          description: |
+                        Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting
+        informatieobjectType:
+          $ref: "#/components/schemas/InformatieobjecttypeEnum"
+        auteur:
+          type: "string"
+          title: "Auteur"
+          description: |
+                        De persoon of organisatie die in de eerste plaats verantwoordelijk is voor het creëren van de inhoud van het INFORMATIEOBJECT.
+          maxLength: 200
+          minLength: 1
+        bronorganisatie:
+          type: "integer"
+          title: "Bronorganisatie"
+          description: |
+                        Het RSIN van de organisatie die het informatieobject heeft gecreëerd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd.
+        creatiedatum:
+          type: "string"
+          title: "Creatiedatum"
+          description: |
+                        Deze datum verwijst gewoonlijk naar de creatie van het INFORMATIEOBJECT.
+          format: "date"
+        informatieobjectidentificatie:
+          type: "string"
+          title: "Informatieobjectidentificatie"
+          description: |
+                        Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT.
+          maxLength: 40
+          minLength: 1
+        ontvangstdatum:
+          type: "string"
+          title: "Ontvangstdatum"
+          description: |
+                        De datum waarop het INFORMATIEOBJECT ontvangen is.
+          format: "date"
+        titel:
+          type: "string"
+          title: "Titel"
+          description: |
+                        De naam waaronder het INFORMATIEOBJECT formeel bekend is.
+          maxLength: 200
+          minLength: 1
+        versie:
+          type: "string"
+          title: "Versie"
+          description: |
+                        Aanduiding van de bewerkingsfase van het INFORMATIEOBJECT. Het gaat hier om een versienummer zoals ‘0.2’ en 1.0’.
+          maxLength: 5
+        bestandsomvang:
+          type: "integer"
+          title: "Bestandsomvang"
+          description: |
+                        Ruimtebeslag op het digitale opslagmedium waarin het fysieke bestand met de inhoud van het INFORMATIEOBJECT is vastgelegd
+        formaat:
+          type: "string"
+          title: "Formaat"
+          description: |
+                        De code voor de wijze waarop de inhoud van het ENKELVOUDIG INFORMATIEOBJECT is vastgelegd in een computerbestand. Het gaat hier om de bestandsoort van het enkelvoudig informatieobject.
+          minLength: 1
+        inhoud:
+          type: "string"
+          title: "Inhoud"
+          description: |
+                        Datgene wat in een ENKELVOUDIG INFORMATIEOBJECT wordt meegedeeld.
+        link:
+          type: "string"
+          title: "Link"
+          description: |
+                        De URL waarmee de inhoud van het INFORMATIEOBJECT op te vragen is.
+          format: "uri"
+        taal:
+          type: "string"
+          title: "Taal"
+          description: |
+                        Een taal van de intellectuele inhoud van het INFORMATIEOBJECT
+          maxLength: 20
+          minLength: 1
+        datumIngediend:
+          type: "string"
+          title: "Datum ingediend"
+          description: |
+                        De datum waarop het BESLUITVORMINGSSTUK is ingediend
+          format: "date"
+        omschrijving:
+          type: "string"
+          title: "Omschrijving"
+          description: |
+                        De omschrijving van het BESLUITVORMINGSSTUK Dit kan de omschrijving zijn van de MOTIE, het AMENDEMENT of het VOORSTEL
+        typeVraag:
+          $ref: "#/components/schemas/VraagType"
+        typeMotie:
+          $ref: "#/components/schemas/MotieType"
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/apAi-specificatie/common.yaml#/components/schemas/Waardetabel"
+        vergaderingIdentificaties:
+          type: "array"
+          items:
+            type: "string"
+        _links:
+          $ref: "#/components/schemas/InformatieobjectLinks"
+    Agendapunt_links:
+      type: "object"
+      properties:
+        "@id":
+          type: string
+          description: |
+                        Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        self:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        informatieobjecten:
+          title: "heeftAlsBijlage"
+          type: "array"
+          description: "Een AGENDAPUNT kan één of meerdere VERGADERSTUKken als bijlage\
+            \ hebben"
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        agendapunten:
+          title: "heeftAlsSubagendapunt"
+          type: "array"
+          description: "Een AGENDAPUNT kan uit één of meer subAGENDAPUNTen en een\
+            \ subAGENDAPUNT kan weer bestaan uit één of meer sub(sub)AGENDAPUNTen."
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        vergaderingen:
+          title: "wordtBehandeldTijdens"
+          type: "object"
+          description: "Een AGENDAPUNT wordt behandeld tijdens een VERGADERING."
+          properties:
+            href:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+    InformatieobjectLinks:
+      type: "object"
+      properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        self:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        hoortBijInformatieobject:
+          title: "heeftBetrekkingOp"
+          type: "object"
+          description: |
+                        Een informatieobject heeft een relatie met een ander informatieobject. Bijvoorbeeld Een subamendement is een wijzigingsvoorstel voor een amendement en een antwoord hoort bij een vraag en een amendement heeft betrekking op een voorstel.
+          properties:
+            href:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Href"
+    Vergadering_links:
+      type: "object"
+      properties:
+        "@id":
+          type: string
+          description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        "@context":
+            type: string
+            format: "uri"
+            example: "href: @id "
+            description: "Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting"
+        self:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        aanwezigeDeelnemers:
+          title: "isAanwezigBij"
+          type: "array"
+          description: "persoon met een functie neemt deel aan een vergadering"
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        agendapunten:
+          title: "wordtBehandeldTijdens"
+          type: "array"
+          description: "Een AGENDAPUNT wordt behandeld tijdens een VERGADERING."
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        informatieobjecten:
+          title: "heeftAlsBijlage"
+          type: "array"
+          description: "Een VERGADERING kan ook één of meer VERGADERSTUKKEN als bijlage\
+            \ hebben. Dit zijn bijvoorbeeld de notulen en de besluitenlijst van de\
+            \ vorige VERGADERING"
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        vergaderingen:
+          title: "heeftAlsDeelvergadering"
+          type: "array"
+          description: "Een VERGADERING kan uit één of meerdere deel-VERGADERINGen bestaan"
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+    VraagType:
+      type: "string"
+      description: "de type van de vraag de type van de vraagde type van de vraag:\n\
+        * `Technische vraag` - Technische vraag\n* `Mondelinge politieke vraag` -\
+        \ Mondelinge politieke vraag\n* `Schriftelijke politieke vraag` - Schriftelijke\
+        \ politieke vraag"
+      enum:
+      - "Technische vraag"
+      - "Mondelinge politieke vraag"
+      - "Schriftelijke politieke vraag"
+    VergaderingStatus:
+      type: "string"
+      description: "duiding van de statussen van een VERGADERING:\n* `0` - Gepland\n\
+        * `1` - Gehouden\n* `2` - Geannuleerd"
+      enum:
+      - "0"
+      - "1"
+      - "2"
+    MotieType:
+      type: "string"
+      description: "duiding van het type van een MOTIE:\n* `R` - Voorstel\n* `A` -\
+        \ Afkeuring\n* `T` - Treurnis\n* `W` - Wantrouwen\n* `V` - Vreemd\n* `O` -\
+        \ Overig"
+      enum:
+      - "R"
+      - "A"
+      - "T"
+      - "W"
+      - "V"
+      - "O"
+    InformatieobjecttypeEnum:
+      type: "string"
+      description: "Het type van een informatieobject."
+      enum:
+      - "Besluitvormingsstuk"
+      - "Antwoord"
+      - "Ingekomenstuk"
+      - "Mededeling"
+      - "Motie"
+      - "Toezegging"
+      - "Voorstellen"
+      - "Vragen"
+    VergaderingsType:
+      type: "string"
+      description: "De mogelijke typen van een VERGADERING behorende bij de gemeenteraad:"
+      enum:
+      - "Raadsvergadering"
+      - "Presidium"
+      - "Commissievergadering"
+      - "Statenvergadering"
