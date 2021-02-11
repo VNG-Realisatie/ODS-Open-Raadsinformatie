@@ -36,8 +36,8 @@ paths:
           schema:
             $ref: "#/components/schemas/RolNaam"
         - in: query
-          name: vertegenwoordigdorganisatie
-          description: "De naam van de organisatie die iemand vertegenwoordigt."
+          name: vertegenwoordigtorganisatie
+          description: "De naam van de organisatie die iemand vertegenwoordigd."
           required: false
           schema:
             type: string
@@ -6331,7 +6331,7 @@ components:
         vertegenwoordigtOrganisatie:
           type: "string"
           title: "Vertegenwoordigde organisatie"
-          description: "<body>De naam van de organisatie die iemand vertegenwoordigt.</body>"
+          description: "<body>De naam van de organisatie die iemand vertegenwoordigd.</body>"
           maxLength: 100
         gemeente:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
