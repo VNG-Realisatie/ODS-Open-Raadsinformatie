@@ -6,6 +6,8 @@ Startpunt voor informatiemodellen van gegevens in de berichten is het informatie
 
 Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API operaties is de overheidsbrede API strategie en overheidsbrede URI strategie (beiden nog in ontwikkeling.
 
+In het kader van de referentieontwikkeling is er een subset van het informatiemodel ontsloten. De [specificaties voor deze referentie-implementatie zijn hier](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/api-specificatie/refimplementatie) te vinden en [hier kan je de specificaties in SwaggerUI](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Open-Raadsinformatie/master/api-specificatie/refimplementatie/openapi.yaml) bekijken.
+
 ## Documentatie
 * Productvisie
 * Definition of Ready
