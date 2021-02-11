@@ -20,7 +20,7 @@ paths:
     get:
       operationId: getcollectionaanwezigedeelnemers
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -86,13 +86,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Aanwezige deelnemers
   /aanwezigedeelnemers/{aanwezigedeelnemeridentificatie}:
     delete:
       operationId: delaanwezigedeelnemer
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een agendapunt .</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: aanwezigedeelnemeridentificatie
           description: ""
@@ -110,12 +110,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Aanwezige deelnemers
     get:
       operationId: getresourceaanwezigedeelnemersAanwezigedeelnemeridentificatie
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: aanwezigedeelnemeridentificatie
           description: ""
@@ -166,12 +166,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Aanwezige deelnemers
     post:
       operationId: postaanwezigedeelnemersAanwezigedeelnemeridentificatie
       description: "<body><p>Het bericht dat de JSON/REST API voor het vastleggen van aanwezige deelnemers retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: aanwezigedeelnemeridentificatie
           description: ""
@@ -224,12 +224,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Aanwezige deelnemers
     put:
       operationId: putaanwezigedeelnemersAanwezigedeelnemeridentificatie
       description: "<body><p>Het bericht dat de JSON/REST API voor het wijzigen van aanwezige deelnemers retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: aanwezigedeelnemeridentificatie
           description: ""
@@ -282,13 +282,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Aanwezige deelnemers
   /agendapunten:
     get:
       operationId: Getagendapunten
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -347,13 +347,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Agendapunten
   /agendapunten/{agendapuntnummer}:
     delete:
       operationId: delagendapunt
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een agendapunt .</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: agendapuntnummer
           description: "Het nummer van het agendapunt op de agenda."
@@ -371,12 +371,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Agendapunten
     get:
       operationId: getagendapunt
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen gegevens van een agendapunt retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: agendapuntnummer
           description: "Het nummer van het agendapunt op de agenda."
@@ -427,12 +427,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Agendapunten
     post:
       operationId: postagendapuntenAgendapuntnummer
       description: "<body><p>Het vastleggen van een AGENDAPUNT</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: agendapuntnummer
           description: "Het nummer van het agendapunt op de agenda."
@@ -485,12 +485,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Agendapunten
     put:
       operationId: putagendapuntenAgendapuntnummer
       description: "<body><p>Het wijzigen van een AGENDAPUNT</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: agendapuntnummer
           description: "Het nummer van het agendapunt op de agenda."
@@ -543,13 +543,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Agendapunten
   /amendementen:
     get:
       operationId: Getamendementen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie amendementen retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -649,13 +649,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Amendementen
   /amendementen/{informatieobjectidentificatie}:
     delete:
       operationId: Delamendement
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een amendement retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -673,12 +673,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Amendementen
     get:
       operationId: Getamendement
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van gegevens van een amendement retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -729,12 +729,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Amendementen
     post:
       operationId: postamendementenInformatieobjectidentificatie
       description: "<body><p>Het vastleggen van een AMENDEMENT</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -787,12 +787,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Amendementen
     put:
       operationId: Putamendement
       description: "<body><p>Het wijzigen van een AGENDAPUNT</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -845,13 +845,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Amendementen
   /antwoorden:
     get:
       operationId: Getantwoorden
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie antwoorden retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -953,13 +953,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Antwoorden
   /antwoorden/{informatieobjectidentificatie}:
     delete:
       operationId: delantwoord
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een antwoord.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -977,12 +977,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Antwoorden
     get:
       operationId: Getantwoord
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een antwoord retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -1033,12 +1033,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Antwoorden
     post:
       operationId: postantwoord
       description: "<body><p>Het vastleggen van een ANTWOORD</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -1091,12 +1091,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Antwoorden
     put:
       operationId: putantwoord
       description: "<body><p>Het wijzigen van een antwoord.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -1149,13 +1149,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Antwoorden
   /besluiten:
     get:
       operationId: Getbesluiten
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie besluiten retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -1215,13 +1215,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Besluiten
   /besluiten/{besluitidentificatie}:
     delete:
       operationId: delbesluit
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een besluit.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: besluitidentificatie
           description: "Identificatie van het besluit binnen de organisatie die het besluit heeft vastgesteld. Identificatie van het besluit binnen de organisatie die het besluit heeft vastgesteld. Het betreft de identificatie of ook wel nummer dat aan het besluit is toegekend door de organisatie die het besluit heeft vastgesteld. Dit identificeert een besluit uniek binnen de desbetreffende organisatie en kan worden gebruikt om snel te kunnen refereren aan een bepaald besluit in mondelinge en schriftelijke communicatie. Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Verantwoordelijke organisatieâ€™, wordt een unieke aanduiding van een besluit voor geheel Nederland verkregen. Het betreft de attribuutsoort Beschikkingidentificatie in het GFO Zaken 2004.organisatie. Er is immers maar Ã©Ã©n organisatie die de zaak gecreÃ«erd heeft. Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -1239,12 +1239,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Besluiten
     get:
       operationId: Getbesluit
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van besluit gegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: besluitidentificatie
           description: "Identificatie van het besluit binnen de organisatie die het besluit heeft vastgesteld. Identificatie van het besluit binnen de organisatie die het besluit heeft vastgesteld. Het betreft de identificatie of ook wel nummer dat aan het besluit is toegekend door de organisatie die het besluit heeft vastgesteld. Dit identificeert een besluit uniek binnen de desbetreffende organisatie en kan worden gebruikt om snel te kunnen refereren aan een bepaald besluit in mondelinge en schriftelijke communicatie. Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Verantwoordelijke organisatieâ€™, wordt een unieke aanduiding van een besluit voor geheel Nederland verkregen. Het betreft de attribuutsoort Beschikkingidentificatie in het GFO Zaken 2004.organisatie. Er is immers maar Ã©Ã©n organisatie die de zaak gecreÃ«erd heeft. Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -1295,12 +1295,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Besluiten
     post:
       operationId: postbesluitenBesluitidentificatie
       description: "<body><p>Het vastleggen van een BESLUIT</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: besluitidentificatie
           description: "Identificatie van het besluit binnen de organisatie die het besluit heeft vastgesteld. Identificatie van het besluit binnen de organisatie die het besluit heeft vastgesteld. Het betreft de identificatie of ook wel nummer dat aan het besluit is toegekend door de organisatie die het besluit heeft vastgesteld. Dit identificeert een besluit uniek binnen de desbetreffende organisatie en kan worden gebruikt om snel te kunnen refereren aan een bepaald besluit in mondelinge en schriftelijke communicatie. Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Verantwoordelijke organisatieâ€™, wordt een unieke aanduiding van een besluit voor geheel Nederland verkregen. Het betreft de attribuutsoort Beschikkingidentificatie in het GFO Zaken 2004.organisatie. Er is immers maar Ã©Ã©n organisatie die de zaak gecreÃ«erd heeft. Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -1353,12 +1353,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Besluiten
     put:
       operationId: PutBestuit
       description: "<body><p>Het wijzigen van een BESLUIT</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: besluitidentificatie
           description: "Identificatie van het besluit binnen de organisatie die het besluit heeft vastgesteld. Identificatie van het besluit binnen de organisatie die het besluit heeft vastgesteld. Het betreft de identificatie of ook wel nummer dat aan het besluit is toegekend door de organisatie die het besluit heeft vastgesteld. Dit identificeert een besluit uniek binnen de desbetreffende organisatie en kan worden gebruikt om snel te kunnen refereren aan een bepaald besluit in mondelinge en schriftelijke communicatie. Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Verantwoordelijke organisatieâ€™, wordt een unieke aanduiding van een besluit voor geheel Nederland verkregen. Het betreft de attribuutsoort Beschikkingidentificatie in het GFO Zaken 2004.organisatie. Er is immers maar Ã©Ã©n organisatie die de zaak gecreÃ«erd heeft. Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -1411,13 +1411,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Besluiten
   /besluitvormingsstukken:
     get:
       operationId: Getbesluitvormingsstukken
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie besluitvormingsstukken retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -1531,13 +1531,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Besluitvormingsstukken
   /besluitvormingsstukken/{informatieobjectidentificatie}:
     delete:
       operationId: delbesluitvormingsstuk
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een besluitvormingsstuk.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -1555,12 +1555,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Besluitvormingsstukken
     get:
       operationId: Getbesluitvormingsstuk
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een besluitvormingsstuk retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -1611,12 +1611,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Besluitvormingsstukken
     post:
       operationId: postbesluitvormingsstukkenInformatieobjectidentificatie
       description: "<body><p>Het vastleggen van een BESLUITVORMINGSSTUK</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -1669,12 +1669,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Besluitvormingsstukken
     put:
       operationId: PutBestuitvormingsstuk
       description: "<body><p>Het wijzigen van een BESLUITVORMINGSSTUK</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -1727,13 +1727,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Besluitvormingsstukken
   /dagelijksbestuurlidmaatschappen:
     get:
       operationId: Getdagelijksbestuurlidmaatschappen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van lidmaatschappen van het dagelijks bestuur retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -1798,13 +1798,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Dagelijksbestuurlidmaatschappen
   /dagelijksbestuurlidmaatschappen/{dagelijksbestuurlidmaatschapidentificatie}:
     delete:
       operationId: Deldagelijksbestuurlidmaatschappen
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van lidmaatschappen van het dagelijks bestuur.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: dagelijksbestuurlidmaatschapidentificatie
           description: ""
@@ -1822,12 +1822,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Dagelijksbestuurlidmaatschappen
     get:
       operationId: Getdagelijksbestuurlidmaatschap
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van lidmaatschappen van het dagelijks bestuur retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: dagelijksbestuurlidmaatschapidentificatie
           description: ""
@@ -1878,12 +1878,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Dagelijksbestuurlidmaatschappen
     post:
       operationId: putdagelijksbetuurlidmaatschappen
       description: "<body><p>Het vastleggen van een BESLUIT</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: dagelijksbestuurlidmaatschapidentificatie
           description: ""
@@ -1936,12 +1936,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Dagelijksbestuurlidmaatschappen
     put:
       operationId: Putdagelijksbestuurlidmaatschap
       description: "<body><p>Het wijzigen van een DAGELIJKS BESTUUR</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: dagelijksbestuurlidmaatschapidentificatie
           description: ""
@@ -1994,13 +1994,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Dagelijksbestuurlidmaatschappen
   /dagelijksebesturen:
     get:
       operationId: Getdagelijksebesturen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie dagelijkse besturen retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -2060,13 +2060,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Dagelijkse Besturen
   /dagelijksebesturen/{dagelijksbestuuridentificatie}:
     delete:
       operationId: deldagelijksbestuur
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een dagelijksbestuur</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: dagelijksbestuuridentificatie
           description: ""
@@ -2084,12 +2084,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Dagelijkse Besturen
     get:
       operationId: Getdagelijksbestuur
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van dagelijks bestuur gegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: dagelijksbestuuridentificatie
           description: ""
@@ -2140,12 +2140,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Dagelijkse Besturen
     post:
       operationId: postdagelijksebesturenDagelijksbestuuridentificatie
       description: "<body><p>Het vastleggen van een BESLUIT</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: dagelijksbestuuridentificatie
           description: ""
@@ -2198,12 +2198,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Dagelijkse Besturen
     put:
       operationId: Putdagelijksbestuur
       description: "<body><p>Het wijzigen van een DAGELIJKS BESTUUR</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: dagelijksbestuuridentificatie
           description: ""
@@ -2256,13 +2256,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Dagelijkse Besturen
   /fractielidmaatschappen:
     get:
       operationId: Getfractielidmaatschappen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie fractielidmaatschappen retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -2340,13 +2340,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Fractielidmaatschappen
   /fractielidmaatschappen/{fractielidmaatschapidentificatie}:
     delete:
       operationId: delfractielidmaatschappen
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een fractielidmaatschap</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: fractielidmaatschapidentificatie
           description: ""
@@ -2364,12 +2364,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Fractielidmaatschappen
     get:
       operationId: Getfractielidmaatschap
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een fractielidmaatschappen retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: fractielidmaatschapidentificatie
           description: ""
@@ -2420,12 +2420,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Fractielidmaatschappen
     post:
       operationId: postfractielidmaatschappenFractielidmaatschapidentificatie
       description: "<body><p>Het vastleggen van een FRACTIELIDMAATSCHAP</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: fractielidmaatschapidentificatie
           description: ""
@@ -2478,12 +2478,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Fractielidmaatschappen
     put:
       operationId: Putfractielidmaatschap
       description: "<body><p>Het wijzigen van een FRACTIES</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: fractielidmaatschapidentificatie
           description: ""
@@ -2536,13 +2536,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Fractielidmaatschappen
   /fracties:
     get:
       operationId: Getfracties
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie fracties retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -2602,13 +2602,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Fracties
   /fracties/{fractienummer}:
     delete:
       operationId: delfractie
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een fractie.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: fractienummer
           description: "Het nummer dat de FRACTIE uniek identificeert binnen de gemeente viercijferige gemeentecode gevolgd door een volgnummer van 7 cijfers met voorloopnullen"
@@ -2626,12 +2626,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Fracties
     get:
       operationId: Getfractie
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van fractie gegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: fractienummer
           description: "Het nummer dat de FRACTIE uniek identificeert binnen de gemeente viercijferige gemeentecode gevolgd door een volgnummer van 7 cijfers met voorloopnullen"
@@ -2682,12 +2682,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Fracties
     post:
       operationId: postfractiesFractienummer
       description: "<body><p>Het vastleggen van een FRACTIE</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: fractienummer
           description: "Het nummer dat de FRACTIE uniek identificeert binnen de gemeente viercijferige gemeentecode gevolgd door een volgnummer van 7 cijfers met voorloopnullen"
@@ -2740,12 +2740,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Fracties
     put:
       operationId: Putfractie
       description: "<body><p>Het wijzigen van een FRACTIES</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: fractienummer
           description: "Het nummer dat de FRACTIE uniek identificeert binnen de gemeente viercijferige gemeentecode gevolgd door een volgnummer van 7 cijfers met voorloopnullen"
@@ -2798,13 +2798,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Fracties
   /ingekomenstukken:
     get:
       operationId: Getingekomenstukken
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie ingekomen stukken retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -2892,13 +2892,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Ingekomen stukken
   /ingekomenstukken/{informatieobjectidentificatie}:
     delete:
       operationId: delingekomenstukken
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een ingekomenstuk</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -2916,12 +2916,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Ingekomen stukken
     get:
       operationId: Getingekomenstuk
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van ingekomen stuk-gegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -2971,12 +2971,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Ingekomen stukken
     post:
       operationId: postingekomenstukkenInformatieobjectidentificatie
       description: "<body><p>Het vastleggen van een Ingekomen stuk</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -3035,12 +3035,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Ingekomen stukken
     put:
       operationId: Putingekomenstuk
       description: "<body><p>Het wijzigen van een FRACTIES</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -3099,13 +3099,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Ingekomen stukken
   /mededelingen:
     get:
       operationId: Getmededelingen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie toezeggingen retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -3205,13 +3205,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Mededelingen
   /mededelingen/{informatieobjectidentificatie}:
     delete:
       operationId: delmededeling
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een mededeling.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -3229,12 +3229,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Mededelingen
     get:
       operationId: Getmededeling
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van mededeling gegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -3285,12 +3285,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Mededelingen
     post:
       operationId: postmededeling
       description: "<body><p>Het vastleggen van een FRACTIE</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -3343,12 +3343,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Mededelingen
     put:
       operationId: Putmededeling
       description: "<body><p>Het wijzigen van een MEDEDELINGEN</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -3401,13 +3401,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Mededelingen
   /moties:
     get:
       operationId: Getmoties
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie moties retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -3507,13 +3507,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Moties
   /moties/{informatieobjectidentificatie}:
     delete:
       operationId: delmotie
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een motie.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -3531,12 +3531,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Moties
     get:
       operationId: Getmotie
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van motie gegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -3587,12 +3587,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Moties
     post:
       operationId: postmotie
       description: "<body><p>Het vastleggen van een FRACTIE</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -3645,12 +3645,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Moties
     put:
       operationId: Putmotie
       description: "<body><p>Het wijzigen van een MEDEDELINGEN</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -3703,13 +3703,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Moties
   /natuurlijkpersonen:
     get:
       operationId: GetnatuurlijkPersonen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie personen retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -3788,13 +3788,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Natuurlijkpersonen
   /natuurlijkpersonen/{nummernatuurlijkpersoon}:
     delete:
       operationId: delnatuurlijkpersoon
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een persoon.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: nummernatuurlijkpersoon
           description: "Het identificerende nummer van een NATUURLIJK PERSOON niet zijnde het burgerservicenummer Het kan dus voorkomen dat dezelfde natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder een ander nummer. viercijferige gemeentecode gevolgd door een volgnummer van 13 cijfers met voorloopnullen"
@@ -3812,12 +3812,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Natuurlijkpersonen
     get:
       operationId: GetnatuurlijkPersoon
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van persoonsgegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: nummernatuurlijkpersoon
           description: "Het identificerende nummer van een NATUURLIJK PERSOON niet zijnde het burgerservicenummer Het kan dus voorkomen dat dezelfde natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder een ander nummer. viercijferige gemeentecode gevolgd door een volgnummer van 13 cijfers met voorloopnullen"
@@ -3868,12 +3868,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Natuurlijkpersonen
     post:
       operationId: postnatuurlijkpersoon
       description: "<body><p>Het vastleggen van een Persoon</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: nummernatuurlijkpersoon
           description: "Het identificerende nummer van een NATUURLIJK PERSOON niet zijnde het burgerservicenummer Het kan dus voorkomen dat dezelfde natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder een ander nummer. viercijferige gemeentecode gevolgd door een volgnummer van 13 cijfers met voorloopnullen"
@@ -3926,12 +3926,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Natuurlijkpersonen
     put:
       operationId: Putnatuurlijkpersoon
       description: "<body><p>Het wijzigen van een MEDEDELINGEN</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: nummernatuurlijkpersoon
           description: "Het identificerende nummer van een NATUURLIJK PERSOON niet zijnde het burgerservicenummer Het kan dus voorkomen dat dezelfde natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder een ander nummer. viercijferige gemeentecode gevolgd door een volgnummer van 13 cijfers met voorloopnullen"
@@ -3984,13 +3984,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Natuurlijkpersonen
   /spreekfragmenten:
     get:
       operationId: Getspreekfragmenten
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een spreekfragment retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -4104,13 +4104,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Spreekfragmenten
   /spreekfragmenten/{spreekfragmentidentificatie}:
     delete:
       operationId: delspreekfragment
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een spreekfragment.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: spreekfragmentidentificatie
           description: ""
@@ -4127,12 +4127,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Spreekfragmenten
     get:
       operationId: Getspreekfragment
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een spreekfragment retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: spreekfragmentidentificatie
           description: ""
@@ -4182,12 +4182,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Spreekfragmenten
     post:
       operationId: postspreekfragment
       description: "<body><p>Het vastleggen van een Spreekfragment</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: spreekfragmentidentificatie
           description: ""
@@ -4239,12 +4239,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Spreekfragmenten
     put:
       operationId: Putspreekfragment
       description: "<body><p>Het wijzigen van een spreekfragment</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: spreekfragmentidentificatie
           description: ""
@@ -4296,13 +4296,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Spreekfragmenten
   /stemmen:
     get:
       operationId: Getstemmen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een spreekfragment retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -4361,13 +4361,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Stemmen
   /stemmen/{stemidentificatie}:
     delete:
       operationId: delstem
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een stem.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemidentificatie
           description: ""
@@ -4385,12 +4385,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Stemmen
     get:
       operationId: Getstem
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een spreekfragment retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemidentificatie
           description: ""
@@ -4441,12 +4441,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Stemmen
     post:
       operationId: poststem
       description: "<body><p>Het vastleggen van een Stem</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemidentificatie
           description: ""
@@ -4499,12 +4499,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Stemmen
     put:
       operationId: Putstem
       description: "<body><p>Het wijzigen van een stem</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemidentificatie
           description: ""
@@ -4557,13 +4557,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Stemmen
   /stemmingen:
     get:
       operationId: Getstemmingen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie stemmingen retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -4622,13 +4622,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Stemmingen
   /stemmingen/{stemmingsidentificatie}:
     delete:
       operationId: delstemming
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een stemming</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemmingsidentificatie
           description: "De identificatie van de STEMMING De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen"
@@ -4646,12 +4646,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Stemmingen
     get:
       operationId: Getstemming
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van fractie gegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemmingsidentificatie
           description: "De identificatie van de STEMMING De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen"
@@ -4702,12 +4702,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Stemmingen
     post:
       operationId: poststemming
       description: "<body><p>Het vastleggen van een Stemming</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemmingsidentificatie
           description: "De identificatie van de STEMMING De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen"
@@ -4760,12 +4760,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Stemmingen
     put:
       operationId: Putstemming
       description: "<body><p>Het wijzigen van een stem</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemmingsidentificatie
           description: "De identificatie van de STEMMING De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen"
@@ -4818,13 +4818,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Stemmingen
   /stemresultatenperfractie:
     get:
       operationId: Getstemresultatenperfractie
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie stemresultatenperfractie retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -4889,13 +4889,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
-      - Stemresultatenperfractie
+      tags:
+      - Stemresultaten per fractie
   /stemresultatenperfractie/{stemresultaatperfractieidentificatie}:
     delete:
       operationId: delstemresultaatperfractie
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een stemresultaatPerFractie</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemresultaatperfractieidentificatie
           description: ""
@@ -4913,12 +4913,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Stemresultaten per fractie
     get:
       operationId: Getstemresultaatperfractie
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie stemresultatenperfractie retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemresultaatperfractieidentificatie
           description: ""
@@ -4969,12 +4969,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
-      - Stemresultatenperfractie
+      tags:
+      - Stemresultaten per fractie
     post:
       operationId: poststemresultaatperfractie
       description: "<body><p>Het vastleggen van een Stemresultaatperfractie</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemresultaatperfractieidentificatie
           description: ""
@@ -5033,12 +5033,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Stemresultaten per fractie
     put:
       operationId: Putstemresultaatperfractie
       description: "<body><p>Het wijzigen van een stemresultaatperfractie</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: stemresultaatperfractieidentificatie
           description: ""
@@ -5097,13 +5097,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
-      - Stemresultataen per fractie
+      tags:
+      - Stemresultaten per fractie
   /toezeggingen:
     get:
       operationId: Gettoezeggingen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie toezeggingen retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -5203,13 +5203,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Toezeggingen
   /toezeggingen/{informatieobjectidentificatie}:
     delete:
       operationId: deltoezegging
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een Toezegging</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -5227,12 +5227,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Toezeggingen
     get:
       operationId: Gettoezegging
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van toezegging gegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -5283,12 +5283,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Toezeggingen
     post:
       operationId: posttoezegging
       description: "<body><p>Het vastleggen van een Stemresultaatperfractie</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -5341,12 +5341,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Toezeggingen
     put:
       operationId: Puttoezegging
       description: "<body><p>Het wijzigen van een toezegging</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -5399,13 +5399,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Toezeggingen
   /vergaderingen:
     get:
       operationId: Getvergaderingen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -5483,13 +5483,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Vergaderingen
   /vergaderingen/{vergaderingsidentificatie}:
     delete:
       operationId: devergadering
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een Vergadering</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: vergaderingsidentificatie
           description: "De identificatie een VERGADERING De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen."
@@ -5508,12 +5508,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Vergaderingen
     get:
       operationId: Getvergadering
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: vergaderingsidentificatie
           description: "De identificatie een VERGADERING De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen."
@@ -5565,12 +5565,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Vergaderingen
     post:
       operationId: postvergadering
       description: "<body><p>Het vastleggen van een Stemresultaatperfractie</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: vergaderingsidentificatie
           description: "De identificatie een VERGADERING De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen."
@@ -5624,12 +5624,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Vergaderingen
     put:
       operationId: Putvergadering
       description: "<body><p>Het wijzigen van een vergadering</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: vergaderingsidentificatie
           description: "De identificatie een VERGADERING De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen."
@@ -5683,13 +5683,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Vergaderingen
   /voorstellen:
     get:
       operationId: Getvoorstellen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -5790,13 +5790,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Voorstellen
   /voorstellen/{informatieobjectidentificatie}:
     delete:
       operationId: delvoorstel
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een Voorstel</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -5814,12 +5814,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Voorstellen
     get:
       operationId: Getvoorstel
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van voorstel gegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -5869,12 +5869,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Voorstellen
     post:
       operationId: postvoorstel
       description: "<body><p>Het vastleggen van een Voorstel</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -5927,12 +5927,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Voorstellen
     put:
       operationId: Putvoorstel
       description: "<body><p>Het wijzigen van een voorstel</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -5985,13 +5985,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Voorstellen
   /vragen:
     get:
       operationId: Getvragen
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie vragen retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: query
           name: page
           description: "Een pagina binnen de gepagineerde resultatenset."
@@ -6084,13 +6084,13 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Vragen
   /vragen/{informatieobjectidentificatie}:
     delete:
       operationId: delvraag
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een Voorstel</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -6108,12 +6108,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/204"
         '404':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/404"
-      tags: 
+      tags:
       - Vragen
     get:
       operationId: Getvraag
       description: "<body><p>Het bericht dat de JSON/REST API voor het ophalen van vraag-gegevens retourneert.</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -6164,12 +6164,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Vragen
     post:
       operationId: postvraag
       description: "<body><p>Het vastleggen van een Vragen</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -6222,12 +6222,12 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Vragen
     put:
       operationId: Putvraag
       description: "<body><p>Het wijzigen van een voorstel</p></body>"
-      parameters: 
+      parameters:
         - in: path
           name: informatieobjectidentificatie
           description: "informatieobjectidentificatie informatieobjectidentificatie Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT. Het gaat om een uniek kenmerk, gevormd door een reeks letters, cijfers en/of leestekens, dat het informatieobject uniek identificeert binnen de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd (cq. de â€˜gegeven contextâ€™). Door combinatie met het RSIN van die organisatie, als waarde van de attribuutsoort â€˜Bronorganisatieâ€™, wordt een voor geheel Nederland unieke aanduiding van informatieobjecten verkregen. Het betreft het Dublin Core metadata-element â€˜Identifierâ€™ met als toelichting: Recommended best practice is to identify the resource by means of a string or number conforming to a formal identification system. Formal identification systems include but are not limited to the Uniform Resource Identifier (URI) (including the Uniform Resource Locator (URL)), the Digital Object Identifier (DOI), and the International Standard Book Number (ISBN). Alle alfanumerieke tekens m.u.v. diacrieten"
@@ -6280,7 +6280,7 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/503"
         'default':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/master/api-specificatie/common.yaml#/components/responses/default"
-      tags: 
+      tags:
       - Vragen
 components:
   schemas:
@@ -6333,6 +6333,8 @@ components:
           title: "Vertegenwoordigde organisatie"
           description: "<body>De naam van de organisatie die iemand vertegenwoordigt.</body>"
           maxLength: 100
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     AgendapuntHalCollectie:
       type: "object"
       properties:
@@ -6430,6 +6432,8 @@ components:
           title: "Starttijd"
           description: "<body>De datum en tijdstip waarop de behandeling van de agendapunt\
             \ is gestart</body>"
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     AmendementHalCollectie:
       type: "object"
       properties:
@@ -6548,6 +6552,8 @@ components:
             \ worden.</body>"
           maxLength: 500
           minLength: 1
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     BesluitvormingsstukHal:
       allOf:
       - $ref: "#/components/schemas/Besluitvormingsstuk"
@@ -6621,6 +6627,8 @@ components:
           description: "<body>De naam van het dagelijkse bestuur verschilt per bestuurslaag</body>"
           maxLength: 200
           minLength: 1
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     DagelijksBestuurLidmaatschapHalCollectie:
       type: "object"
       properties:
@@ -6702,6 +6710,8 @@ components:
             \ volgnummer van 7 cijfers met voorloopnullen</body>"
           maxLength: 10
           minLength: 1
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     FractieLidmaatschapHalCollectie:
       type: "object"
       properties:
@@ -6749,6 +6759,8 @@ components:
           title: "Indicatie voorzitter"
           description: "<body>Indicatie of iemand de voorzitter is van de FRACTIE</body><body>Standaardwaarde\
             \ is Nee</body>"
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     IngekomenStukHalCollectie:
       type: "object"
       properties:
@@ -6893,6 +6905,8 @@ components:
             \ door een volgnummer van 13 cijfers met voorloopnullen</body>"
           maxLength: 17
           minLength: 1
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     SpreekfragmentHalCollectie:
       type: "object"
       properties:
@@ -6968,6 +6982,8 @@ components:
           title: "Video tijdsaanduiding"
           description: "<body>De tijdsaanduiding naar de video opname van het SPREEKFRAGMENT</body><body>hh:mm:ss</body>"
           maximum: 999999
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     StemHalCollectie:
       type: "object"
       properties:
@@ -7003,6 +7019,8 @@ components:
           description: ""
           maxLength: 10
           minLength: 1
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     StemmingHalCollectie:
       type: "object"
       properties:
@@ -7053,6 +7071,8 @@ components:
           minLength: 1
         stemmingstype:
           $ref: "#/components/schemas/StemmingsType"
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     StemresultaatPerFractieHalCollectie:
       type: "object"
       properties:
@@ -7087,6 +7107,8 @@ components:
           description: ""
           maxLength: 10
           minLength: 1
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     ToezeggingHalCollectie:
       type: "object"
       properties:
@@ -7233,6 +7255,8 @@ components:
           description: "<body>De link naar de video opname van de VERGADERING</body>"
           format: "uri"
           example: "https://www.voorbeeldgemeente.nl/video/link"
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
     VoorstelHalCollectie:
       type: "object"
       properties:
@@ -7558,6 +7582,12 @@ components:
             \ is in versie 2.0 verplaatst van ENKELVOUDIG INFORMATIEOBJECT naar INFORMATIEOBJECT.</body><body>Alle\
             \ alfanumerieke tekens m.u.v. diacrieten</body>"
           maxLength: 5
+        gemeente:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/Waardetabel"
+        vergaderingIdentificaties:
+          type: "array"
+          items:
+            type: "string"
     AanwezigeDeelnemer_links:
       type: "object"
       properties:
