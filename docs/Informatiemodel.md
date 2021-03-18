@@ -17,5 +17,5 @@ Informatiemodel ORI is geen informatiemodel voor een RIS (RaadsInformatieSysteem
 
 ## Informatiemodel volledig
 
-![Informatiemodel volledig Open Raadsinformatie](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/Open%20Raads-%20en%20StatenInformatie%20op%20hoofdlijnen.jpg)
+![Informatiemodel volledig Open Raadsinformatie](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/Open%20Raads-%20en%20StatenInformatie%20volledig.jpg)
 
