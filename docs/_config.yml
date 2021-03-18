@@ -8,6 +8,7 @@ plugins:
 remote_theme: VNG-Realisatie/jekyll-theme-haal-centraal
 
 github: VNG-Realisatie/ODS-Open-Raadsinformatie
+
 theme: jekyll-theme-time-machine
 
-project_name: /Open-Raadsinformatie
+project_name: /ODS-Open-Raadsinformatie
