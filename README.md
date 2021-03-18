@@ -11,7 +11,7 @@ In het kader van de referentieontwikkeling is er een subset van het informatiemo
 ## Documentatie
 * [Productvisie](./docs/Productvisie.md)
 * Hoe u kunt bijdragen
-* [Technische specificaties](./api-specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](.api-specificatie/openapi.yaml)
+* [Technische specificaties](./api-specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](./api-specificatie/openapi.yaml)
 * Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md)
 
 ## Bronnen
