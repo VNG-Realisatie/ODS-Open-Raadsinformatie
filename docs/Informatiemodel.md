@@ -7,6 +7,14 @@ Open Raadsinformatie heeft als doel om gemeentelijke raadsinformatie, waaronder 
 
 Het gaat hierbij om de semantiek en samenhang. De uitwerking naar een [technisch model](./Uitwisselingsmodel.md) is in een ander diagram uitgewerkt. In een technisch model kunnen andere keuzes gemaakt worden in de samenstelling van objecten (resources) en eigenschappen hiervan.
 
-## Scope 
+## Scope
 
 Informatiemodel ORI is geen informatiemodel voor een RIS (RaadsInformatieSysteem) en ook niet van de huidige bestaande API van OpenRaadsinformatie, die ontstaan is uit de pilot in 2015. De scope van informatiemodel ORI is een weergave van de uitkomsten en agenda’s van vergaderingen van de gemeenteraad.
+
+## Informatiemodel op hoofdlijnen:
+
+![Informatiemodel op hoofdlijnen Open Raadsinformatie](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/Open%20Raads-%20en%20StatenInformatie%20op%20hoofdlijnen.jpg)
+
+##Informatiemodel volledig
+
+![Informatiemodel volledig Open Raadsinformatie](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/Open%20Raads-%20en%20StatenInformatie%20op%20hoofdlijnen.jpg)
