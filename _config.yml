@@ -1,1 +1,13 @@
-theme: jekyll-theme-cayman
+baseurl: "/ODS_OpenRaadsInformatie"
+apiname: "Open Raadsinformatie"
+url: "http://localhost:4000"
+plugins:
+  - jekyll-redirect-from
+  - jekyll-remote-theme
+
+remote_theme: VNG-Realisatie/jekyll-theme-haal-centraal
+
+github: VNG-Realisatie/ODS-Open-Raadsinformatie
+theme: jekyll-theme-time-machine
+
+project_name: /Open-Raadsinformatie
