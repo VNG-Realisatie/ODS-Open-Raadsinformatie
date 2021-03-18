@@ -9,13 +9,10 @@ Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API
 In het kader van de referentieontwikkeling is er een subset van het informatiemodel ontsloten. De [specificaties voor deze referentie-implementatie zijn hier](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/api-specificatie/refimplementatie) te vinden en [hier kan je de specificaties in SwaggerUI](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Open-Raadsinformatie/master/api-specificatie/refimplementatie/openapi.yaml) bekijken.
 
 ## Documentatie
-* Productvisie
-* Definition of Ready
-* Definition of Done
+* [Productvisie](./docs/productvisie.md)
 * Hoe u kunt bijdragen
-* Omgangsvormen
 * [Technische specificaties](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/api-specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Open-Raadsinformatie/master/api-specificatie/openapi.yaml)
-* Ontwerpkeuzes staan in het document [Design decisions](https://github.com/VNG-Realisatie/Open-Raadsinformatie/blob/master/docs/design_decisions.md)
+* Ontwerpkeuzes staan in het document [Design decisions](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/Designdecisions.md)
 
 ## Bronnen
 * Informatiemodel RSGB (in ontwikkeling)
