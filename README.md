@@ -10,7 +10,9 @@ In het kader van de referentieontwikkeling is er een subset van het informatiemo
 
 ## Documentatie
 * [Productvisie](./docs/Productvisie.md)
-* Hoe u kunt bijdragen
+* [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/API-Kennisbank/blob/master/CONTRIBUTING.md)
+* [Informatiemodel](./docs/Infromatiemodel.md)
+* [Technisch uitwisselingsmodel]9./docs/Uitwisselingsmodel)
 * [Technische specificaties](./api-specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](./api-specificatie/openapi.yaml)
 * Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md)
 
