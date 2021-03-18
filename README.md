@@ -11,12 +11,13 @@ In het kader van de referentieontwikkeling is er een subset van het informatiemo
 ## Documentatie
 * [Productvisie](./docs/productvisie.md)
 * Hoe u kunt bijdragen
-* [Technische specificaties](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/api-specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Open-Raadsinformatie/master/api-specificatie/openapi.yaml)
-* Ontwerpkeuzes staan in het document [Design decisions](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/Designdecisions.md)
+* [Technische specificaties](./api-specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](.api-specificatie/openapi.yaml)
+* Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md)
 
 ## Bronnen
 * Informatiemodel RSGB (in ontwikkeling)
-* [API strategie en URI strategie](https://aandeslagmetdeomgevingswet.nl/digitaal-stelsel/documenten/documenten/api-uri-strategie/)
+* [Designrules Landelijke API strategie](https://geonovum.github.io/KP-APIs/API-strategie-algemeen/)
+* [Extensions Landelijke API strategie](https://geonovum.github.io/KP-APIs/API-strategie-extensies/)
 
 ## Contactpersonen:
 * Projectleider: Sander Bakker Sander.Bakker@VNG.NL
