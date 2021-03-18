@@ -4,4 +4,6 @@
 
 Het technisch uitwisselingsmodel is een weergave van de entiteittypen (resources) zoals die in de API-specificatie beschreven worden en hun onderlinge samenhang.
 
+In dit model zijn alle resources van het informatiemodel opgenomen. Echter in fase 1 (Versie 1.1. van de API-specificatie) wordem alleen de groen gekleurde resources ontsloten. Dat wil zeggen dat alleen der resources "vergaderingen", "agendapunten" en "documenten ontsloten worden. 
+
 ![Uitwisselingsmodel Open Raadsinformatie](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/UGM%20Open%20Raadsinformatie.jpg)
