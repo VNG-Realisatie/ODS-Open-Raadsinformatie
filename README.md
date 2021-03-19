@@ -10,6 +10,7 @@ Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API
 ## Documentatie
 * [Productvisie](./docs/Productvisie.md)
 * [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/API-Kennisbank/blob/master/CONTRIBUTING.md)
+* [Architectuur](./docs/Architectuur.md)
 * [Informatiemodel](./docs/Informatiemodel.md)
 * [Technisch uitwisselingsmodel](./docs/Uitwisselingsmodel.md)
 * [Technische specificaties](./api-specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://vng-realisatie.github.io/ODS-Open-Raadsinformatie/swagger-ui)
