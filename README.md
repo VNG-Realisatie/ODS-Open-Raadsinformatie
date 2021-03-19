@@ -2,7 +2,7 @@
 
 De Open Api Specificatie voor Open Raadsinformatie beschrijft de standaard voor het ontsluiten van Raadsinformatie van gemeenten.
 
-Startpunt voor informatiemodellen van gegevens in de berichten is het informatiemodel voor Open Raadsinformatoe.
+Startpunt voor informatiemodellen van gegevens in de berichten is het informatiemodel voor Open Raadsinformatie.
 
 Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API operaties is de overheidsbrede API strategie en overheidsbrede URI strategie (beiden nog in ontwikkeling.
 
