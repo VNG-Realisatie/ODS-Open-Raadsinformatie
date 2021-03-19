@@ -8,13 +8,13 @@ Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API
 
 
 ## Documentatie
-* [Productvisie](./docs/Productvisie.md)
+* [Productvisie](./Productvisie.md)
 * [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/API-Kennisbank/blob/master/CONTRIBUTING.md)
-* [Architectuur](./docs/Architectuur.md)
-* [Informatiemodel](./docs/Informatiemodel.md)
-* [Technisch uitwisselingsmodel](./docs/Uitwisselingsmodel.md)
+* [Architectuur](./Architectuur.md)
+* [Informatiemodel](./Informatiemodel.md)
+* [Technisch uitwisselingsmodel](./Uitwisselingsmodel.md)
 * [Technische specificaties](./api-specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://vng-realisatie.github.io/ODS-Open-Raadsinformatie/swagger-ui)
-* Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md)
+* Ontwerpkeuzes staan in het document [Design decisions](./Designdecisions.md)
 
 ## Bronnen
 * Informatiemodel RSGB (in ontwikkeling)
