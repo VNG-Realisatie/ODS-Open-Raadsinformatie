@@ -4,9 +4,8 @@
 
 | **Onderwerp** | **:** | Architectuur openbaarmaking open raadsinformatie via PLOOI |
 | --- | --- | --- |
-| **Van** | **:** | Ivo Hendriks |
-| **Aan** | **:** | Sander Bakker, Chris Vast |
-| **Datum** | **:** | maart 2020 |
+| **Auteur** | **:** | Ivo Hendriks |
+
 
 ### Een transparante overheid
 
@@ -14,7 +13,7 @@
 
 De Wet open overheid (Woo) heeft een transparante overheid tot doel. Overheden zullen daarom worden verplicht een aantal categorieën overheidsinformatie openbaar te maken. Eén van deze categorieën betreft ingekomen stukken, agenda&#39;s, verslagen en besluiten van gemeenteraden (verder: raadsinformatie).
 
-Een deel van de Nederlandse gemeenten maakt raadsinformatie al actief openbaar. Ongeveer 120 gemeenten bieden hun raadsinformatie aan voor publicatie en hergebruik via raadsinformatie-portaal [openraadsinformatie.nl](https://zoek.openraadsinformatie.nl/). Dit platform is tot stand gekomen door een samenwerking tussen de Open State Foundation en VNG Realisatie. Het is ontwikkeld door Argu en Ontola. ([GitHub-pagina open raadsinformatie](https://github.com/openstate/open-raadsinformatie)). 
+Een deel van de Nederlandse gemeenten maakt raadsinformatie al actief openbaar. Ongeveer 120 gemeenten bieden hun raadsinformatie aan voor publicatie en hergebruik via raadsinformatie-portaal [openraadsinformatie.nl](https://zoek.openraadsinformatie.nl/). Dit platform is tot stand gekomen door een samenwerking tussen de Open State Foundation en VNG Realisatie. Het is ontwikkeld door Argu en Ontola. ([GitHub-pagina open raadsinformatie](https://github.com/openstate/open-raadsinformatie)).
 
  Door VNG Realisatie zijn bovendien een informatiemodel voor raadsinformatie en een daarbij aansluitende Application Programming Interface (API) gedefinieerd. Deze API wordt op dit moment nog gebruikt.
 
