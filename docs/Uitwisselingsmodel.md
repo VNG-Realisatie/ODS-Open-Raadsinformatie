@@ -8,4 +8,4 @@ In dit model zijn alle resources van het informatiemodel opgenomen. Echter in fa
 
 Door op de image te klikken wordt er een nieuw tabblad van uw browser geopend met een beter leesbaar (en scrollbaar) formaat.
 
-![Uitwisselingsmodel Open Raadsinformatie](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/UGM%20Open%20Raadsinformatie.jpg)
+![Uitwisselingsmodel Open Raadsinformatie](./UGM%20Open%20Raadsinformatie.jpg)
