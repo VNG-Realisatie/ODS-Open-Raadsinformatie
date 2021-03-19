@@ -13,7 +13,7 @@ Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API
 * [Architectuur](./docs/Architectuur.md)
 * [Informatiemodel](./docs/Informatiemodel.md)
 * [Technisch uitwisselingsmodel](./docs/Uitwisselingsmodel.md)
-* [Technische specificaties](./api-specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://vng-realisatie.github.io/ODS-Open-Raadsinformatie/swagger-ui)
+* [Technische specificaties](./specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://vng-realisatie.github.io/ODS-Open-Raadsinformatie/swagger-ui)
 * Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md)
 
 ## Bronnen
