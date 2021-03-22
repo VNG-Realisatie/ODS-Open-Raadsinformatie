@@ -1,9 +1,3 @@
----
-layout: Landing-page
-title: ODS-Open-Raadsinformatie
----
-
-
 # ODS Open RaadsInformatie
 
 De Open Api Specificatie voor Open Raadsinformatie beschrijft de standaard voor het ontsluiten van Raadsinformatie van gemeenten.
