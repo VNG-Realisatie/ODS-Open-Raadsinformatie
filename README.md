@@ -17,7 +17,7 @@ Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API
 * Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md)
 
 ## Bronnen
-* Informatiemodel RSGB (in ontwikkeling)
+* Informatiemodel RSGB en Informatiemodel RGBZ
 * [Designrules Landelijke API strategie](https://geonovum.github.io/KP-APIs/API-strategie-algemeen/)
 * [Extensions Landelijke API strategie](https://geonovum.github.io/KP-APIs/API-strategie-extensies/)
 
