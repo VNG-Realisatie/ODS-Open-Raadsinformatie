@@ -14,7 +14,7 @@ Informatiemodel ORI is geen informatiemodel voor een RIS (RaadsInformatieSysteem
 
 ## Informatiemodel op hoofdlijnen:
 
-![Informatiemodel op hoofdlijnen Open Raadsinformatie](./Open%20Raads-%20en%20StatenInformatie%20op%20hoofdlijnen.jpg)
+[![Informatiemodel op hoofdlijnen Open Raadsinformatie](./Open%20Raads-%20en%20StatenInformatie%20op%20hoofdlijnen.jpg)](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/Open%20Raads-%20en%20StatenInformatie%20op%20hoofdlijnen.jpg)
 
 ## Informatiemodel volledig
 
