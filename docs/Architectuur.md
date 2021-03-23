@@ -30,7 +30,7 @@ Raadsinformatie wordt met behulp van verschillende, leverancierspecifieke koppla
  De gecachte en gestandaardiseerde raadsinformatie is toegankelijk voor (her)gebruik via een REST JSON-API. Voor het doorzoeken van datasets is bovendien is een zoek API (op basis van ElasticSearch) beschikbaar.
 
 
-![Figuur 1](./Architectuur-Afbeelding1.jpg)
+[![Figuur 1](./Architectuur-Afbeelding1.jpg)](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/Architectuur-Afbeelding1.jpg)
 
 Via openraadsinformatie.nlbeschikbare raadsinformatie is gemodelleerd volgens RDF(linked data)-conventies en kan verschillende manieren (RDF/XML, Turtle, N-Triples, JSON-LD, N3, Notation3, Zip, JSON+RDF) worden geserialiseerd.
 
@@ -75,8 +75,8 @@ In lijn met het gegevenslandschap-standaardisatieprincipe is het raadsvergaderin
 
  De hierboven beschreven interface kan gebruikt worden om raadsinformatie toegankelijk te maken via de eigen gemeentelijke website, maar kan ook worden gebruikt om metadata en URL-verwijzingen over te brengen naar PLOOI. Dit kan zowel via een pull- (eventueel voorafgegaan door een notificatie over de beschikbaarheid van nieuwe gegevens) als een pushmechanisme. Aansluitend bij het Gegevenslandschap-principe &#39;eenmalig vastleggen, meervoudig gebruiken&#39; blijft de inhoudelijke raadsinformatie in beide gevallen bij de gemeente opgeslagen. Vanuit PLOOI wordt middels de aangeleverde URL verwezen naar publicatieplaats op de gemeentelijke website. Het op deze manier realiseren van de functionaliteit voor het aanleveren van raadsinformatiedocumenten met bijbehorende metadata (Figuur 2Fout! Verwijzingsbron niet gevonden.) is de eerste en belangrijkste stap in het toegankelijk maken van raadsinformatie via PLOOI.
 
- ![Figuur 2](./Architectuur-Afbeelding2.jpg)
+ [![Figuur 2](./Architectuur-Afbeelding2.jpg)](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/Architectuur-Afbeelding2.jpg)
 
 Om het mogelijk te maken dat (her)gebruikers raadsinformatie van meerdere overheidsinformaties kunnen opvragen zonder daarvoor de door die organisaties beschikbaar gestelde APIs individueel te bevragen, is het gewenst dat raadsinformatie via PLOOI beschikbaar gesteld wordt via dezelfde gestandaardiseerde REST JSON-interface als voor dat doel door gemeenten wordt gebruikt. Deze functionaliteit is onderdeel van de uiteindelijk in een gegevenslandschap gewenste situatie zoals geïllustreerd in Figuur 3. Deze functionaliteit zal waarschijnlijk niet in eerste instantie gerealiseerd worden.
 
- ![Figuur 3](./Architectuur-Afbeelding3.jpg)
+[![Figuur 3](./Architectuur-Afbeelding3.jpg)](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/Architectuur-Afbeelding3.jpg)
