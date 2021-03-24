@@ -4,7 +4,7 @@ De Open Api Specificatie voor Open Raadsinformatie beschrijft de standaard voor 
 
 Startpunt voor informatiemodellen van gegevens in de berichten is het informatiemodel voor Open Raadsinformatie.
 
-Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API operaties is de overheidsbrede API strategie en overheidsbrede URI strategie (beiden nog in ontwikkeling.
+Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API operaties is de overheidsbrede API strategie en overheidsbrede URI strategie (beiden nog in ontwikkeling).
 
 Eventuele opmerkingen, toevoegingen of voorstellen kunnen [hier als isseu](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues) worden ingediend.
 
