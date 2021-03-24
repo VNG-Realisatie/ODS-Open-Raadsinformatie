@@ -5,5 +5,5 @@ Op hooflijnen zijn dit :
 * Enkele toevoegingen op de resource schema-componenten op deze API-specificatie ook linked data compliant te maken.
 Kijk [hier voor de toelichting](../docs/json_to_ld.md)
 
-Het OAS3 bestand is hier te vinden [Openapi.yaml](../openapi.yaml)
+Het OAS3 bestand is hier te vinden [Openapi.yaml](./openapi.yaml)
 
