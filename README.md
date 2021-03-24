@@ -6,7 +6,7 @@ Startpunt voor informatiemodellen van gegevens in de berichten is het informatie
 
 Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API operaties is de overheidsbrede API strategie en overheidsbrede URI strategie (beiden nog in ontwikkeling).
 
-Eventuele opmerkingen, toevoegingen of voorstellen kunnen [hier als isseu](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues) worden ingediend.
+Eventuele opmerkingen, toevoegingen of voorstellen kunnen [hier als issue](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues) worden ingediend.
 
 ## Documentatie
 * [Productvisie](./docs/Productvisie.md)
