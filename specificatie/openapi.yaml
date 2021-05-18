@@ -7,7 +7,7 @@ servers:
 info:
   title: Open Raads- en Stateninformatie
   description: "<body><p>Dit is de concept-versie van de API-documentatie voor Open RaadsInformatie. Deze versie is gebaseerd op de 2e versie en op de verbetervoorstellen die op het discussie-platform `discussie.kinggemeenten.nl/discussie/gemma/koppelvlak-open-raadsinformatie/eeste-iteratie-voor-de-api-documentatie-beschikbaar` zijn geplaatst. Daarnaast is in deze versie een toevoeging gedaan waardoor de API ook JSON-LD compliant is.Vooralsnog wordt er geen centraal context-bestand gepubliceerd, maar de standaard is wel voorbereid op het gebruik van een context bestand. Dit is de versie na conversie naar het MIM 1.1</p></body>"
-  version: "0.2.0"
+  version: "1.0.0"
   x-imvertor-generator-version: "1.64.1"
   x-yamlCompiler-stylesheets-version: "20210428"
   contact:
