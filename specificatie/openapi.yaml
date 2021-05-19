@@ -28,7 +28,7 @@ paths:
             minimum: 1
         - in: query
           name: agendapuntomschrijving
-          description: ""
+          description: "<body><p>De omschrijving van het agendapunt</p></body>"
           required: false
           schema:
             type: string
@@ -104,7 +104,7 @@ paths:
       parameters:
         - in: path
           name: agendapuntnummer
-          description: "<body><p>Unieke identificatie van het agendapunt.</p></body>"
+          description: "<body><p>Het nummer van het agendapunt op de agenda.</p></body><body><p>Unieke identificatie van het agendapunt.</p></body>"
           required: true
           schema:
             type: string
@@ -127,7 +127,7 @@ paths:
       parameters:
         - in: path
           name: agendapuntnummer
-          description: "<body><p>Unieke identificatie van het agendapunt.</p></body>"
+          description: "<body><p>Het nummer van het agendapunt op de agenda.</p></body><body><p>Unieke identificatie van het agendapunt.</p></body>"
           required: true
           schema:
             type: string
@@ -183,7 +183,7 @@ paths:
       parameters:
         - in: path
           name: agendapuntnummer
-          description: "<body><p>Unieke identificatie van het agendapunt.</p></body>"
+          description: "<body><p>Het nummer van het agendapunt op de agenda.</p></body><body><p>Unieke identificatie van het agendapunt.</p></body>"
           required: true
           schema:
             type: string
@@ -241,7 +241,7 @@ paths:
       parameters:
         - in: path
           name: agendapuntnummer
-          description: "<body><p>Unieke identificatie van het agendapunt.</p></body>"
+          description: "<body><p>Het nummer van het agendapunt op de agenda.</p></body><body><p>Unieke identificatie van het agendapunt.</p></body>"
           required: true
           schema:
             type: string
@@ -307,27 +307,27 @@ paths:
             minimum: 1
         - in: query
           name: auteur
-          description: "<body><p>De naamgegevens van de auteur zijnde een betrokkene die in een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon of organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend.</p></body>"
+          description: "<body><p>De persoon of organisatie die in de eerste plaats verantwoordelijk is voor het creÃ«ren van de inhoud van het INFORMATIEOBJECT.</p></body><body><p>De naamgegevens van de auteur zijnde een betrokkene die in een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon of organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend.</p></body>"
           required: false
           schema:
             type: string
             maxLength: 200
         - in: query
           name: bronorganisatie
-          description: "<body><p>bronorganisatie</p></body><body><p>De in het NHR voorkomende unieke identificaties van rechtspersonen en samenwerkingsverbanden.</p></body>"
+          description: "<body><p>Het RSIN van de Niet-natuurlijk persoon zijnde de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd.</p></body><body><p>bronorganisatie</p></body><body><p>bronorganisatie</p></body><body><p>De in het NHR voorkomende unieke identificaties van rechtspersonen en samenwerkingsverbanden.</p></body>"
           required: false
           schema:
             type: integer
         - in: query
           name: creatiedatum
-          description: "<body><p>creatiedatum</p></body><body><p>Alle geldige datums gelegen op of voor de huidige datum en tijd</p></body>"
+          description: "<body><p>Een datum of een gebeurtenis in de levenscyclus van het INFORMATIEOBJECT.</p></body><body><p>creatiedatum</p></body><body><p>creatiedatum</p></body><body><p>Alle geldige datums gelegen op of voor de huidige datum en tijd</p></body>"
           required: false
           schema:
             type: string
             format: date
         - in: query
           name: datumingediend
-          description: ""
+          description: "<body><p>De datum waarop het BESLUITVORMINGSSTUK is ingediend</p></body>"
           required: false
           schema:
             type: string
@@ -360,14 +360,14 @@ paths:
             $ref: "#/components/schemas/Provincie"
         - in: query
           name: taal
-          description: "<body><p>bij voorkeur ISO 639-2/B</p></body>"
+          description: "<body><p>Een taal van de intellectuele inhoud van het ENKELVOUDIG INFORMATIEOBJECT</p></body><body><p>bij voorkeur ISO 639-2/B</p></body>"
           required: false
           schema:
             type: string
             maxLength: 20
         - in: query
           name: titel
-          description: "<body><p>titel</p></body><body><p>alle alfanumerieke tekens</p></body>"
+          description: "<body><p>De naam waaronder het INFORMATIEOBJECT formeel bekend is.</p></body><body><p>titel</p></body><body><p>titel</p></body><body><p>alle alfanumerieke tekens</p></body>"
           required: false
           schema:
             type: string
@@ -380,7 +380,7 @@ paths:
             type: string
         - in: query
           name: versie
-          description: "<body><p>versie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>"
+          description: "<body><p>Aanduiding van de bewerkingsfase van het INFORMATIEOBJECT</p></body><body><p>versie</p></body><body><p>versie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>"
           required: false
           schema:
             type: string
@@ -438,7 +438,7 @@ paths:
       parameters:
         - in: path
           name: informatieobjectidentificatie
-          description: "<body><p>informatieobjectidentificatie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>"
+          description: "<body><p>Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT.</p></body><body><p>informatieobjectidentificatie</p></body><body><p>informatieobjectidentificatie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>"
           required: true
           schema:
             type: string
@@ -461,7 +461,7 @@ paths:
       parameters:
         - in: path
           name: informatieobjectidentificatie
-          description: "<body><p>informatieobjectidentificatie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>"
+          description: "<body><p>Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT.</p></body><body><p>informatieobjectidentificatie</p></body><body><p>informatieobjectidentificatie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>"
           required: true
           schema:
             type: string
@@ -517,7 +517,7 @@ paths:
       parameters:
         - in: path
           name: informatieobjectidentificatie
-          description: "<body><p>informatieobjectidentificatie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>"
+          description: "<body><p>Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT.</p></body><body><p>informatieobjectidentificatie</p></body><body><p>informatieobjectidentificatie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>"
           required: true
           schema:
             type: string
@@ -575,7 +575,7 @@ paths:
       parameters:
         - in: path
           name: informatieobjectidentificatie
-          description: "<body><p>informatieobjectidentificatie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>"
+          description: "<body><p>Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT.</p></body><body><p>informatieobjectidentificatie</p></body><body><p>informatieobjectidentificatie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>"
           required: true
           schema:
             type: string
@@ -654,7 +654,7 @@ paths:
             type: string
         - in: query
           name: naam
-          description: ""
+          description: "<body><p>De naam van de vergadering</p></body>"
           required: false
           schema:
             type: string
@@ -667,20 +667,20 @@ paths:
             $ref: "#/components/schemas/Provincie"
         - in: query
           name: status
-          description: ""
+          description: "<body><p>De status van de vergadering</p></body>"
           required: false
           schema:
             $ref: "#/components/schemas/VergaderingStatus"
         - in: query
           name: vergaderdatum
-          description: ""
+          description: "<body><p>De datum van de VERGADERING</p></body>"
           required: false
           schema:
             type: string
             format: date
         - in: query
           name: vergaderingstype
-          description: ""
+          description: "<body><p>De type-aanduiding van de vergadering.</p></body>"
           required: false
           schema:
             $ref: "#/components/schemas/VergaderingsType"
@@ -737,7 +737,7 @@ paths:
       parameters:
         - in: path
           name: vergaderingsidentificatie
-          description: "<body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>"
+          description: "<body><p>De identificatie een VERGADERING</p></body><body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>"
           required: true
           schema:
             type: string
@@ -761,7 +761,7 @@ paths:
       parameters:
         - in: path
           name: vergaderingsidentificatie
-          description: "<body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>"
+          description: "<body><p>De identificatie een VERGADERING</p></body><body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>"
           required: true
           schema:
             type: string
@@ -818,7 +818,7 @@ paths:
       parameters:
         - in: path
           name: vergaderingsidentificatie
-          description: "<body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>"
+          description: "<body><p>De identificatie een VERGADERING</p></body><body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>"
           required: true
           schema:
             type: string
@@ -877,7 +877,7 @@ paths:
       parameters:
         - in: path
           name: vergaderingsidentificatie
-          description: "<body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>"
+          description: "<body><p>De identificatie een VERGADERING</p></body><body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>"
           required: true
           schema:
             type: string
@@ -953,7 +953,8 @@ components:
             $ref: "#/components/schemas/Agendapunt_links"
     Agendapunt:
       type: "object"
-      description: ""
+      description: "<body><p>Een onderdeel van de agenda dat als Ã©Ã©n geheel wordt\
+        \ behandeld. Een AGENDAPUNT kan weer onderverdeeld zijn naar subAGENDAPUNTen.</p></body>"
       required:
       - "agendapuntnummer"
       properties:
@@ -972,32 +973,35 @@ components:
         agendapuntKenmerk:
           type: "string"
           title: "Agendapunt kenmerk"
-          description: ""
+          description: "<body><p>De weergave van het Agendapuntvolgnummer op de agenda.</p></body>"
           maxLength: 20
         agendapuntOmschrijving:
           type: "string"
           title: "Agendapunt omschrijving"
-          description: ""
+          description: "<body><p>De omschrijving van het agendapunt</p></body>"
         agendapuntTitel:
           type: "string"
           title: "Agendapunt titel"
-          description: ""
+          description: "<body><p>De titel of onderwerp van het agendapunt</p></body>"
           maxLength: 100
         agendapuntnummer:
           type: "string"
           title: "Agendapuntnummer"
-          description: ""
+          description: "<body><p>Het nummer van het agendapunt op de agenda.</p></body>"
           maxLength: 10
           minLength: 1
         agendapuntvolgnummer:
           type: "string"
           title: "Agendapuntvolgnummer"
-          description: ""
+          description: "<body><p>Dit is het volgnummer van het AGENDAPUNT tijdens\
+            \ de vergadering.</p></body>"
           maxLength: 3
         eindtijd:
           type: "string"
           title: "Eindtijd"
-          description: "<body><p>Moet voor komen als Starttijd voorkomt</p></body>"
+          description: "<body><p>De datum en tijdstip waarop de behandeling van de\
+            \ agendapunt is geÃ«indigd</p></body><body><p>Moet voor komen als Starttijd\
+            \ voorkomt</p></body>"
           format: "date-time"
         gemeente:
           allOf:
@@ -1007,17 +1011,20 @@ components:
         geplandAgendapuntvolgnummer:
           type: "string"
           title: "Gepland agendapuntvolgnummer"
-          description: ""
+          description: "<body><p>Dit is het geplande volgnummer van het AGENDAPUNT\
+            \ van een vergadering.</p></body>"
           maxLength: 10
         geplandeEindtijd:
           type: "string"
           title: "Geplande eindtijd"
-          description: ""
+          description: "<body><p>De geplande datum en tijdstip waarop de behandeling\
+            \ van de agendapunt eindigt</p></body>"
           format: "date-time"
         geplandeStarttijd:
           type: "string"
           title: "Geplande starttijd"
-          description: ""
+          description: "<body><p>De geplande datum en tijdstip waarop de behandeling\
+            \ van de agendapunt start</p></body>"
           format: "date-time"
         indicatieHamerstuk:
           type: "boolean"
@@ -1027,17 +1034,20 @@ components:
         indicatorBehandeld:
           type: "boolean"
           title: "Indicator behandeld"
-          description: "<body><p>defaultwaarde = nee</p></body>"
+          description: "<body><p>Indicator geeft aan of het AGENDAPUNT is behandeld\
+            \ tijdens de VERGADERING.</p></body><body><p>defaultwaarde = nee</p></body>"
         indicatorBesloten:
           type: "boolean"
           title: "Indicator besloten"
-          description: "<body><p>defaultwaarde = nee</p></body>"
+          description: "<body><p>Indicator of een AGENDAPUNT besloten wordt behandeld</p></body><body><p>defaultwaarde\
+            \ = nee</p></body>"
         provincie:
           $ref: "#/components/schemas/Provincie"
         starttijd:
           type: "string"
           title: "Starttijd"
-          description: ""
+          description: "<body><p>De datum en tijdstip waarop de behandeling van de\
+            \ agendapunt is gestart</p></body>"
           format: "date-time"
     InformatieObjectHalCollectie:
       type: "object"
@@ -1060,7 +1070,25 @@ components:
             $ref: "#/components/schemas/InformatieObject_links"
     InformatieObject:
       type: "object"
-      description: ""
+      description: "<body><p>Het antwoord dat gegeven is door het college of de burgemeester\
+        \ (in geval van een gemeente) of door de commissaris of gedeputeerde staten\
+        \ (in geval van een provincie) op een gestelde vraag</p></body><body><p>Een\
+        \ mededeling die gedaan wordt bij de vergadering</p></body><body><p>Een toezegging\
+        \ van een gedeputeerde of raadslid</p></body><body><p>Dit zijn vragen die\
+        \ raadsleden aan het college of de burgemeester stellen (gemeente) of die\
+        \ statenleden aan de gedeputeerde staten of de commissaris stellen (provincie).</p></body><body><p>Een\
+        \ BESLUITVORMINGSSTUK is een INFORMATIEOBJECT die als basis dient bij een\
+        \ STEMMING.</p></body><body><p>Een MOTIE is een korte gemotiveerde verklaring\
+        \ over een onderwerp waardoor een mening, wens of verzoek wordt uitgesproken\
+        \ en is ingediend door een raadslid of een statenlid.</p></body><body><p>Een\
+        \ INFORMATIEOBJECT waarvan aard, omvang en/of vorm aanleiding geven het als\
+        \ Ã©Ã©n geheel te behandelen en te beheren.</p></body><body><p>Geheel van\
+        \ gegevens met een eigen identiteit ongeacht zijn vorm, met de bijbehorende\
+        \ metadata ontvangen of opgemaakt door een natuurlijke en/of rechtspersoon\
+        \ bij de uitvoering van taken, zijnde een ENKELVOUDIG INFORMATIEOBJECT of\
+        \ een SAMENGESTELD INFORMATIEOBJECT.</p></body><body><p>Afkomstig van het\
+        \ informatiemodel RGBZ</p></body><body><p>Afkomstig van het informatiemodel\
+        \ RGBZ</p></body>"
       required:
       - "bronorganisatie"
       - "informatieObjectIdentificatie"
@@ -1081,12 +1109,13 @@ components:
         auteur:
           type: "string"
           title: "Auteur"
-          description: "<body><p>De naamgegevens van de auteur zijnde een betrokkene\
-            \ die in een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur\
-            \ niet in een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk\
-            \ persoon of organisatie zijnde de auteur. In het laatste geval verdient\
-            \ het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap\
-            \ wordt uitgeoefend.</p></body>"
+          description: "<body><p>De persoon of organisatie die in de eerste plaats\
+            \ verantwoordelijk is voor het creÃ«ren van de inhoud van het INFORMATIEOBJECT.</p></body><body><p>De\
+            \ naamgegevens van de auteur zijnde een betrokkene die in een rol aan\
+            \ de ZAAK gerelateerd is, dan wel, indien de auteur niet in een rol aan\
+            \ de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon of\
+            \ organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling\
+            \ om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend.</p></body>"
           maxLength: 200
         bestandsomvang:
           type: "integer"
@@ -1095,18 +1124,21 @@ components:
         bronorganisatie:
           type: "integer"
           title: "Bronorganisatie"
-          description: "<body><p>bronorganisatie</p></body><body><p>De in het NHR\
-            \ voorkomende unieke identificaties van rechtspersonen en samenwerkingsverbanden.</p></body>"
+          description: "<body><p>Het RSIN van de Niet-natuurlijk persoon zijnde de\
+            \ organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen\
+            \ en als eerste in een samenwerkingsketen heeft vastgelegd.</p></body><body><p>bronorganisatie</p></body><body><p>bronorganisatie</p></body><body><p>De\
+            \ in het NHR voorkomende unieke identificaties van rechtspersonen en samenwerkingsverbanden.</p></body>"
         creatiedatum:
           type: "string"
           title: "Creatiedatum"
-          description: "<body><p>creatiedatum</p></body><body><p>Alle geldige datums\
-            \ gelegen op of voor de huidige datum en tijd</p></body>"
+          description: "<body><p>Een datum of een gebeurtenis in de levenscyclus van\
+            \ het INFORMATIEOBJECT.</p></body><body><p>creatiedatum</p></body><body><p>creatiedatum</p></body><body><p>Alle\
+            \ geldige datums gelegen op of voor de huidige datum en tijd</p></body>"
           format: "date"
         datumIngediend:
           type: "string"
           title: "Datum ingediend"
-          description: ""
+          description: "<body><p>De datum waarop het BESLUITVORMINGSSTUK is ingediend</p></body>"
           format: "date"
         formaat:
           type: "string"
@@ -1120,7 +1152,8 @@ components:
         informatieObjectIdentificatie:
           type: "string"
           title: "Informatieobjectidentificatie"
-          description: "<body><p>informatieobjectidentificatie</p></body><body><p>Alle\
+          description: "<body><p>Een binnen een gegeven context ondubbelzinnige referentie\
+            \ naar het INFORMATIEOBJECT.</p></body><body><p>informatieobjectidentificatie</p></body><body><p>informatieobjectidentificatie</p></body><body><p>Alle\
             \ alfanumerieke tekens m.u.v. diacrieten</p></body>"
           maxLength: 40
           minLength: 1
@@ -1129,12 +1162,15 @@ components:
         inhoud:
           type: "string"
           title: "Inhoud"
-          description: "<body><p>De content (data) van het enkelvoudig informatieobject\
-            \ in het formaat zoals gespecificeerd met de attribuutsoort 'Formaat'.</p></body>"
+          description: "<body><p>Datgene wat in een ENKELVOUDIG INFORMATIEOBJECT wordt\
+            \ meegedeeld.</p></body><body><p>De content (data) van het enkelvoudig\
+            \ informatieobject in het formaat zoals gespecificeerd met de attribuutsoort\
+            \ 'Formaat'.</p></body>"
         link:
           type: "string"
           title: "Link"
-          description: ""
+          description: "<body><p>De URL waarmee de inhoud van het INFORMATIEOBJECT\
+            \ op te vragen is.</p></body>"
           format: "uri"
         omschrijving:
           type: "string"
@@ -1150,12 +1186,15 @@ components:
         taal:
           type: "string"
           title: "Taal"
-          description: "<body><p>bij voorkeur ISO 639-2/B</p></body>"
+          description: "<body><p>Een taal van de intellectuele inhoud van het ENKELVOUDIG\
+            \ INFORMATIEOBJECT</p></body><body><p>bij voorkeur ISO 639-2/B</p></body>"
           maxLength: 20
         titel:
           type: "string"
           title: "Titel"
-          description: "<body><p>titel</p></body><body><p>alle alfanumerieke tekens</p></body>"
+          description: "<body><p>De naam waaronder het INFORMATIEOBJECT formeel bekend\
+            \ is.</p></body><body><p>titel</p></body><body><p>titel</p></body><body><p>alle\
+            \ alfanumerieke tekens</p></body>"
           maxLength: 200
         typeMotie:
           $ref: "#/components/schemas/MotieType"
@@ -1164,8 +1203,8 @@ components:
         versie:
           type: "string"
           title: "Versie"
-          description: "<body><p>versie</p></body><body><p>Alle alfanumerieke tekens\
-            \ m.u.v. diacrieten</p></body>"
+          description: "<body><p>Aanduiding van de bewerkingsfase van het INFORMATIEOBJECT</p></body><body><p>versie</p></body><body><p>versie</p></body><body><p>Alle\
+            \ alfanumerieke tekens m.u.v. diacrieten</p></body>"
           maxLength: 5
     VergaderingHalCollectie:
       type: "object"
@@ -1188,7 +1227,9 @@ components:
             $ref: "#/components/schemas/Vergadering_links"
     Vergadering:
       type: "object"
-      description: ""
+      description: "<body><p>Een VERGADERING is een bijeenkomst van meerdere mensen\
+        \ die met elkaar spreken en/of afspraken maken over onderwerpen die op de\
+        \ agenda staan.</p></body>"
       required:
       - "vergaderingsidentificatie"
       properties:
@@ -1207,19 +1248,21 @@ components:
         aanvangVergadering:
           type: "string"
           title: "Aanvang vergadering"
-          description: "<body><p>Komt zeker voor als Einde vergadering ook is ingevuld</p></body>"
+          description: "<body><p>De datum en tijdstip waarop de vergadering is gestart</p></body><body><p>Komt\
+            \ zeker voor als Einde vergadering ook is ingevuld</p></body>"
           format: "date-time"
           example: "2017-02-10T18:25:00:000Z"
         audioLink:
           type: "string"
           title: "Audio link"
-          description: ""
+          description: "<body><p>De link naar de audio opname van de VERGADERING</p></body>"
           format: "uri"
           example: "https://www.voorbeeldgemeente.nl/audio/link"
         eindeVergadering:
           type: "string"
           title: "Einde vergadering"
-          description: ""
+          description: "<body><p>De datum en tijdstip waarop de vergadering is geÃ\
+            «indigd</p></body>"
           format: "date-time"
           example: "2017-02-10T21:12:00:000Z"
         gemeente:
@@ -1231,35 +1274,38 @@ components:
           allOf:
           - $ref: "#/components/schemas/Gremium"
           - title: "georganiseerdDoorGremium"
-            description: ""
+            description: "<body><p>de vergadering is georganiseerd door een gremium</p></body>"
         geplandeAanvangVergadering:
           type: "string"
           title: "Geplande aanvang vergadering"
-          description: ""
+          description: "<body><p>De geplande datum en tijdstip waarop de vergadering\
+            \ start</p></body>"
           format: "date-time"
           example: "2017-02-09T18:25:00:000Z"
         geplandeEindeVergadering:
           type: "string"
           title: "Geplande einde vergadering"
-          description: ""
+          description: "<body><p>De geplande datum en tijdstip waarop de vergadering\
+            \ eindigt</p></body>"
           format: "date-time"
           example: "2017-02-09T21:25:00:000Z"
         geplandeVergaderdatum:
           type: "string"
           title: "Geplande vergaderdatum"
-          description: ""
+          description: "<body><p>De geplande datum van de VERGADERING</p></body>"
           format: "date"
           example: "2017-02-09"
         locatie:
           type: "string"
           title: "Locatie"
-          description: ""
+          description: "<body><p>Omschrijving van de locatie waar de vergadering wordt\
+            \ gehouden</p></body>"
           maxLength: 100
           example: "Raadszaal, Stadskantoor, Overtoom 2"
         naam:
           type: "string"
           title: "Naam"
-          description: ""
+          description: "<body><p>De naam van de vergadering</p></body>"
           maxLength: 100
           example: "Raadsvergadering"
         provincie:
@@ -1269,19 +1315,20 @@ components:
         vergaderToelichting:
           type: "string"
           title: "Vergader toelichting"
-          description: ""
+          description: "<body><p>De toelichting of nadere omschrijving van de vergadering</p></body>"
           example: "Regulier geplande raadsvergadering van mei"
         vergaderdatum:
           type: "string"
           title: "Vergaderdatum"
-          description: ""
+          description: "<body><p>De datum van de VERGADERING</p></body>"
           format: "date"
           example: "2017-02-10"
         vergaderingsidentificatie:
           type: "string"
           title: "Vergaderingsidentificatie"
-          description: "<body><p>De eerste vier karakter zijn de gemeentecode, gevolgd\
-            \ door een volgnummer van 7 cijfers met voorloopnullen.</p></body>"
+          description: "<body><p>De identificatie een VERGADERING</p></body><body><p>De\
+            \ eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer\
+            \ van 7 cijfers met voorloopnullen.</p></body>"
           maxLength: 10
           minLength: 1
           example: "1234567890"
@@ -1290,7 +1337,7 @@ components:
         videoLink:
           type: "string"
           title: "Video link"
-          description: ""
+          description: "<body><p>De link naar de video opname van de VERGADERING</p></body>"
           format: "uri"
           example: "https://www.voorbeeldgemeente.nl/video/link"
     Agendapunt_links:
@@ -1310,20 +1357,24 @@ components:
         informatieobjecten:
           title: "heeftAlsBijlage"
           type: "array"
-          description: ""
+          description: "<body><p>Een AGENDAPUNT kan Ã©Ã©n of meerdere VERGADERSTUKken\
+            \ als bijlage hebben</p></body>"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.3.0/api-specificatie/common.yaml#/components/schemas/HalLink"
         agendapunten:
           title: "heeftAlsSubagendapunt"
           type: "array"
-          description: ""
+          description: "<body><p>Een AGENDAPUNT kan uit Ã©Ã©n of meer subAGENDAPUNTen\
+            \ en een subAGENDAPUNT kan weer bestaan uit Ã©Ã©n of meer sub(sub)AGENDAPUNTen.</p></body><body><p>Een\
+            \ AGENDAPUNT kan uit Ã©Ã©n of meer subAGENDAPUNTen en een subAGENDAPUNT\
+            \ kan weer bestaan uit Ã©Ã©n of meer sub(sub)AGENDAPUNTen.</p></body>"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.3.0/api-specificatie/common.yaml#/components/schemas/HalLink"
         vergaderingen:
           allOf:
           - title: "wordtBehandeldTijdens"
             type: "object"
-            description: ""
+            description: "<body><p>Een AGENDAPUNT wordt behandeld tijdens een VERGADERING.</p></body>"
           - $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.3.0/api-specificatie/common.yaml#/components/schemas/HalLink"
     InformatieObject_links:
       type: "object"
@@ -1369,25 +1420,30 @@ components:
         informatieobjecten:
           title: "heeftAlsBijlage"
           type: "array"
-          description: ""
+          description: "<body><p>Een VERGADERING kan ook Ã©Ã©n of meer VERGADERSTUKKEN\
+            \ als bijlage hebben.</p></body>"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.3.0/api-specificatie/common.yaml#/components/schemas/HalLink"
         agendapunten:
           title: "wordtBehandeldTijdens"
           type: "array"
-          description: ""
+          description: "<body><p>Een AGENDAPUNT wordt behandeld tijdens een VERGADERING.</p></body>"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.3.0/api-specificatie/common.yaml#/components/schemas/HalLink"
         deelvergaderingen:
           title: "heeftAlsDeelvergadering"
           type: "array"
-          description: ""
+          description: "<body><p>Een VERGADERING kan uit Ã©Ã©n of meerdere deel-VERGADERINGen\
+            \ bestaan</p></body>"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.3.0/api-specificatie/common.yaml#/components/schemas/HalLink"
     Gemeente:
       type: "object"
-      description: "<body><p>De referentielijst met alle gemeenten</p><p>Tabel 33\
-        \ van de landelijke tabellen</p></body>"
+      description: "<body><p>De referentielijst met alle gemeenten. Landelijke tabel\
+        \ 32 beheerd door het RVIG</p></body><body><p>De referentielijst met alle\
+        \ gemeenten</p><p>Tabel 33 van de landelijke tabellen</p></body><body><p>De\
+        \ referentielijst met alle gemeenten</p><p>Tabel 33 van de landelijke tabellen</p></body><body><p>Hier\
+        \ horen ook alle commissies bij van de gemeenteraad</p></body>"
       required:
       - "gemeenteCode"
       - "gemeenteNaam"
@@ -1395,17 +1451,23 @@ components:
         gemeenteCode:
           type: "string"
           title: "Gemeente code"
-          description: "<body><p>De code van een gemeente in de landelijke tabel</p></body>"
+          description: "<body><p>Code van een gemeente</p></body><body><p>De code\
+            \ van een gemeente in de landelijke tabel</p></body><body><p>De code van\
+            \ een gemeente in de landelijke tabel</p></body>"
           maxLength: 4
           minLength: 1
         gemeenteNaam:
           type: "string"
           title: "Gemeente naam"
-          description: "<body><p>De naam van de gemeente</p></body>"
+          description: "<body><p>De naam van de gemeenten</p></body><body><p>De naam\
+            \ van de gemeente</p></body><body><p>De naam van de gemeente</p></body><body><p>Hier\
+            \ horen ook de (raads- en staten)commissies bij</p></body>"
           minLength: 1
     Gremium:
       type: "object"
-      description: ""
+      description: "<body><p>De referentielijst met alle gremia in een gemeente</p></body><body><p>De\
+        \ referentielijst met alle gremia in een gemeente</p></body><body><p>Hier\
+        \ horen ook alle commissies bij van de gemeenteraad</p></body>"
       required:
       - "gremiumNaam"
       - "gremiumidentificatie"
@@ -1413,18 +1475,21 @@ components:
         gremiumNaam:
           type: "string"
           title: "Gremium naam"
-          description: ""
+          description: "<body><p>De naam van het gremium</p></body><body><p>De naam\
+            \ van het gremium</p></body><body><p>Hier horen ook de (raads- en staten)commissies\
+            \ bij</p></body>"
           maxLength: 100
           minLength: 1
         gremiumidentificatie:
           type: "string"
           title: "gremiumidentificatie"
-          description: ""
+          description: "<body><p>De identificatie van een gremium</p></body>"
           maxLength: 10
           minLength: 1
     InformatieObjectType:
       type: "string"
-      description: "<body><p>Het type van het informatieobject</p></body>"
+      description: "<body><p>Het type van het informatieobject</p></body><body><p>Het\
+        \ type van het informatieobject</p></body>"
       enum:
       - "vraag"
       - "antwoord"
@@ -1435,7 +1500,7 @@ components:
       - "mededeling"
     MotieType:
       type: "string"
-      description: ""
+      description: "<body><p>duiding van het type van een MOTIE</p></body>"
       enum:
       - "voorstel"
       - "afkeuring"
@@ -1445,7 +1510,7 @@ components:
       - "overig"
     Provincie:
       type: "string"
-      description: ""
+      description: "<body><p>Enumeratie van de nederlandse provincies</p></body>"
       enum:
       - "drenthe"
       - "groningen"
@@ -1461,14 +1526,15 @@ components:
       - "limburg"
     VergaderingStatus:
       type: "string"
-      description: ""
+      description: "<body><p>duiding van de statussen van een VERGADERING</p></body>"
       enum:
       - "gepland"
       - "gehouden"
       - "geannuleerd"
     VergaderingsType:
       type: "string"
-      description: ""
+      description: "<body><p>de mogelijke typen van een VERGADERING behorende bij\
+        \ de gemeenteraad</p></body>"
       enum:
       - "raadsvergadering"
       - "commissievergadering"
@@ -1476,7 +1542,8 @@ components:
       - "statenvergadering"
     VraagType:
       type: "string"
-      description: "<body><p>de type van de vraag</p></body>"
+      description: "<body><p>de type van de vraag</p></body><body><p>de type van de\
+        \ vraag</p></body>"
       enum:
       - "technische_vraag"
       - "mondelinge_politieke_vraag"
