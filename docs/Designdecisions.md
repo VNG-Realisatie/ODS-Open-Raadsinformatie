@@ -20,8 +20,15 @@ Hier worden landelijke designrules en/of extensions aangescherpt voor APA-specif
 
 ## Specifieke desin Decisions
 
-### 1 Modelleerprincipe voor resources
+### 1 Modelleerkeuze voor resources "Vergadering" en "Agendapunt"
 
-Resources cooresponderen 1 op 1 objecttypes uit het informatiemodel.
+Resources "Vergadering" en "Agendapunt" corresponderen 1 op 1 met objecttypes uit het informatiemodel.
 
 _**Ratio : **_ Aangezien de er geen duidelijke User-stories vanuit gebruikersperspectief zijn opgesteld is ervoor gekozen om de resources vorm te geven op basis van het informatiemodel.
+
+### 1 Modelleerkeuze voor resource "Informatieobject"
+
+De subtypes die in het informatiemodel onderkent zijn van het supertype "Informatieobject" zijn in het technische model gedenormaliseerd. De eigenschappen zijn opgenomen in de resource "Informatieobject" en er ise een property "InformatieObjectType" toegevoegd. 
+
+_**Ratio : **_ Deze wijze van technisch ontsluiten sluit beter aan bij het gebruik van deze gegevens dan het maken van allemaal aparte resources per subtype.
+
