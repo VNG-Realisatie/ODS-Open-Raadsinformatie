@@ -8,7 +8,7 @@ In dit model zijn alle resources van het informatiemodel opgenomen. Echter in fa
 
 Door op de image te klikken wordt er een nieuw tabblad van uw browser geopend met een beter leesbaar (en scrollbaar) formaat.
 
-De weergave van het technisch informatiemodel is op 21-06-2021 aangepast. Het bleek dat dte eenverouderde versie van het model was. 
+De weergave van het technisch informatiemodel is op 21-06-2021 aangepast. Het bleek dat er een verouderde versie van het model was gepubliceerd. 
 Deze weergave is in overeenstemming met de releasecandidate van de standaard. 
 
 [![Uitwisselingsmodel Open Raadsinformatie](./UGM%20Open%20Raadsinformatie.jpg)](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/master/docs/UGM%20Open%20Raadsinformatie.jpg)
