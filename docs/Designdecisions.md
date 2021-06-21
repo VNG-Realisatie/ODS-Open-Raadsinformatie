@@ -26,7 +26,7 @@ Resources "Vergadering" en "Agendapunt" corresponderen 1 op 1 met objecttypes ui
 
 _**Ratio : **_ Aangezien de er geen duidelijke User-stories vanuit gebruikersperspectief zijn opgesteld is ervoor gekozen om de resources vorm te geven op basis van het informatiemodel.
 
-### 1 Modelleerkeuze voor resource "Informatieobject"
+### 2 Modelleerkeuze voor resource "Informatieobject"
 
 De subtypes die in het informatiemodel onderkent zijn van het supertype "Informatieobject" zijn in het technische model gedenormaliseerd. De eigenschappen zijn opgenomen in de resource "Informatieobject" en er ise een property "InformatieObjectType" toegevoegd. 
 
