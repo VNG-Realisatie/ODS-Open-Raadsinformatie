@@ -1,3 +1,4 @@
+---
 openapi: 3.0.0
 info:
   title: Open Raads- en StatenInformatie
@@ -7,11 +8,11 @@ info:
   license:
     name: European Union Public License, version 1.2 (EUPL-1.2)
     url: https://eupl.eu/1.2/nl/
-  version: 1.0.0
-  x-imvertor-generator-version: 1.64.1
-  x-yamlCompiler-stylesheets-version: "20210428"
+  version: 1.2.0
+  x-imvertor-generator-version: 1.64.2
+  x-yamlCompiler-stylesheets-version: "20210605"
 servers:
-- url: https://virtserver.swaggerhub.com/King4/KING4TEST/1.0.0
+- url: https://virtserver.swaggerhub.com/VNGRealisatie/api/open_raads__en_stateninformatie/v1
   description: SwaggerHub API Auto Mocking
 - url: https://www.voorbeeldgemeente.nl/api/open_raads__en_stateninformatie/v1
   description: Referentie-implementatie
@@ -21,7 +22,7 @@ paths:
       tags:
       - Agendapunten
       description: <body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie agendapunten retourneert.</p></body>
-      operationId: Getagendapunten
+      operationId: getagendapunten
       parameters:
       - name: page
         in: query
@@ -39,6 +40,15 @@ paths:
         style: form
         explode: true
         schema:
+          type: string
+      - name: bovenliggendagendapuntidentificatie
+        in: query
+        description: <body><p>De identificatie van het agendapunt op de agenda.</p></body><body><p>De identificatie die verwijst naar het agendapunt waar dit agendapunt een subagendapunt van is.</p></body>
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 10
           type: string
       - name: fields
         in: query
@@ -68,6 +78,15 @@ paths:
         explode: true
         schema:
           $ref: '#/components/schemas/Provincie'
+      - name: vergaderingsidentificatie
+        in: query
+        description: <body><p>De identificatie een VERGADERING</p></body><body><p>De identificatie de vergadering waarin dit agendapunt is of wordt behandeld.</p></body><body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 10
+          type: string
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -264,16 +283,220 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /agendapunten/{agendapuntnummer}:
+    post:
+      tags:
+      - Agendapunten
+      description: <body><p>Het vastleggen van een AGENDAPUNT</p></body>
+      operationId: postagendapunt
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/AgendapuntHal'
+      responses:
+        "201":
+          description: OK
+          headers:
+            Location:
+              description: URI van de nieuwe resource
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: uri
+                example: /agendapunten/
+            api-version:
+              $ref: '#/components/headers/api_version'
+            warning:
+              $ref: '#/components/headers/warning'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AgendapuntHal'
+        "400":
+          description: Bad Request
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/BadRequestFoutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+                title: Ten minste één parameter moet worden opgegeven.
+                status: 400
+                detail: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modification.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: paramsRequired
+                invalidParams:
+                - type: https://www.vng.nl/realisatie/api/validaties/integer
+                  name: verblijfplaats__huisnummer
+                  code: integer
+                  reason: Waarde is geen geldige integer.
+        "401":
+          description: Unauthorized
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2
+                title: Niet correct geauthenticeerd.
+                status: 401
+                detail: The request requires user authentication. The response MUST include a WWW-Authenticate header field (section 14.47) containing a challenge applicable to the requested resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: authentication
+        "403":
+          description: Forbidden
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
+                title: U bent niet geautoriseerd voor deze operatie.
+                status: 403
+                detail: The server understood the request, but is refusing to fulfill it.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: autorisation
+        "409":
+          description: Conflict
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10
+                title: Conflict
+                status: 409
+                detail: The request could not be completed due to a conflict with the current state of the resource
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: conflict
+        "410":
+          description: Gone
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.11
+                title: Gone
+                status: 410
+                detail: The request could not be completed due to a conflict with the current state of the resource
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: gone
+        "415":
+          description: Unsupported Media Type
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16
+                title: Unsupported Media Type
+                status: 415
+                detail: The server is refusing the request because the entity of the request is in a format not supported by the requested resource for the requested method.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: unsupported
+        "429":
+          description: Too Many Requests
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+                title: Too many request
+                status: 429
+                detail: The user has sent too many requests in a given amount of time (rate limiting).
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: tooManyRequests
+        "500":
+          description: Internal Server Error
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1
+                title: Interne server fout.
+                status: 500
+                detail: The server encountered an unexpected condition which prevented it from fulfilling the request.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: serverError
+        "501":
+          description: Not Implemented
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.2
+                title: Not Implemented
+                status: 501
+                detail: The server does not support the functionality required to fulfill the request.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notImplemented
+        "503":
+          description: Service Unavailable
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
+                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                status: 503
+                detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAvailable
+        default:
+          description: Er is een onverwachte fout opgetreden
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+  /agendapunten/{agendapuntidentificatie}:
     get:
       tags:
       - Agendapunten
       description: <body><p>Het bericht dat de JSON/REST API voor het ophalen gegevens van een agendapunt retourneert.</p></body>
       operationId: getagendapunt
       parameters:
-      - name: agendapuntnummer
+      - name: agendapuntidentificatie
         in: path
-        description: <body><p>Het nummer van het agendapunt op de agenda.</p></body><body><p>Unieke identificatie van het agendapunt.</p></body>
+        description: <body><p>De identificatie van het agendapunt op de agenda.</p></body><body><p>Unieke identificatie van het agendapunt.</p></body>
         required: true
         style: simple
         explode: false
@@ -500,9 +723,9 @@ paths:
       description: <body><p>Het wijzigen van een AGENDAPUNT</p></body>
       operationId: putagendapunt
       parameters:
-      - name: agendapuntnummer
+      - name: agendapuntidentificatie
         in: path
-        description: <body><p>Het nummer van het agendapunt op de agenda.</p></body><body><p>Unieke identificatie van het agendapunt.</p></body>
+        description: <body><p>De identificatie van het agendapunt op de agenda.</p></body><body><p>Unieke identificatie van het agendapunt.</p></body>
         required: true
         style: simple
         explode: false
@@ -706,46 +929,200 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-    post:
+    delete:
       tags:
       - Agendapunten
-      description: <body><p>Het vastleggen van een AGENDAPUNT</p></body>
-      operationId: postagendapunt
+      description: <body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een agendapunt .</p></body>
+      operationId: delagendapunt
       parameters:
-      - name: agendapuntnummer
+      - name: agendapuntidentificatie
         in: path
-        description: <body><p>Het nummer van het agendapunt op de agenda.</p></body><body><p>Unieke identificatie van het agendapunt.</p></body>
+        description: <body><p>De identificatie van het agendapunt op de agenda.</p></body><body><p>Unieke identificatie van het agendapunt.</p></body>
         required: true
         style: simple
         explode: false
         schema:
           maxLength: 10
           type: string
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/AgendapuntHal'
       responses:
-        "201":
-          description: OK
+        "200":
+          description: Verwijderactie geslaagd
           headers:
-            Location:
-              description: URI van de nieuwe resource
-              style: simple
-              explode: false
+            api-version:
+              $ref: '#/components/headers/api_version'
+        "204":
+          description: No content
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+        "404":
+          description: Not Found
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
               schema:
-                type: string
-                format: uri
-                example: /agendapunten/{agendapuntnummer}/
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5
+                title: Opgevraagde resource bestaat niet.
+                status: 404
+                detail: The server has not found anything matching the Request-URI.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notFound
+  /informatieobjecten:
+    get:
+      tags:
+      - Informatieobjecten
+      description: <body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie informatieobjecten retourneert.</p></body>
+      operationId: getinformatieobjecten
+      parameters:
+      - name: page
+        in: query
+        description: Een pagina binnen de gepagineerde resultatenset.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 1
+          type: integer
+      - name: agendapuntidentificatie
+        in: query
+        description: <body><p>De identificatie van het agendapunt op de agenda.</p></body><body><p>De identificatie die verwijst naar het agendapunt waar dit informatieobject een bijlage bij is.</p></body>
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 10
+          type: string
+      - name: auteur
+        in: query
+        description: <body><p>De persoon of organisatie die in de eerste plaats verantwoordelijk is voor het creÃ«ren van de inhoud van het INFORMATIEOBJECT.</p></body><body><p>De naamgegevens van de auteur zijnde een betrokkene die in een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon of organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend.</p></body>
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 200
+          type: string
+      - name: bronorganisatie
+        in: query
+        description: <body><p>Het RSIN van de Niet-natuurlijk persoon zijnde de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd.</p></body><body><p>bronorganisatie</p></body><body><p>bronorganisatie</p></body><body><p>De in het NHR voorkomende unieke identificaties van rechtspersonen en samenwerkingsverbanden.</p></body>
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: creatiedatum
+        in: query
+        description: <body><p>Een datum of een gebeurtenis in de levenscyclus van het INFORMATIEOBJECT.</p></body><body><p>creatiedatum</p></body><body><p>creatiedatum</p></body><body><p>Alle geldige datums gelegen op of voor de huidige datum en tijd</p></body>
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+      - name: datumingediend
+        in: query
+        description: <body><p>De datum waarop het BESLUITVORMINGSSTUK is ingediend</p></body>
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+      - name: fields
+        in: query
+        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature)
+        required: false
+        schema:
+          type: string
+      - name: gemeentecode
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: omschrijving
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: ontvangstdatum
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+      - name: provincie
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/Provincie'
+      - name: taal
+        in: query
+        description: <body><p>Een taal van de intellectuele inhoud van het ENKELVOUDIG INFORMATIEOBJECT</p></body><body><p>bij voorkeur ISO 639-2/B</p></body>
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 20
+          type: string
+      - name: titel
+        in: query
+        description: <body><p>De naam waaronder het INFORMATIEOBJECT formeel bekend is.</p></body><body><p>titel</p></body><body><p>titel</p></body><body><p>alle alfanumerieke tekens</p></body>
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 200
+          type: string
+      - name: vergaderingsidentificatie
+        in: query
+        description: <body><p>Identificatie(s) die verwijzen naar de vergaderingen waar dit informatieobject een bijlage bij is of waarvan dit de notulen zijn. (Zie ook informatieobjectType)</p></body><body><p>Identificatie(s) die verwijzen naar de vergaderingen waar dit informatieobject een bijlage bij is.</p></body>
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: versie
+        in: query
+        description: <body><p>Aanduiding van de bewerkingsfase van het INFORMATIEOBJECT</p></body><body><p>versie</p></body><body><p>versie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 5
+          type: string
+      responses:
+        "200":
+          description: Zoekactie geslaagd
+          headers:
             api-version:
               $ref: '#/components/headers/api_version'
             warning:
               $ref: '#/components/headers/warning'
+            X-Pagination-Page:
+              $ref: '#/components/headers/X_Pagination_Page'
+            X-Pagination-Limit:
+              $ref: '#/components/headers/X_Pagination_Limit'
+            X-Rate-Limit-Limit:
+              $ref: '#/components/headers/X_Rate_Limit_Limit'
+            X-Rate-Limit-Remaining:
+              $ref: '#/components/headers/X_Rate_Limit_Remaining'
+            X-Rate-Limit-Reset:
+              $ref: '#/components/headers/X_Rate_Limit_Reset'
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/AgendapuntHal'
+                $ref: '#/components/schemas/InformatieObjectHalCollectie'
         "400":
           description: Bad Request
           headers:
@@ -920,190 +1297,36 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-    delete:
-      tags:
-      - Agendapunten
-      description: <body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een agendapunt .</p></body>
-      operationId: delagendapunt
-      parameters:
-      - name: agendapuntnummer
-        in: path
-        description: <body><p>Het nummer van het agendapunt op de agenda.</p></body><body><p>Unieke identificatie van het agendapunt.</p></body>
-        required: true
-        style: simple
-        explode: false
-        schema:
-          maxLength: 10
-          type: string
-      responses:
-        "200":
-          description: Verwijderactie geslaagd
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-        "204":
-          description: No content
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-        "404":
-          description: Not Found
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5
-                title: Opgevraagde resource bestaat niet.
-                status: 404
-                detail: The server has not found anything matching the Request-URI.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: notFound
-  /informatieobjecten:
-    get:
+    post:
       tags:
       - Informatieobjecten
-      description: <body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie informatieobjecten retourneert.</p></body>
-      operationId: Getinformatieobjecten
-      parameters:
-      - name: page
-        in: query
-        description: Een pagina binnen de gepagineerde resultatenset.
-        required: false
-        style: form
-        explode: true
-        schema:
-          minimum: 1
-          type: integer
-      - name: auteur
-        in: query
-        description: <body><p>De persoon of organisatie die in de eerste plaats verantwoordelijk is voor het creÃ«ren van de inhoud van het INFORMATIEOBJECT.</p></body><body><p>De naamgegevens van de auteur zijnde een betrokkene die in een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon of organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend.</p></body>
-        required: false
-        style: form
-        explode: true
-        schema:
-          maxLength: 200
-          type: string
-      - name: bronorganisatie
-        in: query
-        description: <body><p>Het RSIN van de Niet-natuurlijk persoon zijnde de organisatie die het informatieobject heeft gecreÃ«erd of heeft ontvangen en als eerste in een samenwerkingsketen heeft vastgelegd.</p></body><body><p>bronorganisatie</p></body><body><p>bronorganisatie</p></body><body><p>De in het NHR voorkomende unieke identificaties van rechtspersonen en samenwerkingsverbanden.</p></body>
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: creatiedatum
-        in: query
-        description: <body><p>Een datum of een gebeurtenis in de levenscyclus van het INFORMATIEOBJECT.</p></body><body><p>creatiedatum</p></body><body><p>creatiedatum</p></body><body><p>Alle geldige datums gelegen op of voor de huidige datum en tijd</p></body>
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date
-      - name: datumingediend
-        in: query
-        description: <body><p>De datum waarop het BESLUITVORMINGSSTUK is ingediend</p></body>
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date
-      - name: fields
-        in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature)
-        required: false
-        schema:
-          type: string
-      - name: gemeentecode
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: omschrijving
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: ontvangstdatum
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date
-      - name: provincie
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/Provincie'
-      - name: taal
-        in: query
-        description: <body><p>Een taal van de intellectuele inhoud van het ENKELVOUDIG INFORMATIEOBJECT</p></body><body><p>bij voorkeur ISO 639-2/B</p></body>
-        required: false
-        style: form
-        explode: true
-        schema:
-          maxLength: 20
-          type: string
-      - name: titel
-        in: query
-        description: <body><p>De naam waaronder het INFORMATIEOBJECT formeel bekend is.</p></body><body><p>titel</p></body><body><p>titel</p></body><body><p>alle alfanumerieke tekens</p></body>
-        required: false
-        style: form
-        explode: true
-        schema:
-          maxLength: 200
-          type: string
-      - name: vergaderingidentificaties
-        in: query
-        required: true
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: versie
-        in: query
-        description: <body><p>Aanduiding van de bewerkingsfase van het INFORMATIEOBJECT</p></body><body><p>versie</p></body><body><p>versie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>
-        required: false
-        style: form
-        explode: true
-        schema:
-          maxLength: 5
-          type: string
+      description: <body><p>Het vastleggen van eenInformatieobject</p></body>
+      operationId: postinformatieobject
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/InformatieObjectHal'
       responses:
-        "200":
-          description: Zoekactie geslaagd
+        "201":
+          description: OK
           headers:
+            Location:
+              description: URI van de nieuwe resource
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: uri
+                example: /informatieobjecten/
             api-version:
               $ref: '#/components/headers/api_version'
             warning:
               $ref: '#/components/headers/warning'
-            X-Pagination-Page:
-              $ref: '#/components/headers/X_Pagination_Page'
-            X-Pagination-Limit:
-              $ref: '#/components/headers/X_Pagination_Limit'
-            X-Rate-Limit-Limit:
-              $ref: '#/components/headers/X_Rate_Limit_Limit'
-            X-Rate-Limit-Remaining:
-              $ref: '#/components/headers/X_Rate_Limit_Remaining'
-            X-Rate-Limit-Reset:
-              $ref: '#/components/headers/X_Rate_Limit_Reset'
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/InformatieObjectHalCollectie'
+                $ref: '#/components/schemas/InformatieObjectHal'
         "400":
           description: Bad Request
           headers:
@@ -1720,220 +1943,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-    post:
-      tags:
-      - Informatieobjecten
-      description: <body><p>Het vastleggen van eenInformatieobject</p></body>
-      operationId: postinformatieobject
-      parameters:
-      - name: informatieobjectidentificatie
-        in: path
-        description: <body><p>Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT.</p></body><body><p>informatieobjectidentificatie</p></body><body><p>informatieobjectidentificatie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>
-        required: true
-        style: simple
-        explode: false
-        schema:
-          maxLength: 40
-          type: string
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/InformatieObjectHal'
-      responses:
-        "201":
-          description: OK
-          headers:
-            Location:
-              description: URI van de nieuwe resource
-              style: simple
-              explode: false
-              schema:
-                type: string
-                format: uri
-                example: /informatieobjecten/{informatieobjectidentificatie}/
-            api-version:
-              $ref: '#/components/headers/api_version'
-            warning:
-              $ref: '#/components/headers/warning'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/InformatieObjectHal'
-        "400":
-          description: Bad Request
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/BadRequestFoutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
-                title: Ten minste één parameter moet worden opgegeven.
-                status: 400
-                detail: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modification.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: paramsRequired
-                invalidParams:
-                - type: https://www.vng.nl/realisatie/api/validaties/integer
-                  name: verblijfplaats__huisnummer
-                  code: integer
-                  reason: Waarde is geen geldige integer.
-        "401":
-          description: Unauthorized
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2
-                title: Niet correct geauthenticeerd.
-                status: 401
-                detail: The request requires user authentication. The response MUST include a WWW-Authenticate header field (section 14.47) containing a challenge applicable to the requested resource.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: authentication
-        "403":
-          description: Forbidden
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
-                title: U bent niet geautoriseerd voor deze operatie.
-                status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: autorisation
-        "409":
-          description: Conflict
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10
-                title: Conflict
-                status: 409
-                detail: The request could not be completed due to a conflict with the current state of the resource
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: conflict
-        "410":
-          description: Gone
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.11
-                title: Gone
-                status: 410
-                detail: The request could not be completed due to a conflict with the current state of the resource
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: gone
-        "415":
-          description: Unsupported Media Type
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16
-                title: Unsupported Media Type
-                status: 415
-                detail: The server is refusing the request because the entity of the request is in a format not supported by the requested resource for the requested method.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: unsupported
-        "429":
-          description: Too Many Requests
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-                title: Too many request
-                status: 429
-                detail: The user has sent too many requests in a given amount of time (rate limiting).
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: tooManyRequests
-        "500":
-          description: Internal Server Error
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1
-                title: Interne server fout.
-                status: 500
-                detail: The server encountered an unexpected condition which prevented it from fulfilling the request.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: serverError
-        "501":
-          description: Not Implemented
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.2
-                title: Not Implemented
-                status: 501
-                detail: The server does not support the functionality required to fulfill the request.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: notImplemented
-        "503":
-          description: Service Unavailable
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
-                status: 503
-                detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: notAvailable
-        default:
-          description: Er is een onverwachte fout opgetreden
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
     delete:
       tags:
       - Informatieobjecten
@@ -1981,7 +1990,7 @@ paths:
       tags:
       - Vergaderingen
       description: <body><p>Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert.</p></body>
-      operationId: Getvergaderingen
+      operationId: getvergaderingen
       parameters:
       - name: page
         in: query
@@ -2250,12 +2259,216 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
+    post:
+      tags:
+      - Vergaderingen
+      description: <body><p>Het vastleggen van een Stemresultaatperfractie</p></body>
+      operationId: postvergadering
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/VergaderingHal'
+      responses:
+        "201":
+          description: OK
+          headers:
+            Location:
+              description: URI van de nieuwe resource
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: uri
+                example: /vergaderingen/1234567890
+            api-version:
+              $ref: '#/components/headers/api_version'
+            warning:
+              $ref: '#/components/headers/warning'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/VergaderingHal'
+        "400":
+          description: Bad Request
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/BadRequestFoutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+                title: Ten minste één parameter moet worden opgegeven.
+                status: 400
+                detail: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modification.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: paramsRequired
+                invalidParams:
+                - type: https://www.vng.nl/realisatie/api/validaties/integer
+                  name: verblijfplaats__huisnummer
+                  code: integer
+                  reason: Waarde is geen geldige integer.
+        "401":
+          description: Unauthorized
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2
+                title: Niet correct geauthenticeerd.
+                status: 401
+                detail: The request requires user authentication. The response MUST include a WWW-Authenticate header field (section 14.47) containing a challenge applicable to the requested resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: authentication
+        "403":
+          description: Forbidden
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
+                title: U bent niet geautoriseerd voor deze operatie.
+                status: 403
+                detail: The server understood the request, but is refusing to fulfill it.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: autorisation
+        "409":
+          description: Conflict
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10
+                title: Conflict
+                status: 409
+                detail: The request could not be completed due to a conflict with the current state of the resource
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: conflict
+        "410":
+          description: Gone
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.11
+                title: Gone
+                status: 410
+                detail: The request could not be completed due to a conflict with the current state of the resource
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: gone
+        "415":
+          description: Unsupported Media Type
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16
+                title: Unsupported Media Type
+                status: 415
+                detail: The server is refusing the request because the entity of the request is in a format not supported by the requested resource for the requested method.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: unsupported
+        "429":
+          description: Too Many Requests
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+                title: Too many request
+                status: 429
+                detail: The user has sent too many requests in a given amount of time (rate limiting).
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: tooManyRequests
+        "500":
+          description: Internal Server Error
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1
+                title: Interne server fout.
+                status: 500
+                detail: The server encountered an unexpected condition which prevented it from fulfilling the request.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: serverError
+        "501":
+          description: Not Implemented
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.2
+                title: Not Implemented
+                status: 501
+                detail: The server does not support the functionality required to fulfill the request.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notImplemented
+        "503":
+          description: Service Unavailable
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
+                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                status: 503
+                detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAvailable
+        default:
+          description: Er is een onverwachte fout opgetreden
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
   /vergaderingen/{vergaderingsidentificatie}:
     get:
       tags:
       - Vergaderingen
       description: <body><p>Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert.</p></body>
-      operationId: Getvergadering
+      operationId: getvergadering
       parameters:
       - name: vergaderingsidentificatie
         in: path
@@ -2485,7 +2698,7 @@ paths:
       tags:
       - Vergaderingen
       description: <body><p>Het wijzigen van een vergadering</p></body>
-      operationId: putvergaderingenVergaderingsidentificatie
+      operationId: putvergadering
       parameters:
       - name: vergaderingsidentificatie
         in: path
@@ -2694,226 +2907,11 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-    post:
-      tags:
-      - Vergaderingen
-      description: <body><p>Het vastleggen van een Stemresultaatperfractie</p></body>
-      operationId: postvergadering
-      parameters:
-      - name: vergaderingsidentificatie
-        in: path
-        description: <body><p>De identificatie een VERGADERING</p></body><body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>
-        required: true
-        style: simple
-        explode: false
-        schema:
-          maxLength: 10
-          type: string
-        example: 1234567890
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/VergaderingHal'
-      responses:
-        "201":
-          description: OK
-          headers:
-            Location:
-              description: URI van de nieuwe resource
-              style: simple
-              explode: false
-              schema:
-                type: string
-                format: uri
-                example: /vergaderingen/{vergaderingsidentificatie}/1234567890
-            api-version:
-              $ref: '#/components/headers/api_version'
-            warning:
-              $ref: '#/components/headers/warning'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/VergaderingHal'
-        "400":
-          description: Bad Request
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/BadRequestFoutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
-                title: Ten minste één parameter moet worden opgegeven.
-                status: 400
-                detail: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modification.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: paramsRequired
-                invalidParams:
-                - type: https://www.vng.nl/realisatie/api/validaties/integer
-                  name: verblijfplaats__huisnummer
-                  code: integer
-                  reason: Waarde is geen geldige integer.
-        "401":
-          description: Unauthorized
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2
-                title: Niet correct geauthenticeerd.
-                status: 401
-                detail: The request requires user authentication. The response MUST include a WWW-Authenticate header field (section 14.47) containing a challenge applicable to the requested resource.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: authentication
-        "403":
-          description: Forbidden
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
-                title: U bent niet geautoriseerd voor deze operatie.
-                status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: autorisation
-        "409":
-          description: Conflict
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10
-                title: Conflict
-                status: 409
-                detail: The request could not be completed due to a conflict with the current state of the resource
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: conflict
-        "410":
-          description: Gone
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.11
-                title: Gone
-                status: 410
-                detail: The request could not be completed due to a conflict with the current state of the resource
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: gone
-        "415":
-          description: Unsupported Media Type
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16
-                title: Unsupported Media Type
-                status: 415
-                detail: The server is refusing the request because the entity of the request is in a format not supported by the requested resource for the requested method.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: unsupported
-        "429":
-          description: Too Many Requests
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-                title: Too many request
-                status: 429
-                detail: The user has sent too many requests in a given amount of time (rate limiting).
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: tooManyRequests
-        "500":
-          description: Internal Server Error
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1
-                title: Interne server fout.
-                status: 500
-                detail: The server encountered an unexpected condition which prevented it from fulfilling the request.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: serverError
-        "501":
-          description: Not Implemented
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.2
-                title: Not Implemented
-                status: 501
-                detail: The server does not support the functionality required to fulfill the request.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: notImplemented
-        "503":
-          description: Service Unavailable
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
-              example:
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
-                status: 503
-                detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: notAvailable
-        default:
-          description: Er is een onverwachte fout opgetreden
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Foutbericht'
     delete:
       tags:
       - Vergaderingen
       description: <body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een Vergadering</p></body>
-      operationId: deletevergaderingenVergaderingsidentificatie
+      operationId: delvergadering
       parameters:
       - name: vergaderingsidentificatie
         in: path
@@ -2970,7 +2968,9 @@ components:
             $ref: '#/components/schemas/Agendapunt_links'
     Agendapunt:
       required:
-      - agendapuntnummer
+      - agendapuntIdentificatie
+      - agendapuntTitel
+      - vergaderingsIdentificatie
       type: object
       properties:
         '@context':
@@ -2985,6 +2985,12 @@ components:
           type: string
           description: |
             Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting
+        agendapuntIdentificatie:
+          title: Agendapuntidentificatie
+          maxLength: 10
+          minLength: 1
+          type: string
+          description: <body><p>De identificatie van het agendapunt op de agenda.</p></body>
         agendapuntKenmerk:
           title: Agendapunt kenmerk
           maxLength: 20
@@ -2997,28 +3003,26 @@ components:
         agendapuntTitel:
           title: Agendapunt titel
           maxLength: 100
-          type: string
-          description: <body><p>De titel of onderwerp van het agendapunt</p></body>
-        agendapuntnummer:
-          title: Agendapuntnummer
-          maxLength: 10
           minLength: 1
           type: string
-          description: <body><p>Het nummer van het agendapunt op de agenda.</p></body>
+          description: <body><p>De titel of onderwerp van het agendapunt</p></body>
         agendapuntvolgnummer:
           title: Agendapuntvolgnummer
           maxLength: 3
           type: string
           description: <body><p>Dit is het volgnummer van het AGENDAPUNT tijdens de vergadering.</p></body>
+        bovenliggendAgendapuntIdentificatie:
+          title: Agendapuntidentificatie
+          maxLength: 10
+          type: string
+          description: <body><p>De identificatie van het agendapunt op de agenda.</p></body>
         eindtijd:
           title: Eindtijd
           type: string
           description: <body><p>De datum en tijdstip waarop de behandeling van de agendapunt is geÃ«indigd</p></body><body><p>Moet voor komen als Starttijd voorkomt</p></body>
           format: date-time
         gemeente:
-          allOf:
-          - $ref: '#/components/schemas/Gemeente'
-          - title: gemeente
+          $ref: '#/components/schemas/Gemeente'
         geplandAgendapuntvolgnummer:
           title: Gepland agendapuntvolgnummer
           maxLength: 10
@@ -3046,6 +3050,14 @@ components:
           title: Indicator besloten
           type: boolean
           description: <body><p>Indicator of een AGENDAPUNT besloten wordt behandeld</p></body><body><p>defaultwaarde = nee</p></body>
+        informatieObjectIdentificatie:
+          title: informatieObjectIdentificatie
+          minItems: 0
+          type: array
+          description: <body><p>Verwijzing naar de informatieobjecten die bijlage zijn bij dit agendapunt.</p></body><body><p>Verwijzing naar de informatieobjecten die bijlage zijn bij dit agendapunt.</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>
+          items:
+            maxLength: 40
+            type: string
         provincie:
           $ref: '#/components/schemas/Provincie'
         starttijd:
@@ -3053,7 +3065,13 @@ components:
           type: string
           description: <body><p>De datum en tijdstip waarop de behandeling van de agendapunt is gestart</p></body>
           format: date-time
-      description: <body><p>Een onderdeel van de agenda dat als Ã©Ã©n geheel wordt behandeld. Een AGENDAPUNT kan weer onderverdeeld zijn naar subAGENDAPUNTen.</p></body>
+        vergaderingsIdentificatie:
+          title: Vergaderingsidentificatie
+          maxLength: 10
+          minLength: 1
+          type: string
+          description: <body><p>De identificatie een VERGADERING</p></body><body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>
+      description: <body><p>Een onderdeel van de agenda dat als een geheel wordt behandeld. Een AGENDAPUNT kan weer onderverdeeld zijn naar subAGENDAPUNTen.</p></body>
     InformatieObjectHalCollectie:
       type: object
       properties:
@@ -3072,7 +3090,7 @@ components:
       required:
       - bronorganisatie
       - informatieObjectIdentificatie
-      - informatieObjectType
+      - vergaderingsIdentificatie
       type: object
       properties:
         '@context':
@@ -3087,6 +3105,14 @@ components:
           type: string
           description: |
             Additioneel element om het mogelijk te maken om JSON-LD te parsen. Zie [documentatie](https://github.com/VNG-Realisatie/Open-Raadsinformatie/tree/master/docs/json_to_ld.md) voor nadere toelichting
+        agendapuntIdentificatie:
+          title: Agendapuntidentificatie
+          minItems: 0
+          type: array
+          description: <body><p>De identificatie van het agendapunt op de agenda.</p></body><body><p>De identificatie die verwijst naar het agendapunt waar dit informatieobject een bijlage bij is.</p></body><body><p>De identificatie die verwijst naar het agendapunt waar dit informatieobject een bijlage bij is.</p></body>
+          items:
+            maxLength: 10
+            type: string
         auteur:
           title: Auteur
           maxLength: 200
@@ -3113,15 +3139,13 @@ components:
           title: formaat
           type: string
         gemeente:
-          allOf:
-          - $ref: '#/components/schemas/Gemeente'
-          - title: gemeente
+          $ref: '#/components/schemas/Gemeente'
         informatieObjectIdentificatie:
           title: Informatieobjectidentificatie
           maxLength: 40
           minLength: 1
           type: string
-          description: <body><p>Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT.</p></body><body><p>informatieobjectidentificatie</p></body><body><p>informatieobjectidentificatie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>
+          description: <body><p>Een binnen een gegeven context ondubbelzinnige referentie naar het INFORMATIEOBJECT.</p></body><body><p>informatieobjectidentificatie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>
         informatieObjectType:
           $ref: '#/components/schemas/InformatieObjectType'
         inhoud:
@@ -3136,6 +3160,22 @@ components:
         omschrijving:
           title: omschrijving
           type: string
+        omvatInformatieObjectIdentificatie:
+          title: omvatInformatieObjectIdentificatie
+          minItems: 0
+          type: array
+          description: <body><p>Verwijzingen naar de informatieobjecten die onderdeel uitmaken van dit informatieobject (dbv.dossier).</p></body><body><p>Verwijzingen naar de informatieobjecten die onderdeel uitmaken van dit informatieobject (dbv.dossier).</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>
+          items:
+            maxLength: 40
+            type: string
+        onderdeelVanInformatieObjectIdentificatie:
+          title: onderdeelVanInformatieObjectIdentificatie
+          minItems: 0
+          type: array
+          description: <body><p>Verwijzing naar het informatieobject (dbv.dossier) waar dit infomatieobject onderdeel van is.</p></body><body><p>Verwijzing naar het informatieobject (dbv.dossier) waar dit infomatieobject onderdeel van is.</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>
+          items:
+            maxLength: 40
+            type: string
         ontvangstdatum:
           title: ontvangstdatum
           type: string
@@ -3156,12 +3196,20 @@ components:
           $ref: '#/components/schemas/MotieType'
         typeVraag:
           $ref: '#/components/schemas/VraagType'
+        vergaderingsIdentificatie:
+          title: vergaderingsIdentificatie
+          minItems: 1
+          type: array
+          description: <body><p>Identificatie(s) die verwijzen naar de vergaderingen waar dit informatieobject een bijlage bij is of waarvan dit de notulen zijn. (Zie ook informatieobjectType)</p></body><body><p>Identificatie(s) die verwijzen naar de vergaderingen waar dit informatieobject een bijlage bij is of waarvan dit de notulen zijn. (Zie ook informatieobjectType)</p></body>
+          items:
+            minLength: 1
+            type: string
         versie:
           title: Versie
           maxLength: 5
           type: string
           description: <body><p>Aanduiding van de bewerkingsfase van het INFORMATIEOBJECT</p></body><body><p>versie</p></body><body><p>versie</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>
-      description: <body><p>Het antwoord dat gegeven is door het college of de burgemeester (in geval van een gemeente) of door de commissaris of gedeputeerde staten (in geval van een provincie) op een gestelde vraag</p></body><body><p>Een mededeling die gedaan wordt bij de vergadering</p></body><body><p>Een toezegging van een gedeputeerde of raadslid</p></body><body><p>Dit zijn vragen die raadsleden aan het college of de burgemeester stellen (gemeente) of die statenleden aan de gedeputeerde staten of de commissaris stellen (provincie).</p></body><body><p>Een BESLUITVORMINGSSTUK is een INFORMATIEOBJECT die als basis dient bij een STEMMING.</p></body><body><p>Een MOTIE is een korte gemotiveerde verklaring over een onderwerp waardoor een mening, wens of verzoek wordt uitgesproken en is ingediend door een raadslid of een statenlid.</p></body><body><p>Een INFORMATIEOBJECT waarvan aard, omvang en/of vorm aanleiding geven het als Ã©Ã©n geheel te behandelen en te beheren.</p></body><body><p>Geheel van gegevens met een eigen identiteit ongeacht zijn vorm, met de bijbehorende metadata ontvangen of opgemaakt door een natuurlijke en/of rechtspersoon bij de uitvoering van taken, zijnde een ENKELVOUDIG INFORMATIEOBJECT of een SAMENGESTELD INFORMATIEOBJECT.</p></body><body><p>Afkomstig van het informatiemodel RGBZ</p></body><body><p>Afkomstig van het informatiemodel RGBZ</p></body>
+      description: <body><p>Een mededeling die gedaan wordt bij de vergadering</p></body><body><p>Het antwoord dat gegeven is door het college of de burgemeester (in geval van een gemeente) of door de commissaris of gedeputeerde staten (in geval van een provincie) op een gestelde vraag</p></body><body><p>Een toezegging van een gedeputeerde of raadslid</p></body><body><p>Een BESLUITVORMINGSSTUK is een INFORMATIEOBJECT die als basis dient bij een STEMMING.</p></body><body><p>Dit zijn vragen die raadsleden aan het college of de burgemeester stellen (gemeente) of die statenleden aan de gedeputeerde staten of de commissaris stellen (provincie).</p></body><body><p>Een MOTIE is een korte gemotiveerde verklaring over een onderwerp waardoor een mening, wens of verzoek wordt uitgesproken en is ingediend door een raadslid of een statenlid.</p></body><body><p>Een INFORMATIEOBJECT waarvan aard, omvang en/of vorm aanleiding geven het als een geheel te behandelen en te beheren.</p></body><body><p>Geheel van gegevens met een eigen identiteit ongeacht zijn vorm, met de bijbehorende metadata ontvangen of opgemaakt door een natuurlijke en/of rechtspersoon bij de uitvoering van taken, zijnde een ENKELVOUDIG INFORMATIEOBJECT of een SAMENGESTELD INFORMATIEOBJECT.</p></body><body><p>Afkomstig van het informatiemodel RGBZ</p></body><body><p>Afkomstig van het informatiemodel RGBZ</p></body>
     VergaderingHalCollectie:
       type: object
       properties:
@@ -3178,7 +3226,8 @@ components:
             $ref: '#/components/schemas/Vergadering_links'
     Vergadering:
       required:
-      - vergaderingsidentificatie
+      - agendapuntIdentificatie
+      - vergaderingsIdentificatie
       type: object
       properties:
         '@context':
@@ -3198,26 +3247,35 @@ components:
           type: string
           description: <body><p>De datum en tijdstip waarop de vergadering is gestart</p></body><body><p>Komt zeker voor als Einde vergadering ook is ingevuld</p></body>
           format: date-time
+        agendapuntIdentificatie:
+          title: Agendapuntidentificatie
+          minItems: 1
+          type: array
+          description: <body><p>De identificatie van het agendapunt op de agenda.</p></body><body><p>Agendapunten van deze vergadering.</p></body><body><p>Agendapunten van deze vergadering.</p></body>
+          items:
+            maxLength: 10
+            minLength: 1
+            type: string
         audioLink:
           title: Audio link
           type: string
           description: <body><p>De link naar de audio opname van de VERGADERING</p></body>
           format: uri
           example: https://www.voorbeeldgemeente.nl/audio/link
+        bovenliggendeVergaderingsIdentificatie:
+          title: Vergaderingsidentificatie
+          maxLength: 10
+          type: string
+          description: <body><p>De identificatie een VERGADERING</p></body><body><p>Verwijzing naar de vergadering waar dit een deelvergadering van is.</p></body><body><p>Verwijzing naar de vergadering waar dit een deelvergadering van is.</p></body><body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.</p></body>
         eindeVergadering:
           title: Einde vergadering
           type: string
           description: <body><p>De datum en tijdstip waarop de vergadering is geÃ«indigd</p></body>
           format: date-time
         gemeente:
-          allOf:
-          - $ref: '#/components/schemas/Gemeente'
-          - title: gemeente
+          $ref: '#/components/schemas/Gemeente'
         georganiseerdDoorGremium:
-          allOf:
-          - $ref: '#/components/schemas/Gremium'
-          - title: georganiseerdDoorGremium
-            description: <body><p>de vergadering is georganiseerd door een gremium</p></body>
+          $ref: '#/components/schemas/Gremium'
         geplandeAanvangVergadering:
           title: Geplande aanvang vergadering
           type: string
@@ -3234,6 +3292,22 @@ components:
           description: <body><p>De geplande datum van de VERGADERING</p></body>
           format: date
           example: 2017-02-09
+        heeftAlsBijlageInformatieObjectIdentificatie:
+          title: heeftAlsBijlageInformatieObjectIdentificatie
+          minItems: 0
+          type: array
+          description: <body><p>Verwijzing naar het informatieobject (dbv.dossier) waar dit infomatieobject onderdeel van is.</p></body><body><p>Verwijzing naar het informatieobject (dbv.dossier) waar dit infomatieobject onderdeel van is.</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>
+          items:
+            maxLength: 40
+            type: string
+        isGenotuleerdInInformatieObjectIdentificatie:
+          title: isGenotuleerdInInformatieObjectIdentificatie
+          minItems: 0
+          type: array
+          description: <body><p>Verwijzingen naar de informatieobjecten die onderdeel uitmaken van dit informatieobject (dbv.dossier).</p></body><body><p>Verwijzingen naar de informatieobjecten die onderdeel uitmaken van dit informatieobject (dbv.dossier).</p></body><body><p>Alle alfanumerieke tekens m.u.v. diacrieten</p></body>
+          items:
+            maxLength: 40
+            type: string
         locatie:
           title: Locatie
           maxLength: 100
@@ -3261,7 +3335,7 @@ components:
           description: <body><p>De datum van de VERGADERING</p></body>
           format: date
           example: 2017-02-10
-        vergaderingsidentificatie:
+        vergaderingsIdentificatie:
           title: Vergaderingsidentificatie
           maxLength: 10
           minLength: 1
@@ -3291,23 +3365,23 @@ components:
           example: 'href: @id '
         self:
           $ref: '#/components/schemas/HalLink'
-        informatieobjecten:
-          title: heeftAlsBijlage
-          type: array
-          description: <body><p>Een AGENDAPUNT kan Ã©Ã©n of meerdere VERGADERSTUKken als bijlage hebben</p></body>
-          items:
-            $ref: '#/components/schemas/HalLink'
         agendapunten:
-          title: heeftAlsSubagendapunt
-          type: array
-          description: <body><p>Een AGENDAPUNT kan uit Ã©Ã©n of meer subAGENDAPUNTen en een subAGENDAPUNT kan weer bestaan uit Ã©Ã©n of meer sub(sub)AGENDAPUNTen.</p></body><body><p>Een AGENDAPUNT kan uit Ã©Ã©n of meer subAGENDAPUNTen en een subAGENDAPUNT kan weer bestaan uit Ã©Ã©n of meer sub(sub)AGENDAPUNTen.</p></body>
-          items:
-            $ref: '#/components/schemas/HalLink'
+          allOf:
+          - title: isSubagendapuntVan
+            type: object
+            description: <body><p>Een AGENDAPUNT kan uit een of meer subAGENDAPUNTen en een subAGENDAPUNT kan weer bestaan uit een of meer sub(sub)AGENDAPUNTen.</p></body><body><p>Een AGENDAPUNT kan uit een of meer subAGENDAPUNTen en een subAGENDAPUNT kan weer bestaan uit een of meer sub(sub)AGENDAPUNTen.</p></body>
+          - $ref: '#/components/schemas/HalLink'
         vergaderingen:
           allOf:
           - title: wordtBehandeldTijdens
             type: object
-            description: <body><p>Een AGENDAPUNT wordt behandeld tijdens een VERGADERING.</p></body>
+            description: <body><p>Een AGENDAPUNT wordt behandeld tijdens een VERGADERING.</p></body><body><p>Een AGENDAPUNT wordt behandeld tijdens een VERGADERING.</p></body>
+          - $ref: '#/components/schemas/HalLink'
+        informatieobjecten:
+          allOf:
+          - title: heeftAlsBijlage
+            type: object
+            description: <body><p>Een AGENDAPUNT kan een of meerdere VERGADERSTUKken als bijlage hebben</p></body>
           - $ref: '#/components/schemas/HalLink'
     InformatieObject_links:
       type: object
@@ -3323,15 +3397,34 @@ components:
           example: 'href: @id '
         self:
           $ref: '#/components/schemas/HalLink'
+        agendapunten:
+          title: isBijlageBij
+          type: array
+          description: <body><p>Een AGENDAPUNT kan een of meerdere VERGADERSTUKken als bijlage hebben</p></body>
+          items:
+            $ref: '#/components/schemas/HalLink'
+        isonderdeelvan-informatieobjecten:
+          title: isOnderdeelVan
+          type: array
+          description: <body><p>een informatieobject kan een of meerdere gerelateerde informatieobjecten hebben, die logisch gezien bij elkaar horen</p></body>
+          items:
+            $ref: '#/components/schemas/HalLink'
+        genotuleerdeVergadering:
+          allOf:
+          - title: isNotulenVan
+            type: object
+          - $ref: '#/components/schemas/HalLink'
+        bijlageVanVergaderingen:
+          title: isBijlage
+          type: array
+          description: <body><p>Een VERGADERING kan ook een of meer VERGADERSTUKKEN als bijlage hebben.</p></body>
+          items:
+            $ref: '#/components/schemas/HalLink'
         omvat-informatieobjecten:
           title: omvat
           minItems: 2
           type: array
-          items:
-            $ref: '#/components/schemas/HalLink'
-        vergaderingen:
-          title: isBijlage
-          type: array
+          description: <body><p>een informatieobject kan een of meerdere gerelateerde informatieobjecten hebben, die logisch gezien bij elkaar horen</p></body>
           items:
             $ref: '#/components/schemas/HalLink'
     Vergadering_links:
@@ -3348,10 +3441,10 @@ components:
           example: 'href: @id '
         self:
           $ref: '#/components/schemas/HalLink'
-        informatieobjecten:
+        heeftAlsBijlage:
           title: heeftAlsBijlage
           type: array
-          description: <body><p>Een VERGADERING kan ook Ã©Ã©n of meer VERGADERSTUKKEN als bijlage hebben.</p></body>
+          description: <body><p>Een VERGADERING kan ook een of meer VERGADERSTUKKEN als bijlage hebben.</p></body>
           items:
             $ref: '#/components/schemas/HalLink'
         agendapunten:
@@ -3360,12 +3453,17 @@ components:
           description: <body><p>Een AGENDAPUNT wordt behandeld tijdens een VERGADERING.</p></body>
           items:
             $ref: '#/components/schemas/HalLink'
-        deelvergaderingen:
-          title: heeftAlsDeelvergadering
+        isGenotuleerdIn:
+          title: is genotuleerdIn
           type: array
-          description: <body><p>Een VERGADERING kan uit Ã©Ã©n of meerdere deel-VERGADERINGen bestaan</p></body>
           items:
             $ref: '#/components/schemas/HalLink'
+        vergaderingen:
+          allOf:
+          - title: isDeelvergaderingVan
+            type: object
+            description: <body><p>Een VERGADERING kan uit een of meerdere deel-VERGADERINGen bestaan</p></body>
+          - $ref: '#/components/schemas/HalLink'
     Gemeente:
       required:
       - gemeenteCode
@@ -3386,82 +3484,83 @@ components:
       description: <body><p>De referentielijst met alle gemeenten. Landelijke tabel 32 beheerd door het RVIG</p></body><body><p>De referentielijst met alle gemeenten</p><p>Tabel 33 van de landelijke tabellen</p></body><body><p>De referentielijst met alle gemeenten</p><p>Tabel 33 van de landelijke tabellen</p></body><body><p>Hier horen ook alle commissies bij van de gemeenteraad</p></body>
     Gremium:
       required:
+      - gremiumIdentificatie
       - gremiumNaam
-      - gremiumidentificatie
       type: object
       properties:
+        gremiumIdentificatie:
+          title: gremiumIdentificatie
+          maxLength: 10
+          minLength: 1
+          type: string
+          description: <body><p>De identificatie van een gremium</p></body><body><p>De identificatie van een gremium</p></body>
         gremiumNaam:
           title: Gremium naam
           maxLength: 100
           minLength: 1
           type: string
-          description: <body><p>De naam van het gremium</p></body><body><p>De naam van het gremium</p></body><body><p>Hier horen ook de (raads- en staten)commissies bij</p></body>
-        gremiumidentificatie:
-          title: gremiumidentificatie
-          maxLength: 10
-          minLength: 1
-          type: string
-          description: <body><p>De identificatie van een gremium</p></body>
-      description: <body><p>De referentielijst met alle gremia in een gemeente</p></body><body><p>De referentielijst met alle gremia in een gemeente</p></body><body><p>Hier horen ook alle commissies bij van de gemeenteraad</p></body>
+          description: <body><p>De naam van het gremium</p></body><body><p>De naam van het gremium</p></body><body><p>De naam van het gremium</p></body><body><p>Hier horen ook de (raads- en staten)commissies bij</p></body>
+      description: <body><p>De referentielijst met alle gremia in een gemeente</p></body><body><p>De referentielijst met alle gremia in een gemeente</p></body><body><p>De referentielijst met alle gremia in een gemeente</p></body><body><p>Hier horen ook alle commissies bij van de gemeenteraad</p></body>
     InformatieObjectType:
       type: string
       description: <body><p>Het type van het informatieobject</p></body><body><p>Het type van het informatieobject</p></body>
       enum:
-      - vraag
-      - antwoord
-      - motie
-      - besluitvormingsstuk
-      - ingekomen_stuk
-      - toezegging
-      - mededeling
+      - VRAAG
+      - ANTWOORD
+      - MOTIE
+      - BESLUITVORMINGSSTUK
+      - INGEKOMEN_STUK
+      - TOEZEGGING
+      - MEDEDELING
+      - NOTULEN
     MotieType:
       type: string
       description: <body><p>duiding van het type van een MOTIE</p></body>
       enum:
-      - voorstel
-      - afkeuring
-      - treurnis
-      - wantrouwen
-      - vreemd
-      - overig
+      - VOORSTEL
+      - AFKEURING
+      - TREURNIS
+      - WANTROUWEN
+      - VREEMD
+      - OVERIG
     Provincie:
       type: string
       description: <body><p>Enumeratie van de nederlandse provincies</p></body>
       enum:
-      - drenthe
-      - groningen
-      - overijssel
-      - flevoland
-      - friesland
-      - gelderland
-      - utrecht
-      - noord_holland
-      - zuid_holland
-      - zeeland
-      - noord_brabant
-      - limburg
+      - DRENTHE
+      - GRONINGEN
+      - OVERIJSSEL
+      - FLEVOLAND
+      - FRIESLAND
+      - GELDERLAND
+      - UTRECHT
+      - NOORDHOLLAND
+      - ZUIDHOLLAND
+      - ZEELAND
+      - NOORDBRABANT
+      - LIMBURG
     VergaderingStatus:
       type: string
       description: <body><p>duiding van de statussen van een VERGADERING</p></body>
       enum:
-      - gepland
-      - gehouden
-      - geannuleerd
+      - GEPLAND
+      - GEHOUDEN
+      - GEANNULEERD
     VergaderingsType:
       type: string
       description: <body><p>de mogelijke typen van een VERGADERING behorende bij de gemeenteraad</p></body>
       enum:
-      - raadsvergadering
-      - commissievergadering
-      - presidium
-      - statenvergadering
+      - RAADSVERGADERING
+      - COMMISSIEVERGADERING
+      - PRESIDIUM
+      - STATENVERGADERING
     VraagType:
       type: string
-      description: <body><p>de type van de vraag</p></body><body><p>de type van de vraag</p></body>
+      description: <body><p>de type van de vraag</p></body>
       enum:
-      - technische_vraag
-      - mondelinge_politieke_vraag
-      - schriftelijke_politieke_vraag
+      - TECHNISCHE_VRAAG
+      - MONDELINGE_POLITIEKE_VRAAG
+      - SCHRIFTELIJKE_POLITIEKE_VRAAG
     BadRequestFoutbericht:
       allOf:
       - $ref: '#/components/schemas/Foutbericht'
