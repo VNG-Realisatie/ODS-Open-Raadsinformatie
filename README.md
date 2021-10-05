@@ -8,6 +8,9 @@ Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API
 
 Eventuele opmerkingen, toevoegingen of voorstellen kunnen [hier als issue](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues) worden ingediend.
 
+De "master" branch is de stand van zaken voor versie 1.1.0 (zie ook de betreffende release).
+Ontwikkelingen voor versie 1.2.0 zijn terug te vinden in de branch "develop".
+
 ## Documentatie
 * [Productvisie](./docs/Productvisie.md)
 * [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/API-Kennisbank/blob/master/CONTRIBUTING.md)
@@ -24,7 +27,7 @@ Eventuele opmerkingen, toevoegingen of voorstellen kunnen [hier als issue](https
 
 ## Contactpersonen:
 * Projectleider: Sander Bakker Sander.Bakker@VNG.NL
-* Informatieanalist - Modelontwerper : Remko de Haas Remko.deHaas@VNG.nl
+* Architect: Ivo Hendriks ivo.hendriks@vng.nl
 * Berichtontwerper: Johan Boer johan.boer@vng.nl
 
 ## Licentie
