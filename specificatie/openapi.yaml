@@ -95,7 +95,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/AanwezigeDeelnemerHal'
+                $ref: '#/components/schemas/AanwezigeDeelnemer'
       responses:
         '201':
           description: "OK"
@@ -145,7 +145,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/AanwezigeDeelnemerHal'
+                $ref: '#/components/schemas/AanwezigeDeelnemer'
       responses:
         '200':
           description: "Zoekactie geslaagd"
@@ -372,7 +372,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/AgendapuntHal'
+                $ref: '#/components/schemas/Agendapunt'
       responses:
         '201':
           description: "OK"
@@ -422,7 +422,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/AgendapuntHal'
+                $ref: '#/components/schemas/Agendapunt'
       responses:
         '200':
           description: "Zoekactie geslaagd"
@@ -626,7 +626,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/BesluitHal'
+                $ref: '#/components/schemas/Besluit'
       responses:
         '201':
           description: "OK"
@@ -684,7 +684,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/BesluitHal'
+                $ref: '#/components/schemas/Besluit'
       responses:
         '200':
           description: "Zoekactie geslaagd"
@@ -959,7 +959,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/InformatieObjectHal'
+                $ref: '#/components/schemas/InformatieObject'
       responses:
         '201':
           description: "OK"
@@ -1009,7 +1009,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/InformatieObjectHal'
+                $ref: '#/components/schemas/InformatieObject'
       responses:
         '200':
           description: "Zoekactie geslaagd"
@@ -1136,6 +1136,21 @@ paths:
     delete:
       operationId: deletestemmen
       description: "<body><p>Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een stem.</p></body>"
+      parameters:
+      - in: query
+        name: stemmingsidentificatie
+        description: "<body><p>De identificatie van de STEMMING</p></body><body><p>De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen</p></body>"
+        required: true
+        schema:
+          type: string
+          maxLength: 10
+      - in: query
+        name: aanwezigedeelnemeridentificatie
+        description: ""
+        required: true
+        schema:
+          type: string
+          maxLength: 10
       responses:
         '200':
           description: "Verwijderactie geslaagd"
@@ -1155,7 +1170,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/StemHal'
+                $ref: '#/components/schemas/Stem'
       responses:
         '201':
           description: "OK"
@@ -1205,7 +1220,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/StemHal'
+                $ref: '#/components/schemas/Stem'
       responses:
         '200':
           description: "Zoekactie geslaagd"
@@ -1321,7 +1336,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/StemmingHal'
+                $ref: '#/components/schemas/Stemming'
       responses:
         '201':
           description: "OK"
@@ -1371,7 +1386,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/StemmingHal'
+                $ref: '#/components/schemas/Stemming'
       responses:
         '200':
           description: "Zoekactie geslaagd"
@@ -1605,7 +1620,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/VergaderingHal'
+                $ref: '#/components/schemas/Vergadering'
       responses:
         '201':
           description: "OK"
@@ -1655,7 +1670,7 @@ paths:
         content:
           application/hal+json:
             schema:
-                $ref: '#/components/schemas/VergaderingHal'
+                $ref: '#/components/schemas/Vergadering'
       responses:
         '200':
           description: "Zoekactie geslaagd"
