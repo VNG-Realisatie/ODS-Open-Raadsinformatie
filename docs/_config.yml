@@ -12,12 +12,6 @@ nav:
     subnav:
       - title: Main
         path: /
-  - title: Documentatie
-    subnav:
-      - title: Gebruik PeiltijdstipMaterieel
-        path: /gebruikPeiltijdstipMaterieel
-      - title: Overzicht Query-queryparameters
-        path: /overzicht-queryparameters
   - title: Specificaties in concept
     subnav:
 #      - title: Getting started
@@ -27,9 +21,9 @@ nav:
 #        https://github.com/VNG-Realisatie/IMWOZ-bevragingen/issues?q=is%3Aissue+label%3A%22user+story%22
 #        path: /user-stories
       - title: Open Raadsinformatie (swagger-ui)
-        path: /ORI-swagger-ui
+        path: /swagger-ui.md
       - title: Open raadsinformatie (redoc)
-        path: /ORI-redoc
+        path: /redoc.md
 
 plugins:
   - jekyll-redirect-from
