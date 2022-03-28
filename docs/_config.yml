@@ -21,9 +21,9 @@ nav:
 #        https://github.com/VNG-Realisatie/IMWOZ-bevragingen/issues?q=is%3Aissue+label%3A%22user+story%22
 #        path: /user-stories
       - title: Open Raadsinformatie (swagger-ui)
-        path: /swagger-ui.md
+        path: /swagger-ui
       - title: Open raadsinformatie (redoc)
-        path: /redoc.md
+        path: /redoc
 
 plugins:
   - jekyll-redirect-from
