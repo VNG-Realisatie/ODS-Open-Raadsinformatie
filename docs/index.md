@@ -1,3 +1,9 @@
+---
+layout: page-with-side-nav
+title: Ontwikkelversie Open Raadsinformatie
+---
+
+
 # ODS Open RaadsInformatie
 
 De Open Api Specificatie voor Open Raadsinformatie beschrijft de standaard voor het ontsluiten van Raadsinformatie van gemeenten.
@@ -12,7 +18,7 @@ De "master" branch is de stand van zaken voor versie 1.1.0 (zie ook de betreffen
 Ontwikkelingen voor versie 1.2.0 zijn terug te vinden in de branch "develop".
 
 **Versie 1.1.0 is weliswaar gereleased, maar door ontwikkelingen rondom PLOOI en KOOP staat het gebruik ter discussie**
-**Ook de doorontwikkeling van versie 1.2.0 staat on hold tot er duidelijkheid is in de eisen die er in samenspraak met KOOP worden opgesteld.**
+**Ook de doorontwikkeling van versie 1.2.0 staat on hold tot er duidelijkheid is in de eisen die er in samenspraak met KOOp worden opgesteld.**
 **Proef-implementaties (en terugkoppeling van de bevindingen daaruit) zijn uiteraard wel mogelijk, maar de specificatie kan op dag-basis wijzigen.**
 **Als er een eerste stabiel versie is wordt daar een release van aangemaakt en wordt dit op deze plek (en via andere communicatie-lijnen) gedeeld.**
 
