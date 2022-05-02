@@ -23,11 +23,11 @@ Ontwikkelingen voor versie 1.2.0 zijn terug te vinden in de branch "develop".
 **Als er een eerste stabiel versie is wordt daar een release van aangemaakt en wordt dit op deze plek (en via andere communicatie-lijnen) gedeeld.**
 
 ## Documentatie
-* [Productvisie](./docs/Productvisie.md)
+* [Productvisie](./Productvisie.md)
 * [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/API-Kennisbank/blob/master/CONTRIBUTING.md)
-* [Architectuur](./docs/Architectuur.md)
-* [Informatiemodel](./docs/Informatiemodel.md)
-* [Technisch uitwisselingsmodel](./docs/Uitwisselingsmodel.md)
+* [Architectuur](./Architectuur.md)
+* [Informatiemodel](./Informatiemodel.md)
+* [Technisch uitwisselingsmodel](./Uitwisselingsmodel.md)
 * [Technische specificaties](./specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://vng-realisatie.github.io/ODS-Open-Raadsinformatie/swagger-ui)
 * Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md)
 
