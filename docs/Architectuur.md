@@ -1,3 +1,8 @@
+---
+layout: page-with-side-nav
+title: Ontwikkelversie Open Raadsinformatie
+---
+
 ![](RackMultipart20210319-4-1fq9oap_html_f2cf87d34556e0e2.gif)
 
 **NOTITIE**
