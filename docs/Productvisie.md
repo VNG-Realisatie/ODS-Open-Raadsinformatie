@@ -1,3 +1,8 @@
+---
+layout: page-with-side-nav
+title: Ontwikkelversie Open Raadsinformatie
+---
+
 # Een transparante overheid
 
 ## Open (raads)informatie

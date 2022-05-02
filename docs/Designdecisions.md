@@ -1,3 +1,8 @@
+---
+layout: page-with-side-nav
+title: Ontwikkelversie Open Raadsinformatie
+---
+
 # Design decisions Open Raadsinformatie
 
 In de onderliggende Design Decisions zijn de inzichten vastgelegd die zijn opgedaan bij het ontwerpen en specificeren van API-specificatie voor Open Raadsinformatie.
@@ -28,7 +33,6 @@ _**Ratio : **_ Aangezien de er geen duidelijke User-stories vanuit gebruikersper
 
 ### 2 Modelleerkeuze voor resource "Informatieobject"
 
-De subtypes die in het informatiemodel onderkent zijn van het supertype "Informatieobject" zijn in het technische model gedenormaliseerd. De eigenschappen zijn opgenomen in de resource "Informatieobject" en er ise een property "InformatieObjectType" toegevoegd. 
+De subtypes die in het informatiemodel onderkent zijn van het supertype "Informatieobject" zijn in het technische model gedenormaliseerd. De eigenschappen zijn opgenomen in de resource "Informatieobject" en er ise een property "InformatieObjectType" toegevoegd.
 
 _**Ratio : **_ Deze wijze van technisch ontsluiten sluit beter aan bij het gebruik van deze gegevens dan het maken van allemaal aparte resources per subtype.
-
