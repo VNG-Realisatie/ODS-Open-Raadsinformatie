@@ -6,6 +6,6 @@ title: Ontwikkelversie Open Raadsinformatie
 # Documentatie
 
 * [Informatiemodel](./Informatiemodel)
-* [Catalogus](./catalog)
+* [Catalogus](./catalog.html)
 * [Technisch uitwisselingsmodel](./Uitwisselingsmodel)
 * Technische specificaties via [Redoc](./redoc) (Open API Specificaties en JSON schema) en via de [Swagger-interface](./swagger-ui)
