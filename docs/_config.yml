@@ -12,14 +12,14 @@ nav:
     subnav:
       - title: Main
         path: /
-  - title: Specificaties in concept
+  - title: Specificaties v.1.1.0
     subnav:
-#      - title: Getting started
-#        path: /getting-started
-#      - title: User stories
-#        url: https://vng-realisatie.github.io/IMWOZ-bevragingen/user-stories-prod
-#        https://github.com/VNG-Realisatie/IMWOZ-bevragingen/issues?q=is%3Aissue+label%3A%22user+story%22
-#        path: /user-stories
+      - title: Open Raadsinformatie (swagger-ui)
+        path: /swagger-ui
+      - title: Open raadsinformatie (redoc)
+        path: /redoc
+  - title: Specificaties v.1.2.0
+    subnav:
       - title: Open Raadsinformatie (swagger-ui)
         path: /swagger-ui
       - title: Open raadsinformatie (redoc)
