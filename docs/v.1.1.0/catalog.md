@@ -1,5 +1,6 @@
 ---
 layout: page-with-side-nav
+head_include: include-htm.html
 title: catalog
 ---
 
