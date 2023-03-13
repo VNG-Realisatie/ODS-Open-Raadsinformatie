@@ -14,12 +14,16 @@ nav:
         path: /
   - title: Specificaties v.1.1.0
     subnav:
+      - title: Documentatie
+        path: /v.1.1.0/Documentatie
       - title: Open Raadsinformatie (swagger-ui)
         path: /swagger-ui
       - title: Open raadsinformatie (redoc)
         path: /redoc
   - title: Specificaties v.1.2.0
     subnav:
+      - title: Documentatie
+        path: /v.1.2.0/Documentatie
       - title: Open Raadsinformatie (swagger-ui)
         path: /swagger-ui
       - title: Open raadsinformatie (redoc)
