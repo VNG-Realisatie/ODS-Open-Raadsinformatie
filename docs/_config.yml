@@ -24,10 +24,10 @@ nav:
     subnav:
       - title: Documentatie
         path: /v.1.2.0/Documentatie
-#      - title: Open Raadsinformatie (swagger-ui)
-#        path: /v.1.2.0/swagger-ui
-#      - title: Open raadsinformatie (redoc)
-#        path: /v.1.2.0/redoc
+      - title: Open Raadsinformatie (swagger-ui)
+        path: /v.1.2.0/swagger-ui
+      - title: Open raadsinformatie (redoc)
+        path: /v.1.2.0/redoc
 
 plugins:
   - jekyll-redirect-from
