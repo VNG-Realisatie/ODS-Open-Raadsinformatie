@@ -6,21 +6,19 @@ title: Ontwikkelversie Open Raadsinformatie
 
 # ODS Open RaadsInformatie
 
-De Open Api Specificatie voor Open Raadsinformatie beschrijft de standaard voor het ontsluiten van Raadsinformatie van gemeenten.
+De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor het ontsluiten van raadsinformatie van gemeenten.
 
-Startpunt voor informatiemodellen van gegevens in de berichten is het informatiemodel voor Open Raadsinformatie.
+- De GitHub-repository bevindt zich [hier](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie). 
+    - De "master" branch bevat release 1.1.0.
+    - De "develop" branch bevat versie 1.2.0-draft die nog in ontwikkeling is.
+- Opmerkingen, toevoegingen of voorstellen kunnen [hier als issue](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues) worden ingediend.
 
-Startpunt voor technische uitwisselafspraken voor de te ontwikkelen RESTfull API operaties is de overheidsbrede API strategie en overheidsbrede URI strategie (beiden nog in ontwikkeling).
-
-Eventuele opmerkingen, toevoegingen of voorstellen kunnen [hier als issue](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues) worden ingediend.
-
-De "master" branch is de stand van zaken voor versie 1.1.0 (zie ook de betreffende release).
-Ontwikkelingen voor versie 1.2.0 zijn terug te vinden in de branch "develop".
-
+<!--
 **Versie 1.1.0 is weliswaar gereleased, maar door ontwikkelingen rondom PLOOI en KOOP staat het gebruik ter discussie**
 **Ook de doorontwikkeling van versie 1.2.0 staat on hold tot er duidelijkheid is in de eisen die er in samenspraak met KOOp worden opgesteld.**
 **Proef-implementaties (en terugkoppeling van de bevindingen daaruit) zijn uiteraard wel mogelijk, maar de specificatie kan op dag-basis wijzigen.**
 **Als er een eerste stabiel versie is wordt daar een release van aangemaakt en wordt dit op deze plek (en via andere communicatie-lijnen) gedeeld.**
+-->
 
 ## Documentatie
 * [Productvisie](./Productvisie.md)
@@ -36,7 +34,7 @@ Ontwikkelingen voor versie 1.2.0 zijn terug te vinden in de branch "develop".
 ## Contactpersonen:
 * Projectleider: Sander Bakker Sander.Bakker@VNG.NL
 * Architect: Ivo Hendriks ivo.hendriks@vng.nl
-* Berichtontwerper: Johan Boer johan.boer@vng.nl
+* API Designer: Henri Korver henri.korver@vng.nl
 
 ## Licentie
 De koppelvlakstandaard, inclusief alle onderdelen die erbij horen (volgens productvisie en/of definition of done) zijn gelicenceerd onder [EUPL](https://eupl.eu/1.2/nl/).
