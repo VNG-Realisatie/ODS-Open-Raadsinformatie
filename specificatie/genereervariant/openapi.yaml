@@ -2,18 +2,16 @@
 openapi: 3.0.0
 info:
   title: Open Raads- en StatenInformatie
-  description: Dit is de API-documentatie voor Open RaadsInformatie. Deze versie is gebaseerd op de ervaringen die opgedaan zijn tijdens het maken van een referentie-implentatie. Met deze specificatie kan een deel van de gegevens die in het informatiemodel beschreven zijn ontsloten worden. Dit is de versie na conversie naar het MIM 1.1
+  description: Dit is de API-specificatie voor Open RaadsInformatie.<br> Opvolger van de 1.1.0 versie.<br> Deze 2.0.0 versie is nog in ontwikkeling. <br> In deze 2.0.0 versie zit het volledige informatiemodel van ORI.<br> Omdat de OAS opnieuw gegenereerd is vanuit het informatiemodel is deze OAS niet meer backwards compatible met de vorige versie.
   contact:
     url: https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie
   license:
-    name: European Union Public License, version 1.2 (EUPL-1.2)
+    name: "European Union Public License, version 1.2 (EUPL-1.2)"
     url: https://eupl.eu/1.2/nl/
-  version: 1.2.0
+  version: 2.0.0-alpha.1
   x-imvertor-generator-version: 2.0.0
   x-yamlCompiler-stylesheets-version: "20230315"
 servers:
-- url: https://virtserver.swaggerhub.com/KorverInformatica/OpenRaadsInformatie/1.2.0
-  description: SwaggerHub API Auto Mocking
 - url: https://virtserver.swaggerhub.com/VNGRealisatie/api/open_raads__en_stateninformatie/v1
   description: SwaggerHub API Auto Mocking
 - url: https://www.voorbeeldgemeente.nl/api/open_raads__en_stateninformatie/v1
@@ -28,7 +26,7 @@ paths:
       parameters:
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -119,7 +117,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -229,7 +227,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -321,7 +319,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -431,7 +429,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -525,7 +523,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -635,7 +633,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -666,7 +664,7 @@ paths:
           type: string
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -738,7 +736,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -864,7 +862,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -948,7 +946,7 @@ paths:
           type: string
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -1054,7 +1052,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -1164,7 +1162,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -1256,7 +1254,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -1366,7 +1364,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -1460,7 +1458,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -1570,7 +1568,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -1605,7 +1603,7 @@ paths:
           type: string
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -1677,7 +1675,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -1803,7 +1801,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -1880,7 +1878,7 @@ paths:
           type: string
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -1954,7 +1952,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -2064,7 +2062,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -2166,7 +2164,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -2276,7 +2274,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -2380,7 +2378,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -2490,7 +2488,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -2522,7 +2520,7 @@ paths:
           type: string
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -2594,7 +2592,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -2720,7 +2718,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -2803,7 +2801,7 @@ paths:
           format: date-time
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -2877,7 +2875,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -2987,7 +2985,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -3018,7 +3016,7 @@ paths:
           type: string
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -3090,7 +3088,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -3216,7 +3214,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -3317,7 +3315,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -3427,7 +3425,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -3471,7 +3469,7 @@ paths:
               schema:
                 type: string
                 format: uri
-                example: /dagelijksbestuurlidmaatschappen/{dagelijksbestuurlidmaatschapidentificatie}/
+                example: "/dagelijksbestuurlidmaatschappen/{dagelijksbestuurlidmaatschapidentificatie}/"
             api-version:
               $ref: '#/components/headers/api_version'
             warning:
@@ -3530,7 +3528,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -3640,7 +3638,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -3712,7 +3710,7 @@ paths:
           $ref: '#/components/schemas/NaamDagelijksBestuursType'
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -3786,7 +3784,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -3896,7 +3894,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -3927,7 +3925,7 @@ paths:
           type: string
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -3999,7 +3997,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -4125,7 +4123,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -4226,7 +4224,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -4336,7 +4334,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -4380,7 +4378,7 @@ paths:
               schema:
                 type: string
                 format: uri
-                example: /dagelijksebesturen/{dagelijksbestuuridentificatie}/
+                example: "/dagelijksebesturen/{dagelijksbestuuridentificatie}/"
             api-version:
               $ref: '#/components/headers/api_version'
             warning:
@@ -4439,7 +4437,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -4549,7 +4547,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -4680,7 +4678,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -4790,7 +4788,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -4882,7 +4880,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -4992,7 +4990,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -5086,7 +5084,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -5196,7 +5194,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -5293,7 +5291,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -5419,7 +5417,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -5550,7 +5548,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -5660,7 +5658,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -5752,7 +5750,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -5862,7 +5860,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -5956,7 +5954,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -6066,7 +6064,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -6167,7 +6165,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -6293,7 +6291,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -6373,7 +6371,7 @@ paths:
           type: string
       - name: auteur
         in: query
-        description: De naamgegevens van de auteur zijnde een betrokkene die in een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon of organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend.
+        description: "De naamgegevens van de auteur zijnde een betrokkene die in een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon of organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend."
         required: false
         style: form
         explode: true
@@ -6408,7 +6406,7 @@ paths:
           format: date
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -6552,7 +6550,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -6662,7 +6660,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -6754,7 +6752,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -6864,7 +6862,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -6958,7 +6956,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -7068,7 +7066,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -7091,7 +7089,7 @@ paths:
       parameters:
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -7172,7 +7170,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -7298,7 +7296,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -7363,7 +7361,7 @@ paths:
       parameters:
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -7468,7 +7466,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -7578,7 +7576,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -7670,7 +7668,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -7780,7 +7778,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -7874,7 +7872,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -7984,7 +7982,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -8007,7 +8005,7 @@ paths:
       parameters:
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -8087,7 +8085,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -8213,7 +8211,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -8285,7 +8283,7 @@ paths:
           $ref: '#/components/schemas/Functie'
       - name: geslachtsaanduiding
         in: query
-        description: Een aanduiding die aangeeft dat de persoon een man, een vrouw, anders of dat het geslacht (nog) onbekend is.
+        description: "Een aanduiding die aangeeft dat de persoon een man, een vrouw, anders of dat het geslacht (nog) onbekend is."
         required: false
         style: form
         explode: true
@@ -8361,7 +8359,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -8471,7 +8469,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -8563,7 +8561,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -8673,7 +8671,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -8767,7 +8765,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -8877,7 +8875,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -8980,7 +8978,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -9106,7 +9104,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -9193,7 +9191,7 @@ paths:
           type: integer
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -9310,7 +9308,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -9420,7 +9418,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -9443,7 +9441,7 @@ paths:
       parameters:
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -9522,7 +9520,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -9648,7 +9646,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -9748,7 +9746,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -9858,7 +9856,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -9901,7 +9899,7 @@ paths:
               schema:
                 type: string
                 format: uri
-                example: /spreekfragmenten/{spreekfragmentidentificatie}/
+                example: "/spreekfragmenten/{spreekfragmentidentificatie}/"
             api-version:
               $ref: '#/components/headers/api_version'
             warning:
@@ -9960,7 +9958,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -10070,7 +10068,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -10203,7 +10201,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -10313,7 +10311,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -10407,7 +10405,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -10517,7 +10515,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -10540,7 +10538,7 @@ paths:
       parameters:
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -10625,7 +10623,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -10735,7 +10733,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -10827,7 +10825,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -10937,7 +10935,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -11031,7 +11029,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -11141,7 +11139,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -11164,7 +11162,7 @@ paths:
       parameters:
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -11248,7 +11246,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -11374,7 +11372,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -11509,7 +11507,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -11619,7 +11617,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -11711,7 +11709,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -11821,7 +11819,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -11915,7 +11913,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -12025,7 +12023,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -12121,7 +12119,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -12247,7 +12245,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -12310,7 +12308,7 @@ paths:
       parameters:
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -12441,7 +12439,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -12551,7 +12549,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -12643,7 +12641,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -12753,7 +12751,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -12847,7 +12845,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "409":
@@ -12957,7 +12955,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -12980,7 +12978,7 @@ paths:
       parameters:
       - name: fields
         in: query
-        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+        description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
         required: false
         schema:
           type: string
@@ -13065,7 +13063,7 @@ paths:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
                 title: U bent niet geautoriseerd voor deze operatie.
                 status: 403
-                detail: The server understood the request, but is refusing to fulfill it.
+                detail: "The server understood the request, but is refusing to fulfill it."
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
         "404":
@@ -13191,7 +13189,7 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
               example:
                 type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                title: "Bronservice {bron} is tijdelijk niet beschikbaar."
                 status: 503
                 detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -13650,7 +13648,7 @@ components:
           title: Auteur
           maxLength: 200
           type: string
-          description: De naamgegevens van de auteur zijnde een betrokkene die in een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon of organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend.
+          description: "De naamgegevens van de auteur zijnde een betrokkene die in een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon of organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend."
         bestandsomvang:
           title: bestandsomvang
           type: integer
@@ -14279,7 +14277,7 @@ components:
           maxLength: 100
           type: string
           description: Omschrijving van de locatie waar de vergadering wordt gehouden
-          example: Raadszaal, Stadskantoor, Overtoom 2
+          example: "Raadszaal, Stadskantoor, Overtoom 2"
         naam:
           title: Naam
           maxLength: 100
@@ -14501,157 +14499,160 @@ components:
       description: De individuele uitgebrachte STEMmen over personen zijn geheim. Alleen het aantal uitgebrachte stemmen per kandidaat is bekend.
     FractieStemResultaat:
       type: string
-      description: '<body><ul><li>`AANGENOMEN` - de gehele aanwezige fractie heeft voor gestemd</li><li>`VERWORPEN` - de gehele aanwezige fractie heeft tegen gestemd</li><li>`VERDEELD` - de stemming in de fractie was verdeeld: een deel was voor en een deel was tegen</li></ul></body>'
+      description: "<body><ul><li>`aangenomen` - Aangenomen de gehele aanwezige fractie heeft voor gestemd</li><li>`verworpen` - Verworpen de gehele aanwezige fractie heeft tegen gestemd</li><li>`verdeeld` - Verdeeld de stemming in de fractie was verdeeld: een deel was voor en een deel was tegen</li></ul></body>"
       enum:
-      - AANGENOMEN
-      - VERWORPEN
-      - VERDEELD
+      - aangenomen
+      - verworpen
+      - verdeeld
     Functie:
       type: string
-      description: <body><ul><li>`BURGEMEESTER` - van de gemeente</li><li>`WETHOUDER` - van de gemeente</li><li>`RAADSLID` - van de gemeente</li><li>`BURGERLID` - </li><li>`GRIFFIER` - </li><li>`GEMEENTESECRETARIS` - </li><li>`AMBTENAAR_OF_MEDEWERKER` - van gemeente of provincie</li><li>`ADVISEUR_OF_DESKUNDIGE` - </li><li>`OVERIG` - </li><li>`COMMISSARIS_VAN_DE_KONING` - Commissaris van de Koning of Koningin (hoort bij de provincie)</li><li>`GEDEPUTEERDE` - van de provincie</li><li>`STATENLID` - van de provincie</li><li>`PROVINCIESECRETARIS` - </li><li>`DIJKGRAAF` - Waterschappen</li><li>`DAGELIJKS_BESTUURSLID` - Waterschappen</li><li>`ALGEMEEN_BESTUURSLID` - Waterschappen</li><li>`SECRETARISDIRECTEUR` - Waterschappen</li></ul></body>
+      description: <body><ul><li>`burgemeester` - Burgemeester van de gemeente</li><li>`wethouder` - Wethouder van de gemeente</li><li>`raadslid` - Raadslid van de gemeente</li><li>`burgerlid` - Burgerlid </li><li>`griffier` - Griffier </li><li>`gemeentesecretaris` - Gemeentesecretaris </li><li>`ambtenaar_of_medewerker` - Ambtenaar of medewerker van gemeente of provincie</li><li>`adviseur_of_deskundige` - Adviseur of deskundige </li><li>`overig` - Overig </li><li>`commissaris_van_de_koning` - Commissaris van de koning Commissaris van de Koning of Koningin (hoort bij de provincie)</li><li>`gedeputeerde` - Gedeputeerde van de provincie</li><li>`statenlid` - Statenlid van de provincie</li><li>`provinciesecretaris` - Provinciesecretaris </li><li>`dijkgraaf` - Dijkgraaf Waterschappen</li><li>`dagelijks_bestuurslid` - Dagelijks bestuurslid Waterschappen</li><li>`algemeen_bestuurslid` - Algemeen bestuurslid Waterschappen</li><li>`secretarisdirecteur` - Secretarisdirecteur Waterschappen</li></ul></body>
       enum:
-      - BURGEMEESTER
-      - WETHOUDER
-      - RAADSLID
-      - BURGERLID
-      - GRIFFIER
-      - GEMEENTESECRETARIS
-      - AMBTENAAR_OF_MEDEWERKER
-      - ADVISEUR_OF_DESKUNDIGE
-      - OVERIG
-      - COMMISSARIS_VAN_DE_KONING
-      - GEDEPUTEERDE
-      - STATENLID
-      - PROVINCIESECRETARIS
-      - DIJKGRAAF
-      - DAGELIJKS_BESTUURSLID
-      - ALGEMEEN_BESTUURSLID
-      - SECRETARISDIRECTEUR
+      - burgemeester
+      - wethouder
+      - raadslid
+      - burgerlid
+      - griffier
+      - gemeentesecretaris
+      - ambtenaar_of_medewerker
+      - adviseur_of_deskundige
+      - overig
+      - commissaris_van_de_koning
+      - gedeputeerde
+      - statenlid
+      - provinciesecretaris
+      - dijkgraaf
+      - dagelijks_bestuurslid
+      - algemeen_bestuurslid
+      - secretarisdirecteur
     Geslacht:
       type: string
-      description: <body><ul><li>`M` - MAN </li><li>`V` - VROUW </li><li>`A` - ANDERS Is niet een man of vrouw, en het geslacht is wel bekend</li><li>`O` - ONBEKEND </li></ul></body>
+      description: "<body><ul><li>`man` - Man </li><li>`vrouw` - Vrouw </li><li>`anders` - Anders Is niet een man of vrouw, en het geslacht is wel bekend</li><li>`onbekend` - Onbekend </li></ul></body>"
       enum:
-      - M
-      - V
-      - A
-      - O
+      - man
+      - vrouw
+      - anders
+      - onbekend
     InformatieObjectType:
       type: string
-      description: "Het type van het informatieobject\n\nHet type van het informatieobject "
+      description: |-
+        Het type van het informatieobject
+
+        Het type van het informatieobject <body><ul><li>`vraag` - Vraag </li><li>`antwoord` - Antwoord </li><li>`motie` - Motie </li><li>`besluitvormingsstuk` - Besluitvormingsstuk </li><li>`ingekomen_stuk` - Ingekomen stuk </li><li>`toezegging` - Toezegging </li><li>`mededeling` - Mededeling </li><li>`amendement` - Amendement </li><li>`voorstel` - Voorstel </li></ul></body>
       enum:
-      - VRAAG
-      - ANTWOORD
-      - MOTIE
-      - BESLUITVORMINGSSTUK
-      - INGEKOMEN_STUK
-      - TOEZEGGING
-      - MEDEDELING
-      - AMENDEMENT
-      - VOORSTEL
+      - vraag
+      - antwoord
+      - motie
+      - besluitvormingsstuk
+      - ingekomen_stuk
+      - toezegging
+      - mededeling
+      - amendement
+      - voorstel
     MediabronType:
       type: string
-      description: <body><ul><li>`VIDEO` - technische vragen over een agendapunt</li><li>`AUDIO` - </li><li>`TRANSCRIPTIE` - </li></ul></body>
+      description: <body><ul><li>`video` - Video technische vragen over een agendapunt</li><li>`audio` - Audio </li><li>`transcriptie` - Transcriptie </li></ul></body>
       enum:
-      - VIDEO
-      - AUDIO
-      - TRANSCRIPTIE
+      - video
+      - audio
+      - transcriptie
     MotieType:
       type: string
-      description: duiding van het type van een MOTIE<body><ul><li>`VOORSTEL` - voorstellen van het college van B&amp;W (gemeente) of van de gedeputueerde staten (provincie) en initiatiefvoorstellen van raadsleden (gemeente) of statenleden (provincie)</li><li>`AFKEURING` - </li><li>`TREURNIS` - </li><li>`WANTROUWEN` - </li><li>`VREEMD` - </li><li>`OVERIG` - Dit is de standaardwaarde</li></ul></body>
+      description: duiding van het type van een MOTIE<body><ul><li>`voorstel` - Voorstel voorstellen van het college van B&amp;W (gemeente) of van de gedeputueerde staten (provincie) en initiatiefvoorstellen van raadsleden (gemeente) of statenleden (provincie)</li><li>`afkeuring` - Afkeuring </li><li>`treurnis` - Treurnis </li><li>`wantrouwen` - Wantrouwen </li><li>`vreemd` - Vreemd </li><li>`overig` - Overig Dit is de standaardwaarde</li></ul></body>
       enum:
-      - VOORSTEL
-      - AFKEURING
-      - TREURNIS
-      - WANTROUWEN
-      - VREEMD
-      - OVERIG
+      - voorstel
+      - afkeuring
+      - treurnis
+      - wantrouwen
+      - vreemd
+      - overig
     NaamDagelijksBestuursType:
       type: string
-      description: <body><ul><li>`COLLEGE` - </li><li>`GEDEPUTEERDE_STATEN` - </li><li>`DAGELIJKS_BESTUUR` - Waterschappen</li></ul></body>
+      description: <body><ul><li>`college` - College </li><li>`gedeputeerde_staten` - Gedeputeerde staten </li><li>`dagelijks_bestuur` - Dagelijks bestuur Waterschappen</li></ul></body>
       enum:
-      - COLLEGE
-      - GEDEPUTEERDE_STATEN
-      - DAGELIJKS_BESTUUR
+      - college
+      - gedeputeerde_staten
+      - dagelijks_bestuur
     Provincie:
       type: string
-      description: ""
+      description: <body><ul><li>`drenthe` - Drenthe </li><li>`groningen` - Groningen </li><li>`overijsel` - Overijsel </li><li>`flevoland` - Flevoland </li><li>`friesland` - Friesland </li><li>`friesland` - Gelderland </li><li>`utrecht` - Utrecht </li><li>`noord_holland` - Noord-Holland </li><li>`zuid_holland` - Zuid-Holland </li><li>`zeeland` - Zeeland </li><li>`noord_brabant` - Noord-Brabant </li><li>`limburg` - Limburg </li></ul></body>
       enum:
-      - DRENTHE
-      - GRONINGEN
-      - OVERIJSSEL
-      - FLEVOLAND
-      - FRIESLAND
-      - GELDERLAND
-      - UTRECHT
-      - NOORDHOLLAND
-      - ZUIDHOLLAND
-      - ZEELAND
-      - NOORDBRABANT
-      - LIMBURG
+      - drenthe
+      - groningen
+      - overijsel
+      - flevoland
+      - friesland
+      - friesland
+      - utrecht
+      - noord_holland
+      - zuid_holland
+      - zeeland
+      - noord_brabant
+      - limburg
     RolNaam:
       type: string
-      description: duiding van de rollen van een natuurlijke persoon tijdens een vergadering<body><ul><li>`V` - Voorzitter de voorzitter zit de vergadering voor</li><li>`VV` - Vice voorzitter de vice-voorzitter van de vergadering</li><li>`R` - Raadslid Een raadslid is een gekozen volksvertegenwoordiger binnen een gemeente. Alle raadsleden van één gemeente vormen samen de gemeenteraad van de betreffende gemeente.</li><li>`I` - Inspreker Een inspreker is een belanghebbende of betrokkene die wil inspreken bij een agendapunt</li><li>`O` - Overig </li><li>`P` - Portefeuillehouder de houder van een bepaalde portefeuille.</li><li>`S` - Statenlid Een statenlid is een gekozen volksvertegenwoordiger binnen een provincie. Alle statenleden van één provincie vormen samen de Provinciale Staten van de betreffende provincie.</li><li>`DB` - Dagelijks bestuurslid Waterschappen</li><li>`AB` - Algemeen bestuurslid Waterschappen</li></ul></body>
+      description: duiding van de rollen van een natuurlijke persoon tijdens een vergadering<body><ul><li>`voorzitter` - Voorzitter de voorzitter zit de vergadering voor</li><li>`vice_voorzitter` - Vice voorzitter de vice-voorzitter van de vergadering</li><li>`raadslid` - Raadslid Een raadslid is een gekozen volksvertegenwoordiger binnen een gemeente. Alle raadsleden van één gemeente vormen samen de gemeenteraad van de betreffende gemeente.</li><li>`inspreker` - Inspreker Een inspreker is een belanghebbende of betrokkene die wil inspreken bij een agendapunt</li><li>`overig` - Overig </li><li>`portefeuillehouder` - Portefeuillehouder de houder van een bepaalde portefeuille.</li><li>`statenlid` - Statenlid Een statenlid is een gekozen volksvertegenwoordiger binnen een provincie. Alle statenleden van één provincie vormen samen de Provinciale Staten van de betreffende provincie.</li><li>`dagelijks_bestuurslid` - Dagelijks bestuurslid Waterschappen</li><li>`algemeen_bestuurslid` - Algemeen bestuurslid Waterschappen</li></ul></body>
       enum:
-      - V
-      - VV
-      - R
-      - I
-      - O
-      - P
-      - S
-      - DB
-      - AB
+      - voorzitter
+      - vice_voorzitter
+      - raadslid
+      - inspreker
+      - overig
+      - portefeuillehouder
+      - statenlid
+      - dagelijks_bestuurslid
+      - algemeen_bestuurslid
     StemKeuze:
       type: string
       description: |-
         de mogelijke keuze van een uitgebrachte STEM
 
-        de mogelijke keuze van een uitgebrachte STEM <body><ul><li>`V` - Voor </li><li>`T` - Tegen </li><li>`A` - Afwezig </li><li>`O` - Onthouden </li></ul></body>
+        de mogelijke keuze van een uitgebrachte STEM <body><ul><li>`voor` - Voor </li><li>`tegen` - Tegen </li><li>`afwezig` - Afwezig </li><li>`othouden` - Onthouden </li></ul></body>
       enum:
-      - V
-      - T
-      - A
-      - O
+      - voor
+      - tegen
+      - afwezig
+      - othouden
     StemmingResultaat:
       type: string
-      description: duiding van het resultaat van een STEMMING<body><ul><li>`V` - Voor </li><li>`T` - Tegen </li><li>`G` - Gelijk </li></ul></body>
+      description: duiding van het resultaat van een STEMMING<body><ul><li>`voor` - Voor </li><li>`tegen` - Tegen </li><li>`gelijk` - Gelijk </li></ul></body>
       enum:
-      - V
-      - T
-      - G
+      - voor
+      - tegen
+      - gelijk
     StemmingsType:
       type: string
-      description: duiding van het type van een STEMMING<body><ul><li>`H` - Hoofdelijk </li><li>`F` - Regulier </li><li>`S` - Schriftelijk </li></ul></body>
+      description: duiding van het type van een STEMMING<body><ul><li>`hoofdelijk` - Hoofdelijk </li><li>`regulier` - Regulier </li><li>`schriftelijk` - Schriftelijk </li></ul></body>
       enum:
-      - H
-      - F
-      - S
+      - hoofdelijk
+      - regulier
+      - schriftelijk
     VergaderingStatus:
       type: string
-      description: duiding van de statussen van een VERGADERING
+      description: duiding van de statussen van een VERGADERING<body><ul><li>`gepland` - Gepland </li><li>`gehouden` - Gehouden </li><li>`geannuleerd` - Geannuleerd </li></ul></body>
       enum:
-      - GEPLAND
-      - GEHOUDEN
-      - GEANNULEERD
+      - gepland
+      - gehouden
+      - geannuleerd
     VergaderingsType:
       type: string
-      description: de mogelijke typen van een VERGADERING behorende bij de gemeenteraad<body><ul><li>`RAADSVERGADERING` - is van toepassing bij gemeenten</li><li>`COMMISSIEVERGADERING` - is van toepassing bij gemeenten</li><li>`PRESIDIUM` - </li><li>`STATENVERGADERING` - is van toepassing bij provincies</li><li>`ALGEMENE_BESTUURSVERGADERING` - is van toepassing bij waterschappen</li></ul></body>
+      description: de mogelijke typen van een VERGADERING behorende bij de gemeenteraad<body><ul><li>`raadsvergadering` - Raadsvergadering is van toepassing bij gemeenten</li><li>`commissievergadering` - Commissievergadering is van toepassing bij gemeenten</li><li>`presidium` - Presidium </li><li>`statenvergadering` - Statenvergadering is van toepassing bij provincies</li><li>`algemene_bestuursvergadering` - Algemene bestuursvergadering is van toepassing bij waterschappen</li></ul></body>
       enum:
-      - RAADSVERGADERING
-      - COMMISSIEVERGADERING
-      - PRESIDIUM
-      - STATENVERGADERING
-      - ALGEMENE_BESTUURSVERGADERING
+      - raadsvergadering
+      - commissievergadering
+      - presidium
+      - statenvergadering
+      - algemene_bestuursvergadering
     VraagType:
       type: string
       description: |-
         de type van de vraag
 
-        de type van de vraag <body><ul><li>`TECHNISCHE_VRAAG` - technische vragen over een agendapunt</li><li>`MONDELINGE_POLITIEKE_VRAAG` - </li><li>`SCHRIFTELIJKE_POLITIEKE_VRAAG` - </li></ul></body>
+        de type van de vraag <body><ul><li>`technische_vraag` - Technische vraag technische vragen over een agendapunt</li><li>`mondelinge_politieke_vraag` - Mondelinge politieke vraag </li><li>`schriftelijke_politieke_vraag` - Schriftelijke politieke vraag </li></ul></body>
       enum:
-      - TECHNISCHE_VRAAG
-      - MONDELINGE_POLITIEKE_VRAAG
-      - SCHRIFTELIJKE_POLITIEKE_VRAAG
+      - technische_vraag
+      - mondelinge_politieke_vraag
+      - schriftelijke_politieke_vraag
     BadRequestFoutbericht:
       allOf:
       - $ref: '#/components/schemas/Foutbericht'
@@ -14686,14 +14687,14 @@ components:
           minLength: 1
           type: string
           description: Systeemcode die het type fout aangeeft
-      description: Terugmelding bij een fout. JSON representatie in lijn met [RFC7807](https://tools.ietf.org/html/rfc7807).
+      description: "Terugmelding bij een fout. JSON representatie in lijn met [RFC7807](https://tools.ietf.org/html/rfc7807)."
     InvalidParams:
       type: object
       properties:
         type:
           type: string
           format: uri
-          example: https://www.vng.nl/realisatie/api/{major-versie}/validaties/integer
+          example: "https://www.vng.nl/realisatie/api/{major-versie}/validaties/integer"
         name:
           type: string
           description: Naam van de parameter
@@ -14759,7 +14760,7 @@ components:
             type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
             title: U bent niet geautoriseerd voor deze operatie.
             status: 403
-            detail: The server understood the request, but is refusing to fulfill it.
+            detail: "The server understood the request, but is refusing to fulfill it."
             instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
             code: autorisation
     "409":
@@ -14869,7 +14870,7 @@ components:
             $ref: '#/components/schemas/Foutbericht'
           example:
             type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
-            title: Bronservice {bron} is tijdelijk niet beschikbaar.
+            title: "Bronservice {bron} is tijdelijk niet beschikbaar."
             status: 503
             detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
             instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
@@ -14908,7 +14909,7 @@ components:
     fields:
       name: fields
       in: query
-      description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)
+      description: "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.3.0/features/fields.feature)"
       required: false
       schema:
         type: string
@@ -14921,8 +14922,8 @@ components:
     warning:
       schema:
         type: string
-        description: zie RFC 7234. In het geval een major versie wordt uitgefaseerd, gebruiken we warn-code 299 ("Miscellaneous Persistent Warning") en het API end-point (inclusief versienummer) als de warn-agent van de warning, gevolgd door de warn-text met de human-readable waarschuwing
-        example: '299 https://service.../api/.../v1 "Deze versie van de API is verouderd en zal uit dienst worden genomen op 2018-02-01. Raadpleeg voor meer informatie hier de documentatie: https://omgevingswet.../api/.../v1".'
+        description: "zie RFC 7234. In het geval een major versie wordt uitgefaseerd, gebruiken we warn-code 299 (\"Miscellaneous Persistent Warning\") en het API end-point (inclusief versienummer) als de warn-agent van de warning, gevolgd door de warn-text met de human-readable waarschuwing"
+        example: "299 https://service.../api/.../v1 \"Deze versie van de API is verouderd en zal uit dienst worden genomen op 2018-02-01. Raadpleeg voor meer informatie hier de documentatie: https://omgevingswet.../api/.../v1\"."
     X_Rate_Limit_Limit:
       schema:
         type: integer
