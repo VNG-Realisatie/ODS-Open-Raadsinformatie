@@ -10,7 +10,7 @@ De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor 
 
 - De GitHub-repository bevindt zich [hier](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie). 
     - De "master" branch bevat release 1.1.0.
-    - De "develop" branch bevat versie 1.2.0-draft die nog in ontwikkeling is.
+    - De "develop" branch bevat versie 2.0.0-alpha.1 die nog in ontwikkeling is.
 - Opmerkingen, toevoegingen of voorstellen kunnen [hier als issue](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues) worden ingediend.
 
 <!--
