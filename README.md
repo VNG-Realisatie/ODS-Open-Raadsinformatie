@@ -15,9 +15,9 @@ De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor 
 -->
 
 ## Documentatie
-* [Productvisie](./Productvisie.md)
+* [Productvisie](./docs/Productvisie.md)
 * [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/API-Kennisbank/blob/master/CONTRIBUTING.md)
-* [Architectuur](./Architectuur.md)
+* [Architectuur](./docs/Architectuur.md)
 * Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md)
 
 ## Bronnen
