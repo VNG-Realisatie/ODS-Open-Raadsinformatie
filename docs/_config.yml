@@ -12,8 +12,8 @@ nav:
     subnav:
       - title: Main
         path: /
-  - title: Specificaties v.2.0.0 (in ontwikkeling)
-    subnav:
+  # - title: Specificaties v.2.0.0 (in ontwikkeling)
+  #   subnav:
       - title: Documentatie
         path: /Documentatie
       - title: Open Raadsinformatie (swagger-ui)

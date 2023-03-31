@@ -22,9 +22,9 @@ De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor 
 <!-- * [Extensions Landelijke API strategie](https://geonovum.github.io/KP-APIs/API-strategie-extensies/) -->
 
 ## Contactpersonen:
-* Projectleider: Sander Bakker Sander.Bakker@VNG.NL
-* Architect: Ivo Hendriks ivo.hendriks@vng.nl
-* API Designer: Henri Korver henri.korver@vng.nl
+* Projectleider: Sander Bakker (sander.bakker@vng.nl)
+* Architect: Ivo Hendriks (ivo.hendriks@vng.nl)
+* API Designer: Henri Korver (henri.korver@vng.nl)
 
 ## Licentie
 De koppelvlakstandaard, inclusief alle onderdelen die erbij horen (volgens productvisie en/of definition of done) zijn gelicenceerd onder [EUPL](https://eupl.eu/1.2/nl/).
