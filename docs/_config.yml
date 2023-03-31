@@ -12,7 +12,7 @@ nav:
     subnav:
       - title: Main
         path: /
-  # - title: Specificaties v.2.0.0 (in ontwikkeling)
+  # - title: Specificaties v2.0.0 (in ontwikkeling)
   #   subnav:
       - title: Documentatie
         path: /Documentatie
