@@ -15,19 +15,19 @@ nav:
   - title: Specificaties v.2.0.0 (in ontwikkeling)
     subnav:
       - title: Documentatie
-        path: /v.1.2.0/Documentatie
+        path: Documentatie
       - title: Open Raadsinformatie (swagger-ui)
-        path: /v.1.2.0/swagger-ui
+        path: swagger-ui
       - title: Open raadsinformatie (redoc)
-        path: /v.1.2.0/redoc
-  - title: Specificaties v.1.1.0
-    subnav:
-      - title: Documentatie
-        path: /v.1.1.0/Documentatie
-      - title: Open Raadsinformatie (swagger-ui)
-        path: /v.1.1.0/swagger-ui
-      - title: Open raadsinformatie (redoc)
-        path: /v.1.1.0/redoc       
+        path: redoc
+#  - title: Specificaties v.1.1.0
+#    subnav:
+#      - title: Documentatie
+#        path: /v.1.1.0/Documentatie
+#      - title: Open Raadsinformatie (swagger-ui)
+#        path: /v.1.1.0/swagger-ui
+#      - title: Open raadsinformatie (redoc)
+#        path: /v.1.1.0/redoc       
 
 plugins:
   - jekyll-redirect-from
