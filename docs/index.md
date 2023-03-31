@@ -4,12 +4,12 @@ title: Ontwikkelversie Open Raadsinformatie
 ---
 
 
-# ODS Open RaadsInformatie
+# ODS Open RaadsInformatie 
 
 De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor het ontsluiten van raadsinformatie van gemeenten.
 
-## Versies
-* [v2.0.0-alpha (in ontwikkeling)](./../specificatie/README.md)
+## Versies op GitHub
+* [v2.0.0-alpha (in ontwikkeling)](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie)
 * [v1.2.0](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/refs/tags/v1.2.0/specificatie/README.md)
 * [v1.1.0](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/v1.1.0/specificatie/README.md)
 
