@@ -19,6 +19,9 @@ De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor 
 * [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/API-Kennisbank/blob/master/CONTRIBUTING.md)
 * [Architectuur](./docs/Architectuur.md)
 * Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md)
+* [Informatiemodel](./docs/Informatiemodel.md)
+* [Technische specificaties](./specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://vng-realisatie.github.io/ODS-Open-Raadsinformatie/swagger-ui)
+* Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md)
 
 ## Bronnen
 * Informatiemodel RSGB en Informatiemodel RGBZ
