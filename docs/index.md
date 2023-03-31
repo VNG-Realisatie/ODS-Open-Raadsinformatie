@@ -18,6 +18,9 @@ De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor 
 * [Productvisie](./Productvisie.md)
 * [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues)
 * [Architectuur](./Architectuur.md) 
+* [Informatiemodel](./Informatiemodel)
+* [Catalogus](./catalog)
+
 
 ## Bronnen
 * Informatiemodel RSGB en Informatiemodel RGBZ
