@@ -19,7 +19,7 @@ nav:
       - title: Open Raadsinformatie (swagger-ui)
         path: /swagger-ui
       - title: Open raadsinformatie (redoc)
-        path: redoc
+        path: /redoc
 #  - title: Specificaties v.1.1.0
 #    subnav:
 #      - title: Documentatie
