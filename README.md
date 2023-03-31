@@ -13,7 +13,7 @@ De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor 
 * [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues)
 * [Architectuur](./docs/Architectuur.md)
 * [Informatiemodel](./docs/Informatiemodel.md)
-* [Technische specificaties](./specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://vng-realisatie.github.io/ODS-Open-Raadsinformatie/swagger-ui)
+* [Technische specificaties](./specificatie) (Open API Specificaties en JSON schema) via [Swagger of Redoc viewer](https://vng-realisatie.github.io/ODS-Open-Raadsinformatie/swagger-ui)
 <!-- * Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md) -->
 
 ## Bronnen
