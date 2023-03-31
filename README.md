@@ -12,14 +12,13 @@ De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor 
 * [Productvisie](./docs/Productvisie.md)
 * [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues)
 * [Architectuur](./docs/Architectuur.md)
-* Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md)
 * [Informatiemodel](./docs/Informatiemodel.md)
 * [Technische specificaties](./specificatie) (Open API Specificaties en JSON schema) en via de [Swagger-interface](https://vng-realisatie.github.io/ODS-Open-Raadsinformatie/swagger-ui)
 <!-- * Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md) -->
 
 ## Bronnen
 * Informatiemodel RSGB en Informatiemodel RGBZ
-* [Designrules Landelijke API strategie](https://geonovum.github.io/KP-APIs/API-strategie-algemeen/)
+* [Design rules Landelijke API strategie](https://geonovum.github.io/KP-APIs/API-strategie-algemeen/)
 <!-- * [Extensions Landelijke API strategie](https://geonovum.github.io/KP-APIs/API-strategie-extensies/) -->
 
 ## Contactpersonen:
