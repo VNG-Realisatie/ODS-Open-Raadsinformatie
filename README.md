@@ -4,9 +4,11 @@ De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor 
 
 ## Versies
 * [v2.0.0-alpha (in ontwikkeling)](./specificatie/README.md)
-* [v1.2.0](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/refs/tags/v1.2.0/specificatie/README.md)
+* [v1.2.0](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/refs/tags/v1.2.0/specificatie/genereervariant/openapi.yaml)
 * [v1.1.0](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/v1.1.0/specificatie/genereervariant/openapi.yaml)
+<!-- * [v1.2.0](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/refs/tags/v1.2.0/specificatie/README.md) -->
 <!-- * [v1.1.0](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/blob/v1.1.0/specificatie/README.md) -->
+
 
 
 ## Documentatie
