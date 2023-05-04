@@ -1,5 +1,8 @@
 openapi: "3.0.0"
 servers:
+# Added by API Auto Mocking Plugin
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/KorverInformatica/OpenRaadsInformatie/2.0.0-alpha.1
 - description: "SwaggerHub API Auto Mocking"
   url: "https://virtserver.swaggerhub.com/VNGRealisatie/api/open_raads__en_stateninformatie/v1"
 - description: "Referentie-implementatie"
@@ -1814,14 +1817,14 @@ paths:
           maxLength: 200
       - in: "query"
         name: "bronOrganisatie"
-        description: "bronorganisatie\n\nbronorganisatie \n\nDe in het NHR voorkomende\
+        description: "bronorganisatie\n\nDe in het NHR voorkomende\
           \ unieke identificaties van rechtspersonen en samenwerkingsverbanden."
         required: false
         schema:
           type: "integer"
       - in: "query"
         name: "creatiedatum"
-        description: "creatiedatum\n\ncreatiedatum \n\nAlle geldige datums gelegen\
+        description: "creatiedatum\n\nAlle geldige datums gelegen\
           \ op of voor de huidige datum en tijd"
         required: false
         schema:
@@ -1865,7 +1868,7 @@ paths:
           maxLength: 20
       - in: "query"
         name: "titel"
-        description: "titel\n\ntitel \n\nalle alfanumerieke tekens"
+        description: "titel\n\nalle alfanumerieke tekens"
         required: false
         schema:
           type: "string"
@@ -1881,7 +1884,7 @@ paths:
           type: "string"
       - in: "query"
         name: "versie"
-        description: "versie\n\nversie \n\nAlle alfanumerieke tekens m.u.v. diacrieten"
+        description: "versie\n\nAlle alfanumerieke tekens m.u.v. diacrieten"
         required: false
         schema:
           type: "string"
@@ -2038,7 +2041,7 @@ paths:
       parameters:
       - in: "path"
         name: "informatieobjectidentificatie"
-        description: "informatieobjectidentificatie\n\ninformatieobjectidentificatie\
+        description: "informatieobjectidentificatie\n\n
           \ \n\nAlle alfanumerieke tekens m.u.v. diacrieten"
         required: true
         schema:
@@ -2811,7 +2814,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Spreekfragment_postput"
+              $ref: "#/components/schemas/Spreekfragment"
       responses:
         201:
           description: "OK"
@@ -2867,7 +2870,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Spreekfragment_postput"
+              $ref: "#/components/schemas/Spreekfragment"
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -3771,27 +3774,37 @@ components:
       required:
       - "vergaderingen"
       properties:
-        aanvangAanwezigheid:
-          type: "string"
-          title: "Aanvang aanwezigheid"
-          description: "De aanvang van de aanwezigheid"
-          format: "date-time"
         aanwezigdeDeelnemerIdentificatie:
           type: "string"
           title: "aanwezigdeDeelnemerIdentificatie"
           description: ""
           maxLength: 10
+        nummerNatuurlijkPersoon:
+          type: "string"
+          title: "Nummer natuurlijk persoon"
+          description: "Het identificerende nummer van een NATUURLIJK PERSOON niet\
+            \ zijnde het burgerservicenummer\n\nHet kan dus voorkomen dat dezelfde\
+            \ natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder\
+            \ een ander nummer.\n\nviercijferige gemeentecode gevolgd door een volgnummer\
+            \ van 13 cijfers met voorloopnullen"
+          maxLength: 17
+          minLength: 1
+        aanvangAanwezigheid:
+          type: "string"
+          title: "Aanvang aanwezigheid"
+          description: "De aanvang van de aanwezigheid"
+          format: "date-time"
+        eindeAanwezigheid:
+          type: "string"
+          title: "Einde aanwezigheid"
+          description: "De einde van de aanwezigheid"
+          format: "date-time"
         deelnemerspositie:
           type: "string"
           title: "Deelnemerspositie"
           description: "De plek waar een deelnemer in de zaal zit.\n\nDit kan bijvoorbeeld\
             \ een stoel of een console zijn. Dit kan o.a. van belang zijn voor de\
             \ audio/video-verslaggeving."
-        eindeAanwezigheid:
-          type: "string"
-          title: "Einde aanwezigheid"
-          description: "De einde van de aanwezigheid"
-          format: "date-time"
         rolnaam:
           $ref: "#/components/schemas/RolNaam"
         vertegenwoordigtOrganisatie:
@@ -3812,16 +3825,11 @@ components:
           readOnly: true
           uniqueItems: true
           example: "datapunt.voorbeeldgemeente.nl/api/v1/stemmen/123456789"
-        vergaderingen:
-          type: "array"
-          title: "neemt deel aan"
-          description: "persoon met een functie neemt deel aan een vergadering"
-          minItems: 1
-          items:
-            type: "string"
-            format: "uri"
-          readOnly: true
-          uniqueItems: true
+        vergadering:
+          title: "Vergadering"
+          description: "De vergadering waaraan de deelnemer deelneemt."
+          type: "string"
+          format: "uri"
           example: "datapunt.voorbeeldgemeente.nl/api/v1/vergaderingen/123456789"
     Agendapunt:
       type: "object"
@@ -4426,12 +4434,13 @@ components:
       - "spreekfragmentidentificatie"
       - "videoTijdsaanduidingEinde"
       properties:
-        aanvangSpreekfragment:
+        spreekfragmentidentificatie:
           type: "string"
-          title: "Aanvang spreekfragment"
-          description: "De tijdstip en datum van aanvang van het SPREEKFRAGMENT"
-          format: "date-time"
-        aanwezigdeDeelnemerIdentificatie:
+          title: "spreekfragmentidentificatie"
+          description: ""
+          maxLength: 10
+          minLength: 1
+        aanwezigeDeelnemerIdentificatie:
           type: "string"
           title: "aanwezigdeDeelnemerIdentificatie"
           description: ""
@@ -4442,178 +4451,179 @@ components:
           description: "Het nummer van het agendapunt op de agenda."
           maxLength: 10
           minLength: 1
-        audioTijdsaanduidingAanvang:
-          type: "integer"
-          title: "Audio tijdsaanduiding aanvang"
-          description: "De tijdsaanduiding naar de aavang van de audio opname van\
-            \ het SPREEKFRAGMENT"
-        audioTijdsaanduidingEinde:
+        aanvangSpreekfragment:
           type: "string"
-          title: "Audio tijdsaanduiding einde"
-          description: "Aanduiding van het einde van het spreekfragment in het audiobestand"
-          minLength: 1
-        audiolink:
-          type: "string"
-          title: "Audio link"
-          description: "De link naar de audio opname van het SPREEKFRAGMENT\n\nDe\
-            \ link naar de audio opname van het SPREEKFRAGMENT \n\nDe link naar de\
-            \ audio opname van het SPREEKFRAGMENT"
-          format: "uri"
+          title: "Aanvang spreekfragment"
+          description: "De tijdstip en datum van aanvang van het SPREEKFRAGMENT"
+          format: "date-time"
         eindeSpreekfragment:
           type: "string"
           title: "Einde spreekfragment"
           description: ""
           format: "date-time"
+        audiolink:
+          type: "string"
+          title: "Audio link"
+          description: "De link naar de audio opname van het SPREEKFRAGMENT."
+          format: "uri"
+        audioTijdsaanduidingAanvang:
+          type: "integer"
+          title: "Audio tijdsaanduiding aanvang"
+          description: "De tijdsaanduiding naar de aanvang van de audio opname van\
+            \ het SPREEKFRAGMENT in seconden."
+        audioTijdsaanduidingEinde:
+          type: "string"
+          title: "Audio tijdsaanduiding einde"
+          description: "Aanduiding van het einde van het spreekfragment in het audiobestand in seconden"
+          minLength: 1
+        videoLink:
+          type: "string"
+          title: "Video link"
+          description: "De link naar de video opname van het SPREEKFRAGMENT."
+          format: "uri"
+        videoTijdsaanduidingAanvang:
+          type: "integer"
+          title: "Video tijdsaanduiding aanvang"
+          description: "De tijdsaanduiding naar aanvang van het SPREEKFRAGMENT in\
+            \ de video opname in seconden."
+        videoTijdsaanduidingEinde:
+          type: "string"
+          title: "Video tijdsaanduiding einde"
+          description: "Tijdsaanduiding van het einde van het SPREEKFRAGMENT op de\
+            \ video-opname in seconden."
+          minLength: 1
         positieNotulen:
           type: "string"
           title: "Positie notulen"
           description: "De positie van het SPREEKFRAGMENT binnen de notulen"
           maxLength: 10
-        spreekfragmentidentificatie:
-          type: "string"
-          title: "spreekfragmentidentificatie"
-          description: ""
-          maxLength: 10
-          minLength: 1
-        taal:
-          type: "string"
-          title: "Taal"
-          description: "De taal van het SPREEKFRAGMENT"
-          maxLength: 20
-        tekstSpreekfragment:
-          type: "string"
-          title: "Tekst spreekfragment"
-          description: "De uitgeschreven weergave van het SPREEKFRAGMENT"
         titelSpreekfragment:
           type: "string"
           title: "Titel spreekfragment"
           description: "De titel die kenmerkend is voor het SPREEKFRAGMENT of deel\
             \ van de discussie"
           maxLength: 100
-        videoLink:
+        tekstSpreekfragment:
           type: "string"
-          title: "Video link"
-          description: "De link naar de video opname van het SPREEKFRAGMENT\n\nDe\
-            \ link naar de video opname van het SPREEKFRAGMENT \n\nDe link naar de\
-            \ video opname van het SPREEKFRAGMENT"
-          format: "uri"
-        videoTijdsaanduidingAanvang:
-          type: "integer"
-          title: "Video tijdsaanduiding aanvang"
-          description: "De tijdsaanduiding naar aanvang van het SPREEKFRAGMENT in\
-            \ de video opname"
-        videoTijdsaanduidingEinde:
+          title: "Tekst spreekfragment"
+          description: "De uitgeschreven weergave van het SPREEKFRAGMENT"
+        taal:
           type: "string"
-          title: "Video tijdsaanduiding einde"
-          description: "Tijdsaanduiding van het einde van het SPREEKFRAGMENT op de\
-            \ video-opname"
+          title: "Taal"
+          description: "De taal van het SPREEKFRAGMENT"
+          maxLength: 20
+        mediabronidentificatie:
+          type: "string"
+          title: "Mediabronidentificatie"
+          description: "Indentificatie van de mediabron"
+          maxLength: 10
           minLength: 1
-        mediabronnen:
-          title: "is vastgelegd in"
-          description: ""
+        mediabron:
+          title: "Mediabron"
+          description: "Mediabron waarin het spreekfragment is vastgelegd."
           type: "string"
           format: "uri"
           readOnly: true
           example: "datapunt.voorbeeldgemeente.nl/api/v1/mediabronnen/123456789"
-    Spreekfragment_postput:
-      type: "object"
-      description: ""
-      required:
-      - "agendapuntIdentificatie"
-      - "audioTijdsaanduidingEinde"
-      - "eindeSpreekfragment"
-      - "mediabronIdentificatie"
-      - "spreekfragmentidentificatie"
-      - "videoTijdsaanduidingEinde"
-      properties:
-        aanvangSpreekfragment:
-          type: "string"
-          title: "Aanvang spreekfragment"
-          description: "De tijdstip en datum van aanvang van het SPREEKFRAGMENT"
-          format: "date-time"
-        aanwezigdeDeelnemerIdentificatie:
-          type: "string"
-          title: "aanwezigdeDeelnemerIdentificatie"
-          description: ""
-          maxLength: 10
-        agendapuntIdentificatie:
-          type: "string"
-          title: "Agendapuntnummer"
-          description: "Het nummer van het agendapunt op de agenda."
-          maxLength: 10
-          minLength: 1
-        audioTijdsaanduidingAanvang:
-          type: "integer"
-          title: "Audio tijdsaanduiding aanvang"
-          description: "De tijdsaanduiding naar de aavang van de audio opname van\
-            \ het SPREEKFRAGMENT"
-        audioTijdsaanduidingEinde:
-          type: "string"
-          title: "Audio tijdsaanduiding einde"
-          description: "Aanduiding van het einde van het spreekfragment in het audiobestand"
-          minLength: 1
-        audiolink:
-          type: "string"
-          title: "Audio link"
-          description: "De link naar de audio opname van het SPREEKFRAGMENT\n\nDe\
-            \ link naar de audio opname van het SPREEKFRAGMENT \n\nDe link naar de\
-            \ audio opname van het SPREEKFRAGMENT"
-          format: "uri"
-        eindeSpreekfragment:
-          type: "string"
-          title: "Einde spreekfragment"
-          description: ""
-          format: "date-time"
-        mediabronIdentificatie:
-          type: "string"
-          title: "mediabronIdentificatie"
-          description: ""
-          maxLength: 10
-          minLength: 1
-        positieNotulen:
-          type: "string"
-          title: "Positie notulen"
-          description: "De positie van het SPREEKFRAGMENT binnen de notulen"
-          maxLength: 10
-        spreekfragmentidentificatie:
-          type: "string"
-          title: "spreekfragmentidentificatie"
-          description: ""
-          maxLength: 10
-          minLength: 1
-        taal:
-          type: "string"
-          title: "Taal"
-          description: "De taal van het SPREEKFRAGMENT"
-          maxLength: 20
-        tekstSpreekfragment:
-          type: "string"
-          title: "Tekst spreekfragment"
-          description: "De uitgeschreven weergave van het SPREEKFRAGMENT"
-        titelSpreekfragment:
-          type: "string"
-          title: "Titel spreekfragment"
-          description: "De titel die kenmerkend is voor het SPREEKFRAGMENT of deel\
-            \ van de discussie"
-          maxLength: 100
-        videoLink:
-          type: "string"
-          title: "Video link"
-          description: "De link naar de video opname van het SPREEKFRAGMENT\n\nDe\
-            \ link naar de video opname van het SPREEKFRAGMENT \n\nDe link naar de\
-            \ video opname van het SPREEKFRAGMENT"
-          format: "uri"
-        videoTijdsaanduidingAanvang:
-          type: "integer"
-          title: "Video tijdsaanduiding aanvang"
-          description: "De tijdsaanduiding naar aanvang van het SPREEKFRAGMENT in\
-            \ de video opname"
-        videoTijdsaanduidingEinde:
-          type: "string"
-          title: "Video tijdsaanduiding einde"
-          description: "Tijdsaanduiding van het einde van het SPREEKFRAGMENT op de\
-            \ video-opname"
-          minLength: 1
+    # Spreekfragment_postput:
+    #   type: "object"
+    #   description: ""
+    #   required:
+    #   - "agendapuntIdentificatie"
+    #   - "audioTijdsaanduidingEinde"
+    #   - "eindeSpreekfragment"
+    #   - "mediabronIdentificatie"
+    #   - "spreekfragmentidentificatie"
+    #   - "videoTijdsaanduidingEinde"
+    #   properties:
+    #     aanvangSpreekfragment:
+    #       type: "string"
+    #       title: "Aanvang spreekfragment"
+    #       description: "De tijdstip en datum van aanvang van het SPREEKFRAGMENT"
+    #       format: "date-time"
+    #     aanwezigdeDeelnemerIdentificatie:
+    #       type: "string"
+    #       title: "aanwezigdeDeelnemerIdentificatie"
+    #       description: ""
+    #       maxLength: 10
+    #     agendapuntIdentificatie:
+    #       type: "string"
+    #       title: "Agendapuntnummer"
+    #       description: "Het nummer van het agendapunt op de agenda."
+    #       maxLength: 10
+    #       minLength: 1
+    #     audioTijdsaanduidingAanvang:
+    #       type: "integer"
+    #       title: "Audio tijdsaanduiding aanvang"
+    #       description: "De tijdsaanduiding naar de aavang van de audio opname van\
+    #         \ het SPREEKFRAGMENT"
+    #     audioTijdsaanduidingEinde:
+    #       type: "string"
+    #       title: "Audio tijdsaanduiding einde"
+    #       description: "Aanduiding van het einde van het spreekfragment in het audiobestand"
+    #       minLength: 1
+    #     audiolink:
+    #       type: "string"
+    #       title: "Audio link"
+    #       description: "De link naar de audio opname van het SPREEKFRAGMENT\n\nDe\
+    #         \ link naar de audio opname van het SPREEKFRAGMENT \n\nDe link naar de\
+    #         \ audio opname van het SPREEKFRAGMENT"
+    #       format: "uri"
+    #     eindeSpreekfragment:
+    #       type: "string"
+    #       title: "Einde spreekfragment"
+    #       description: ""
+    #       format: "date-time"
+    #     mediabronIdentificatie:
+    #       type: "string"
+    #       title: "mediabronIdentificatie"
+    #       description: ""
+    #       maxLength: 10
+    #       minLength: 1
+    #     positieNotulen:
+    #       type: "string"
+    #       title: "Positie notulen"
+    #       description: "De positie van het SPREEKFRAGMENT binnen de notulen"
+    #       maxLength: 10
+    #     spreekfragmentidentificatie:
+    #       type: "string"
+    #       title: "spreekfragmentidentificatie"
+    #       description: ""
+    #       maxLength: 10
+    #       minLength: 1
+    #     taal:
+    #       type: "string"
+    #       title: "Taal"
+    #       description: "De taal van het SPREEKFRAGMENT"
+    #       maxLength: 20
+    #     tekstSpreekfragment:
+    #       type: "string"
+    #       title: "Tekst spreekfragment"
+    #       description: "De uitgeschreven weergave van het SPREEKFRAGMENT"
+    #     titelSpreekfragment:
+    #       type: "string"
+    #       title: "Titel spreekfragment"
+    #       description: "De titel die kenmerkend is voor het SPREEKFRAGMENT of deel\
+    #         \ van de discussie"
+    #       maxLength: 100
+    #     videoLink:
+    #       type: "string"
+    #       title: "Video link"
+    #       description: "De link naar de video opname van het SPREEKFRAGMENT\n\nDe\
+    #         \ link naar de video opname van het SPREEKFRAGMENT \n\nDe link naar de\
+    #         \ video opname van het SPREEKFRAGMENT"
+    #       format: "uri"
+    #     videoTijdsaanduidingAanvang:
+    #       type: "integer"
+    #       title: "Video tijdsaanduiding aanvang"
+    #       description: "De tijdsaanduiding naar aanvang van het SPREEKFRAGMENT in\
+    #         \ de video opname"
+    #     videoTijdsaanduidingEinde:
+    #       type: "string"
+    #       title: "Video tijdsaanduiding einde"
+    #       description: "Tijdsaanduiding van het einde van het SPREEKFRAGMENT op de\
+    #         \ video-opname"
+    #       minLength: 1
     Stem:
       type: "object"
       description: "Een STEM is een formele uitdrukking van een keuze die een raadslid\
@@ -4781,9 +4791,8 @@ components:
         bovenliggendeVergaderingsIdentificatie:
           type: "string"
           title: "Vergaderingsidentificatie"
-          description: "De identificatie een VERGADERING\n\nVerwijzing naar de vergadering\
-            \ waar dit een deelvergadering van is. \n\nVerwijzing naar de vergadering\
-            \ waar dit een deelvergadering van is. \n\nDe eerste vier karakter zijn\
+          description: "Verwijzing naar de vergadering\
+            \ waar dit een deelvergadering van is. De eerste vier karakter zijn\
             \ de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen."
           maxLength: 10
         eindeVergadering:
@@ -4920,17 +4929,14 @@ components:
           example: "datapunt.voorbeeldgemeente.nl/api/v1/informatieobjecten/123456789"
         vergaderingen:
           title: "heeft als deel-vergadering"
-          description: "Een VERGADERING kan uit één of meerdere deel-VERGADERINGen\
-            \ bestaan"
+          description: "Een VERGADERING kan uit één of meerdere deel-VERGADERINGen bestaan"
           type: "string"
           format: "uri"
           readOnly: true
           example: "datapunt.voorbeeldgemeente.nl/api/v1/vergaderingen/123456789"
     Gemeente:
       type: "object"
-      description: "De referentielijst met alle gemeenten Tabel 33 van de landelijke\
-        \ tabellen\n\nDe referentielijst met alle gemeenten Tabel 33 van de landelijke\
-        \ tabellen"
+      description: "De referentielijst met alle gemeenten Tabel 33 van de landelijke tabellen."
       required:
       - "gemeenteCode"
       - "gemeenteNaam"
@@ -4938,20 +4944,17 @@ components:
         gemeenteCode:
           type: "string"
           title: "gemeenteCode"
-          description: "De code van een gemeente in de landelijke tabel\n\nDe code\
-            \ van een gemeente in de landelijke tabel"
+          description: "De code van een gemeente in de landelijke tabel."
           maxLength: 4
           minLength: 1
         gemeenteNaam:
           type: "string"
           title: "gemeenteNaam"
-          description: "De naam van de gemeente\n\nDe naam van de gemeente"
+          description: "De naam van de gemeente."
           minLength: 1
     Gremium:
       type: "object"
-      description: "De referentielijst met alle gremia in een gemeente\n\nDe referentielijst\
-        \ met alle gremia in een gemeente \n\nDe referentielijst met alle gremia in\
-        \ een gemeente \n\nHier horen ook alle commissies bij van de gemeenteraad"
+      description: "De referentielijst met alle gremia in een gemeente. Hier horen ook alle commissies bij van de gemeenteraad."
       required:
       - "gremiumIdentificatie"
       - "gremiumNaam"
@@ -4966,8 +4969,7 @@ components:
         gremiumNaam:
           type: "string"
           title: "Gremium naam"
-          description: "De naam van het gremium\n\nDe naam van het gremium \n\nDe\
-            \ naam van het gremium \n\nHier horen ook de (raads- en staten)commissies\
+          description: "De naam van het gremium. Hier horen ook de (raads- en staten)commissies\
             \ bij"
           maxLength: 100
           minLength: 1
@@ -5118,7 +5120,7 @@ components:
       - "onbekend"
     InformatieObjectType:
       type: "string"
-      description: "Het type van het informatieobject\n\nHet type van het informatieobject\
+      description: "Het type van het informatieobject\n\n
         \ <body><ul><li>`vraag` - Vraag </li><li>`antwoord` - Antwoord </li><li>`motie`\
         \ - Motie </li><li>`besluitvormingsstuk` - Besluitvormingsstuk </li><li>`ingekomen_stuk`\
         \ - Ingekomen stuk </li><li>`toezegging` - Toezegging </li><li>`mededeling`\
@@ -5214,8 +5216,7 @@ components:
       - "algemeen_bestuurslid"
     StemKeuze:
       type: "string"
-      description: "de mogelijke keuze van een uitgebrachte STEM\n\nde mogelijke keuze\
-        \ van een uitgebrachte STEM <body><ul><li>`voor` - Voor </li><li>`tegen` -\
+      description: "de mogelijke keuze van een uitgebrachte STEM\n\n <body><ul><li>`voor` - Voor </li><li>`tegen` -\
         \ Tegen </li><li>`afwezig` - Afwezig </li><li>`othouden` - Onthouden </li></ul></body>"
       enum:
       - "voor"
@@ -5264,7 +5265,7 @@ components:
       - "algemene_bestuursvergadering"
     VraagType:
       type: "string"
-      description: "de type van de vraag\n\nde type van de vraag <body><ul><li>`technische_vraag`\
+      description: "de type van de vraag <body><ul><li>`technische_vraag`\
         \ - Technische vraag technische vragen over een agendapunt</li><li>`mondelinge_politieke_vraag`\
         \ - Mondelinge politieke vraag </li><li>`schriftelijke_politieke_vraag` -\
         \ Schriftelijke politieke vraag </li></ul></body>"
