@@ -25,3 +25,6 @@ Informatiemodel ORI is geen informatiemodel voor een RIS (RaadsInformatieSysteem
 ## Informatiemodel volledig
 
 <img src="./Open%20Raads-%20en%20StatenInformatie%20volledig.jpg" alt=" Informatiemodel Open Raadsinformatie volledig" width="1000"/>
+
+## XMI export van informatiemodel
+[XMI formaat informatiemodel](./Open Raads- en StatenInformatie.xmi).
