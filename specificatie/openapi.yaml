@@ -12,16 +12,16 @@ info:
   description: "API-specificatie voor Open RaadsInformatie. <br><br>
           <i>Wat is nieuw?</i>
           <ul>
-            <li>De OAS bevat nu het volledige informatiemodel, inclusief Aanwezige Deelnemers (Natuurlijke Personen) en Fracties.</li>
+            <li>De OAS bevat nu het volledige informatiemodel, inclusief 'Aanwezige deelnemers' ('Natuurlijke personen') en Fracties.</li>
             <li>De syntax van de berichten is gebaseerd op plain JSON in plaats van HAL.</li>
-            <li>Uitbreidingen voor de waterschappen (<a href='https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/89'>issue #89</a>)</li>
-            <li>Functie griffier toegevoegd als rolnaam (issue #88).</li>
+            <li>Uitbreidingen voor de waterschappen (<a href='https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/89'>issue #89</a>).</li>
+            <li>Functie 'griffier' toegevoegd als rolnaam (issue #88).</li>
             <li>Extra attribuut om volledige naam in één keer toe te kunnen voegen (issue #84).</li>
             <li>Dubbele voorkomens beschrijvingen verwijderd (issue #86).</li>
             <li>Publicatiedatum toegevoegd (issue #78).</li>
-            <li>Relateren van besluiten aan stemmingen (issue #88).</li>
-            <li>Relateren van stemmingen aan agendapunten en/of informatieobjecten (issue #87).</li>
-            <li>Attribuut 'behandelendAmbtenaar' aan Agendapunt toegevoegd (issue #81).</li>
+            <li>Relateren van Besluiten aan Stemmingen (issue #88).</li>
+            <li>Relateren van Stemmingen aan Agendapunten en/of Informatieobjecten (issue #87).</li>
+            <li>Attribuut 'behandelendAmbtenaar' aan Agendapunten toegevoegd (issue #81).</li>
           </ul>"
   version: "2.0.0-beta.1"
   x-imvertor-generator-version: "2.0.0"
