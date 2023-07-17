@@ -9,12 +9,17 @@ servers:
   url: "https://www.voorbeeldgemeente.nl/api/open_raads__en_stateninformatie/v1"
 info:
   title: "Open Raads- en StatenInformatie"
-  description: "Dit is de API-specificatie voor Open RaadsInformatie.<br>
-                Opvolger van de 1.1.0 versie.<br>
-                Deze 2.0.0 versie is nog in ontwikkeling. <br>
-                In deze 2.0.0 versie zit het volledige informatiemodel van ORI.<br>
-                Omdat de OAS opnieuw gegenereerd is vanuit het informatiemodel is deze OAS niet meer backwards compatible met de vorige versie."
-  version: "2.0.0-alpha.1"
+  description: "API-specificatie voor Open RaadsInformatie. Deze beta-versie is gereed om door de stakeholders (leveranciers, gemeenten, PLOOI) gereviewed en getest te worden. <br>
+          Wat is nieuw:
+          <ul>
+            <li>Functie griffier toegevoegd als rolnaam (issue #88).
+            <li>Extra attribuut om volledige naam in 1 keer toe te kunnen voegen (issue #84).
+            <li>Dubbele voorkomens beschrijvingen verwijderd (issue #86).
+            <li>Publicatiedatum toegevoegd (issue #78).
+            <li>Kunnen relateren van besluiten aan stemmingen (issue #88).
+            <li>Kunnen relateren van stemmingen aan agendapunten en/of informatieobjecten (issue #87).
+          </ul>"
+  version: "2.0.0-beta.1"
   x-imvertor-generator-version: "2.0.0"
   x-yamlCompiler-stylesheets-version: "20230315"
   contact:
@@ -3928,8 +3933,7 @@ components:
           type: "array"
           title: "informatieObjectIdentificatie"
           description: "Verwijzing naar de informatieobjecten die bijlage zijn bij\
-            \ dit agendapunt.\n\nVerwijzing naar de informatieobjecten die bijlage\
-            \ zijn bij dit agendapunt. \n\nAlle alfanumerieke tekens m.u.v. diacrieten"
+            \ dit agendapunt. \n\nAlle alfanumerieke tekens m.u.v. diacrieten"
           minItems: 0
           items:
             type: "string"
@@ -4689,7 +4693,6 @@ components:
             \ subAGENDAPUNTen in één keer."
           type: "string"
           format: "uri"
-          readOnly: true
           example: "datapunt.voorbeeldgemeente.nl/api/v1/agendapunten/123456789"
         besluiten:
           type: "array"
@@ -4698,7 +4701,6 @@ components:
           items:
             type: "string"
             format: "uri"
-          readOnly: true
           uniqueItems: true
           example: "datapunt.voorbeeldgemeente.nl/api/v1/besluiten/123456789"
         informatieobjecten:
@@ -4708,7 +4710,6 @@ components:
           items:
             type: "string"
             format: "uri"
-          readOnly: true
           uniqueItems: true
           example: "datapunt.voorbeeldgemeente.nl/api/v1/informatieobjecten/123456789"
         stemmen:
@@ -4724,6 +4725,7 @@ components:
           readOnly: true
           uniqueItems: true
           example: "datapunt.voorbeeldgemeente.nl/api/v1/stemmen/123456789"
+        
     StemresultaatPerFractie:
       type: "object"
       description: "Het resultaat van de STEMMING per FRACTIE en wordt afgeleid van\
@@ -4776,7 +4778,7 @@ components:
           type: "array"
           title: "Agendapuntnummer"
           description: "Het nummer van het agendapunt op de agenda.\n\nAgendapunten\
-            \ van deze vergadering. \n\nAgendapunten van deze vergadering."
+            \ van deze vergadering."
           minItems: 1
           items:
             type: "string"
@@ -4833,8 +4835,7 @@ components:
           type: "array"
           title: "heeftAlsBijlageInformatieObjectIdentificatie"
           description: "Verwijzing naar het informatieobject (dbv.dossier) waar dit\
-            \ infomatieobject onderdeel van is.\n\nVerwijzing naar het informatieobject\
-            \ (dbv.dossier) waar dit infomatieobject onderdeel van is. \n\nAlle alfanumerieke\
+            \ infomatieobject onderdeel van is.\n\nAlle alfanumerieke\
             \ tekens m.u.v. diacrieten"
           minItems: 0
           items:
@@ -4844,8 +4845,7 @@ components:
           type: "array"
           title: "isGenotuleerdInInformatieObjectIdentificatie"
           description: "Verwijzingen naar de informatieobjecten die onderdeel uitmaken\
-            \ van dit informatieobject (dbv.dossier).\n\nVerwijzingen naar de informatieobjecten\
-            \ die onderdeel uitmaken van dit informatieobject (dbv.dossier). \n\n\
+            \ van dit informatieobject (dbv.dossier).\n\n\
             Alle alfanumerieke tekens m.u.v. diacrieten"
           minItems: 0
           items:
@@ -4934,6 +4934,14 @@ components:
           format: "uri"
           readOnly: true
           example: "datapunt.voorbeeldgemeente.nl/api/v1/vergaderingen/123456789"
+        publicatiedatum:
+          type: "string"
+          title: "Publicatiedatum"
+          description: "De datum waarop de vergadering voor het laatst gepubliceerd is. \ 
+                  \ Het kan zijn dat er wijzigingen hebben plaatsgevonden en dat de vergadering opnieuw is gepubliceerd."
+          format: "date"
+          nullable: true
+          example: "2021-07-11"
     Gemeente:
       type: "object"
       description: "De referentielijst met alle gemeenten Tabel 33 van de landelijke tabellen."
@@ -5000,6 +5008,12 @@ components:
           title: "Voornamen"
           description: "De voornamen van een NATUURLIJK PERSOON."
           maxLength: 200
+        volledigeNaam:
+          type: "string"
+          title: "Volledige naam"
+          description: "De volledige naam van een NATUURLIJK PERSOON."
+          maxLength: 300
+
     NevenfunctieNatuurlijkePersoon:
       type: "object"
       description: ""
@@ -5214,6 +5228,7 @@ components:
       - "statenlid"
       - "dagelijks_bestuurslid"
       - "algemeen_bestuurslid"
+      - "griffier"
     StemKeuze:
       type: "string"
       description: "de mogelijke keuze van een uitgebrachte STEM\n\n <body><ul><li>`voor` - Voor </li><li>`tegen` -\
