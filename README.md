@@ -3,7 +3,7 @@
 De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor het ontsluiten van raadsinformatie van gemeenten.
 
 ## Versies
-* [v2.0.0-alpha (in ontwikkeling)](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/master/specificatie/openapi.yaml)
+* [v2.0.0-beta.1](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/master/specificatie/openapi.yaml)
 * [v1.2.0](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/refs/tags/v1.2.0/specificatie/genereervariant/openapi.yaml)
 * [v1.1.0](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/v1.1.0/specificatie/genereervariant/openapi.yaml)
 <!-- * [v2.0.0-alpha (in ontwikkeling)](./specificatie/README.md) -->
