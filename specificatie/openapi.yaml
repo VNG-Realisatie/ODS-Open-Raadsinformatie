@@ -9,15 +9,19 @@ servers:
   url: "https://www.voorbeeldgemeente.nl/api/open_raads__en_stateninformatie/v1"
 info:
   title: "Open Raads- en StatenInformatie"
-  description: "API-specificatie voor Open RaadsInformatie. Deze beta-versie is gereed om door de stakeholders (leveranciers, gemeenten, PLOOI) gereviewed en getest te worden. <br>
-          Wat is nieuw:
+  description: "API-specificatie voor Open RaadsInformatie. <br><br>
+          <i>Wat is nieuw?</i>
           <ul>
-            <li>Functie griffier toegevoegd als rolnaam (issue #88).
-            <li>Extra attribuut om volledige naam in 1 keer toe te kunnen voegen (issue #84).
-            <li>Dubbele voorkomens beschrijvingen verwijderd (issue #86).
-            <li>Publicatiedatum toegevoegd (issue #78).
-            <li>Kunnen relateren van besluiten aan stemmingen (issue #88).
-            <li>Kunnen relateren van stemmingen aan agendapunten en/of informatieobjecten (issue #87).
+            <li>De OAS bevat nu het volledige informatiemodel, inclusief Aanwezige Deelnemers (Natuurlijke Personen) en Fracties.</li>
+            <li>De syntax van de berichten is gebaseerd op plain JSON in plaats van HAL.</li>
+            <li>Uitbreidingen voor de waterschappen (<a href='https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/89'>issue #89</a>)</li>
+            <li>Functie griffier toegevoegd als rolnaam (issue #88).</li>
+            <li>Extra attribuut om volledige naam in één keer toe te kunnen voegen (issue #84).</li>
+            <li>Dubbele voorkomens beschrijvingen verwijderd (issue #86).</li>
+            <li>Publicatiedatum toegevoegd (issue #78).</li>
+            <li>Relateren van besluiten aan stemmingen (issue #88).</li>
+            <li>Relateren van stemmingen aan agendapunten en/of informatieobjecten (issue #87).</li>
+            <li>Attribuut 'behandelendAmbtenaar' aan Agendapunt toegevoegd (issue #81).</li>
           </ul>"
   version: "2.0.0-beta.1"
   x-imvertor-generator-version: "2.0.0"
@@ -3957,9 +3961,7 @@ components:
         agendapunten:
           title: "heeft als sub-agendapunt"
           description: "Een AGENDAPUNT kan uit één of meer subAGENDAPUNTen en een\
-            \ subAGENDAPUNT kan weer bestaan uit één of meer sub(sub)AGENDAPUNTen.\n\
-            \nEen AGENDAPUNT kan uit één of meer subAGENDAPUNTen en een subAGENDAPUNT\
-            \ kan weer bestaan uit één of meer sub(sub)AGENDAPUNTen."
+            \ subAGENDAPUNT kan weer bestaan uit één of meer sub(sub)AGENDAPUNTen."
           type: "string"
           format: "uri"
           readOnly: true
@@ -3982,21 +3984,23 @@ components:
           example: "datapunt.voorbeeldgemeente.nl/api/v1/stemmingen/123456789"
         vergaderingen:
           title: "wordt behandeld tijdens"
-          description: "Een AGENDAPUNT wordt behandeld tijdens een VERGADERING.\n\n\
-            Een AGENDAPUNT wordt behandeld tijdens een VERGADERING."
+          description: "Een AGENDAPUNT wordt behandeld tijdens een VERGADERING."
           type: "string"
           format: "uri"
           readOnly: true
           example: "datapunt.voorbeeldgemeente.nl/api/v1/vergaderingen/123456789"
         informatieobjecten:
           title: "heeft als bijlage"
-          description: "Een AGENDAPUNT kan één of meerdere VERGADERSTUKken als bijlage\
-            \ hebben\n\nEen AGENDAPUNT kan één of meerdere vergaderstukken als bijlage\
-            \ hebben"
+          description: "Een AGENDAPUNT kan één of meerdere VERGADERSTUKken als bijlage hebben."
           type: "string"
           format: "uri"
           readOnly: true
           example: "datapunt.voorbeeldgemeente.nl/api/v1/informatieobjecten/123456789"
+        behandelendAmbtenaar:
+          title: "Behandelend ambtenaar"
+          description: "De ambtenaar die het agendapunt behandeld."
+          type: string
+          format: uri
     Besluit:
       type: "object"
       description: "Een na beraadslaging vastgestelde beslissing\n\nEen na overweging\
