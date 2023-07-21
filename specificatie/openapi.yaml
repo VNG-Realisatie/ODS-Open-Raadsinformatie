@@ -12,15 +12,15 @@ info:
   description: "API-specificatie voor Open RaadsInformatie. <br><br>
           <i>Wat is nieuw?</i>
           <ul>
-            <li>De OAS bevat nu het volledige informatiemodel, inclusief 'Aanwezige deelnemers' ('Natuurlijke personen') en Fracties.</li>
+            <li>De OAS bevat nu het volledige informatiemodel, inclusief Fractielidmaatschap, Fractie, Natuurlijk Persoon en Stemresultaat Per Fractie.</li>
             <li>De syntax van de berichten is gebaseerd op plain JSON in plaats van HAL.</li>
             <li>Uitbreidingen voor de waterschappen (<a href='https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/89'>issue #89</a>).</li>
             <li>Functie 'griffier' toegevoegd als rolnaam (issue #88).</li>
             <li>Extra attribuut om volledige naam in één keer toe te kunnen voegen (issue #84).</li>
             <li>Dubbele voorkomens beschrijvingen verwijderd (issue #86).</li>
             <li>Publicatiedatum toegevoegd (issue #78).</li>
-            <li>Relateren van Besluiten aan Stemmingen (issue #88).</li>
-            <li>Relateren van Stemmingen aan Agendapunten en/of Informatieobjecten (issue #87).</li>
+            <li>Kunnen relateren van Besluiten aan Stemmingen (issue #88).</li>
+            <li>Kunnen relateren van Stemmingen aan Agendapunten en/of Informatieobjecten (issue #87).</li>
             <li>Attribuut 'behandelendAmbtenaar' aan Agendapunten toegevoegd (issue #81).</li>
           </ul>"
   version: "2.0.0-beta.1"
@@ -3792,10 +3792,10 @@ components:
           type: "string"
           title: "Nummer natuurlijk persoon"
           description: "Het identificerende nummer van een NATUURLIJK PERSOON niet\
-            \ zijnde het burgerservicenummer\n\nHet kan dus voorkomen dat dezelfde\
+            \ zijnde het burgerservicenummer. Het is een viercijferige gemeentecode gevolgd door een volgnummer\
+            \ van 13 cijfers met voorloopnullen. Het kan  voorkomen dat dezelfde\
             \ natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder\
-            \ een ander nummer.\n\nviercijferige gemeentecode gevolgd door een volgnummer\
-            \ van 13 cijfers met voorloopnullen"
+            \ een ander nummer."
           maxLength: 17
           minLength: 1
         aanvangAanwezigheid:
@@ -4095,20 +4095,18 @@ components:
             \ bestuur geëindigd is."
           format: "date-time"
         nummerNatuurlijkPersoon:
-          type: "array"
+          type: "string"
           title: "Nummer natuurlijk persoon"
           description: "Het identificerende nummer van een NATUURLIJK PERSOON niet\
             \ zijnde het burgerservicenummer\n\nHet kan dus voorkomen dat dezelfde\
             \ natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder\
             \ een ander nummer.\n\nviercijferige gemeentecode gevolgd door een volgnummer\
             \ van 13 cijfers met voorloopnullen"
-          minItems: 0
-          items:
-            type: "string"
-            maxLength: 17
+          maxLength: 17
+          minLength: 1
     Fractie:
       type: "object"
-      description: ""
+      description: "Deel van een gekozen volksvertegenwoordiging."
       required:
       - "fractienaam"
       - "fractienummer"
@@ -4156,6 +4154,23 @@ components:
           title: "Indicatie voorzitter"
           description: "Indicatie of iemand de voorzitter is van de FRACTIE\n\nStandaardwaarde\
             \ is Nee"
+        fractienummer:
+          type: "string"
+          title: "Fractienummer"
+          description: "Het nummer dat de FRACTIE uniek identificeert binnen de gemeente. \
+            \ Viercijferige gemeentecode gevolgd door een volgnummer van 7 cijfers met voorloopnullen."
+          maxLength: 10
+          minLength: 1
+        nummerNatuurlijkPersoon:
+          type: "string"
+          title: "Nummer natuurlijk persoon"
+          description: "Het identificerende nummer van een NATUURLIJK PERSOON niet\
+            \ zijnde het burgerservicenummer\n\nHet kan dus voorkomen dat dezelfde\
+            \ natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder\
+            \ een ander nummer.\n\nviercijferige gemeentecode gevolgd door een volgnummer\
+            \ van 13 cijfers met voorloopnullen"
+          maxLength: 17
+          minLength: 1
     InformatieObject:
       type: "object"
       description: "Een mededeling die gedaan wordt bij de vergadering Het antwoord\
@@ -4987,9 +5002,8 @@ components:
           minLength: 1
     NaamNatuurlijkPersoon:
       type: "object"
-      description: ""
-      required:
-      - "achternaam"
+      description: "De naam van een natuurlijk persoon. Wanneer de naam bij het invullen niet \
+               opgesplitst is in voornamen, tussenvoegsel en achternaam kan de naam ook in één keer worden geregistreerd in het veld volledigeNaam."
       properties:
         achternaam:
           type: "string"
@@ -5221,7 +5235,7 @@ components:
         \ provincie. Alle statenleden van één provincie vormen samen de Provinciale\
         \ Staten van de betreffende provincie.</li><li>`dagelijks_bestuurslid` - Dagelijks\
         \ bestuurslid Waterschappen</li><li>`algemeen_bestuurslid` - Algemeen bestuurslid\
-        \ Waterschappen</li></ul></body>"
+        \ Waterschappen</li><li>`griffier` - Griffier van de vergadering</li></ul></body>"
       enum:
       - "voorzitter"
       - "vice_voorzitter"
@@ -5236,7 +5250,7 @@ components:
     StemKeuze:
       type: "string"
       description: "de mogelijke keuze van een uitgebrachte STEM\n\n <body><ul><li>`voor` - Voor </li><li>`tegen` -\
-        \ Tegen </li><li>`afwezig` - Afwezig </li><li>`othouden` - Onthouden </li></ul></body>"
+        \ Tegen </li><li>`afwezig` - Afwezig </li><li>`onthouden` - Onthouden </li></ul></body>"
       enum:
       - "voor"
       - "tegen"
