@@ -23,7 +23,7 @@ info:
             <li>Kunnen relateren van Stemmingen aan Agendapunten en/of Informatieobjecten (issue #87).</li>
             <li>Attribuut 'behandelendAmbtenaar' aan Agendapunten toegevoegd (issue #81).</li>
           </ul>"
-  version: "2.0.0-beta.1"
+  version: "2.0.0-beta.2"
   x-imvertor-generator-version: "2.0.0"
   x-yamlCompiler-stylesheets-version: "20230315"
   contact:
@@ -67,11 +67,9 @@ paths:
             X-Rate-Limit-Reset:
               $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Reset"
           content:
-            application/json:
+             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/AanwezigeDeelnemer"
+                $ref: "#/components/schemas/PaginatedAanwezigeDeelnemerList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -344,9 +342,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/Agendapunt"
+                  $ref: "#/components/schemas/PaginatedAgendapuntList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -587,9 +583,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/Besluit"
+                  $ref: "#/components/schemas/PaginatedBesluitList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -860,9 +854,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/DagelijksBestuurLidmaatschap"
+                  $ref: "#/components/schemas/PaginatedDagelijksBestuurLidmaatschapList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -1111,9 +1103,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/DagelijksBestuur"
+                  $ref: "#/components/schemas/PaginatedDagelijksBestuurList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -1354,9 +1344,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/FractieLidmaatschap"
+                  $ref: "#/components/schemas/PaginatedFractieLidmaatschapList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -1584,9 +1572,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/Fractie"
+                  $ref: "#/components/schemas/PaginatedFractieList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -1915,9 +1901,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/InformatieObject"
+                  $ref: "#/components/schemas/PaginatedInformatieObjectList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -2173,9 +2157,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/Mediabron"
+                  $ref: "#/components/schemas/PaginatedMediabronList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -2414,9 +2396,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/NatuurlijkPersoon"
+                  $ref: "#/components/schemas/PaginatedNatuurlijkPersoonList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -2705,9 +2685,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/Spreekfragment"
+                  $ref: "#/components/schemas/PaginatedSpreekfragmentList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -3054,9 +3032,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/Stemming"
+                  $ref: "#/components/schemas/PaginatedStemmingList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -3287,9 +3263,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/StemresultaatPerFractie"
+                  $ref: "#/components/schemas/PaginatedStemresultaatPerFractieList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -3561,9 +3535,7 @@ paths:
           content:
             application/json:
               schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/Vergadering"
+                $ref: "#/components/schemas/PaginatedVergaderingList"
         400:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
         401:
@@ -5306,3 +5278,197 @@ components:
       - "technische_vraag"
       - "mondelinge_politieke_vraag"
       - "schriftelijke_politieke_vraag"
+    PaginatedBasis:
+      type: object
+      properties:
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+    PaginatedAanwezigeDeelnemerList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/AanwezigeDeelnemer'
+    PaginatedAgendapuntList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Agendapunt'
+    PaginatedBesluitList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Besluit'
+    PaginatedDagelijksBestuurLidmaatschapList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/DagelijksBestuurLidmaatschap'
+    PaginatedDagelijksBestuurList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/DagelijksBestuur'
+    PaginatedFractieLidmaatschapList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/FractieLidmaatschap'
+    PaginatedFractieList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Fractie'
+    PaginatedInformatieObjectList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/InformatieObject'
+    PaginatedMediabronList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Mediabron'
+    PaginatedNatuurlijkPersoonList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/NatuurlijkPersoon'
+    PaginatedSpreekfragmentList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Spreekfragment'
+    PaginatedStemList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Stem'
+    PaginatedStemmingList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Stemming'
+    PaginatedStemresultaatPerFractieList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/StemresultaatPerFractie'
+    PaginatedVergaderingList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Vergadering'
+    
