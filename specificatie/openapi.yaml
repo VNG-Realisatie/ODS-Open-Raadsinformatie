@@ -41,7 +41,7 @@ paths:
       - in: "query"
         name: "rolnaam"
         description: "De rol waarin de persoon aanwezig is bij de vergadering"
-        required: true
+        required: false
         schema:
           $ref: "#/components/schemas/RolNaam"
       - in: "query"
@@ -893,6 +893,18 @@ paths:
       description: "Het bericht dat de JSON/REST API voor het ophalen van lidmaatschappen\
         \ van het dagelijks bestuur retourneert."
       parameters:
+      - in: query
+        name: natuurlijkPersoon
+        required: false
+        schema:
+          type: "string"
+          format: uri
+      - in: query
+        name: dagelijksBestuur
+        required: false
+        schema:
+          type: "string"
+          format: uri
       - in: "query"
         name: "datumBeginDagelijksBestuurLidmaatschap"
         description: "De datum en tijdstip waarop het lidmaatschap van het dagelijkse\
@@ -909,7 +921,6 @@ paths:
         schema:
           type: "string"
           format: "date-time"
-      - $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/parameters/fields"
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -954,7 +965,7 @@ paths:
       - "Dagelijksbestuurlidmaatschappen"
     post:
       operationId: "putdagelijksbetuurlidmaatschappen"
-      description: "Het vastleggen van een BESLUIT"
+      description: "Het vastleggen van een dagelijks bestuur lidmaatschap."
       requestBody:
         content:
           application/json:
@@ -1105,7 +1116,7 @@ paths:
       - "Dagelijksbestuurlidmaatschappen"
     put:
       operationId: "putdagelijksbestuurlidmaatschappenDagelijksbestuurlidmaatschapidentificatie"
-      description: "Het wijzigen van een DAGELIJKS BESTUUR"
+      description: "Het wijzigen van een dagelijks bestuur lidmaatschap."
       parameters:
         - in: path
           name: uuid
@@ -1169,12 +1180,30 @@ paths:
         \ dagelijkse besturen retourneert."
       parameters:
       - in: "query"
-        name: "dagelijksBestuurNaam"
-        description: "De naam van het dagelijkse bestuur verschilt per bestuurslaag"
-        required: true
+        name: "gemeentecode"
+        required: false
+        schema:
+          type: "string"
+      - in: "query"
+        name: "provincie"
+        required: false
+        schema:
+          $ref: "#/components/schemas/Provincie"
+      - in: "query"
+        name: "waterschap"
+        required: false
+        schema:
+          $ref: "#/components/schemas/Waterschap"
+      - in: "query"
+        name: "dagelijksBestuurnaam"
+        required: false
+        schema:
+          type: string
+      - in: "query"
+        name: "dagelijksBestuurtype"
+        required: false
         schema:
           $ref: "#/components/schemas/NaamDagelijksBestuursType"
-      - $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/parameters/fields"
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -1219,7 +1248,7 @@ paths:
       - "Dagelijkse Besturen"
     post:
       operationId: "postdagelijksebesturenDagelijksbestuuridentificatie"
-      description: "Het vastleggen van een BESLUIT"
+      description: "Het vastleggen van een dagelijks bestuur."
       requestBody:
         content:
           application/json:
@@ -4125,9 +4154,10 @@ components:
       type: "object"
       description: "De NATUURLIJKe PERSOON die deelneemt aan een VERGADERING"
       required:
-      - "url"
-      - "uuid"
-      - "vergaderingen"
+      - url
+      - uuid
+      - natuurlijkPersoon
+      - vergadering
       properties:
         url:
           type: string
@@ -4145,20 +4175,12 @@ components:
           readOnly: true
           description: Unieke resource identifier (UUID4)
           title: uuid
-        aanwezigdeDeelnemerIdentificatie:
+        natuurlijkPersoon:
           type: "string"
-          title: "aanwezigdeDeelnemerIdentificatie"
-          description: ""
-          maxLength: 10
-        nummerNatuurlijkPersoon:
-          type: "string"
-          title: "Nummer natuurlijk persoon"
-          description: "Het identificerende nummer van een NATUURLIJK PERSOON niet\
-            \ zijnde het burgerservicenummer. Het is een viercijferige gemeentecode gevolgd door een volgnummer\
-            \ van 13 cijfers met voorloopnullen. Het kan  voorkomen dat dezelfde\
-            \ natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder\
-            \ een ander nummer."
-          maxLength: 17
+          format: uri
+          title: "Natuurlijk persoon"
+          description: URL-referentie naar de natuurlijke persoon zijnde de
+            de aanwezige deelnemer.
           minLength: 1
         aanvangAanwezigheid:
           type: "string"
@@ -4185,23 +4207,21 @@ components:
           maxLength: 100
         stemmen:
           type: "array"
-          title: "neemt deel aan"
-          description: "aanwezige raadsleden en statenleden mogen deelnemen aan een\
-            \ STEMMING\n\nHet gaat hierbij om een uitgebrachte stem van een STEMMING\
-            \ die niet over een persoon gaat. Die worden namelijk niet vastgelegd\
-            \ per uitgebrachte STEM."
+          title: "Stemmen"
+          description: URL-referenties naar de stemmen die de 
+            aanwezige deelnemer heeft uitgebracht.
           items:
             type: "string"
             format: "uri"
+            minLength: 1
           readOnly: true
           uniqueItems: true
-          example: "datapunt.voorbeeldgemeente.nl/api/v1/stemmen/123456789"
         vergadering:
           title: "Vergadering"
-          description: "De vergadering waaraan de deelnemer deelneemt."
+          description: "URL-referentie naar de vergadering waar de deelnemer aanwezig is."
           type: "string"
           format: "uri"
-          example: "datapunt.voorbeeldgemeente.nl/api/v1/vergaderingen/123456789"
+          minLength: 1
     Agendapunt:
       type: "object"
       description: "Een onderdeel van de agenda dat als één geheel wordt behandeld.\
@@ -4386,8 +4406,7 @@ components:
       required:
       - "url"
       - "uuid"
-      - "besluitidentificatie"
-      - "toezegging"
+      - besluitresultaat
       properties:
         url:
           type: string
@@ -4433,14 +4452,14 @@ components:
           minLength: 1
         stemmingen:
           type: "array"
-          title: "genomenNav"
+          title: "Stemmingen"
           description: ""
           items:
             type: "string"
             format: "uri"
+            minLength: 1
           readOnly: true
           uniqueItems: true
-          example: "datapunt.voorbeeldgemeente.nl/api/v1/stemmingen/123456789"
     DagelijksBestuur:
       type: "object"
       description: "Het dagelijkse bestuur van de gemeente (college) of provincie\
@@ -4467,21 +4486,27 @@ components:
           readOnly: true
           description: Unieke resource identifier (UUID4)
           title: uuid
-        dagelijksBestuurIdentificatie:
+        dagelijksBestuurnaam:
           type: "string"
-          title: "dagelijksBestuurIdentificatie"
-          description: ""
-          maxLength: 10
-          minLength: 1
-        dagelijksBestuurNaam:
+          title: "Dagelijks bestuurnaam"
+          description: "Naam van het dagelijks bestuur."
+        dagelijksBestuurtype:
           $ref: "#/components/schemas/NaamDagelijksBestuursType"
+        gemeente:
+          allOf:
+          - $ref: "#/components/schemas/Gemeente"
+          - title: "gemeente"
+            description: ""
+        provincie:
+          $ref: "#/components/schemas/Provincie"
+        waterschap:
+          $ref: "#/components/schemas/Waterschap"
     DagelijksBestuurLidmaatschap:
       type: "object"
       description: "De lidmaatschap van het dagelijkse bestuur"
       required:
       - "url"
       - "uuid"
-      - "dagelijksbestuurlidmaatschapidentificatie"
       properties:
         url:
           type: string
@@ -4499,42 +4524,31 @@ components:
           readOnly: true
           description: Unieke resource identifier (UUID4)
           title: uuid
-        dagelijksBestuurIdentificatie:
-          type: "array"
-          title: "dagelijksBestuurIdentificatie"
-          description: ""
-          minItems: 0
-          items:
-            type: "string"
-            maxLength: 10
-        dagelijksbestuurlidmaatschapidentificatie:
+        dagelijksBestuur:
           type: "string"
-          title: "dagelijksbestuurlidmaatschapidentificatie"
-          description: ""
-          maxLength: 10
+          title: "dagelijksBestuur"
+          description: "URL-referentie naar het dagelijks bestuur."
+          format: uri
           minLength: 1
-        datumBeginCollegeLidmaatschap:
+        natuurlijkPersoon:
+          type: string
+          title: Natuurlijk persoon
+          description: URL-referentie naar de natuurlijk persoon die lid is van het
+            dagelijks bestuur.
+          format: uri
+          minLength: 1
+        datumBeginDagelijksBestuurLidmaatschap:
           type: "string"
           title: "Datum begin dagelijkse bestuur lidmaatschap"
           description: "De datum en tijdstip waarop het lidmaatschap van het dagelijkse\
             \ bestuur begon"
           format: "date-time"
-        datumEindeCollegeLidmaatschap:
+        datumeindeDagelijksBestuurLidmaatschap:
           type: "string"
           title: "Datum einde dagelijkse bestuur lidmaatschap"
           description: "De datum en tijdstip waarop het lidmaatschap van het dagelijkse\
             \ bestuur geëindigd is."
           format: "date-time"
-        nummerNatuurlijkPersoon:
-          type: "string"
-          title: "Nummer natuurlijk persoon"
-          description: "Het identificerende nummer van een NATUURLIJK PERSOON niet\
-            \ zijnde het burgerservicenummer\n\nHet kan dus voorkomen dat dezelfde\
-            \ natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder\
-            \ een ander nummer.\n\nviercijferige gemeentecode gevolgd door een volgnummer\
-            \ van 13 cijfers met voorloopnullen"
-          maxLength: 17
-          minLength: 1
     Fractie:
       type: "object"
       description: "Deel van een gekozen volksvertegenwoordiging."
