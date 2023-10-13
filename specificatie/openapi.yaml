@@ -5260,7 +5260,6 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-          maxLength: 1000
         uuid:
           type: string
           format: uuid
@@ -5393,10 +5392,7 @@ components:
             \ is geëindigd\n\nMoet voor komen als Starttijd voorkomt"
           format: "date-time"
         gemeente:
-          allOf:
-          - $ref: "#/components/schemas/Gemeente"
-          - title: "gemeente"
-            description: ""
+          $ref: "#/components/schemas/Gemeente"
         provincie:
           $ref: "#/components/schemas/Provincie"
         waterschap:
@@ -5424,17 +5420,19 @@ components:
           title: "Indicatie hamerstuk"
           description: ""
           example: "true"
+          nullable: true
         indicatorBehandeld:
           type: "boolean"
           title: "Indicator behandeld"
           description: "Indicator geeft aan of het AGENDAPUNT is behandeld tijdens\
-            \ de VERGADERING.\n\nIs eventueel af te leiden als Starttijd en/of Eindtijd\
-            \ zijn ingevuld\n\ndefaultwaarde = nee"
+            \ de VERGADERING. Is eventueel af te leiden als Starttijd en/of Eindtijd
+            \ zijn ingevuld."
+          nullable: true
         indicatorBesloten:
           type: "boolean"
           title: "Indicator besloten"
-          description: "Indicator of een AGENDAPUNT besloten wordt behandeld\n\ndefaultwaarde\
-            \ = nee"
+          description: Indicator of een AGENDAPUNT besloten wordt behandeld. 
+          nullable: true
         informatieobjecten:
           type: array
           items:
@@ -5481,15 +5479,10 @@ components:
           uniqueItems: true
         vergadering:
           title: "Vergadering"
-          description: "De vergadering waar dit agendapunt behandled wordt."
+          description: "De vergadering waar dit agendapunt behandeld wordt."
           type: "string"
           format: "uri"
           minLength: 1
-        # behandelendAmbtenaar:
-        #   title: "Behandelend ambtenaar"
-        #   description: "De ambtenaar die het agendapunt behandeld."
-        #   type: string
-        #   format: uri
     Besluit:
       type: "object"
       description: "Een na beraadslaging vastgestelde beslissing\n\nEen na overweging\
@@ -5509,7 +5502,6 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-          maxLength: 1000
         uuid:
           type: string
           format: uuid
@@ -5520,32 +5512,30 @@ components:
           type: "string"
           title: "Besluitidentificatie"
           description: "Het resultaat van een BESLUIT. Dit kan n.a.v. een gehouden\
-            \ STEMMING zijn.\n\nIdentificatie van het besluit binnen de organisatie\
-            \ die het besluit heeft vastgesteld. \n\nAlle alfanumerieke tekens m.u.v.\
+            \ STEMMING zijn. Identificatie van het besluit binnen de organisatie\
+            \ die het besluit heeft vastgesteld. Alle alfanumerieke tekens m.u.v.\
             \ diacrieten"
           maxLength: 50
           minLength: 1
         besluitresultaat:
           type: "string"
           title: "Besluitresultaat"
-          description: "Het resultaat van het BESLUIT\n\nalle alfanumerieke tekens"
+          description: "Het resultaat van het BESLUIT. Alle alfanumerieke tekens"
           maxLength: 200
         besluittoelichting:
           type: "string"
-          title: "Besluitresultaat"
-          description: "Het resultaat van het BESLUIT\n\nToelichting bij het besluit.\
-            \ \n\nalle alfanumerieke tekens"
+          title: "Besluittoelichting"
+          description: Toelichting bij het besluit.
           maxLength: 200
         toezegging:
           type: "string"
           title: "Toezegging"
           description: "Bij een BESLUIT kan een additionele toezegging gedaan worden."
           maxLength: 500
-          minLength: 1
         stemmingen:
           type: "array"
           title: "Stemmingen"
-          description: ""
+          description: "URL-referenties naar de stemmingen die tot besluit hebben geleid."
           items:
             type: "string"
             format: "uri"
@@ -5559,7 +5549,6 @@ components:
       required:
       - "url"
       - "uuid"
-      - "dagelijksBestuurIdentificatie"
       - "dagelijksBestuurNaam"
       properties:
         url:
@@ -5571,7 +5560,6 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-          maxLength: 1000
         uuid:
           type: string
           format: uuid
@@ -5585,10 +5573,7 @@ components:
         dagelijksBestuurtype:
           $ref: "#/components/schemas/NaamDagelijksBestuursType"
         gemeente:
-          allOf:
-          - $ref: "#/components/schemas/Gemeente"
-          - title: "gemeente"
-            description: ""
+          $ref: "#/components/schemas/Gemeente"
         provincie:
           $ref: "#/components/schemas/Provincie"
         waterschap:
@@ -5599,6 +5584,8 @@ components:
       required:
       - "url"
       - "uuid"
+      - natuurlijkPersoon
+      - dagelijksBestuur
       properties:
         url:
           type: string
@@ -5609,7 +5596,6 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-          maxLength: 1000
         uuid:
           type: string
           format: uuid
@@ -5648,7 +5634,6 @@ components:
       - "url"
       - "uuid"
       - "fractienaam"
-      - "fractienummer"
       properties:
         url:
           type: string
@@ -5659,7 +5644,6 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-          maxLength: 1000
         uuid:
           type: string
           format: uuid
@@ -5681,10 +5665,7 @@ components:
           maxLength: 10
           minLength: 1
         gemeente:
-          allOf:
-          - $ref: "#/components/schemas/Gemeente"
-          - title: "gemeente"
-            description: ""
+          $ref: "#/components/schemas/Gemeente"
         provincie:
           $ref: "#/components/schemas/Provincie"
         waterschap:
@@ -5696,7 +5677,7 @@ components:
       - "url"
       - "uuid"
       - "indicatieVoorzitter"
-      - "fractielid"
+      - "natuurlijkPersoon"
       - "fractie"
       properties:
         url:
@@ -5708,7 +5689,6 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-          maxLength: 1000
         uuid:
           type: string
           format: uuid
@@ -5721,7 +5701,7 @@ components:
           title: Fractie
           description: URL-referentie naar de fractie.
           minLength: 1
-        fractielid:
+        natuurlijkPersoon:
           type: string
           format: uri
           title: Fractielid
@@ -5817,10 +5797,7 @@ components:
           description: "De datum waarop het BESLUITVORMINGSSTUK is ingediend"
           format: "date"
         gemeente:
-          allOf:
-          - $ref: "#/components/schemas/Gemeente"
-          - title: "gemeente"
-            description: ""
+          $ref: "#/components/schemas/Gemeente"
         provincie:
           $ref: "#/components/schemas/Provincie"
         waterschap:
@@ -5953,14 +5930,12 @@ components:
             - hoofd_amendement
             - voorstel
             - vraag
-
     Mediabron:
       type: "object"
       description: ""
       required:
       - "url"
       - "uuid"
-      - "mediabronIdentificatie"
       - "type"
       properties:
         url:
@@ -5989,12 +5964,12 @@ components:
           type: "string"
           title: "Locatie Webvttbestand"
           description: "De locatie waar het Webvttbestand is opgeslagen"
-        mediabronIdentificatie:
-          type: "string"
-          title: "mediabronIdentificatie"
-          description: ""
-          maxLength: 10
-          minLength: 1
+        # mediabronIdentificatie:
+        #   type: "string"
+        #   title: "mediabronIdentificatie"
+        #   description: ""
+        #   maxLength: 10
+        #   minLength: 1
         mimetype:
           type: "string"
           title: "Mimetype"
@@ -6008,7 +5983,6 @@ components:
       - "url"
       - "uuid"
       - "naamNatuurlijkPersoon"
-      - "nummerNatuurlijkPersoon"
       properties:
         url:
           type: string
@@ -6019,7 +5993,6 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-          maxLength: 1000
         uuid:
           type: string
           format: uuid
@@ -6063,7 +6036,7 @@ components:
       required:
         - url
         - uuid
-        - spreker
+        - aanwezigeDeelnemer
         - agendapunt
       properties:
         url:
@@ -6075,14 +6048,13 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-          maxLength: 1000
         uuid:
           type: string
           format: uuid
           readOnly: true
           description: Unieke resource identifier (UUID4)
           title: uuid
-        spreker:
+        aanwezigeDeelnemer:
           type: string
           format: uri
           title: Spreker
@@ -6173,7 +6145,6 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-          maxLength: 1000
         uuid:
           type: string
           format: uuid
@@ -6202,9 +6173,8 @@ components:
         \nAlleen aanwezige raadsleden (gemeente) of statenleden (provincie) kunnen\
         \ een stem uitbrengen."
       required:
-      - "url"
-      - "uuid"
-      - "stemmingsidentificatie"
+      - url
+      - uuid
       - agendapunt
       properties:
         url:
@@ -6216,7 +6186,6 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-          maxLength: 1000
         uuid:
           type: string
           format: uuid
@@ -6320,8 +6289,9 @@ components:
       description: "Een VERGADERING is een bijeenkomst van meerdere mensen die met\
         \ elkaar spreken en/of afspraken maken over onderwerpen die op de agenda staan."
       required:
-      - "url"
-      - "uuid"
+      - url
+      - uuid
+      - vergaderingstype
       properties:
         url:
           type: string
@@ -6379,10 +6349,7 @@ components:
           format: "date-time"
           example: "2017-02-10T21:12:00:000Z"
         gemeente:
-          allOf:
-          - $ref: "#/components/schemas/Gemeente"
-          - title: "gemeente"
-            description: ""
+          $ref: "#/components/schemas/Gemeente"
         provincie:
           $ref: "#/components/schemas/Provincie"
         waterschap:
@@ -7111,7 +7078,6 @@ components:
           type: string
           title: Toelichting
           description: Toelichting bij de organisatorische eenheid.
-          maxLength: 1000
     Indiener:
       type: object
       title: Indiener
@@ -7135,7 +7101,6 @@ components:
           description: URL-referentie naar het informatieobject dat wordt ingediend.
           format: uri
           minLength: 1
-          nullable: true
         natuurlijkPersoon:
           type: string
           title: Natuurlijk persoon
