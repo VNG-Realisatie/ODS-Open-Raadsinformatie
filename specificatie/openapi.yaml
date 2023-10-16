@@ -1027,7 +1027,7 @@ paths:
       tags:
       - "Dagelijksbestuurlidmaatschappen"
     post:
-      operationId: "putdagelijksbetuurlidmaatschappen"
+      operationId: "postdagelijksbetuurlidmaatschap"
       description: "Het vastleggen van een dagelijks bestuur lidmaatschap."
       requestBody:
         content:
@@ -1200,7 +1200,7 @@ paths:
       tags:
       - "Dagelijksbestuurlidmaatschappen"
     put:
-      operationId: "putdagelijksbestuurlidmaatschappenDagelijksbestuurlidmaatschapidentificatie"
+      operationId: "putdagelijksbestuurlidmaatschap"
       description: "Het wijzigen van een dagelijks bestuur lidmaatschap."
       parameters:
         - in: path
@@ -5549,7 +5549,7 @@ components:
       required:
       - "url"
       - "uuid"
-      - "dagelijksBestuurNaam"
+      - dagelijksBestuursnaam
       properties:
         url:
           type: string
@@ -5566,11 +5566,11 @@ components:
           readOnly: true
           description: Unieke resource identifier (UUID4)
           title: uuid
-        dagelijksBestuurnaam:
+        dagelijksBestuursnaam:
           type: "string"
           title: "Dagelijks bestuurnaam"
           description: "Naam van het dagelijks bestuur."
-        dagelijksBestuurtype:
+        dagelijksBestuurstype:
           $ref: "#/components/schemas/NaamDagelijksBestuursType"
         gemeente:
           $ref: "#/components/schemas/Gemeente"
@@ -5813,7 +5813,7 @@ components:
         link:
           type: "string"
           title: "Link"
-          description: "Zie RGBZ."
+          description: De URL waarmee de inhoud van het informatieobject op te vragen is.
           format: "uri"
         omschrijving:
           type: "string"
@@ -5831,7 +5831,7 @@ components:
           maxLength: 200
         typeMotie:
           $ref: "#/components/schemas/MotieType"
-        typeVraag:
+        vraagtype:
           $ref: "#/components/schemas/VraagType"
         vergaderingen:
           type: array
@@ -5974,7 +5974,7 @@ components:
           type: "string"
           title: "Mimetype"
           description: "Het type bestand dat is opgeslagen."
-        type:
+        mediabrontype:
           $ref: "#/components/schemas/MediabronType"
     NatuurlijkPersoon:
       type: "object"
@@ -6693,7 +6693,7 @@ components:
       type: "string"
       description: "<body><ul><li>`drenthe` - Drenthe </li><li>`groningen` - Groningen\
         \ </li><li>`overijsel` - Overijsel </li><li>`flevoland` - Flevoland </li><li>`friesland`\
-        \ - Friesland </li><li>`friesland` - Gelderland </li><li>`utrecht` - Utrecht\
+        \ - Friesland </li><li>`gelderland` - Gelderland </li><li>`utrecht` - Utrecht\
         \ </li><li>`noord_holland` - Noord-Holland </li><li>`zuid_holland` - Zuid-Holland\
         \ </li><li>`zeeland` - Zeeland </li><li>`noord_brabant` - Noord-Brabant </li><li>`limburg`\
         \ - Limburg </li></ul></body>"
@@ -6703,7 +6703,7 @@ components:
       - "overijsel"
       - "flevoland"
       - "friesland"
-      - "friesland"
+      - "gelderland"
       - "utrecht"
       - "noord_holland"
       - "zuid_holland"
