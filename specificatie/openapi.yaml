@@ -142,19 +142,17 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Aanwezige deelnemers"
-  /aanwezigedeelnemers/{uuid}:
+  /aanwezigedeelnemers/{id}:
     delete:
       operationId: "deleteaanwezigedeelnemersAanwezigedeelnemeridentificatie"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van gegevens\
         \ van een agendapunt ."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
           required: true
       responses:
         200:
@@ -196,12 +194,10 @@ paths:
         \ van een aanwezige deelnemer.."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier
           required: true
         - in: header
           name: If-None-Match
@@ -271,12 +267,11 @@ paths:
         \ deelnemers retourneert."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            maxLength: 40
+            description: Unieke resource identifier.
           required: true
       requestBody:
         content:
@@ -470,19 +465,17 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Agendapunten"
-  /agendapunten/{uuid}:
+  /agendapunten/{id}:
     delete:
       operationId: "delagendapunt"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van gegevens\
         \ van een agendapunt ."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
           required: true
       responses:
         200:
@@ -524,12 +517,10 @@ paths:
         \ een agendapunt retourneert."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
           required: true
         - in: header
           name: If-None-Match
@@ -598,12 +589,10 @@ paths:
       description: "Het wijzigen van een AGENDAPUNT"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
           required: true
       requestBody:
         content:
@@ -768,19 +757,17 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Besluiten"
-  /besluiten/{uuid}:
+  /besluiten/{id}:
     delete:
       operationId: "deletebesluitenBesluitidentificatie"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van gegevens\
         \ van een besluit."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
           required: true
       responses:
         200:
@@ -822,12 +809,10 @@ paths:
         \ gegevens retourneert."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
           required: true
         - in: header
           name: If-None-Match
@@ -896,12 +881,10 @@ paths:
       description: "Het wijzigen van een BESLUIT"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
           required: true
       requestBody:
         content:
@@ -1076,19 +1059,17 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Dagelijksbestuurlidmaatschappen"
-  /dagelijksbestuurlidmaatschappen/{uuid}:
+  /dagelijksbestuurlidmaatschappen/{id}:
     delete:
       operationId: "deletedagelijksbestuurlidmaatschappenDagelijksbestuurlidmaatschapidentificatie"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van lidmaatschappen\
         \ van het dagelijks bestuur."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
           required: true
       responses:
         200:
@@ -1130,12 +1111,10 @@ paths:
         \ van het dagelijks bestuur retourneert."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
           required: true
         - in: header
           name: If-None-Match
@@ -1204,12 +1183,11 @@ paths:
       description: "Het wijzigen van een dagelijks bestuur lidmaatschap."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -1381,19 +1359,18 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Dagelijkse Besturen"
-  /dagelijksebesturen/{uuid}:
+  /dagelijksebesturen/{id}:
     delete:
       operationId: "deletedagelijksebesturenDagelijksbestuuridentificatie"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van gegevens\
         \ van een dagelijksbestuur"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -1435,12 +1412,11 @@ paths:
         \ bestuur gegevens retourneert."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -1509,12 +1485,11 @@ paths:
       description: "Het wijzigen van een DAGELIJKS BESTUUR"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -1677,19 +1652,18 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Fractielidmaatschappen"
-  /fractielidmaatschappen/{uuid}:
+  /fractielidmaatschappen/{id}:
     delete:
       operationId: "deletefractielidmaatschappenFractielidmaatschapidentificatie"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van gegevens\
         \ van een fractielidmaatschap."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -1730,12 +1704,11 @@ paths:
       description: "Ophalen van een specifieke fractielidmaatschap."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -1804,12 +1777,11 @@ paths:
       description: "Wijzigen van een fractielidmaatschap."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -1977,19 +1949,18 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Fracties"
-  /fracties/{uuid}:
+  /fracties/{id}:
     delete:
       operationId: "deletefractiesFractienummer"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van gegevens\
         \ van een fractie ."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -2031,12 +2002,11 @@ paths:
         \ van een fractie."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -2105,12 +2075,11 @@ paths:
       description: "Het bericht voor het wijzigen van een fractie."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -2280,18 +2249,17 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Indieners"
-  /indieners/{uuid}:
+  /indieners/{id}:
     delete:
       operationId: "deleteindiener"
       description: Verwijderen indiener van een informatieobject.
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -2332,12 +2300,11 @@ paths:
       description: Opvragen van een specifieke indiener van een informatieobject.
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -2406,12 +2373,11 @@ paths:
       description: Wijzigen van een indiener van een informatieobject.
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -2651,19 +2617,18 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Informatieobjecten"
-  /informatieobjecten/{uuid}:
+  /informatieobjecten/{id}:
     delete:
       operationId: "delinformatieobject"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van gegevens\
         \ van een informatieobject."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -2705,12 +2670,11 @@ paths:
         \ een informatieobject retourneert."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -2779,12 +2743,11 @@ paths:
       description: "Het wijzigen van een Informatieobject"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -2954,18 +2917,17 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Mediabronnen"
-  /mediabronnen/{uuid}:
+  /mediabronnen/{id}:
     delete:
       operationId: "deletemediabronnenMediabronidentificatie"
       description: "Het bericht voor het verwijderen van gegevens van een mediabron"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -3006,12 +2968,11 @@ paths:
       description: "Het bericht voor het ophalen van mediabron gegevens."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -3080,12 +3041,11 @@ paths:
       description: "Het wijzigen van een mediabron"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -3261,18 +3221,17 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Natuurlijke personen"
-  /natuurlijkpersonen/{uuid}:
+  /natuurlijkpersonen/{id}:
     delete:
       operationId: "deletenatuurlijkpersonenNummernatuurlijkpersoon"
       description: "Verwijderen van een natuurlijk persoon."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -3314,12 +3273,11 @@ paths:
         \ van een natuurlijk persoon."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -3388,12 +3346,11 @@ paths:
       description: Wijzigen van een natuurlijk persoon.
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -3543,18 +3500,17 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Organisatorische eenheden"
-  /organisatorische_eenheden/{uuid}:
+  /organisatorische_eenheden/{id}:
     delete:
       operationId: "delete_organisatorische_eenheid"
       description: Verwijderen van een organisatorische eenheid.
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -3595,12 +3551,11 @@ paths:
       description: "Ophalen van organisatorische eenheden."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -3669,12 +3624,11 @@ paths:
       description: Wijzigen van een oragnisatorische eenheid.
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -3870,19 +3824,18 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Spreekfragmenten"
-  /spreekfragmenten/{uuid}:
+  /spreekfragmenten/{id}:
     delete:
       operationId: "deletespreekfragmentenSpreekfragmentidentificatie"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van gegevens\
         \ van een spreekfragment."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -3924,12 +3877,11 @@ paths:
         \ retourneert."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -3998,12 +3950,11 @@ paths:
       description: "Het wijzigen van een spreekfragment"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -4149,19 +4100,18 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Stemmen"
-  /stemmen/{uuid}:
+  /stemmen/{id}:
     get:
       operationId: "getstem"
       description: "Het bericht dat de JSON/REST API voor het ophalen gegevens van\
         \ een stem retourneert."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -4230,12 +4180,11 @@ paths:
       description: "Het wijzigen van een stem"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -4289,12 +4238,11 @@ paths:
       description: Verwijderen van een stem.
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -4435,19 +4383,18 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Stemmingen"
-  /stemmingen/{uuid}:
+  /stemmingen/{id}:
     delete:
       operationId: "deletestemmingenStemmingsidentificatie"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van gegevens\
         \ van een stemming"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -4489,12 +4436,11 @@ paths:
         \ gegevens retourneert."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -4563,12 +4509,11 @@ paths:
       description: "Het wijzigen van een stemming"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -4733,19 +4678,18 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Stemresultaten Per Fractie"
-  /stemresultatenperfractie/{uuid}:
+  /stemresultatenperfractie/{id}:
     delete:
       operationId: "deletestemresultatenperfractieStemresultaatidentificatie"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van gegevens\
         \ van een stemresultaat per fractie."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -4787,12 +4731,11 @@ paths:
         \ van een stemresultaat per fractie."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -4862,12 +4805,11 @@ paths:
         stemresultaat per fractie retourneert."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -5058,19 +5000,18 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
       tags:
       - "Vergaderingen"
-  /vergaderingen/{uuid}:
+  /vergaderingen/{id}:
     delete:
       operationId: "delvergadering"
       description: "Het bericht dat de JSON/REST API voor het verwijderen van gegevens\
         \ van een Vergadering"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       responses:
         200:
@@ -5112,12 +5053,11 @@ paths:
         \ retourneert."
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
         - in: header
           name: If-None-Match
@@ -5186,12 +5126,11 @@ paths:
       description: "Het wijzigen van een vergadering"
       parameters:
         - in: path
-          name: uuid
+          name: id
           schema:
             type: string
-            format: uuid
-            description: Unieke resource identifier (UUID4)
-            title: uuid
+            description: Unieke resource identifier.
+            title: ID
           required: true
       requestBody:
         content:
@@ -5247,7 +5186,7 @@ components:
       description: "De NATUURLIJKe PERSOON die deelneemt aan een VERGADERING"
       required:
       - url
-      - uuid
+      - id
       - natuurlijkPersoon
       - vergadering
       properties:
@@ -5260,12 +5199,11 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         natuurlijkPersoon:
           type: "string"
           format: uri
@@ -5319,7 +5257,7 @@ components:
         \ Een AGENDAPUNT kan weer onderverdeeld zijn naar subAGENDAPUNTen."
       required:
       - "url"
-      - "uuid"
+      - "id"
       - "vergadering"
       properties:
         url:
@@ -5331,12 +5269,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         agendapuntnummer:
           type: "string"
           title: "Agendapuntnummer"
@@ -5490,7 +5428,7 @@ components:
         \ geval."
       required:
       - "url"
-      - "uuid"
+      - "id"
       - besluitresultaat
       properties:
         url:
@@ -5502,12 +5440,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         besluitidentificatie:
           type: "string"
           title: "Besluitidentificatie"
@@ -5548,7 +5486,7 @@ components:
         \ (gedeputeerde staten) bereidt het beleid voor en voert dit beleid uit."
       required:
       - "url"
-      - "uuid"
+      - "id"
       - dagelijksBestuursnaam
       properties:
         url:
@@ -5560,12 +5498,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         dagelijksBestuursnaam:
           type: "string"
           title: "Dagelijks bestuurnaam"
@@ -5583,7 +5521,7 @@ components:
       description: "De lidmaatschap van het dagelijkse bestuur"
       required:
       - "url"
-      - "uuid"
+      - "id"
       - natuurlijkPersoon
       - dagelijksBestuur
       properties:
@@ -5596,12 +5534,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         dagelijksBestuur:
           type: "string"
           title: "dagelijksBestuur"
@@ -5632,7 +5570,7 @@ components:
       description: "Deel van een gekozen volksvertegenwoordiging."
       required:
       - "url"
-      - "uuid"
+      - "id"
       - "fractienaam"
       properties:
         url:
@@ -5644,12 +5582,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         fractienaam:
           type: "string"
           title: "Fractienaam"
@@ -5675,7 +5613,7 @@ components:
       description: ""
       required:
       - "url"
-      - "uuid"
+      - "id"
       - "indicatieVoorzitter"
       - "natuurlijkPersoon"
       - "fractie"
@@ -5689,12 +5627,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         fractie:
           type: string
           format: uri
@@ -5746,7 +5684,7 @@ components:
         \ kan zelfstandig zijn of gekoppeld aan een voorstel dat ter bespreking voorligt."
       required:
       - "url"
-      - "uuid"
+      - "id"
       properties:
         url:
           type: string
@@ -5757,12 +5695,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         informatieObjectIdentificatie:
           type: "string"
           title: "Informatieobjectidentificatie"
@@ -5885,9 +5823,12 @@ components:
           uniqueItems: true
     Zaak:
       properties:
-        identificatie:
+        zaakidentificatie:
           description: Identificatie van de zaak.
           type: string
+        zaakregistratie:
+          description: Identificatie van de registratie waar de zaak is vastgelegd.
+          type: integer
         url: 
           description: URL-referentie naar de zaak.
           type: string
@@ -5896,10 +5837,7 @@ components:
           nullable: true
         omschrijving:
           description: Omschrijving van de zaak.
-          type: string
-        bronorganisatie:
-          description: Identificatie van de organisatie waar de zaak is vastgelegd.
-          type: integer
+          type: string       
     GerelateerdInformatieobject:
       type: object
       title: Gerelateerd informatieobject
@@ -5935,7 +5873,7 @@ components:
       description: ""
       required:
       - "url"
-      - "uuid"
+      - "id"
       - "type"
       properties:
         url:
@@ -5947,12 +5885,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         vergadering:
           type: string
           format: uri
@@ -5981,7 +5919,7 @@ components:
       description: ""
       required:
       - "url"
-      - "uuid"
+      - "id"
       - "naamNatuurlijkPersoon"
       properties:
         url:
@@ -5993,12 +5931,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         functie:
           $ref: "#/components/schemas/Functie"
         geslachtsaanduiding:
@@ -6035,7 +5973,7 @@ components:
       description: "Een AANWEZIGE DEELNEMER spreekt tijdens een AGENDAPUNT"
       required:
         - url
-        - uuid
+        - id
         - aanwezigeDeelnemer
         - agendapunt
       properties:
@@ -6048,12 +5986,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         aanwezigeDeelnemer:
           type: string
           format: uri
@@ -6131,7 +6069,7 @@ components:
         \ (gemeente) of statenlid (provincie) maakt over een bepaald onderwerp."
       required:
       - url
-      - uuid
+      - id
       - aanwezigeDeelnemer
       - stemming
       - keuzeStemming
@@ -6145,12 +6083,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         aanwezigeDeelnemer:
           type: string
           format: uri
@@ -6174,7 +6112,7 @@ components:
         \ een stem uitbrengen."
       required:
       - url
-      - uuid
+      - id
       - agendapunt
       properties:
         url:
@@ -6186,12 +6124,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         stemmingsidentificatie:
           type: "string"
           title: "Stemmingsidentificatie"
@@ -6251,7 +6189,7 @@ components:
         \ de uitgebrachte STEMmen."
       required:
       - url
-      - uuid
+      - id
       - fractie
       - stemming
       properties:
@@ -6264,12 +6202,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4).
-          title: uuid
+          description: Unieke resource identifier..
+          title: ID
         fractie:
           type: "string"
           title: "Fractie"
@@ -6290,7 +6228,7 @@ components:
         \ elkaar spreken en/of afspraken maken over onderwerpen die op de agenda staan."
       required:
       - url
-      - uuid
+      - id
       - vergaderingstype
       properties:
         url:
@@ -6302,12 +6240,12 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        uuid:
+        id:
           type: string
-          format: uuid
+          maxLength: 40
           readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
+          description: Unieke resource identifier.
+          title: ID
         vergaderingsIdentificatie:
           type: "string"
           title: "Vergaderingsidentificatie"
