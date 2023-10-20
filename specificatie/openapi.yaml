@@ -5583,14 +5583,14 @@ components:
           description: "De naam van de fractie."
           maxLength: 100
           minLength: 1
-        fractienummer:
-          type: "string"
-          title: "Fractienummer"
-          description: "Het nummer dat de FRACTIE uniek identificeert binnen de gemeente\n\
-            \nviercijferige gemeentecode gevolgd door een volgnummer van 7 cijfers\
-            \ met voorloopnullen"
-          maxLength: 10
-          minLength: 1
+        # fractienummer:
+        #   type: "string"
+        #   title: "Fractienummer"
+        #   description: "Het nummer dat de FRACTIE uniek identificeert binnen de gemeente\n\
+        #     \nviercijferige gemeentecode gevolgd door een volgnummer van 7 cijfers\
+        #     \ met voorloopnullen"
+        #   maxLength: 10
+        #   minLength: 1
         gemeente:
           $ref: "#/components/schemas/Gemeente"
         provincie:
