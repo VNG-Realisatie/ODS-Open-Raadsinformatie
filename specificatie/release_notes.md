@@ -8,8 +8,8 @@ Het informatiemodel is uitgebreid zodat de waterschappen ook gebruik kunnen make
 
 - Enumeratiesoort "functie" is uitgebreid met de volgende waarden:
   - Dijkgraaf
-  - Dagelijks bestuurlid
-  - Algemeen vestuurslid
+  - Dagelijks bestuurslid
+  - Algemeen bestuurslid
   - Secretarisdirecteur
 
 - Enumeratiesoort "rolNaam" is uitgebreid met de volgende waarden:
@@ -29,7 +29,7 @@ Het informatiemodel is uitgebreid zodat de waterschappen ook gebruik kunnen make
 
 ### Allerhande
 
-- Alle Objecttypen en Relatieklassen zijn voorzien van een generieke idendifier "ID". Bestaande specifieke identifiers zijn verwijderd.
+- Alle Objecttypen en Relatieklassen zijn voorzien van een generieke identifier "ID". Bestaande specifieke identifiers zijn verwijderd.
 - Attribuut 'Griffier' toegevoegd aan Enumeratiesoort "rolNaam"" (issue #88).
 - Attribuut 'Volledige naam' toegevoegd aan Gegevensgroeptype "Naam" (issue #84).
 - Attribuut 'Publicatiedatum' toegevoegd aan Objecttype "Vergadering" (issue #78).
@@ -63,8 +63,8 @@ De volgende relaties uit het informatiemodel zijn toegevoegd aan de OAS:
 
 ## OAS
 
-- De syntax van de berichten gebaseert op Plain JSON in plaats van HAL.
-- Consequente verwijzing en identificatie van resources doormiddel van de attributen "url" en "id".
+- De syntax van de berichten is gebaseerd op Plain JSON in plaats van HAL.
+- Consequente verwijzing en identificatie van resources door middel van de attributen "url" en "id".
 - Dubbele voorkomens beschrijvingen in OAS verwijderd (issue #86).
 - Alle resources voorzien van dezelfde HTTP-operaties (GET, POST, PUT, DELETE).
 - PUT-operaties gedefinieerd op basis van path-parameter "id".
