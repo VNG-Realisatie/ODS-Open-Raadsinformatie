@@ -6,21 +6,9 @@ servers:
 - description: "Referentie-implementatie"
   url: "https://www.voorbeeldgemeente.nl/api/open_raads__en_stateninformatie/v1"
 info:
-  title: "Open Raads- en StatenInformatie"
-  description: "API-specificatie voor Open RaadsInformatie. <br><br>
-          <i>Wat is nieuw?</i>
-          <ul>
-            <li>De OAS bevat nu het volledige informatiemodel, inclusief Fractielidmaatschap, Fractie, Natuurlijk Persoon en Stemresultaat Per Fractie.</li>
-            <li>De syntax van de berichten is gebaseerd op plain JSON in plaats van HAL.</li>
-            <li>Uitbreidingen voor de waterschappen (<a href='https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/89'>issue #89</a>).</li>
-            <li>Functie 'griffier' toegevoegd als rolnaam (issue #88).</li>
-            <li>Extra attribuut om volledige naam in één keer toe te kunnen voegen (issue #84).</li>
-            <li>Dubbele voorkomens beschrijvingen verwijderd (issue #86).</li>
-            <li>Publicatiedatum toegevoegd (issue #78).</li>
-            <li>Kunnen relateren van Besluiten aan Stemmingen (issue #88).</li>
-            <li>Kunnen relateren van Stemmingen aan Agendapunten en/of Informatieobjecten (issue #87).</li>
-            <li>Attribuut 'behandelendAmbtenaar' aan Agendapunten toegevoegd (issue #81).</li>
-          </ul>"
+  title: "Open Raads-, -Staten en Bestuursinformatie"
+  description: "In het kader van de 'Wet open overheid' ontsluit deze API een aantal categorieën overheidsinformatie voor gemeenten, provincies en waterschappen 
+          zoals ingekomen (vergader)stukken, agenda's (voor vergaderingen), verslagen en besluiten."
   version: "2.0.0-beta.2"
   x-imvertor-generator-version: "2.0.0"
   x-yamlCompiler-stylesheets-version: "20230315"
@@ -5183,7 +5171,7 @@ components:
   schemas:
     AanwezigeDeelnemer:
       type: "object"
-      description: "De NATUURLIJKe PERSOON die deelneemt aan een VERGADERING"
+      description: "De NATUURLIJKe PERSOON die deelneemt aan een VERGADERING."
       required:
       - url
       - id
@@ -5201,6 +5189,7 @@ components:
           minLength: 1
         id:
           type: string
+          maxLength: 40
           readOnly: true
           description: Unieke resource identifier.
           title: ID
@@ -5214,12 +5203,12 @@ components:
         aanvangAanwezigheid:
           type: "string"
           title: "Aanvang aanwezigheid"
-          description: "De aanvang van de aanwezigheid"
+          description: "De aanvang van de aanwezigheid."
           format: "date-time"
         eindeAanwezigheid:
           type: "string"
           title: "Einde aanwezigheid"
-          description: "De einde van de aanwezigheid"
+          description: "De einde van de aanwezigheid."
           format: "date-time"
         deelnemerspositie:
           type: "string"
@@ -5275,12 +5264,12 @@ components:
           readOnly: true
           description: Unieke resource identifier.
           title: ID
-        agendapuntnummer:
-          type: "string"
-          title: "Agendapuntnummer"
-          description: "Het nummer van het agendapunt op de agenda."
-          maxLength: 10
-          minLength: 1
+        # agendapuntnummer:
+        #   type: "string"
+        #   title: "Agendapuntnummer"
+        #   description: "Het nummer van het agendapunt op de agenda."
+        #   maxLength: 10
+        #   minLength: 1
         agendapuntKenmerk:
           type: "string"
           title: "Agendapunt kenmerk"
@@ -5446,15 +5435,15 @@ components:
           readOnly: true
           description: Unieke resource identifier.
           title: ID
-        besluitidentificatie:
-          type: "string"
-          title: "Besluitidentificatie"
-          description: "Het resultaat van een BESLUIT. Dit kan n.a.v. een gehouden\
-            \ STEMMING zijn. Identificatie van het besluit binnen de organisatie\
-            \ die het besluit heeft vastgesteld. Alle alfanumerieke tekens m.u.v.\
-            \ diacrieten"
-          maxLength: 50
-          minLength: 1
+        # besluitidentificatie:
+        #   type: "string"
+        #   title: "Besluitidentificatie"
+        #   description: "Het resultaat van een BESLUIT. Dit kan n.a.v. een gehouden\
+        #     \ STEMMING zijn. Identificatie van het besluit binnen de organisatie\
+        #     \ die het besluit heeft vastgesteld. Alle alfanumerieke tekens m.u.v.\
+        #     \ diacrieten"
+        #   maxLength: 50
+        #   minLength: 1
         besluitresultaat:
           type: "string"
           title: "Besluitresultaat"
@@ -5701,13 +5690,13 @@ components:
           readOnly: true
           description: Unieke resource identifier.
           title: ID
-        informatieObjectIdentificatie:
-          type: "string"
-          title: "Informatieobjectidentificatie"
-          description: "informatieobjectidentificatie. Alle alfanumerieke tekens\
-            \ m.u.v. diacrieten"
-          maxLength: 40
-          minLength: 1
+        # informatieObjectIdentificatie:
+        #   type: "string"
+        #   title: "Informatieobjectidentificatie"
+        #   description: "informatieobjectidentificatie. Alle alfanumerieke tekens\
+        #     \ m.u.v. diacrieten"
+        #   maxLength: 40
+        #   minLength: 1
         auteur:
           type: "string"
           title: "Auteur"
@@ -5948,16 +5937,16 @@ components:
           minItems: 0
           items:
             $ref: "#/components/schemas/NevenfunctieNatuurlijkePersoon"
-        nummerNatuurlijkPersoon:
-          type: "string"
-          title: "Nummer natuurlijk persoon"
-          description: "Het identificerende nummer van een NATUURLIJK PERSOON niet\
-            \ zijnde het burgerservicenummer\n\nHet kan dus voorkomen dat dezelfde\
-            \ natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder\
-            \ een ander nummer.\n\nviercijferige gemeentecode gevolgd door een volgnummer\
-            \ van 13 cijfers met voorloopnullen"
-          maxLength: 17
-          minLength: 1
+        # nummerNatuurlijkPersoon:
+        #   type: "string"
+        #   title: "Nummer natuurlijk persoon"
+        #   description: "Het identificerende nummer van een NATUURLIJK PERSOON niet\
+        #     \ zijnde het burgerservicenummer\n\nHet kan dus voorkomen dat dezelfde\
+        #     \ natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder\
+        #     \ een ander nummer.\n\nviercijferige gemeentecode gevolgd door een volgnummer\
+        #     \ van 13 cijfers met voorloopnullen"
+        #   maxLength: 17
+        #   minLength: 1
         informatieobjecten:
           description: URL-referenties naar één of meer informatieobjecten die de natuurlijke persoon
             heeft ondertekend.
@@ -6130,14 +6119,14 @@ components:
           readOnly: true
           description: Unieke resource identifier.
           title: ID
-        stemmingsidentificatie:
-          type: "string"
-          title: "Stemmingsidentificatie"
-          description: "De identificatie van de STEMMING\n\nDe eerste vier karakter\
-            \ zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met\
-            \ voorloopnullen"
-          maxLength: 10
-          minLength: 1
+        # stemmingsidentificatie:
+        #   type: "string"
+        #   title: "Stemmingsidentificatie"
+        #   description: "De identificatie van de STEMMING\n\nDe eerste vier karakter\
+        #     \ zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met\
+        #     \ voorloopnullen"
+        #   maxLength: 10
+        #   minLength: 1
         agendapunt:
           type: string
           format: uri
@@ -6246,15 +6235,15 @@ components:
           readOnly: true
           description: Unieke resource identifier.
           title: ID
-        vergaderingsIdentificatie:
-          type: "string"
-          title: "Vergaderingsidentificatie"
-          description: "De identificatie een VERGADERING\n\nDe eerste vier karakter\
-            \ zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met\
-            \ voorloopnullen."
-          maxLength: 10
-          minLength: 1
-          example: "1234567890"
+        # vergaderingsIdentificatie:
+        #   type: "string"
+        #   title: "Vergaderingsidentificatie"
+        #   description: "De identificatie een VERGADERING\n\nDe eerste vier karakter\
+        #     \ zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met\
+        #     \ voorloopnullen."
+        #   maxLength: 10
+        #   minLength: 1
+        #   example: "1234567890"
         aanvangVergadering:
           type: "string"
           title: "Aanvang vergadering"
@@ -6975,13 +6964,25 @@ components:
         uitvoert binnen een VESTIGING VAN ZAAKBEHANDELENDE ORGANISATIE en die verantwoordelijk is voor de behandeling 
         van zaken.
       required:
+        - url
+        - id
         - naam
       properties:
-        organisatie-eenheid-identificatie:
+        url:
           type: string
-          title: Organisatie-eenheid-identificatie
-          description: Een korte identificatie van de organisatorische eenheid.
-          maxLength: 24
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
         e-mailAdres:
           type: string
           title: E-mail adres
@@ -7021,8 +7022,25 @@ components:
       title: Indiener
       description: De indiener, zijnde een natuurlijk persoon of een organisatorische eenheid, van een informatieobject.
       required:
+        - url
+        - id
         - informatieobject
       properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
         naam:
           type: string
           title: Naam
@@ -7053,37 +7071,4 @@ components:
           format: uri
           minLength: 1
           nullable: true
-    # Betrokkene:
-    #   type: object
-    #   title: Betrokkene
-    #   description: Een individu of een als zodanig benoemde groep van individuen, die als groep kunnen handelen, 
-    #     die een rol speelt bij één of meer ZAAKen.
-    #   properties:
-    #     naam:
-    #       type: string
-    #       title: Naam
-    #       description: De benaming van de BETROKKENE  indien dit een (NIET) NATUURLIJK PERSOON, 
-    #         VESTIGING of specialisatie daarvan is.
-    #       maxLength: 200
-    #     adresBinnenland:
-    #       type: string
-    #       title: Adres binnenland
-    #       description: De aanduiding van het adres van de BETROKKENE indien dit adres in Nederland gelegen is.
-    #       maxLength: 257
-    #     natuurlijkPersoon:
-    #       type: string
-    #       title: Natuurlijk persoon
-    #       description: URL-referentie naar de natuurlijk persoon zijnde de betrokkene.
-    #       format: uri
-    #       minLength: 1
-    #       nullable: true
-    #     organisatorischeEenheid:
-    #       type: string
-    #       title: Organisatorische eenheid
-    #       description: URL-referentie naar de organisatorische eenheid zijnde de betrokkene.
-    #       format: uri
-    #       minLength: 1
-    #       nullable: true
-
-        
-
+    
