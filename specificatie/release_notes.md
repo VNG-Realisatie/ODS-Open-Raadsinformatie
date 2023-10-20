@@ -3,30 +3,32 @@
 ## Aanpassingen informatiemodel
 
 ### Toevoegingen voor de Waterschappen
-Het informatiemodel is uitgebreid zodat de waterschappen ook gebruik kunnen maken van de ORI API (<a href='https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/89'>issue #89</a>).
+
+Het informatiemodel is uitgebreid zodat de waterschappen ook gebruik kunnen maken van de ORI API ([issue #89](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/89)).
 
 - Enumeratiesoort "functie" is uitgebreid met de volgende waarden:
-    * Dijkgraaf
-    * Dagelijks bestuurlid
-    * Algemeen vestuurslid
-    * Secretarisdirecteur
+  - Dijkgraaf
+  - Dagelijks bestuurlid
+  - Algemeen vestuurslid
+  - Secretarisdirecteur
 
 - Enumeratiesoort "rolNaam" is uitgebreid met de volgende waarden:
-    * Dagelijks bestuurslid
-    * Algemeen bestuurslid
+  - Dagelijks bestuurslid
+  - Algemeen bestuurslid
 
 - Enumeratiesoort "vergaderingsType" is uitgebreid met de volgende waarden:
-    * Algemene bestuursvergadering
+  - Algemene bestuursvergadering
 
 - Enumeratiesoort "naamDagelijksBestuursType" is uitgebreid met de volgende waarden:
-    * Dagelijksbestuur
+  - Dagelijksbestuur
 
 - Aan Objecttypen "Vergadering" en "Fractie" zijn de volgende attributen toegevoegd:
-    * Gemeente,
-    * Provincie,
-    * Waterschap.
+  - Gemeente,
+  - Provincie,
+  - Waterschap.
 
 ### Allerhande
+
 - Alle Objecttypen en Relatieklassen zijn voorzien van een generieke idendifier "ID". Bestaande specifieke identifiers zijn verwijderd.
 - Attribuut 'Griffier' toegevoegd aan Enumeratiesoort "rolNaam"" (issue #88).
 - Attribuut 'Volledige naam' toegevoegd aan Gegevensgroeptype "Naam" (issue #84).
@@ -35,6 +37,7 @@ Het informatiemodel is uitgebreid zodat de waterschappen ook gebruik kunnen make
 - Objecttype "Zaak" is gewijzigd in een Gegevensgroeptype.
 
 ## Volledig dekking informatiemodel
+
 De OAS dekt nu het volledige informatiemodel. De volgende klassen uit het informatiemodel zijn toegevoegd aan de OAS:
 
 - Fractielidmaatschap.
@@ -47,7 +50,7 @@ De OAS dekt nu het volledige informatiemodel. De volgende klassen uit het inform
 
 De volgende relaties uit het informatiemodel zijn toegevoegd aan de OAS:
 
-- “is genotuleerd in” tussen Agendapunt en Vergadering. 
+- “is genotuleerd in” tussen Agendapunt en Vergadering.
 - “is vastgelegd middels” tussen Vergadering en Mediabron.
 - “is mede ondertekend door” tussen Natuurlijk Persoon en Besluitvormingsstuk.
 - "is ingediend" tussen Informatieobject en Indiener.
@@ -58,10 +61,10 @@ De volgende relaties uit het informatiemodel zijn toegevoegd aan de OAS:
 - "heeft betrekking op" tussen Stemming en Agendapunt (issue #87).
 - "heeft betrekking op" tussen Stemming en Besluitvormingsstuk (issue #87).
 
-
 ## OAS
+
 - De syntax van de berichten gebaseert op Plain JSON in plaats van HAL.
 - Consequente verwijzing en identificatie van resources doormiddel van de attributen "url" en "id".
 - Dubbele voorkomens beschrijvingen in OAS verwijderd (issue #86).
 - Alle resources voorzien van dezelfde HTTP-operaties (GET, POST, PUT, DELETE).
-- PUT-operaties gedefinieerd op op basis van path-paramenter "id".
+- PUT-operaties gedefinieerd op basis van path-parameter "id".
