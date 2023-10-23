@@ -7,9 +7,9 @@ servers:
   url: "https://www.voorbeeldgemeente.nl/api/open_raads__en_stateninformatie/v1"
 info:
   title: "Open Raads-, -Staten en Bestuursinformatie"
-  description: "In het kader van de 'Wet open overheid' ontsluit deze API een aantal categorieën overheidsinformatie voor gemeenten, provincies en waterschappen 
+  description: "Om te kunnen voldoen aan de 'Wet open overheid' ontsluit deze API een aantal categorieën overheidsinformatie voor gemeenten, provincies en waterschappen 
           zoals ingekomen (vergader)stukken, agenda's (voor vergaderingen), verslagen en besluiten."
-  version: "2.0.0-beta.2"
+  version: "2.0.0-beta.3"
   x-imvertor-generator-version: "2.0.0"
   x-yamlCompiler-stylesheets-version: "20230315"
   contact:
@@ -5738,9 +5738,9 @@ components:
             \ informatieobject in het formaat zoals gespecificeerd met de attribuutsoort\
             \ 'Formaat'."
         link:
-          type: "string"
           title: "Link"
           description: De URL waarmee de inhoud van het informatieobject op te vragen is.
+          type: "string"
           format: "uri"
         omschrijving:
           type: "string"
@@ -5749,12 +5749,12 @@ components:
         taal:
           type: "string"
           title: "Taal"
-          description: "Zie RGBZ. Bij voorkeur ISO 639-2/B."
+          description: "De taal van het informatieobject. Bij voorkeur aaangeduid volgens ISO 639-2/B."
           maxLength: 20
         titel:
           type: "string"
           title: "Titel"
-          description: "Titel. Alle alfanumerieke tekens"
+          description: "De titel van het informatieobject."
           maxLength: 200
         motietype:
           $ref: "#/components/schemas/MotieType"
@@ -5810,6 +5810,19 @@ components:
             format: "uri"
             minLength: 1
           uniqueItems: true
+        vertrouwelijkheidsaanduiding:
+          title: Vertrouwelijkheidsaanduiding
+          description: Aanduiding van de vertrouwelijkheid.
+          type: string
+        portefeuillehouder:
+          title: Portefeuillehouder
+          description: De naam van de portefeuillehouder van het VOORSTEL.
+          type: string
+          maxLength: 100
+        toelichting:
+          title: Toelichting
+          description: De toelichting op het AMENDEMENT.
+          type: string
     Zaak:
       properties:
         zaakidentificatie:
