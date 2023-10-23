@@ -5194,11 +5194,23 @@ components:
           description: Unieke resource identifier.
           title: ID
         natuurlijkPersoon:
+          # allOf:
+          #   - description: Verwijzing naar de natuurlijke persoon zijnde de de aanwezige deelnemer.
+          #   - $ref: "#/components/schemas/VerwijzingNaarResource"
           type: "string"
           format: uri
           title: "Natuurlijk persoon"
           description: URL-referentie naar de natuurlijke persoon zijnde de
             de aanwezige deelnemer.
+          minLength: 1
+        vergadering:
+          # allOf:
+          #   - description: Verwijzing naar de vergadering waar de deelnemer aanwezig is.
+          #   - $ref: "#/components/schemas/VerwijzingNaarResource"
+          title: "Vergadering"
+          description: "URL-referentie naar de vergadering waar de deelnemer aanwezig is."
+          type: "string"
+          format: "uri"
           minLength: 1
         aanvangAanwezigheid:
           type: "string"
@@ -5218,10 +5230,10 @@ components:
             \ audio/video-verslaggeving."
         rolnaam:
           $ref: "#/components/schemas/RolNaam"
-        vertegenwoordigtOrganisatie:
+        organisatie:
           type: "string"
           title: "Vertegenwoordigde organisatie"
-          description: "De naam van de organisatie die iemand vertegenwoordigt."
+          description: "De naam van de organisatie die wordt vertegenwoordigd door de aanwezige deelnemer."
           maxLength: 100
         stemmen:
           type: "array"
@@ -5234,12 +5246,6 @@ components:
             minLength: 1
           readOnly: true
           uniqueItems: true
-        vergadering:
-          title: "Vergadering"
-          description: "URL-referentie naar de vergadering waar de deelnemer aanwezig is."
-          type: "string"
-          format: "uri"
-          minLength: 1
     Agendapunt:
       type: "object"
       description: "Een onderdeel van de agenda dat als één geheel wordt behandeld.\
@@ -5264,12 +5270,25 @@ components:
           readOnly: true
           description: Unieke resource identifier.
           title: ID
-        # agendapuntnummer:
-        #   type: "string"
-        #   title: "Agendapuntnummer"
-        #   description: "Het nummer van het agendapunt op de agenda."
-        #   maxLength: 10
-        #   minLength: 1
+        vergadering:
+          # allOf:
+          #   - description: "Verwijzing naar de vergadering waar dit agendapunt behandeld wordt."
+          #   - $ref: "#/components/schemas/VerwijzingNaarResource"
+          title: "Vergadering"
+          description: "De URL-referentie naar vergadering waar dit agendapunt behandeld wordt."
+          type: "string"
+          format: "uri"
+          minLength: 1
+        hoofdagendapunt:
+          # allOf:
+          #   - description: "Verwijzing naar het hoofdagendapunt waarvan dit het subagendapunt is."
+          #   - $ref: "#/components/schemas/VerwijzingNaarResource"
+          type: string
+          format: uri
+          nullable: true
+          title: Hoofdagendapunt
+          description: URL-referentie naar het hoofdagendapunt waarvan dit het subagendapunt is.
+          minLength: 1
         agendapuntKenmerk:
           type: "string"
           title: "Agendapunt kenmerk"
@@ -5296,13 +5315,6 @@ components:
             \ getoond wordt. Hoe het Agendapunt getoond wordt op de Agenda wordt beschreven\
             \ met attribuut 'Agendapunt kenmerk'."
           maxLength: 3
-        hoofdagendapunt:
-          type: string
-          format: uri
-          nullable: true
-          title: Hoofdagendapunt
-          description: URL-referentie naar het hoofdagendapunt waarvan dit het subagendapunt is.
-          minLength: 1
         subagendapunten:
           type: array
           items:
@@ -5378,15 +5390,15 @@ components:
           description: "De datum en tijdstip waarop de behandeling van de agendapunt\
             \ is gestart"
           format: "date-time"
-        vergaderingsIdentificatie:
-          type: "string"
-          title: "Vergaderingsidentificatie"
-          description: "De identificatie een VERGADERING\n\nDe eerste vier karakter\
-            \ zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met\
-            \ voorloopnullen."
-          maxLength: 10
-          minLength: 1
-          nullable: true
+        # vergaderingsIdentificatie:
+        #   type: "string"
+        #   title: "Vergaderingsidentificatie"
+        #   description: "De identificatie een VERGADERING\n\nDe eerste vier karakter\
+        #     \ zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met\
+        #     \ voorloopnullen."
+        #   maxLength: 10
+        #   minLength: 1
+        #   nullable: true
         stemmingen:
           type: "array"
           title: "hoort bij of kan betrekking hebben op"
@@ -5404,12 +5416,6 @@ components:
             nullable: true
           readOnly: true
           uniqueItems: true
-        vergadering:
-          title: "Vergadering"
-          description: "De vergadering waar dit agendapunt behandeld wordt."
-          type: "string"
-          format: "uri"
-          minLength: 1
     Besluit:
       type: "object"
       description: "Een na beraadslaging vastgestelde beslissing\n\nEen na overweging\
@@ -5435,15 +5441,6 @@ components:
           readOnly: true
           description: Unieke resource identifier.
           title: ID
-        # besluitidentificatie:
-        #   type: "string"
-        #   title: "Besluitidentificatie"
-        #   description: "Het resultaat van een BESLUIT. Dit kan n.a.v. een gehouden\
-        #     \ STEMMING zijn. Identificatie van het besluit binnen de organisatie\
-        #     \ die het besluit heeft vastgesteld. Alle alfanumerieke tekens m.u.v.\
-        #     \ diacrieten"
-        #   maxLength: 50
-        #   minLength: 1
         besluitresultaat:
           type: "string"
           title: "Besluitresultaat"
@@ -5530,12 +5527,18 @@ components:
           description: Unieke resource identifier.
           title: ID
         dagelijksBestuur:
+          # allOf:
+          #   - description: Verwijzing naar het dagelijks bestuur.
+          #   - $ref: "#/components/schemas/VerwijzingNaarResource"
           type: "string"
           title: "dagelijksBestuur"
           description: "URL-referentie naar het dagelijks bestuur."
           format: uri
           minLength: 1
         natuurlijkPersoon:
+          # allOf:
+          #   - description: Verwijzing naar de natuurlijk persoon die lid is van het dagelijks bestuur.
+          #   - $ref: "#/components/schemas/VerwijzingNaarResource"
           type: string
           title: Natuurlijk persoon
           description: URL-referentie naar de natuurlijk persoon die lid is van het
@@ -5583,14 +5586,6 @@ components:
           description: "De naam van de fractie."
           maxLength: 100
           minLength: 1
-        # fractienummer:
-        #   type: "string"
-        #   title: "Fractienummer"
-        #   description: "Het nummer dat de FRACTIE uniek identificeert binnen de gemeente\n\
-        #     \nviercijferige gemeentecode gevolgd door een volgnummer van 7 cijfers\
-        #     \ met voorloopnullen"
-        #   maxLength: 10
-        #   minLength: 1
         gemeente:
           $ref: "#/components/schemas/Gemeente"
         provincie:
@@ -5623,12 +5618,18 @@ components:
           description: Unieke resource identifier.
           title: ID
         fractie:
+          # allOf:
+          #   - description: Verwijzing naar de fractie.
+          #   - $ref: "#/components/schemas/VerwijzingNaarResource"
           type: string
           format: uri
           title: Fractie
           description: URL-referentie naar de fractie.
           minLength: 1
         natuurlijkPersoon:
+          # allOf:
+          #   - description: Verwijzing naar de natuurlijke persoon die lid is van de fractie.
+          #   - $ref: "#/components/schemas/VerwijzingNaarResource"
           type: string
           format: uri
           title: Fractielid
@@ -5690,13 +5691,6 @@ components:
           readOnly: true
           description: Unieke resource identifier.
           title: ID
-        # informatieObjectIdentificatie:
-        #   type: "string"
-        #   title: "Informatieobjectidentificatie"
-        #   description: "informatieobjectidentificatie. Alle alfanumerieke tekens\
-        #     \ m.u.v. diacrieten"
-        #   maxLength: 40
-        #   minLength: 1
         auteur:
           type: "string"
           title: "Auteur"
@@ -5768,8 +5762,13 @@ components:
             minLength: 1
             nullable: true
           description: URL-referenties naar de vergaderingen die dit informatieobject als bijlagen hebben.
-          title: Bijlage van vergaderingen
           uniqueItems: true
+        # vergaderingen:
+        #   type: array
+        #   items:
+        #     $ref: "#/components/schemas/VerwijzingNaarResource"
+        #   description: Verwijzingen naar de vergaderingen die dit informatieobject als bijlagen hebben.
+        #   uniqueItems: true
         versie:
           type: "string"
           title: "Versie"
@@ -5904,18 +5903,17 @@ components:
           type: "string"
           title: "Locatie Webvttbestand"
           description: "De locatie waar het Webvttbestand is opgeslagen"
-        # mediabronIdentificatie:
-        #   type: "string"
-        #   title: "mediabronIdentificatie"
-        #   description: ""
-        #   maxLength: 10
-        #   minLength: 1
         mimetype:
           type: "string"
           title: "Mimetype"
           description: "Het type bestand dat is opgeslagen."
         mediabrontype:
           $ref: "#/components/schemas/MediabronType"
+        link:
+          type: string
+          format: uri
+          minLength: 1
+          description: Link naar de mediabron.
     NatuurlijkPersoon:
       type: "object"
       description: ""
@@ -7084,4 +7082,22 @@ components:
           format: uri
           minLength: 1
           nullable: true
-    
+    # VerwijzingNaarResource:
+    #   type: object
+    #   required:
+    #     - url
+    #     - id
+    #   properties:
+    #     url:
+    #       type: string
+    #       format: uri
+    #       description:
+    #         URL-referentie naar de resource waarnaar verwezen wordt. 
+    #       minLength: 1
+    #     id:
+    #       type: string
+    #       maxLength: 40
+    #       description: ID van de resource waarnaar verwezen wordt.
+    #     naam:
+    #       description: Naam van de verwijzing.
+    #       type: string
