@@ -5730,7 +5730,7 @@ components:
         waterschap:
           $ref: "#/components/schemas/Waterschap"
         informatieobjecttype:
-          $ref: "#/components/schemas/InformatieObjectType"
+          $ref: "#/components/schemas/Informatieobjecttype"
         inhoud:
           type: "string"
           title: "Inhoud"
