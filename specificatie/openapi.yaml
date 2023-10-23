@@ -2501,7 +2501,7 @@ paths:
         name: "vergaderingsIdentificatie"
         description: "Identificatie(s) die verwijzen naar de vergaderingen waar dit\
           \ informatieobject een bijlage bij is of waarvan dit de notulen zijn. (Zie\
-          \ ook informatieobjectType)\n\nIdentificatie(s) die verwijzen naar de vergaderingen\
+          \ ook informatieobjecttype)\n\nIdentificatie(s) die verwijzen naar de vergaderingen\
           \ waar dit informatieobject een bijlage bij is."
         required: false
         schema:
@@ -5729,7 +5729,7 @@ components:
           $ref: "#/components/schemas/Provincie"
         waterschap:
           $ref: "#/components/schemas/Waterschap"
-        informatieObjectType:
+        informatieobjecttype:
           $ref: "#/components/schemas/InformatieObjectType"
         inhoud:
           type: "string"
@@ -5756,7 +5756,7 @@ components:
           title: "Titel"
           description: "Titel. Alle alfanumerieke tekens"
           maxLength: 200
-        typeMotie:
+        motietype:
           $ref: "#/components/schemas/MotieType"
         vraagtype:
           $ref: "#/components/schemas/VraagType"
@@ -6318,10 +6318,10 @@ components:
           example: "Raadsvergadering"
         status:
           $ref: "#/components/schemas/VergaderingStatus"
-        vergaderToelichting:
+        vergadertoelichting:
           type: "string"
-          title: "Vergader toelichting"
-          description: "De toelichting of nadere omschrijving van de vergadering"
+          title: "Vergadertoelichting"
+          description: "De toelichting of nadere omschrijving van de vergadering."
           example: "Regulier geplande raadsvergadering van mei"
         vergaderdatum:
           type: "string"
@@ -6380,37 +6380,37 @@ components:
       type: "object"
       description: "De referentielijst met alle gemeenten Tabel 33 van de landelijke tabellen."
       required:
-      - "gemeenteCode"
-      - "gemeenteNaam"
+      - "gemeentecode"
+      - "gemeentenaam"
       properties:
-        gemeenteCode:
+        gemeentecode:
           type: "string"
-          title: "gemeenteCode"
+          title: "Gemeentecode"
           description: "De code van een gemeente in de landelijke tabel."
           maxLength: 4
           minLength: 1
-        gemeenteNaam:
+        gemeentenaam:
           type: "string"
-          title: "gemeenteNaam"
+          title: "Gemeentenaam"
           description: "De naam van de gemeente."
           minLength: 1
     Gremium:
       type: "object"
       description: "De referentielijst met alle gremia in een gemeente. Hier horen ook alle commissies bij van de gemeenteraad."
       required:
-      - "gremiumIdentificatie"
-      - "gremiumNaam"
+      - "gremiumidentificatie"
+      - "gremiumnaam"
       properties:
-        gremiumIdentificatie:
+        gremiumidentificatie:
           type: "string"
-          title: "gremiumIdentificatie"
+          title: "Gremiumidentificatie"
           description: "De identificatie van een gremium\n\nDe identificatie van een\
             \ gremium"
           maxLength: 10
           minLength: 1
-        gremiumNaam:
+        gremiumnaam:
           type: "string"
-          title: "Gremium naam"
+          title: "Gremiumnaam"
           description: "De naam van het gremium. Hier horen ook de (raads- en staten)commissies\
             \ bij"
           maxLength: 100
@@ -6480,7 +6480,7 @@ components:
           type: "boolean"
           title: "Indicator bezoldigd"
           description: "Indicator of de nevenfunctie uitgevoerd wordt tegen betaling."
-        indicatorNevenFunctieVanwegeLidmaatschap:
+        indicatorNevenunctieVanwegeLidmaatschap:
           type: "boolean"
           title: "Indicator nevenfunctie vanwege lidmaatschap"
           description: "Indicator die aangeeft of de nevenfunctie wordt vervuld vanwege\
@@ -6567,7 +6567,7 @@ components:
       - "vrouw"
       - "anders"
       - "onbekend"
-    InformatieObjectType:
+    Informatieobjecttype:
       type: "string"
       description: "Het type van het informatieobject\n\n
         \ <body><ul><li>`vraag` - Vraag </li><li>`antwoord` - Antwoord </li><li>`motie`\
@@ -6641,15 +6641,15 @@ components:
       type: "object"
       description: "De referentielijst met alle waterschappen volgens CBS."
       required:
-      - "waterschapCode"
-      - "waterschapNaam"
+      - "waterschapcode"
+      - "waterschapnaam"
       properties:
-        waterschapCode:
+        waterschapcode:
           type: "string"
           description: "De code van het waterschap in de CBS tabel."
           maxLength: 4
           minLength: 4
-        waterschapNaam:
+        waterschapnaam:
           type: "string"
           description: "De naam van het waterschap."
           maxLength: 4
@@ -6983,9 +6983,9 @@ components:
           readOnly: true
           description: Unieke resource identifier.
           title: ID
-        e-mailAdres:
+        e-mailadres:
           type: string
-          title: E-mail adres
+          title: E-mailadres
           description: Elektronisch postadres waaronder de organisatorische eenheid in de regel bereikbaar is.
           maxLength: 254
         faxnummer:
