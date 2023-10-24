@@ -2282,7 +2282,7 @@ paths:
         503:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503"
       tags:
-      - "Aanwezige deelnemers"
+      - "Indieners"
     get:
       operationId: "getindiener"
       description: Opvragen van een specifieke indiener van een informatieobject.
@@ -4089,6 +4089,51 @@ paths:
       tags:
       - "Stemmen"
   /stemmen/{id}:
+    delete:
+      operationId: "delstem"
+      description: Verwijderen van een stem.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            description: Unieke resource identifier.
+            title: ID
+          required: true
+      responses:
+        200:
+          description: "Verwijderactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version"
+        204:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/204"
+        400:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
+        401:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401"
+        403:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403"
+        404:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/404"
+        406:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/406"
+        409:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409"
+        410:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410"
+        415:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415"
+        429:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429"
+        500:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500"
+        501:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501"
+        503:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503"
+      tags:
+      - "Stemmen"
     get:
       operationId: "getstem"
       description: "Het bericht dat de JSON/REST API voor het ophalen gegevens van\
@@ -4219,51 +4264,6 @@ paths:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503"
         default:
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
-      tags:
-      - "Stemmen"
-    delete:
-      operationId: "delstem"
-      description: Verwijderen van een stem.
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-            description: Unieke resource identifier.
-            title: ID
-          required: true
-      responses:
-        200:
-          description: "Verwijderactie geslaagd"
-          headers:
-            api-version:
-              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version"
-        204:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/204"
-        400:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
-        401:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401"
-        403:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403"
-        404:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/404"
-        406:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/406"
-        409:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409"
-        410:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410"
-        415:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415"
-        429:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429"
-        500:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500"
-        501:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501"
-        503:
-          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503"
       tags:
       - "Stemmen"
   /stemmingen:
@@ -5197,21 +5197,10 @@ components:
           allOf:
             - description: Verwijzing naar de natuurlijke persoon zijnde de aanwezige deelnemer.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-          # type: "string"
-          # format: uri
-          # title: "Natuurlijk persoon"
-          # description: URL-referentie naar de natuurlijke persoon zijnde de
-          #   de aanwezige deelnemer.
-          # minLength: 1
         vergadering:
           allOf:
             - description: Verwijzing naar de vergadering waar de deelnemer aanwezig is.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-          # title: "Vergadering"
-          # description: "URL-referentie naar de vergadering waar de deelnemer aanwezig is."
-          # type: "string"
-          # format: "uri"
-          # minLength: 1
         aanvangAanwezigheid:
           type: "string"
           title: "Aanvang aanwezigheid"
@@ -5274,26 +5263,15 @@ components:
           allOf:
             - description: "Verwijzing naar de vergadering waar dit agendapunt behandeld wordt."
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-          # title: "Vergadering"
-          # description: "De URL-referentie naar vergadering waar dit agendapunt behandeld wordt."
-          # type: "string"
-          # format: "uri"
-          # minLength: 1
         hoofdagendapunt:
           allOf:
             - description: "Verwijzing naar het hoofdagendapunt waarvan dit het subagendapunt is."
             - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-          # type: string
-          # format: uri
-          # nullable: true
-          # title: Hoofdagendapunt
-          # description: URL-referentie naar het hoofdagendapunt waarvan dit het subagendapunt is.
-          # minLength: 1
         agendapuntKenmerk:
           type: "string"
           title: "Agendapunt kenmerk"
-          description: "De weergave van het Agendapuntvolgnummer op de agenda.\n\n\
+          description: "De weergave van het Agendapuntvolgnummer op de agenda. 
             Dit is de letterlijke volgorde van een Agendapunt wordt bij gehouden d.m.v.\
             \ attribuut 'Agendapuntvolgnummer'. Hoe het Agendapunt getoond wordt op\
             \ de Agenda wordt beschreven met attribuut 'Agendapunt kenmerk'."
@@ -5329,7 +5307,7 @@ components:
           type: "string"
           title: "Eindtijd"
           description: "De datum en tijdstip waarop de behandeling van de agendapunt\
-            \ is geëindigd\n\nMoet voor komen als Starttijd voorkomt"
+            \ is geëindigd. Moet voorkomen als Starttijd voorkomt."
           format: "date-time"
         gemeente:
           $ref: "#/components/schemas/Gemeente"
@@ -5393,13 +5371,13 @@ components:
         stemmingen:
           type: "array"
           title: "hoort bij of kan betrekking hebben op"
-          description: "Een STEMMING kan betrekking hebben op een AGENDAPUNT of subAGENDAPUNT.\n\
-            \nEen STEMMING kan betrekking hebben op één of meerdere VERGADERSTUKKEN\
-            \ zoals moties, amendementen, voorstellen en/of concept besluitstukken.\
-            \ Deze STEMMING hoort dan bij een AGENDAPUNT. Ook kan een STEMMING betrekking\
-            \ hebben tot een AGENDAPUNT. Men stemt dan over het betreffende AGENDAPUNT,\
-            \ bijvoorbeeld om de agenda vast te stellen of over alle onderliggende\
-            \ subAGENDAPUNTen in één keer."
+          description: Een STEMMING kan betrekking hebben op een AGENDAPUNT of subAGENDAPUNT.
+            # Een STEMMING kan betrekking hebben op één of meerdere VERGADERSTUKKEN\
+            # \ zoals moties, amendementen, voorstellen en/of concept besluitstukken.\
+            # \ Deze STEMMING hoort dan bij een AGENDAPUNT. Ook kan een STEMMING betrekking\
+            # \ hebben tot een AGENDAPUNT. Men stemt dan over het betreffende AGENDAPUNT,\
+            # \ bijvoorbeeld om de agenda vast te stellen of over alle onderliggende\
+            # \ subAGENDAPUNTen in één keer."
           items:
             type: "string"
             format: "uri"
@@ -5435,7 +5413,7 @@ components:
         besluitresultaat:
           type: "string"
           title: "Besluitresultaat"
-          description: "Het resultaat van het BESLUIT. Alle alfanumerieke tekens"
+          description: "Het resultaat van het BESLUIT."
           maxLength: 200
         besluittoelichting:
           type: "string"
@@ -5521,21 +5499,10 @@ components:
           allOf:
             - description: Verwijzing naar het dagelijks bestuur.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-          # type: "string"
-          # title: "dagelijksBestuur"
-          # description: "URL-referentie naar het dagelijks bestuur."
-          # format: uri
-          # minLength: 1
         natuurlijkPersoon:
           allOf:
             - description: Verwijzing naar de natuurlijk persoon die lid is van het dagelijks bestuur.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-          # type: string
-          # title: Natuurlijk persoon
-          # description: URL-referentie naar de natuurlijk persoon die lid is van het
-          #   dagelijks bestuur.
-          # format: uri
-          # minLength: 1
         datumBeginDagelijksBestuurLidmaatschap:
           type: "string"
           title: "Datum begin dagelijkse bestuur lidmaatschap"
@@ -5612,20 +5579,10 @@ components:
           allOf:
             - description: Verwijzing naar de fractie.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-          # type: string
-          # format: uri
-          # title: Fractie
-          # description: URL-referentie naar de fractie.
-          # minLength: 1
         natuurlijkPersoon:
           allOf:
             - description: Verwijzing naar de natuurlijke persoon die lid is van de fractie.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-          # type: string
-          # format: uri
-          # title: Fractielid
-          # description: URL-referentie naar de natuurlijke persoon die lid is van de fractie.
-          # minLength: 1
         datumBeginFractieLidmaatschap:
           type: "string"
           title: "Datum begin fractie lidmaatschap"
@@ -5640,8 +5597,8 @@ components:
         indicatieVoorzitter:
           type: "boolean"
           title: "Indicatie voorzitter"
-          description: "Indicatie of iemand de voorzitter is van de FRACTIE\n\nStandaardwaarde\
-            \ is Nee"
+          description: Indicatie of iemand de voorzitter is van de FRACTIE.
+          default: false
     InformatieObject:
       type: "object"
       description: "Een mededeling die gedaan wordt bij de vergadering Het antwoord\
@@ -5822,6 +5779,9 @@ components:
           description: De toelichting op het AMENDEMENT.
           type: string
     Zaak:
+      required:
+        - zaakidentificatie
+        - zaakregistratie
       properties:
         zaakidentificatie:
           description: Identificatie van de zaak.
@@ -5892,14 +5852,8 @@ components:
         vergadering:
           allOf:
             - description: Verwijzing naar de vergadering waarvan deze mediabron de vastlegging is.
+            - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # vergadering:
-        #   type: string
-        #   format: uri
-        #   title: url
-        #   description:
-        #     URL-referentie naar de vergadering waarvan deze mediabron de vastlegging is.
-        #   minLength: 1
         locatieWebvttbestand:
           type: "string"
           title: "Locatie Webvttbestand"
@@ -5915,6 +5869,7 @@ components:
           format: uri
           minLength: 1
           description: Link naar de mediabron.
+          nullable: true
     NatuurlijkPersoon:
       type: "object"
       description: ""
@@ -5993,44 +5948,24 @@ components:
           allOf:
             - description: Verwijzing naar de aanwezige deelnemer waarvan het spreekfragment wordt vastgelegd.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # aanwezigeDeelnemer:
-        #   type: string
-        #   format: uri
-        #   title: Spreker
-        #   description: URL-referentie naar de aanwezige deelnemer waarvan het 
-        #     spreekfragment wordt vastgelegd.
-        #   minLength: 1
         agendapunt:
           allOf:
             - description: Verwijzing naar het agendapunt waarover het spreekfragment gaat.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # agendapunt:
-        #   type: string
-        #   format: uri
-        #   title: Agendapunt
-        #   description: URL-referentie naar het agendapunt waarover het spreekfragment gaat.
-        #   minLength: 1
         mediabron:
           allOf:
             - description: Verwijzing naar de mediabron waarin het spreekfragment is vastgelegd.
             - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # mediabron:
-        #   type: string
-        #   format: uri
-        #   title: Mediabron
-        #   description: URL-referentie naar de mediabron waarin het spreekfragment is vastgelegd.
-        #   minLength: 1
-        #   nullable: true
         aanvangSpreekfragment:
           type: "string"
           title: "Aanvang spreekfragment"
-          description: "De tijdstip en datum van aanvang van het SPREEKFRAGMENT"
+          description: "Het tijdstip en de datum van aanvang van het SPREEKFRAGMENT."
           format: "date-time"
         eindeSpreekfragment:
           type: "string"
           title: "Einde spreekfragment"
-          description: ""
+          description: "Het tijdstip en de datum van einde van het SPREEKFRAGMENT."
           format: "date-time"
         audioTijdsaanduidingAanvang:
           type: "integer"
@@ -6103,23 +6038,10 @@ components:
           allOf:
             - description: Verwijzing naar de aanwezige deelnemer die een keuze heeft gemaakt in de stemming.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # aanwezigeDeelnemer:
-        #   type: string
-        #   format: uri
-        #   title: Aanwezige deelnemer
-        #   description: URL-referentie naar de aanwezige deelnemer die een keuze 
-        #    heeft gemaakt in de stemming.
-        #   minLength: 1
         stemming:
           allOf:
             - description: Verwijzing naar de stemming.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # stemming:
-        #   type: string
-        #   format: uri
-        #   title: Stemming
-        #   description: URL-referentie naar de stemming.
-        #   minLength: 1 
         keuzeStemming:
           $ref: "#/components/schemas/StemKeuze"
     Stemming:
@@ -6152,12 +6074,6 @@ components:
           allOf:
             - description: Verwijzing naar het agendapunt waar deze stemming betrekking op heeft.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # agendapunt:
-        #   type: string
-        #   format: uri
-        #   title: Agendapunt
-        #   description: URL-referentie naar het agendapunt waar deze stemming betrekking op heeft.
-        #   minLength: 1
         resultaatMondelingeStemming:
           $ref: "#/components/schemas/StemmingResultaat"
         resultaatStemmingOverPersonen:
@@ -6177,25 +6093,11 @@ components:
             - description: Verwijzing naar het besluit waartoe de stemming heeft geleid.
             - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # besluit:
-        #   type: "string"
-        #   format: uri
-        #   title: "Besluit"
-        #   description: "URL-referentie naar het besluit waartoe de stemming heeft geleid."
-        #   minLength: 1
-        #   nullable: true 
         informatieobject:
            allOf:
             - description: Verwijzing naar het besluitvormingsstuk waar de stemming betrekking op heeft.
             - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # informatieobject:
-        #   type: "string"
-        #   format: uri
-        #   title: "Informatieobject"
-        #   description: "URL-referentie naar het besluitvormingsstuk waar de stemming betrekking op heeft."
-        #   minLength: 1
-        #   nullable: true   
         stemmen:
           type: array
           items:
@@ -6235,22 +6137,10 @@ components:
           allOf:
             - description: Verwijzing naar de fractie.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # fractie:
-        #   type: "string"
-        #   title: "Fractie"
-        #   description: "URL-referentie naar de fractie."
-        #   format: uri
-        #   minLength: 1
         stemming:
           allOf:
             - description: Verwijzing naar de stemming.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # stemming:
-        #   type: "string"
-        #   title: "Stemming"
-        #   description: "URL-referentie naar de stemming."
-        #   format: uri
-        #   minLength: 1
         fractiestemresultaat:
           $ref: "#/components/schemas/FractieStemResultaat"
     Vergadering:
@@ -6300,13 +6190,6 @@ components:
             - description: Verwijzing naar de hoofdvergadering waarvan deze vergadering een deelvergadering is.
             - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # hoofdvergadering:
-        #   type: string
-        #   format: uri
-        #   nullable: true
-        #   title: Hoofdvergadering
-        #   description: URL-referentie naar de hoofdvergadering waarvan deze vergadering een deelvergadering is.
-        #   minLength: 1
         eindeVergadering:
           type: "string"
           title: "Einde vergadering"
@@ -6383,13 +6266,6 @@ components:
             - description: Verwijzing naar de notulen van deze vergadering.
             - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # notulen:
-        #   type: string
-        #   format: uri
-        #   nullable: true
-        #   title: Notulen
-        #   description: URL-referentie naar de notulen van deze vergadering.
-        #   minLength: 1
         deelvergaderingen:
           type: array
           items:
@@ -6732,7 +6608,7 @@ components:
       - "voor"
       - "tegen"
       - "afwezig"
-      - "othouden"
+      - "onthouden"
     StemmingResultaat:
       type: "string"
       description: "duiding van het resultaat van een STEMMING<body><ul><li>`voor`\
@@ -7095,35 +6971,19 @@ components:
           description: De aanduiding van het adres van de indiener.
           maxLength: 257
         informatieobject:
-          type: string
-          title: Informatieobject
-          description: URL-referentie naar het informatieobject dat wordt ingediend.
-          format: uri
-          minLength: 1
+          allOf:
+            - description: Verwijzing naar het informatieobject dat wordt ingediend.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
         natuurlijkPersoon:
           allOf:
             - description: Verwijzing naar de natuurlijk persoon die het informatieobject indient.
             - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # natuurlijkPersoon:
-        #   type: string
-        #   title: Natuurlijk persoon
-        #   description: URL-referentie naar de natuurlijk persoon die het informatieobject indient.
-        #   format: uri
-        #   minLength: 1
-        #   nullable: true
         organisatorischeEenheid:
           allOf:
             - description: Verwijzing naar de organisatorische eenheid die het informatieobject indient.
             - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
-        # organisatorischeEenheid:
-        #   type: string
-        #   title: Organisatorische eenheid
-        #   description: URL-referentie naar de organisatorische eenheid die het informatieobject indient.
-        #   format: uri
-        #   minLength: 1
-        #   nullable: true
     VerwijzingNaarResource:
       type: object
       required:
