@@ -5282,6 +5282,7 @@ components:
         hoofdagendapunt:
           allOf:
             - description: "Verwijzing naar het hoofdagendapunt waarvan dit het subagendapunt is."
+            - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
           # type: string
           # format: uri
@@ -6012,6 +6013,7 @@ components:
         mediabron:
           allOf:
             - description: Verwijzing naar de mediabron waarin het spreekfragment is vastgelegd.
+            - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
         # mediabron:
         #   type: string
@@ -6173,6 +6175,7 @@ components:
         besluit:
           allOf:
             - description: Verwijzing naar het besluit waartoe de stemming heeft geleid.
+            - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
         # besluit:
         #   type: "string"
@@ -6184,6 +6187,7 @@ components:
         informatieobject:
            allOf:
             - description: Verwijzing naar het besluitvormingsstuk waar de stemming betrekking op heeft.
+            - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
         # informatieobject:
         #   type: "string"
@@ -6294,6 +6298,7 @@ components:
         hoofdvergadering:
           allOf:
             - description: Verwijzing naar de hoofdvergadering waarvan deze vergadering een deelvergadering is.
+            - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
         # hoofdvergadering:
         #   type: string
@@ -6376,6 +6381,7 @@ components:
         notulen:
           allOf:
             - description: Verwijzing naar de notulen van deze vergadering.
+            - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
         # notulen:
         #   type: string
@@ -7097,6 +7103,7 @@ components:
         natuurlijkPersoon:
           allOf:
             - description: Verwijzing naar de natuurlijk persoon die het informatieobject indient.
+            - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
         # natuurlijkPersoon:
         #   type: string
@@ -7108,6 +7115,7 @@ components:
         organisatorischeEenheid:
           allOf:
             - description: Verwijzing naar de organisatorische eenheid die het informatieobject indient.
+            - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
         # organisatorischeEenheid:
         #   type: string
