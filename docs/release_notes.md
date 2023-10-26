@@ -1,3 +1,8 @@
+---
+layout: page-with-side-nav
+title: Wat is nieuw ten opzichte van 1.2.0?
+---
+
 # Wat is nieuw ten opzichte van 1.2.0?
 
 ## Aanpassingen informatiemodel
