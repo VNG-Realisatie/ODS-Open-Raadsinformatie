@@ -1,18 +1,18 @@
 ---
 openapi: 3.0.0
 info:
-  title: Open Raads- en StatenInformatie
-  description: "API-specificatie voor Open RaadsInformatie. <br><br> <i>Wat is nieuw?</i> <ul> <li>De OAS bevat nu het volledige informatiemodel, inclusief Fractielidmaatschap, Fractie, Natuurlijk Persoon en Stemresultaat Per Fractie.</li> <li>De syntax van de berichten is gebaseerd op plain JSON in plaats van HAL.</li> <li>Uitbreidingen voor de waterschappen (<a href='https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/89'>issue #89</a>).</li> <li>Functie 'griffier' toegevoegd als rolnaam (issue #88).</li> <li>Extra attribuut om volledige naam in één keer toe te kunnen voegen (issue #84).</li> <li>Dubbele voorkomens beschrijvingen verwijderd (issue #86).</li> <li>Publicatiedatum toegevoegd (issue #78).</li> <li>Kunnen relateren van Besluiten aan Stemmingen (issue #88).</li> <li>Kunnen relateren van Stemmingen aan Agendapunten en/of Informatieobjecten (issue #87).</li> <li>Attribuut 'behandelendAmbtenaar' aan Agendapunten toegevoegd (issue #81).</li> </ul>"
+  title: "Open Raads-, -Staten en Bestuursinformatie"
+  description: "Om te kunnen voldoen aan de 'Wet open overheid' ontsluit deze API een aantal categorieën overheidsinformatie voor gemeenten, provincies en waterschappen zoals ingekomen (vergader)stukken, agenda's (voor vergaderingen), verslagen en besluiten."
   contact:
     url: https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie
   license:
     name: "European Union Public License, version 1.2 (EUPL-1.2)"
     url: https://eupl.eu/1.2/nl/
-  version: 2.0.0-beta.2
+  version: 2.0.0-beta.3
   x-imvertor-generator-version: 2.0.0
   x-yamlCompiler-stylesheets-version: "20230315"
 servers:
-- url: https://virtserver.swaggerhub.com/KorverInformatica/OpenRaadsInformatie/2.0.0-beta.2
+- url: https://virtserver.swaggerhub.com/KorverInformatica/OpenRaadsInformatie/2.0.0-beta.3
   description: SwaggerHub API Auto Mocking
 - url: https://virtserver.swaggerhub.com/VNGRealisatie/api/open_raads__en_stateninformatie/v1
   description: SwaggerHub API Auto Mocking
@@ -439,38 +439,21 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /aanwezigedeelnemers/{uuid}:
+  /aanwezigedeelnemers/{id}:
     get:
       tags:
       - Aanwezige deelnemers
-      description: Het bericht dat de JSON/REST API voor het ophalen van gegevens van een aanwezige deelnemer..
+      description: Het bericht dat de JSON/REST API voor het ophalen van gegevens van een aanwezige deelnemer.
       operationId: getaanwezigedeelnemer
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -685,16 +668,15 @@ paths:
       description: Het bericht dat de JSON/REST API voor het wijzigen van aanwezige deelnemers retourneert.
       operationId: putaanwezigedeelnemers
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -898,16 +880,14 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een agendapunt .
       operationId: deleteaanwezigedeelnemersAanwezigedeelnemeridentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -1145,6 +1125,7 @@ paths:
           type: string
       - name: gemeentecode
         in: query
+        description: De code van een gemeente in de landelijke tabel.
         required: false
         style: form
         explode: true
@@ -1156,14 +1137,15 @@ paths:
         style: form
         explode: true
         schema:
-          $ref: '#/components/schemas/Provincie'
-      - name: waterschap
+          $ref: '#/components/schemas/ProvincieInQuery'
+      - name: waterschapcode
         in: query
+        description: De code van het waterschap in de CBS tabel.
         required: false
         style: form
         explode: true
         schema:
-          $ref: '#/components/schemas/Waterschap'
+          type: string
       - name: gewijzigdSinds
         in: query
         description: Met deze parameter kunnen vergaderingen opgevraagd worden waarin iets is gewijzigd sinds het opgegeven moment.
@@ -1578,38 +1560,21 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /agendapunten/{uuid}:
+  /agendapunten/{id}:
     get:
       tags:
       - Agendapunten
       description: Het bericht dat de JSON/REST API voor het ophalen gegevens van een agendapunt retourneert.
       operationId: getagendapunt
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -1824,16 +1789,14 @@ paths:
       description: Het wijzigen van een AGENDAPUNT
       operationId: putagendapunt
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -2037,16 +2000,14 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een agendapunt .
       operationId: delagendapunt
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -2677,38 +2638,21 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /besluiten/{uuid}:
+  /besluiten/{id}:
     get:
       tags:
       - Besluiten
       description: Het bericht dat de JSON/REST API voor het ophalen van besluit gegevens retourneert.
       operationId: Getbesluit
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -2923,16 +2867,14 @@ paths:
       description: Het wijzigen van een BESLUIT
       operationId: putbesluiten
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -3136,16 +3078,14 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een besluit.
       operationId: deletebesluitenBesluitidentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -3361,22 +3301,24 @@ paths:
       description: Het bericht dat de JSON/REST API voor het ophalen van lidmaatschappen van het dagelijks bestuur retourneert.
       operationId: Getdagelijksbestuurlidmaatschappen
       parameters:
-      - name: natuurlijkPersoon
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: uri
       - name: dagelijksBestuur
         in: query
+        description: ID van het dagelijks bestuur.
         required: false
         style: form
         explode: true
         schema:
+          maxLength: 40
           type: string
-          format: uri
+      - name: natuurlijkPersoon
+        in: query
+        description: ID van de natuurlijk persoon.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 40
+          type: string
       - name: datumBeginDagelijksBestuurLidmaatschap
         in: query
         description: De datum en tijdstip waarop het lidmaatschap van het dagelijkse bestuur begon
@@ -3591,7 +3533,7 @@ paths:
       tags:
       - Dagelijksbestuurlidmaatschappen
       description: Het vastleggen van een dagelijks bestuur lidmaatschap.
-      operationId: putdagelijksbetuurlidmaatschappen
+      operationId: postdagelijksbetuurlidmaatschap
       requestBody:
         content:
           application/json:
@@ -3791,31 +3733,21 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /dagelijksbestuurlidmaatschappen/{uuid}:
+  /dagelijksbestuurlidmaatschappen/{id}:
     get:
       tags:
       - Dagelijksbestuurlidmaatschappen
       description: Het bericht dat de JSON/REST API voor het ophalen van lidmaatschappen van het dagelijks bestuur retourneert.
       operationId: getresourcedagelijksbestuurlidmaatschappenDagelijksbestuurlidmaatschapidentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
+          description: Unieke resource identifier.
         examples:
           OneValue:
             summary: Eén ETag-waarde
@@ -4035,18 +3967,17 @@ paths:
       tags:
       - Dagelijksbestuurlidmaatschappen
       description: Het wijzigen van een dagelijks bestuur lidmaatschap.
-      operationId: putdagelijksbestuurlidmaatschappenDagelijksbestuurlidmaatschapidentificatie
+      operationId: putdagelijksbestuurlidmaatschap
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -4250,16 +4181,14 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van lidmaatschappen van het dagelijks bestuur.
       operationId: deletedagelijksbestuurlidmaatschappenDagelijksbestuurlidmaatschapidentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -4477,6 +4406,7 @@ paths:
       parameters:
       - name: gemeentecode
         in: query
+        description: De code van een gemeente in de landelijke tabel.
         required: false
         style: form
         explode: true
@@ -4488,14 +4418,15 @@ paths:
         style: form
         explode: true
         schema:
-          $ref: '#/components/schemas/Provincie'
-      - name: waterschap
+          $ref: '#/components/schemas/ProvincieInQuery'
+      - name: waterschapcode
         in: query
+        description: De code van het waterschap in de CBS tabel.
         required: false
         style: form
         explode: true
         schema:
-          $ref: '#/components/schemas/Waterschap'
+          type: string
       - name: dagelijksBestuurnaam
         in: query
         required: false
@@ -4906,38 +4837,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /dagelijksebesturen/{uuid}:
+  /dagelijksebesturen/{id}:
     get:
       tags:
       - Dagelijkse Besturen
       description: Het bericht dat de JSON/REST API voor het ophalen van dagelijks bestuur gegevens retourneert.
       operationId: Getdagelijksbestuur
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -5152,16 +5067,15 @@ paths:
       description: Het wijzigen van een DAGELIJKS BESTUUR
       operationId: putdagelijksebesturenDagelijksbestuuridentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -5365,16 +5279,15 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een dagelijksbestuur
       operationId: deletedagelijksebesturenDagelijksbestuuridentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -5592,24 +5505,22 @@ paths:
       parameters:
       - name: fractie
         in: query
-        description: URL-referentie naar de fractie.
+        description: ID van de fractie.
         required: false
         style: form
         explode: true
         schema:
-          minLength: 1
+          maxLength: 40
           type: string
-          format: uri
       - name: fractielid
         in: query
-        description: URL-referentie naar het fractielid.
+        description: ID van het fractielid.
         required: false
         style: form
         explode: true
         schema:
-          minLength: 1
+          maxLength: 40
           type: string
-          format: uri
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -6006,38 +5917,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /fractielidmaatschappen/{uuid}:
+  /fractielidmaatschappen/{id}:
     get:
       tags:
       - Fractielidmaatschappen
       description: Ophalen van een specifieke fractielidmaatschap.
       operationId: getfractielidmaatschap
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -6252,16 +6147,15 @@ paths:
       description: Wijzigen van een fractielidmaatschap.
       operationId: putfractielidmaatschappen
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -6465,16 +6359,15 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een fractielidmaatschap.
       operationId: deletefractielidmaatschappenFractielidmaatschapidentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -6692,6 +6585,7 @@ paths:
       parameters:
       - name: fractienaam
         in: query
+        description: De naam van de fractie.
         required: false
         style: form
         explode: true
@@ -6699,6 +6593,7 @@ paths:
           type: string
       - name: gemeente
         in: query
+        description: De code van een gemeente in de landelijke tabel.
         required: false
         style: form
         explode: true
@@ -6710,14 +6605,15 @@ paths:
         style: form
         explode: true
         schema:
-          $ref: '#/components/schemas/Provincie'
-      - name: waterschap
+          $ref: '#/components/schemas/ProvincieInQuery'
+      - name: waterschapcode
         in: query
+        description: De code van het waterschap in de CBS tabel.
         required: false
         style: form
         explode: true
         schema:
-          $ref: '#/components/schemas/Waterschap'
+          type: string
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -7114,38 +7010,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /fracties/{uuid}:
+  /fracties/{id}:
     get:
       tags:
       - Fracties
       description: Het bericht dat de JSON/REST API voor het ophalen van gegevens van een fractie.
       operationId: getfractie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -7360,16 +7240,15 @@ paths:
       description: Het bericht voor het wijzigen van een fractie.
       operationId: putfracties
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -7573,16 +7452,15 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een fractie .
       operationId: deletefractiesFractienummer
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -8225,38 +8103,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /indieners/{uuid}:
+  /indieners/{id}:
     get:
       tags:
       - Indieners
       description: Opvragen van een specifieke indiener van een informatieobject.
       operationId: getindiener
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -8471,16 +8333,15 @@ paths:
       description: Wijzigen van een indiener van een informatieobject.
       operationId: putindiener
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -8680,20 +8541,19 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
     delete:
       tags:
-      - Aanwezige deelnemers
+      - Indieners
       description: Verwijderen indiener van een informatieobject.
       operationId: deleteindiener
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -8964,6 +8824,22 @@ paths:
           format: date
       - name: gemeentecode
         in: query
+        description: De code van een gemeente in de landelijke tabel.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: provincie
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/ProvincieInQuery'
+      - name: waterschapcode
+        in: query
+        description: De code van het waterschap in de CBS tabel.
         required: false
         style: form
         explode: true
@@ -8976,21 +8852,6 @@ paths:
         explode: true
         schema:
           type: string
-      - name: ontvangstdatum
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: date
-      - name: provincie
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          $ref: '#/components/schemas/Provincie'
       - name: taal
         in: query
         description: |-
@@ -9018,7 +8879,7 @@ paths:
       - name: vergaderingsIdentificatie
         in: query
         description: |-
-          Identificatie(s) die verwijzen naar de vergaderingen waar dit informatieobject een bijlage bij is of waarvan dit de notulen zijn. (Zie ook informatieobjectType)
+          Identificatie(s) die verwijzen naar de vergaderingen waar dit informatieobject een bijlage bij is of waarvan dit de notulen zijn. (Zie ook informatieobjecttype)
 
           Identificatie(s) die verwijzen naar de vergaderingen waar dit informatieobject een bijlage bij is.
         required: false
@@ -9434,31 +9295,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /informatieobjecten/{uuid}:
+  /informatieobjecten/{id}:
     get:
       tags:
       - Informatieobjecten
       description: Het bericht dat de JSON/REST API voor het ophalen gegevens van een informatieobject retourneert.
       operationId: getinformatieobject
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
+          description: Unieke resource identifier.
         examples:
           OneValue:
             summary: Eén ETag-waarde
@@ -9680,16 +9532,15 @@ paths:
       description: Het wijzigen van een Informatieobject
       operationId: putinformatieobject
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -9893,16 +9744,15 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een informatieobject.
       operationId: delinformatieobject
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -10545,38 +10395,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /mediabronnen/{uuid}:
+  /mediabronnen/{id}:
     get:
       tags:
       - Mediabronnen
       description: Het bericht voor het ophalen van mediabron gegevens.
       operationId: Getmediabron
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -10791,16 +10625,15 @@ paths:
       description: Het wijzigen van een mediabron
       operationId: Putmediabron
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -11004,16 +10837,15 @@ paths:
       description: Het bericht voor het verwijderen van gegevens van een mediabron
       operationId: deletemediabronnenMediabronidentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -11669,38 +11501,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /natuurlijkpersonen/{uuid}:
+  /natuurlijkpersonen/{id}:
     get:
       tags:
       - Natuurlijke personen
       description: Het bericht dat de JSON/REST API voor het ophalen van gegevens van een natuurlijk persoon.
       operationId: getnatuurlijkPersoon
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -11915,16 +11731,15 @@ paths:
       description: Wijzigen van een natuurlijk persoon.
       operationId: putnatuurlijkpersonen
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -12128,16 +11943,15 @@ paths:
       description: Verwijderen van een natuurlijk persoon.
       operationId: deletenatuurlijkpersonenNummernatuurlijkpersoon
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -12756,38 +12570,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /organisatorische_eenheden/{uuid}:
+  /organisatorische_eenheden/{id}:
     get:
       tags:
       - Organisatorische eenheden
       description: Ophalen van organisatorische eenheden.
       operationId: get_organisatorische_eenheid
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -13002,16 +12800,15 @@ paths:
       description: Wijzigen van een oragnisatorische eenheid.
       operationId: put_organisatorische_eenheid
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -13215,16 +13012,15 @@ paths:
       description: Verwijderen van een organisatorische eenheid.
       operationId: delete_organisatorische_eenheid
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -13896,38 +13692,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /spreekfragmenten/{uuid}:
+  /spreekfragmenten/{id}:
     get:
       tags:
       - Spreekfragmenten
       description: Het bericht dat de JSON/REST API voor het ophalen van een spreekfragment retourneert.
       operationId: Getspreekfragment
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -14142,16 +13922,15 @@ paths:
       description: Het wijzigen van een spreekfragment
       operationId: putspreekfragmentenSpreekfragmentidentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -14355,16 +14134,15 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een spreekfragment.
       operationId: deletespreekfragmentenSpreekfragmentidentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -14579,6 +14357,25 @@ paths:
       - Stemmen
       description: Het bericht dat de JSON/REST API voor het ophalen van een collectie stemmen retourneert.
       operationId: getstemmen
+      parameters:
+      - name: aanwezigeDeelnemer
+        in: query
+        description: De ID van de aanwezige deelnemers.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 40
+          type: string
+      - name: stemming
+        in: query
+        description: De ID van de stemming.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 40
+          type: string
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -14975,38 +14772,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /stemmen/{uuid}:
+  /stemmen/{id}:
     get:
       tags:
       - Stemmen
       description: Het bericht dat de JSON/REST API voor het ophalen gegevens van een stem retourneert.
       operationId: getstem
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -15221,16 +15002,15 @@ paths:
       description: Het wijzigen van een stem
       operationId: putstem
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -15434,16 +15214,15 @@ paths:
       description: Verwijderen van een stem.
       operationId: delstem
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -16066,38 +15845,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /stemmingen/{uuid}:
+  /stemmingen/{id}:
     get:
       tags:
       - Stemmingen
       description: Het bericht dat de JSON/REST API voor het ophalen van stemming gegevens retourneert.
       operationId: Getstemming
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -16312,16 +16075,15 @@ paths:
       description: Het wijzigen van een stemming
       operationId: putstemmingen
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -16525,16 +16287,15 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een stemming
       operationId: deletestemmingenStemmingsidentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -16752,26 +16513,22 @@ paths:
       parameters:
       - name: fractie
         in: query
-        description: URL-referentie naar de fractie.
+        description: ID van de fractie.
         required: false
         style: form
         explode: true
         schema:
-          title: Fractie
-          minLength: 1
+          maxLength: 40
           type: string
-          format: uri
       - name: Stemming
         in: query
-        description: URL-referentie naar de stemming.
+        description: ID van de stemming.
         required: false
         style: form
         explode: true
         schema:
-          title: Stemming
-          minLength: 1
+          maxLength: 40
           type: string
-          format: uri
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -17168,38 +16925,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /stemresultatenperfractie/{uuid}:
+  /stemresultatenperfractie/{id}:
     get:
       tags:
       - Stemresultaten Per Fractie
       description: Het bericht dat de JSON/REST API voor het ophalen van gegevens van een stemresultaat per fractie.
       operationId: getstemresultaatperfractie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -17414,16 +17155,15 @@ paths:
       description: Het bericht dat de JSON/REST API voor het wijzigen van stemresultaat per fractie retourneert.
       operationId: putstemresultatenperfractie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -17627,16 +17367,15 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een stemresultaat per fractie.
       operationId: deletestemresultatenperfractieStemresultaatidentificatie
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -17852,13 +17591,6 @@ paths:
       description: Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert.
       operationId: getvergaderingen
       parameters:
-      - name: gemeentecode
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
       - name: gewijzigdSinds
         in: query
         description: Met deze parameter kunnen vergaderingen opgevraagd worden waarin iets is gewijzigd sinds het opgegeven moment.
@@ -17877,13 +17609,31 @@ paths:
         schema:
           maxLength: 100
           type: string
+      - name: gemeentecode
+        in: query
+        description: De code van een gemeente in de landelijke tabel.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
       - name: provincie
         in: query
         required: false
         style: form
         explode: true
         schema:
-          $ref: '#/components/schemas/Provincie'
+          $ref: '#/components/schemas/ProvincieInQuery'
+      - name: waterschapcode
+        in: query
+        description: De code van het waterschap in de CBS tabel.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 4
+          minLength: 4
+          type: string
       - name: status
         in: query
         description: De status van de vergadering
@@ -18305,38 +18055,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Foutbericht'
-  /vergaderingen/{uuid}:
+  /vergaderingen/{id}:
     get:
       tags:
       - Vergaderingen
       description: Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens retourneert.
       operationId: getvergadering
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-      - name: If-None-Match
-        in: header
-        description: "Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie."
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-        examples:
-          OneValue:
-            summary: Eén ETag-waarde
-            value: '"79054025255fb1a26e4bc422aef54eb4"'
-          MultipleValues:
-            summary: Meerdere ETag-waardes
-            value: "\"79054025255fb1a26e4bc422aef54eb4\", \"e4d909c290d0fb1ca068ffaddf22cbd0\""
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Zoekactie geslaagd
@@ -18551,16 +18285,15 @@ paths:
       description: Het wijzigen van een vergadering
       operationId: putvergadering
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       requestBody:
         content:
           application/json:
@@ -18764,16 +18497,15 @@ paths:
       description: Het bericht dat de JSON/REST API voor het verwijderen van gegevens van een Vergadering
       operationId: delvergadering
       parameters:
-      - name: uuid
+      - name: id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          title: uuid
+          title: ID
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
       responses:
         "200":
           description: Verwijderactie geslaagd
@@ -18986,9 +18718,9 @@ components:
   schemas:
     AanwezigeDeelnemer:
       required:
+      - id
       - natuurlijkPersoon
       - url
-      - uuid
       - vergadering
       type: object
       properties:
@@ -18999,27 +18731,29 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
         natuurlijkPersoon:
-          title: Natuurlijk persoon
-          minLength: 1
-          type: string
-          description: URL-referentie naar de natuurlijke persoon zijnde de de aanwezige deelnemer.
-          format: uri
+          allOf:
+          - description: Verwijzing naar de natuurlijke persoon zijnde de aanwezige deelnemer.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
+        vergadering:
+          allOf:
+          - description: Verwijzing naar de vergadering waar de deelnemer aanwezig is.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         aanvangAanwezigheid:
           title: Aanvang aanwezigheid
           type: string
-          description: De aanvang van de aanwezigheid
+          description: De aanvang van de aanwezigheid.
           format: date-time
         eindeAanwezigheid:
           title: Einde aanwezigheid
           type: string
-          description: De einde van de aanwezigheid
+          description: De einde van de aanwezigheid.
           format: date-time
         deelnemerspositie:
           title: Deelnemerspositie
@@ -19030,11 +18764,11 @@ components:
             Dit kan bijvoorbeeld een stoel of een console zijn. Dit kan o.a. van belang zijn voor de audio/video-verslaggeving.
         rolnaam:
           $ref: '#/components/schemas/RolNaam'
-        vertegenwoordigtOrganisatie:
+        organisatie:
           title: Vertegenwoordigde organisatie
           maxLength: 100
           type: string
-          description: De naam van de organisatie die iemand vertegenwoordigt.
+          description: De naam van de organisatie die wordt vertegenwoordigd door de aanwezige deelnemer.
         stemmen:
           title: Stemmen
           uniqueItems: true
@@ -19045,17 +18779,11 @@ components:
             minLength: 1
             type: string
             format: uri
-        vergadering:
-          title: Vergadering
-          minLength: 1
-          type: string
-          description: URL-referentie naar de vergadering waar de deelnemer aanwezig is.
-          format: uri
-      description: De NATUURLIJKe PERSOON die deelneemt aan een VERGADERING
+      description: De NATUURLIJKe PERSOON die deelneemt aan een VERGADERING.
     Agendapunt:
       required:
+      - id
       - url
-      - uuid
       - vergadering
       type: object
       properties:
@@ -19066,26 +18794,26 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
-        agendapuntnummer:
-          title: Agendapuntnummer
-          maxLength: 10
-          minLength: 1
-          type: string
-          description: Het nummer van het agendapunt op de agenda.
+        vergadering:
+          allOf:
+          - description: Verwijzing naar de vergadering waar dit agendapunt behandeld wordt.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
+        hoofdagendapunt:
+          allOf:
+          - description: Verwijzing naar het hoofdagendapunt waarvan dit het subagendapunt is.
+          - nullable: true
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         agendapuntKenmerk:
           title: Agendapunt kenmerk
           maxLength: 20
           type: string
-          description: |-
-            De weergave van het Agendapuntvolgnummer op de agenda.
-
-            Dit is de letterlijke volgorde van een Agendapunt wordt bij gehouden d.m.v. attribuut 'Agendapuntvolgnummer'. Hoe het Agendapunt getoond wordt op de Agenda wordt beschreven met attribuut 'Agendapunt kenmerk'.
+          description: De weergave van het Agendapuntvolgnummer op de agenda. Dit is de letterlijke volgorde van een Agendapunt wordt bij gehouden d.m.v. attribuut 'Agendapuntvolgnummer'. Hoe het Agendapunt getoond wordt op de Agenda wordt beschreven met attribuut 'Agendapunt kenmerk'.
         agendapuntOmschrijving:
           title: Agendapunt omschrijving
           type: string
@@ -19104,13 +18832,6 @@ components:
             Dit is het volgnummer van het AGENDAPUNT tijdens de vergadering.
 
             Dit is de letterlijke volgorde en zegt niets over hoe dit volgnummer getoond wordt. Hoe het Agendapunt getoond wordt op de Agenda wordt beschreven met attribuut 'Agendapunt kenmerk'.
-        hoofdagendapunt:
-          title: Hoofdagendapunt
-          minLength: 1
-          type: string
-          description: URL-referentie naar het hoofdagendapunt waarvan dit het subagendapunt is.
-          format: uri
-          nullable: true
         subagendapunten:
           title: Subagendapunten
           uniqueItems: true
@@ -19123,10 +18844,7 @@ components:
         eindtijd:
           title: Eindtijd
           type: string
-          description: |-
-            De datum en tijdstip waarop de behandeling van de agendapunt is geëindigd
-
-            Moet voor komen als Starttijd voorkomt
+          description: De datum en tijdstip waarop de behandeling van de agendapunt is geëindigd. Moet voorkomen als Starttijd voorkomt.
           format: date-time
         gemeente:
           $ref: '#/components/schemas/Gemeente'
@@ -19168,7 +18886,7 @@ components:
         informatieobjecten:
           uniqueItems: true
           type: array
-          description: Verwijzing naar de informatieobjecten die bijlage zijn bij dit agendapunt.
+          description: URL-referenties naar de informatieobjecten die een bijlage zijn van dit agendapunt.
           readOnly: true
           items:
             title: Informatieobjecten
@@ -19181,42 +18899,23 @@ components:
           type: string
           description: De datum en tijdstip waarop de behandeling van de agendapunt is gestart
           format: date-time
-        vergaderingsIdentificatie:
-          title: Vergaderingsidentificatie
-          maxLength: 10
-          minLength: 1
-          type: string
-          description: |-
-            De identificatie een VERGADERING
-
-            De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.
-          nullable: true
         stemmingen:
           title: hoort bij of kan betrekking hebben op
           uniqueItems: true
           type: array
-          description: |-
-            Een STEMMING kan betrekking hebben op een AGENDAPUNT of subAGENDAPUNT.
-
-            Een STEMMING kan betrekking hebben op één of meerdere VERGADERSTUKKEN zoals moties, amendementen, voorstellen en/of concept besluitstukken. Deze STEMMING hoort dan bij een AGENDAPUNT. Ook kan een STEMMING betrekking hebben tot een AGENDAPUNT. Men stemt dan over het betreffende AGENDAPUNT, bijvoorbeeld om de agenda vast te stellen of over alle onderliggende subAGENDAPUNTen in één keer.
+          description: Een STEMMING kan betrekking hebben op een AGENDAPUNT of subAGENDAPUNT.
           readOnly: true
           items:
             minLength: 1
             type: string
             format: uri
             nullable: true
-        vergadering:
-          title: Vergadering
-          minLength: 1
-          type: string
-          description: De vergadering waar dit agendapunt behandeld wordt.
-          format: uri
       description: Een onderdeel van de agenda dat als één geheel wordt behandeld. Een AGENDAPUNT kan weer onderverdeeld zijn naar subAGENDAPUNTen.
     Besluit:
       required:
       - besluitresultaat
+      - id
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19226,23 +18925,17 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
-        besluitidentificatie:
-          title: Besluitidentificatie
-          maxLength: 50
-          minLength: 1
-          type: string
-          description: Het resultaat van een BESLUIT. Dit kan n.a.v. een gehouden STEMMING zijn. Identificatie van het besluit binnen de organisatie die het besluit heeft vastgesteld. Alle alfanumerieke tekens m.u.v. diacrieten
         besluitresultaat:
           title: Besluitresultaat
           maxLength: 200
           type: string
-          description: Het resultaat van het BESLUIT. Alle alfanumerieke tekens
+          description: Het resultaat van het BESLUIT.
         besluittoelichting:
           title: Besluittoelichting
           maxLength: 200
@@ -19269,9 +18962,9 @@ components:
         Een na overweging of beraadslaging vastgestelde beslissing voor een individueel of concreet geval.
     DagelijksBestuur:
       required:
-      - dagelijksBestuurNaam
+      - dagelijksBestuursnaam
+      - id
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19281,17 +18974,17 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
-        dagelijksBestuurnaam:
+        dagelijksBestuursnaam:
           title: Dagelijks bestuurnaam
           type: string
           description: Naam van het dagelijks bestuur.
-        dagelijksBestuurtype:
+        dagelijksBestuurstype:
           $ref: '#/components/schemas/NaamDagelijksBestuursType'
         gemeente:
           $ref: '#/components/schemas/Gemeente'
@@ -19303,9 +18996,9 @@ components:
     DagelijksBestuurLidmaatschap:
       required:
       - dagelijksBestuur
+      - id
       - natuurlijkPersoon
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19315,24 +19008,20 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
         dagelijksBestuur:
-          title: dagelijksBestuur
-          minLength: 1
-          type: string
-          description: URL-referentie naar het dagelijks bestuur.
-          format: uri
+          allOf:
+          - description: Verwijzing naar het dagelijks bestuur.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         natuurlijkPersoon:
-          title: Natuurlijk persoon
-          minLength: 1
-          type: string
-          description: URL-referentie naar de natuurlijk persoon die lid is van het dagelijks bestuur.
-          format: uri
+          allOf:
+          - description: Verwijzing naar de natuurlijk persoon die lid is van het dagelijks bestuur.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         datumBeginDagelijksBestuurLidmaatschap:
           title: Datum begin dagelijkse bestuur lidmaatschap
           type: string
@@ -19347,8 +19036,8 @@ components:
     Fractie:
       required:
       - fractienaam
+      - id
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19358,11 +19047,11 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
         fractienaam:
           title: Fractienaam
@@ -19370,15 +19059,6 @@ components:
           minLength: 1
           type: string
           description: De naam van de fractie.
-        fractienummer:
-          title: Fractienummer
-          maxLength: 10
-          minLength: 1
-          type: string
-          description: |-
-            Het nummer dat de FRACTIE uniek identificeert binnen de gemeente
-
-            viercijferige gemeentecode gevolgd door een volgnummer van 7 cijfers met voorloopnullen
         gemeente:
           $ref: '#/components/schemas/Gemeente'
         provincie:
@@ -19389,10 +19069,10 @@ components:
     FractieLidmaatschap:
       required:
       - fractie
+      - id
       - indicatieVoorzitter
       - natuurlijkPersoon
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19402,24 +19082,20 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
         fractie:
-          title: Fractie
-          minLength: 1
-          type: string
-          description: URL-referentie naar de fractie.
-          format: uri
+          allOf:
+          - description: Verwijzing naar de fractie.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         natuurlijkPersoon:
-          title: Fractielid
-          minLength: 1
-          type: string
-          description: URL-referentie naar de natuurlijke persoon die lid is van de fractie.
-          format: uri
+          allOf:
+          - description: Verwijzing naar de natuurlijke persoon die lid is van de fractie.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         datumBeginFractieLidmaatschap:
           title: Datum begin fractie lidmaatschap
           type: string
@@ -19433,15 +19109,13 @@ components:
         indicatieVoorzitter:
           title: Indicatie voorzitter
           type: boolean
-          description: |-
-            Indicatie of iemand de voorzitter is van de FRACTIE
-
-            Standaardwaarde is Nee
+          description: Indicatie of iemand de voorzitter is van de FRACTIE.
+          default: false
       description: ""
     InformatieObject:
       required:
+      - id
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19451,18 +19125,12 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
-          type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
-          readOnly: true
-        informatieObjectIdentificatie:
-          title: Informatieobjectidentificatie
+        id:
+          title: ID
           maxLength: 40
-          minLength: 1
           type: string
-          description: informatieobjectidentificatie. Alle alfanumerieke tekens m.u.v. diacrieten
+          description: Unieke resource identifier.
+          readOnly: true
         auteur:
           title: Auteur
           maxLength: 200
@@ -19488,8 +19156,8 @@ components:
           $ref: '#/components/schemas/Provincie'
         waterschap:
           $ref: '#/components/schemas/Waterschap'
-        informatieObjectType:
-          $ref: '#/components/schemas/InformatieObjectType'
+        informatieobjecttype:
+          $ref: '#/components/schemas/Informatieobjecttype'
         inhoud:
           title: Inhoud
           type: string
@@ -19500,7 +19168,7 @@ components:
         link:
           title: Link
           type: string
-          description: Zie RGBZ.
+          description: De URL waarmee de inhoud van het informatieobject op te vragen is.
           format: uri
         omschrijving:
           title: omschrijving
@@ -19510,26 +19178,22 @@ components:
           title: Taal
           maxLength: 20
           type: string
-          description: Zie RGBZ. Bij voorkeur ISO 639-2/B.
+          description: De taal van het informatieobject. Bij voorkeur aaangeduid volgens ISO 639-2/B.
         titel:
           title: Titel
           maxLength: 200
           type: string
-          description: Titel. Alle alfanumerieke tekens
-        typeMotie:
+          description: De titel van het informatieobject.
+        motietype:
           $ref: '#/components/schemas/MotieType'
-        typeVraag:
+        vraagtype:
           $ref: '#/components/schemas/VraagType'
         vergaderingen:
-          title: Bijlage van vergaderingen
           uniqueItems: true
           type: array
-          description: URL-referenties naar de vergaderingen die dit informatieobject als bijlagen hebben.
+          description: Verwijzingen naar de vergaderingen die dit informatieobject als bijlagen hebben.
           items:
-            minLength: 1
-            type: string
-            format: uri
-            nullable: true
+            $ref: '#/components/schemas/VerwijzingNaarResource'
         versie:
           title: Versie
           maxLength: 5
@@ -19539,11 +19203,9 @@ components:
           title: Agendapunten
           uniqueItems: true
           type: array
-          description: URL-referenties naar de agendapunten die dit informatieobject als bijlagen hebben.
+          description: Verwijzingen naar de agendapunten die dit informatieobject als bijlagen hebben.
           items:
-            minLength: 1
-            type: string
-            format: uri
+            $ref: '#/components/schemas/VerwijzingNaarResource'
         genotuleerdeVergadering:
           title: Genotuleerde vergadering
           minLength: 1
@@ -19558,26 +19220,46 @@ components:
           title: Zaken
           uniqueItems: true
           type: array
-          description: Zaken die gerelateerd zijn aan het informatieobject.
+          description: Zaken die gerelateerd zijn aan dit informatieobject.
           items:
             $ref: '#/components/schemas/Zaak'
         natuurlijkePersonen:
           uniqueItems: true
           type: array
           description: URL-referenties naar één of meer natuurlijke personen die het informatieobject hebben ondertekend.
+          readOnly: true
           items:
             minLength: 1
             type: string
             format: uri
+        vertrouwelijkheidsaanduiding:
+          title: Vertrouwelijkheidsaanduiding
+          type: string
+          description: Aanduiding van de vertrouwelijkheid.
+        portefeuillehouder:
+          title: Portefeuillehouder
+          maxLength: 100
+          type: string
+          description: De naam van de portefeuillehouder van het VOORSTEL.
+        toelichting:
+          title: Toelichting
+          type: string
+          description: De toelichting op het AMENDEMENT.
       description: |-
         Een mededeling die gedaan wordt bij de vergadering Het antwoord dat gegeven is door het college of de burgemeester (in geval van een gemeente) of door de commissaris of gedeputeerde staten (in geval van een provincie) op een gestelde vraag Een toezegging van een gedeputeerde of raadslid Een BESLUITVORMINGSSTUK is een INFORMATIEOBJECT die als basis dient bij een STEMMING. Dit zijn vragen die raadsleden aan het college of de burgemeester stellen (gemeente) of die statenleden aan de gedeputeerde staten of de commissaris stellen (provincie). Een MOTIE is een korte gemotiveerde verklaring over een onderwerp waardoor een mening, wens of verzoek wordt uitgesproken en is ingediend door een raadslid of een statenlid. zie RGBZ Geheel van gegevens met een eigen identiteit ongeacht zijn vorm, met de bijbehorende metadata ontvangen of opgemaakt door een natuurlijke en/of rechtspersoon bij de uitvoering van taken, zijnde een ENKELVOUDIG INFORMATIEOBJECT of een SAMENGESTELD INFORMATIEOBJECT.
 
         Kan vaak een antwoord zijn op een toezegging. Dit kunnen zowel schriftelijke vragen zijn als vragen die gesteld worden bij bijvoorbeeld het vragenuur. Een motie begint met de reden van indiening en eindigt met de uitspraak. Een motie is juridisch niet bindend en wordt eerst ter stemming voorgelegd tijdens de VERGADERING van de gemeenteraad of provinciale staten. Een motie kan zelfstandig zijn of gekoppeld aan een voorstel dat ter bespreking voorligt.
     Zaak:
+      required:
+      - zaakidentificatie
+      - zaakregistratie
       properties:
-        identificatie:
+        zaakidentificatie:
           type: string
           description: Identificatie van de zaak.
+        zaakregistratie:
+          type: integer
+          description: Identificatie van de registratie waar de zaak is vastgelegd.
         url:
           minLength: 1
           type: string
@@ -19587,22 +19269,17 @@ components:
         omschrijving:
           type: string
           description: Omschrijving van de zaak.
-        bronorganisatie:
-          type: integer
-          description: Identificatie van de organisatie waar de zaak is vastgelegd.
     GerelateerdInformatieobject:
       title: Gerelateerd informatieobject
       required:
-      - aanduiding
       - informatieobject
+      - rol
       type: object
       properties:
         informatieobject:
-          title: Informatieobject
-          minLength: 1
-          type: string
-          description: URL-referentie naar het informatieobject.
-          format: uri
+          allOf:
+          - description: Verwijzing naar het gerelateerde informatieobject.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         rol:
           title: Rol
           type: string
@@ -19615,9 +19292,9 @@ components:
       nullable: true
     Mediabron:
       required:
+      - id
       - type
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19627,18 +19304,17 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
         vergadering:
-          title: url
-          minLength: 1
-          type: string
-          description: URL-referentie naar de vergadering waarvan deze mediabron de vastlegging is.
-          format: uri
+          allOf:
+          - description: Verwijzing naar de vergadering waarvan deze mediabron de vastlegging is.
+          - nullable: true
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         locatieWebvttbestand:
           title: Locatie Webvttbestand
           type: string
@@ -19647,14 +19323,20 @@ components:
           title: Mimetype
           type: string
           description: Het type bestand dat is opgeslagen.
-        type:
+        mediabrontype:
           $ref: '#/components/schemas/MediabronType'
+        link:
+          minLength: 1
+          type: string
+          description: Link naar de mediabron.
+          format: uri
+          nullable: true
       description: ""
     NatuurlijkPersoon:
       required:
+      - id
       - naamNatuurlijkPersoon
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19664,11 +19346,11 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
         functie:
           $ref: '#/components/schemas/Functie'
@@ -19681,22 +19363,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/NevenfunctieNatuurlijkePersoon'
-        nummerNatuurlijkPersoon:
-          title: Nummer natuurlijk persoon
-          maxLength: 17
-          minLength: 1
-          type: string
-          description: |-
-            Het identificerende nummer van een NATUURLIJK PERSOON niet zijnde het burgerservicenummer
-
-            Het kan dus voorkomen dat dezelfde natuurlijke persoon bij twee of meer gemeenten geregistreerd is onder een ander nummer.
-
-            viercijferige gemeentecode gevolgd door een volgnummer van 13 cijfers met voorloopnullen
         informatieobjecten:
           uniqueItems: true
           type: array
-          description: URL-referenties naar één of meer informatieobjecten die de natuurlijke persoon heeft ondertekend.
-          readOnly: true
+          description: Verwijzingen naar één of meer informatieobjecten die de natuurlijke persoon heeft ondertekend.
+          items:
+            $ref: '#/components/schemas/VerwijzingNaarResource'
+        indieners:
+          uniqueItems: true
+          type: array
+          description: URL-referenties naar de indieners van een informatieobject.
           items:
             minLength: 1
             type: string
@@ -19706,8 +19382,8 @@ components:
       required:
       - aanwezigeDeelnemer
       - agendapunt
+      - id
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19717,40 +19393,34 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
         aanwezigeDeelnemer:
-          title: Spreker
-          minLength: 1
-          type: string
-          description: URL-referentie naar de aanwezige deelnemer waarvan het spreekfragment wordt vastgelegd.
-          format: uri
+          allOf:
+          - description: Verwijzing naar de aanwezige deelnemer waarvan het spreekfragment wordt vastgelegd.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         agendapunt:
-          title: Agendapunt
-          minLength: 1
-          type: string
-          description: URL-referentie naar het agendapunt waarover het spreekfragment gaat.
-          format: uri
+          allOf:
+          - description: Verwijzing naar het agendapunt waarover het spreekfragment gaat.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         mediabron:
-          title: Mediabron
-          minLength: 1
-          type: string
-          description: URL-referentie naar de mediabron waarin het spreekfragment is vastgelegd.
-          format: uri
-          nullable: true
+          allOf:
+          - description: Verwijzing naar de mediabron waarin het spreekfragment is vastgelegd.
+          - nullable: true
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         aanvangSpreekfragment:
           title: Aanvang spreekfragment
           type: string
-          description: De tijdstip en datum van aanvang van het SPREEKFRAGMENT
+          description: Het tijdstip en de datum van aanvang van het SPREEKFRAGMENT.
           format: date-time
         eindeSpreekfragment:
           title: Einde spreekfragment
           type: string
-          description: ""
+          description: Het tijdstip en de datum van einde van het SPREEKFRAGMENT.
           format: date-time
         audioTijdsaanduidingAanvang:
           title: Audio tijdsaanduiding aanvang
@@ -19793,10 +19463,10 @@ components:
     Stem:
       required:
       - aanwezigeDeelnemer
+      - id
       - keuzeStemming
       - stemming
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19806,32 +19476,28 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
         aanwezigeDeelnemer:
-          title: Aanwezige deelnemer
-          minLength: 1
-          type: string
-          description: URL-referentie naar de aanwezige deelnemer die een keuze heeft gemaakt in de stemming.
-          format: uri
+          allOf:
+          - description: Verwijzing naar de aanwezige deelnemer die een keuze heeft gemaakt in de stemming.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         stemming:
-          title: Stemming
-          minLength: 1
-          type: string
-          description: URL-referentie naar de stemming.
-          format: uri
+          allOf:
+          - description: Verwijzing naar de stemming.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         keuzeStemming:
           $ref: '#/components/schemas/StemKeuze'
       description: Een STEM is een formele uitdrukking van een keuze die een raadslid (gemeente) of statenlid (provincie) maakt over een bepaald onderwerp.
     Stemming:
       required:
       - agendapunt
+      - id
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19841,27 +19507,16 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
-        stemmingsidentificatie:
-          title: Stemmingsidentificatie
-          maxLength: 10
-          minLength: 1
-          type: string
-          description: |-
-            De identificatie van de STEMMING
-
-            De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen
         agendapunt:
-          title: Agendapunt
-          minLength: 1
-          type: string
-          description: URL-referentie naar het agendapunt waar deze stemming betrekking op heeft.
-          format: uri
+          allOf:
+          - description: Verwijzing naar het agendapunt waar deze stemming betrekking op heeft.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         resultaatMondelingeStemming:
           $ref: '#/components/schemas/StemmingResultaat'
         resultaatStemmingOverPersonen:
@@ -19877,19 +19532,15 @@ components:
         stemmingstype:
           $ref: '#/components/schemas/StemmingsType'
         besluit:
-          title: Besluit
-          minLength: 1
-          type: string
-          description: URL-referentie naar het besluit waartoe de stemming heeft geleid.
-          format: uri
-          nullable: true
+          allOf:
+          - description: Verwijzing naar het besluit waartoe de stemming heeft geleid.
+          - nullable: true
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         informatieobject:
-          title: Informatieobject
-          minLength: 1
-          type: string
-          description: URL-referentie naar het besluitvormingsstuk waar de stemming betrekking op heeft.
-          format: uri
-          nullable: true
+          allOf:
+          - description: Verwijzing naar het besluitvormingsstuk waar de stemming betrekking op heeft.
+          - nullable: true
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         stemmen:
           title: Stemmen
           uniqueItems: true
@@ -19900,7 +19551,6 @@ components:
             minLength: 1
             type: string
             format: uri
-            nullable: true
       description: |-
         Een moment waarop een keuze gemaakt moet worden over een bepaald AGENDAPUNT of VERGADERSTUK, waarbij alle uitgebrachte stemmen geteld worden.
 
@@ -19908,9 +19558,9 @@ components:
     StemresultaatPerFractie:
       required:
       - fractie
+      - id
       - stemming
       - url
-      - uuid
       type: object
       properties:
         url:
@@ -19920,31 +19570,27 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4).
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
         fractie:
-          title: Fractie
-          minLength: 1
-          type: string
-          description: URL-referentie naar de fractie.
-          format: uri
+          allOf:
+          - description: Verwijzing naar de fractie.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         stemming:
-          title: Stemming
-          minLength: 1
-          type: string
-          description: URL-referentie naar de stemming.
-          format: uri
+          allOf:
+          - description: Verwijzing naar de stemming.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         fractiestemresultaat:
           $ref: '#/components/schemas/FractieStemResultaat'
       description: Het resultaat van de STEMMING per FRACTIE en wordt afgeleid van de uitgebrachte STEMmen.
     Vergadering:
       required:
+      - id
       - url
-      - uuid
       - vergaderingstype
       type: object
       properties:
@@ -19955,22 +19601,12 @@ components:
           description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           format: uri
           readOnly: true
-        uuid:
-          title: uuid
+        id:
+          title: ID
+          maxLength: 40
           type: string
-          description: Unieke resource identifier (UUID4)
-          format: uuid
+          description: Unieke resource identifier.
           readOnly: true
-        vergaderingsIdentificatie:
-          title: Vergaderingsidentificatie
-          maxLength: 10
-          minLength: 1
-          type: string
-          description: |-
-            De identificatie een VERGADERING
-
-            De eerste vier karakter zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen.
-          example: "1234567890"
         aanvangVergadering:
           title: Aanvang vergadering
           type: string
@@ -19991,12 +19627,10 @@ components:
             format: uri
             nullable: true
         hoofdvergadering:
-          title: Hoofdvergadering
-          minLength: 1
-          type: string
-          description: URL-referentie naar de hoofdvergadering waarvan deze vergadering een deelvergadering is.
-          format: uri
-          nullable: true
+          allOf:
+          - description: Verwijzing naar de hoofdvergadering waarvan deze vergadering een deelvergadering is.
+          - nullable: true
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         eindeVergadering:
           title: Einde vergadering
           type: string
@@ -20043,10 +19677,10 @@ components:
           example: Raadsvergadering
         status:
           $ref: '#/components/schemas/VergaderingStatus'
-        vergaderToelichting:
-          title: Vergader toelichting
+        vergadertoelichting:
+          title: Vergadertoelichting
           type: string
-          description: De toelichting of nadere omschrijving van de vergadering
+          description: De toelichting of nadere omschrijving van de vergadering.
           example: Regulier geplande raadsvergadering van mei
         vergaderdatum:
           title: Vergaderdatum
@@ -20065,13 +19699,11 @@ components:
           items:
             type: string
             format: uri
-        notulen:
-          title: Notulen
-          minLength: 1
-          type: string
-          description: URL-referentie naar de notulen van deze vergadering.
-          format: uri
-          nullable: true
+        informatieobject:
+          allOf:
+          - description: Verwijzing naar het informatieobject zijnde de notulen van deze vergadering.
+          - nullable: true
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         deelvergaderingen:
           title: Deelvergaderingen
           uniqueItems: true
@@ -20103,30 +19735,32 @@ components:
       description: Een VERGADERING is een bijeenkomst van meerdere mensen die met elkaar spreken en/of afspraken maken over onderwerpen die op de agenda staan.
     Gemeente:
       required:
-      - gemeenteCode
-      - gemeenteNaam
+      - gemeentecode
+      - gemeentenaam
       type: object
       properties:
-        gemeenteCode:
-          title: gemeenteCode
+        gemeentecode:
+          title: Gemeentecode
           maxLength: 4
           minLength: 1
           type: string
           description: De code van een gemeente in de landelijke tabel.
-        gemeenteNaam:
-          title: gemeenteNaam
+        gemeentenaam:
+          title: Gemeentenaam
           minLength: 1
           type: string
           description: De naam van de gemeente.
-      description: De referentielijst met alle gemeenten Tabel 33 van de landelijke tabellen.
+          readOnly: true
+      description: "De referentielijst met alle gemeenten Tabel 33 van de landelijke tabellen.  \n\n **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `provincie` en `waterschap` de waarde `null` hebben."
+      nullable: true
     Gremium:
       required:
-      - gremiumIdentificatie
-      - gremiumNaam
+      - gremiumidentificatie
+      - gremiumnaam
       type: object
       properties:
-        gremiumIdentificatie:
-          title: gremiumIdentificatie
+        gremiumidentificatie:
+          title: Gremiumidentificatie
           maxLength: 10
           minLength: 1
           type: string
@@ -20134,12 +19768,13 @@ components:
             De identificatie van een gremium
 
             De identificatie van een gremium
-        gremiumNaam:
-          title: Gremium naam
+        gremiumnaam:
+          title: Gremiumnaam
           maxLength: 100
           minLength: 1
           type: string
           description: De naam van het gremium. Hier horen ook de (raads- en staten)commissies bij
+          readOnly: true
       description: De referentielijst met alle gremia in een gemeente. Hier horen ook alle commissies bij van de gemeenteraad.
     NaamNatuurlijkPersoon:
       required:
@@ -20203,7 +19838,7 @@ components:
           title: Indicator bezoldigd
           type: boolean
           description: Indicator of de nevenfunctie uitgevoerd wordt tegen betaling.
-        indicatorNevenFunctieVanwegeLidmaatschap:
+        indicatorNevenunctieVanwegeLidmaatschap:
           title: Indicator nevenfunctie vanwege lidmaatschap
           type: boolean
           description: Indicator die aangeeft of de nevenfunctie wordt vervuld vanwege de lidmaatschap van de Raad of de Staten.
@@ -20272,7 +19907,7 @@ components:
       - vrouw
       - anders
       - onbekend
-    InformatieObjectType:
+    Informatieobjecttype:
       type: string
       description: |-
         Het type van het informatieobject
@@ -20297,7 +19932,7 @@ components:
       - transcriptie
     MotieType:
       type: string
-      description: duiding van het type van een MOTIE<body><ul><li>`voorstel` - Voorstel voorstellen van het college van B&amp;W (gemeente) of van de gedeputueerde staten (provincie) en initiatiefvoorstellen van raadsleden (gemeente) of statenleden (provincie)</li><li>`afkeuring` - Afkeuring </li><li>`treurnis` - Treurnis </li><li>`wantrouwen` - Wantrouwen </li><li>`vreemd` - Vreemd </li><li>`overig` - Overig Dit is de standaardwaarde</li></ul></body>
+      description: Duiding van het type van een MOTIE<body><ul><li>`voorstel` - Voorstel voorstellen van het college van B&amp;W (gemeente) of van de gedeputueerde staten (provincie) en initiatiefvoorstellen van raadsleden (gemeente) of statenleden (provincie)</li><li>`afkeuring` - Afkeuring </li><li>`treurnis` - Treurnis </li><li>`wantrouwen` - Wantrouwen </li><li>`vreemd` - Vreemd </li><li>`overig` - Overig Dit is de standaardwaarde</li></ul></body>
       enum:
       - voorstel
       - afkeuring
@@ -20314,14 +19949,46 @@ components:
       - dagelijks_bestuur
     Provincie:
       type: string
-      description: <body><ul><li>`drenthe` - Drenthe </li><li>`groningen` - Groningen </li><li>`overijsel` - Overijsel </li><li>`flevoland` - Flevoland </li><li>`friesland` - Friesland </li><li>`friesland` - Gelderland </li><li>`utrecht` - Utrecht </li><li>`noord_holland` - Noord-Holland </li><li>`zuid_holland` - Zuid-Holland </li><li>`zeeland` - Zeeland </li><li>`noord_brabant` - Noord-Brabant </li><li>`limburg` - Limburg </li></ul></body>
+      description: |-
+        De naam van de provincie volgens de waardenlijst.
+        * drente - Drenthe
+        * groningen - Groningen
+        * overijsel - Overijsel
+        * flevoland - Flevoland
+        * friesland - Friesland
+        * gelderland - Gelderland
+        * utrecht - Utrecht
+        * noord_holland - Noord-Holland
+        * zuid_holland - Zuid-Holland
+        * zeeland - Zeeland
+        * noord_brabant - Noord-Brabant
+        * limburg - Limburg
+
+        **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `gemeente` en `waterschap` de waarde `null` hebben.
+      nullable: true
       enum:
       - drenthe
       - groningen
       - overijsel
       - flevoland
       - friesland
+      - gelderland
+      - utrecht
+      - noord_holland
+      - zuid_holland
+      - zeeland
+      - noord_brabant
+      - limburg
+    ProvincieInQuery:
+      type: string
+      description: De naam van de provincie volgens de waardenlijst.
+      enum:
+      - drenthe
+      - groningen
+      - overijsel
+      - flevoland
       - friesland
+      - gelderland
       - utrecht
       - noord_holland
       - zuid_holland
@@ -20330,21 +19997,21 @@ components:
       - limburg
     Waterschap:
       required:
-      - waterschapCode
-      - waterschapNaam
+      - waterschapcode
+      - waterschapnaam
       type: object
       properties:
-        waterschapCode:
+        waterschapcode:
           maxLength: 4
           minLength: 4
           type: string
           description: De code van het waterschap in de CBS tabel.
-        waterschapNaam:
-          maxLength: 4
-          minLength: 4
+        waterschapnaam:
           type: string
           description: De naam van het waterschap.
-      description: De referentielijst met alle waterschappen volgens CBS.
+          readOnly: true
+      description: "De referentielijst met alle waterschappen volgens CBS. \n\n **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `gemeente` en `provincie` de waarde `null` hebben."
+      nullable: true
     RolNaam:
       type: string
       description: duiding van de rollen van een natuurlijke persoon tijdens een vergadering<body><ul><li>`voorzitter` - Voorzitter de voorzitter zit de vergadering voor</li><li>`vice_voorzitter` - Vice voorzitter de vice-voorzitter van de vergadering</li><li>`raadslid` - Raadslid Een raadslid is een gekozen volksvertegenwoordiger binnen een gemeente. Alle raadsleden van één gemeente vormen samen de gemeenteraad van de betreffende gemeente.</li><li>`inspreker` - Inspreker Een inspreker is een belanghebbende of betrokkene die wil inspreken bij een agendapunt</li><li>`overig` - Overig </li><li>`portefeuillehouder` - Portefeuillehouder de houder van een bepaalde portefeuille.</li><li>`statenlid` - Statenlid Een statenlid is een gekozen volksvertegenwoordiger binnen een provincie. Alle statenleden van één provincie vormen samen de Provinciale Staten van de betreffende provincie.</li><li>`dagelijks_bestuurslid` - Dagelijks bestuurslid Waterschappen</li><li>`algemeen_bestuurslid` - Algemeen bestuurslid Waterschappen</li><li>`griffier` - Griffier van de vergadering</li></ul></body>
@@ -20369,7 +20036,7 @@ components:
       - voor
       - tegen
       - afwezig
-      - othouden
+      - onthouden
     StemmingResultaat:
       type: string
       description: duiding van het resultaat van een STEMMING<body><ul><li>`voor` - Voor </li><li>`tegen` - Tegen </li><li>`gelijk` - Gelijk </li></ul></body>
@@ -20627,16 +20294,26 @@ components:
     OrganisatorischeEenheid:
       title: Organisatorische eenheid
       required:
+      - id
       - naam
+      - url
       type: object
       properties:
-        organisatie-eenheid-identificatie:
-          title: Organisatie-eenheid-identificatie
-          maxLength: 24
+        url:
+          title: url
+          minLength: 1
           type: string
-          description: Een korte identificatie van de organisatorische eenheid.
-        e-mailAdres:
-          title: E-mail adres
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          format: uri
+          readOnly: true
+        id:
+          title: ID
+          maxLength: 40
+          type: string
+          description: Unieke resource identifier.
+          readOnly: true
+        e-mailadres:
+          title: E-mailadres
           maxLength: 254
           type: string
           description: Elektronisch postadres waaronder de organisatorische eenheid in de regel bereikbaar is.
@@ -20673,9 +20350,24 @@ components:
     Indiener:
       title: Indiener
       required:
+      - id
       - informatieobject
+      - url
       type: object
       properties:
+        url:
+          title: url
+          minLength: 1
+          type: string
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          format: uri
+          readOnly: true
+        id:
+          title: ID
+          maxLength: 40
+          type: string
+          description: Unieke resource identifier.
+          readOnly: true
         naam:
           title: Naam
           maxLength: 200
@@ -20687,26 +20379,37 @@ components:
           type: string
           description: De aanduiding van het adres van de indiener.
         informatieobject:
-          title: Informatieobject
-          minLength: 1
-          type: string
-          description: URL-referentie naar het informatieobject dat wordt ingediend.
-          format: uri
+          allOf:
+          - description: Verwijzing naar het informatieobject dat wordt ingediend.
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         natuurlijkPersoon:
-          title: Natuurlijk persoon
-          minLength: 1
-          type: string
-          description: URL-referentie naar de natuurlijk persoon die het informatieobject indient.
-          format: uri
-          nullable: true
+          allOf:
+          - description: Verwijzing naar de natuurlijk persoon die het informatieobject indient.
+          - nullable: true
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
         organisatorischeEenheid:
-          title: Organisatorische eenheid
+          allOf:
+          - description: Verwijzing naar de organisatorische eenheid die het informatieobject indient.
+          - nullable: true
+          - $ref: '#/components/schemas/VerwijzingNaarResource'
+      description: "De indiener, zijnde een natuurlijk persoon of een organisatorische eenheid, van een informatieobject."
+    VerwijzingNaarResource:
+      required:
+      - id
+      - url
+      type: object
+      properties:
+        id:
+          maxLength: 40
           minLength: 1
           type: string
-          description: URL-referentie naar de organisatorische eenheid die het informatieobject indient.
+          description: ID van de resource waarnaar verwezen wordt.
+        url:
+          minLength: 1
+          type: string
+          description: URL-referentie naar de resource waarnaar verwezen wordt.
           format: uri
-          nullable: true
-      description: "De indiener, zijnde een natuurlijk persoon of een organisatorische eenheid, van een informatieobject."
+          readOnly: true
     BadRequestFoutbericht:
       allOf:
       - $ref: '#/components/schemas/Foutbericht'
