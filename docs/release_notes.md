@@ -31,6 +31,13 @@ Het informatiemodel is uitgebreid zodat de waterschappen ook gebruik kunnen make
   - Gemeente,
   - Provincie,
   - Waterschap.
+ 
+### Wijziging rondom modellering relatie "is ingediend"
+
+- Objecttype "Betrokkene" hernoemd naar "Indiener".
+- De relatie tussen de objecttypen Indiener en Informatieobject ("is ingediend door") is omgedraaid en hernoemd naar "heeft ingediend". De kardinaliteit van die relatie is aan de zijde van het objecttype Informatieobject op 1 gezet.
+- De kardinaliteit van de relatie tussen de objecttypen Indiener en Natuurlijk Persoon ("is") is aan de zijde van het objecttype Natuurlijk Persoon op 0..1 gezet.
+- De kardinaliteit van de relatie tussen de objecttypen Indiener en Organisatorische Eenheid ("is") is aan de zijde van het objecttype Organisatorische Eenheid op 0..1 gezet.
 
 ### Allerhande
 
@@ -38,8 +45,9 @@ Het informatiemodel is uitgebreid zodat de waterschappen ook gebruik kunnen make
 - Attribuut 'Griffier' toegevoegd aan Enumeratiesoort "rolNaam"" (issue #88).
 - Attribuut 'Volledige naam' toegevoegd aan Gegevensgroeptype "Naam" (issue #84).
 - Attribuut 'Publicatiedatum' toegevoegd aan Objecttype "Vergadering" (issue #78).
-- Objecttype "Betrokkene" hernoemd naar "Indiener".
 - Objecttype "Zaak" is gewijzigd in een Gegevensgroeptype.
+- De attribuutsoort 'Link' is verwijderd uit het objecttype Enkelvoudig Informatieobject, deze was immers als aanwezig in het objecttype Informatieobject.
+- De naam van het enumeratiesoort 'naamDagelijksBestuursType' is gewijzigd in 'dagelijksBestuurstype'.
 
 ## Volledig dekking informatiemodel
 
@@ -58,7 +66,7 @@ De volgende relaties uit het informatiemodel zijn toegevoegd aan de OAS:
 - “is genotuleerd in” tussen Agendapunt en Vergadering.
 - “is vastgelegd middels” tussen Vergadering en Mediabron.
 - “is mede ondertekend door” tussen Natuurlijk Persoon en Besluitvormingsstuk.
-- "is ingediend" tussen Informatieobject en Indiener.
+- "heeft ingediend" tussen Indiener en Informatieobject.
 - "heeft als sub-amendement" tussen Amendement en zichzelf (voorheen:“is subAmendement heeft betrekking op”)
 - "hoort bij" tussen Amendement en Voorstel.
 - "hoort bij" tussen Antwoord en Vraag (voorheen: "behorend bij").
