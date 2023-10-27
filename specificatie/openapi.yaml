@@ -179,7 +179,7 @@ paths:
     get:
       operationId: "getaanwezigedeelnemer"
       description: "Het bericht dat de JSON/REST API voor het ophalen van gegevens\
-        \ van een aanwezige deelnemer.."
+        \ van een aanwezige deelnemer."
       parameters:
         - in: path
           name: id
@@ -187,24 +187,6 @@ paths:
             type: string
             description: Unieke resource identifier
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -331,6 +313,7 @@ paths:
           maxLength: 10
       - in: "query"
         name: "gemeentecode"
+        description: De code van een gemeente in de landelijke tabel.
         required: false
         schema:
           type: "string"
@@ -338,12 +321,13 @@ paths:
         name: "provincie"
         required: false
         schema:
-          $ref: "#/components/schemas/Provincie"
+          $ref: "#/components/schemas/ProvincieInQuery"
       - in: "query"
-        name: "waterschap"
+        name: "waterschapcode"
+        description: De code van het waterschap in de CBS tabel.
         required: false
         schema:
-          $ref: "#/components/schemas/Waterschap"
+          type: string
       - in: "query"
         name: "gewijzigdSinds"
         description: "Met deze parameter kunnen vergaderingen opgevraagd worden waarin\
@@ -510,24 +494,6 @@ paths:
             type: string
             description: Unieke resource identifier.
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -802,24 +768,6 @@ paths:
             type: string
             description: Unieke resource identifier.
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -928,17 +876,19 @@ paths:
         \ van het dagelijks bestuur retourneert."
       parameters:
       - in: query
-        name: natuurlijkPersoon
-        required: false
-        schema:
-          type: "string"
-          format: uri
-      - in: query
         name: dagelijksBestuur
+        description: ID van het dagelijks bestuur.
         required: false
         schema:
           type: "string"
-          format: uri
+          maxLength: 40
+      - in: query
+        name: natuurlijkPersoon
+        description: ID van de natuurlijk persoon.
+        required: false
+        schema:
+          type: "string"
+          maxLength: 40
       - in: "query"
         name: "datumBeginDagelijksBestuurLidmaatschap"
         description: "De datum en tijdstip waarop het lidmaatschap van het dagelijkse\
@@ -1104,17 +1054,6 @@ paths:
             type: string
             description: Unieke resource identifier.
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
           examples:
             OneValue:
               value: '"79054025255fb1a26e4bc422aef54eb4"'
@@ -1232,6 +1171,7 @@ paths:
       parameters:
       - in: "query"
         name: "gemeentecode"
+        description: De code van een gemeente in de landelijke tabel.
         required: false
         schema:
           type: "string"
@@ -1239,12 +1179,13 @@ paths:
         name: "provincie"
         required: false
         schema:
-          $ref: "#/components/schemas/Provincie"
+          $ref: "#/components/schemas/ProvincieInQuery"
       - in: "query"
-        name: "waterschap"
+        name: "waterschapcode"
+        description: De code van het waterschap in de CBS tabel.
         required: false
         schema:
-          $ref: "#/components/schemas/Waterschap"
+          type: string
       - in: "query"
         name: "dagelijksBestuurnaam"
         required: false
@@ -1406,24 +1347,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -1534,20 +1457,18 @@ paths:
       parameters:
       - in: "query"
         name: "fractie"
-        description: "URL-referentie naar de fractie."
+        description: "ID van de fractie."
         required: false
         schema:
           type: string
-          format: uri
-          minLength: 1
+          maxLength: 40
       - in: "query"
         name: "fractielid"
-        description: "URL-referentie naar het fractielid."
+        description: "ID van het fractielid."
         required: false
         schema:
           type: string
-          format: uri
-          minLength: 1
+          maxLength: 40
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -1698,24 +1619,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -1826,11 +1729,13 @@ paths:
       parameters:
         - in: query
           name: fractienaam
+          description: De naam van de fractie.
           required: false
           schema:
             type: string
         - in: "query"
           name: "gemeente"
+          description: De code van een gemeente in de landelijke tabel.
           required: false
           schema:
             type: "string"
@@ -1838,12 +1743,13 @@ paths:
           name: "provincie"
           required: false
           schema:
-            $ref: "#/components/schemas/Provincie"
+            $ref: "#/components/schemas/ProvincieInQuery"
         - in: "query"
-          name: "waterschap"
+          name: "waterschapcode"
+          description: De code van het waterschap in de CBS tabel.
           required: false
           schema:
-            $ref: "#/components/schemas/Waterschap"
+            type: string
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -1996,24 +1902,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -2294,24 +2182,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -2464,25 +2334,26 @@ paths:
           format: "date"
       - in: "query"
         name: "gemeentecode"
+        description: De code van een gemeente in de landelijke tabel.
         required: false
         schema:
           type: "string"
-      - in: "query"
-        name: "omschrijving"
-        required: false
-        schema:
-          type: "string"
-      - in: "query"
-        name: "ontvangstdatum"
-        required: false
-        schema:
-          type: "string"
-          format: "date"
       - in: "query"
         name: "provincie"
         required: false
         schema:
-          $ref: "#/components/schemas/Provincie"
+          $ref: "#/components/schemas/ProvincieInQuery"
+      - in: "query"
+        name: "waterschapcode"
+        description: De code van het waterschap in de CBS tabel.
+        required: false
+        schema:
+          type: string
+      - in: "query"
+        name: "omschrijving"
+        required: false
+        schema:
+          type: "string"  
       - in: "query"
         name: "taal"
         description: "zie RGBZ\n\nbij voorkeur ISO 639-2/B"
@@ -2664,17 +2535,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
           examples:
             OneValue:
               value: '"79054025255fb1a26e4bc422aef54eb4"'
@@ -2962,24 +2822,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -3267,24 +3109,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -3545,24 +3369,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -3871,24 +3677,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -3996,6 +3784,21 @@ paths:
       operationId: "getstemmen"
       description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie\
         \ stemmen retourneert."
+      parameters:
+        - in: query
+          name: aanwezigeDeelnemer
+          description: De ID van de aanwezige deelnemers.
+          required: false
+          schema:
+            type: string
+            maxLength: 40
+        - in: query
+          name: stemming
+          description: De ID van de stemming.
+          required: false
+          schema:
+            type: string
+            maxLength: 40
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -4146,24 +3949,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -4430,24 +4215,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -4558,22 +4325,18 @@ paths:
       parameters:
       - in: "query"
         name: "fractie"
-        description: "URL-referentie naar de fractie."
+        description: ID van de fractie.
         required: false
         schema:
           type: "string"
-          title: "Fractie"
-          format: uri
-          minLength: 1
+          maxLength: 40
       - in: "query"
         name: "Stemming"
-        description: "URL-referentie naar de stemming."
+        description: ID van de stemming.
         required: false
         schema:
           type: "string"
-          title: "Stemming"
-          format: uri
-          minLength: 1
+          maxLength: 40
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -4725,24 +4488,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -4853,11 +4598,6 @@ paths:
         \ retourneert."
       parameters:
       - in: "query"
-        name: "gemeentecode"
-        required: false
-        schema:
-          type: "string"
-      - in: "query"
         name: "gewijzigdSinds"
         description: "Met deze parameter kunnen vergaderingen opgevraagd worden waarin\
           \ iets is gewijzigd sinds het opgegeven moment."
@@ -4873,10 +4613,24 @@ paths:
           type: "string"
           maxLength: 100
       - in: "query"
+        name: "gemeentecode"
+        description: De code van een gemeente in de landelijke tabel.
+        required: false
+        schema:
+          type: "string"
+      - in: "query"
         name: "provincie"
         required: false
         schema:
-          $ref: "#/components/schemas/Provincie"
+          $ref: "#/components/schemas/ProvincieInQuery"
+      - in: "query"
+        name: "waterschapcode"
+        description: De code van het waterschap in de CBS tabel.
+        required: false
+        schema:
+          type: string
+          minLength: 4
+          maxLength: 4
       - in: "query"
         name: "status"
         description: "De status van de vergadering"
@@ -5047,24 +4801,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-        - in: header
-          name: If-None-Match
-          schema:
-            type: string
-          description:
-            "Voer een voorwaardelijk verzoek uit. Deze header moet \xE9\xE9\
-            n of meerdere ETag-waardes bevatten van resources die de consumer gecached\
-            \ heeft. Indien de waarde van de ETag van de huidige resource voorkomt in\
-            \ deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie\
-            \ [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match)\
-            \ voor meer informatie."
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -5372,12 +5108,6 @@ components:
           type: "array"
           title: "hoort bij of kan betrekking hebben op"
           description: Een STEMMING kan betrekking hebben op een AGENDAPUNT of subAGENDAPUNT.
-            # Een STEMMING kan betrekking hebben op één of meerdere VERGADERSTUKKEN\
-            # \ zoals moties, amendementen, voorstellen en/of concept besluitstukken.\
-            # \ Deze STEMMING hoort dan bij een AGENDAPUNT. Ook kan een STEMMING betrekking\
-            # \ hebben tot een AGENDAPUNT. Men stemt dan over het betreffende AGENDAPUNT,\
-            # \ bijvoorbeeld om de agenda vast te stellen of over alle onderliggende\
-            # \ subAGENDAPUNTen in één keer."
           items:
             type: "string"
             format: "uri"
@@ -5579,6 +5309,15 @@ components:
           allOf:
             - description: Verwijzing naar de fractie.
             - $ref: "#/components/schemas/VerwijzingNaarResource"
+        # fractie:
+        #   genotuleerdeVergadering:
+        #   title: "Genotuleerde vergadering"
+        #   description: "URL-referentie naar de vergadering waarvan dit informatieobject de notulen zijn."
+        #   type: "string"
+        #   format: "uri"
+        #   minLength: 1
+        #   nullable: true
+        #   readOnly: true
         natuurlijkPersoon:
           allOf:
             - description: Verwijzing naar de natuurlijke persoon die lid is van de fractie.
@@ -5708,15 +5447,6 @@ components:
             $ref: "#/components/schemas/VerwijzingNaarResource"
           description: Verwijzingen naar de vergaderingen die dit informatieobject als bijlagen hebben.
           uniqueItems: true
-        # vergaderingen:
-        #   type: array
-        #   items:
-        #     type: string
-        #     format: uri
-        #     minLength: 1
-        #     nullable: true
-        #   description: URL-referenties naar de vergaderingen die dit informatieobject als bijlagen hebben.
-        #   uniqueItems: true
         versie:
           type: "string"
           title: "Versie"
@@ -5729,15 +5459,6 @@ components:
           items:
             $ref: "#/components/schemas/VerwijzingNaarResource"
           uniqueItems: true
-        # agendapunten:
-        #   type: "array"
-        #   title: "Agendapunten"
-        #   description: URL-referenties naar de agendapunten die dit informatieobject als bijlagen hebben.
-        #   items:
-        #     type: "string"
-        #     format: "uri"
-        #     minLength: 1
-        #   uniqueItems: true
         genotuleerdeVergadering:
           title: "Genotuleerde vergadering"
           description: "URL-referentie naar de vergadering waarvan dit informatieobject de notulen zijn."
@@ -5911,15 +5632,14 @@ components:
           items:
             $ref: "#/components/schemas/VerwijzingNaarResource"
           uniqueItems: true
-        # informatieobjecten:
-        #   description: URL-referenties naar één of meer informatieobjecten die de natuurlijke persoon
-        #     heeft ondertekend.
-        #   type: array
-        #   items:
-        #     type: "string"
-        #     format: "uri"
-        #     minLength: 1
-        #   uniqueItems: true
+        indieners:
+          description: URL-referenties naar de indieners van een informatieobject.
+          type: array
+          items:
+            type: "string"
+            format: "uri"
+            minLength: 1
+          uniqueItems: true
     Spreekfragment:
       type: "object"
       description: "Een AANWEZIGE DEELNEMER spreekt tijdens een AGENDAPUNT"
@@ -6131,7 +5851,7 @@ components:
           type: string
           maxLength: 40
           readOnly: true
-          description: Unieke resource identifier..
+          description: Unieke resource identifier.
           title: ID
         fractie:
           allOf:
@@ -6261,9 +5981,9 @@ components:
             format: "uri"
           readOnly: true
           uniqueItems: true
-        notulen:
+        informatieobject:
           allOf:
-            - description: Verwijzing naar de notulen van deze vergadering.
+            - description: Verwijzing naar het informatieobject zijnde de notulen van deze vergadering.
             - nullable: true
             - $ref: "#/components/schemas/VerwijzingNaarResource"
         deelvergaderingen:
@@ -6297,7 +6017,9 @@ components:
           example: "2021-07-11"
     Gemeente:
       type: "object"
-      description: "De referentielijst met alle gemeenten Tabel 33 van de landelijke tabellen."
+      description: "De referentielijst met alle gemeenten Tabel 33 van de landelijke tabellen.  \n\n
+          **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `provincie` en `waterschap` de waarde `null` hebben."
+      nullable: true
       required:
       - "gemeentecode"
       - "gemeentenaam"
@@ -6313,6 +6035,7 @@ components:
           title: "Gemeentenaam"
           description: "De naam van de gemeente."
           minLength: 1
+          readOnly: true
     Gremium:
       type: "object"
       description: "De referentielijst met alle gremia in een gemeente. Hier horen ook alle commissies bij van de gemeenteraad."
@@ -6334,6 +6057,7 @@ components:
             \ bij"
           maxLength: 100
           minLength: 1
+          readOnly: true
     NaamNatuurlijkPersoon:
       type: "object"
       description: "De naam van een natuurlijk persoon. Wanneer de naam bij het invullen niet \
@@ -6514,7 +6238,7 @@ components:
       - "transcriptie"
     MotieType:
       type: "string"
-      description: "duiding van het type van een MOTIE<body><ul><li>`voorstel` - Voorstel\
+      description: "Duiding van het type van een MOTIE<body><ul><li>`voorstel` - Voorstel\
         \ voorstellen van het college van B&amp;W (gemeente) of van de gedeputueerde\
         \ staten (provincie) en initiatiefvoorstellen van raadsleden (gemeente) of\
         \ statenleden (provincie)</li><li>`afkeuring` - Afkeuring </li><li>`treurnis`\
@@ -6537,12 +6261,51 @@ components:
       - "dagelijks_bestuur"
     Provincie:
       type: "string"
-      description: "<body><ul><li>`drenthe` - Drenthe </li><li>`groningen` - Groningen\
-        \ </li><li>`overijsel` - Overijsel </li><li>`flevoland` - Flevoland </li><li>`friesland`\
-        \ - Friesland </li><li>`gelderland` - Gelderland </li><li>`utrecht` - Utrecht\
-        \ </li><li>`noord_holland` - Noord-Holland </li><li>`zuid_holland` - Zuid-Holland\
-        \ </li><li>`zeeland` - Zeeland </li><li>`noord_brabant` - Noord-Brabant </li><li>`limburg`\
-        \ - Limburg </li></ul></body>"
+      description: "De naam van de provincie volgens de waardenlijst. 
+
+        * drente - Drenthe
+
+        * groningen - Groningen
+
+        * overijsel - Overijsel
+
+        * flevoland - Flevoland
+
+        * friesland - Friesland
+
+        * gelderland - Gelderland
+
+        * utrecht - Utrecht
+
+        * noord_holland - Noord-Holland
+
+        * zuid_holland - Zuid-Holland
+
+        * zeeland - Zeeland
+
+        * noord_brabant - Noord-Brabant
+
+        * limburg - Limburg  
+
+
+        **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `gemeente` en `waterschap` de waarde `null` hebben."
+      nullable: true
+      enum:
+      - "drenthe"
+      - "groningen"
+      - "overijsel"
+      - "flevoland"
+      - "friesland"
+      - "gelderland"
+      - "utrecht"
+      - "noord_holland"
+      - "zuid_holland"
+      - "zeeland"
+      - "noord_brabant"
+      - "limburg"
+    ProvincieInQuery:
+      type: "string"
+      description: De naam van de provincie volgens de waardenlijst.
       enum:
       - "drenthe"
       - "groningen"
@@ -6558,21 +6321,22 @@ components:
       - "limburg"
     Waterschap:
       type: "object"
-      description: "De referentielijst met alle waterschappen volgens CBS."
+      description: "De referentielijst met alle waterschappen volgens CBS. \n\n
+        **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `gemeente` en `provincie` de waarde `null` hebben."
+      nullable: true
       required:
       - "waterschapcode"
       - "waterschapnaam"
       properties:
         waterschapcode:
           type: "string"
-          description: "De code van het waterschap in de CBS tabel."
+          description: De code van het waterschap in de CBS tabel.
           maxLength: 4
           minLength: 4
         waterschapnaam:
           type: "string"
-          description: "De naam van het waterschap."
-          maxLength: 4
-          minLength: 4
+          description: De naam van het waterschap.
+          readOnly: true
     RolNaam:
       type: "string"
       description: "duiding van de rollen van een natuurlijke persoon tijdens een\
@@ -6990,16 +6754,14 @@ components:
         - url
         - id
       properties:
-        url:
-          description: URL-referentie naar de resource waarnaar verwezen wordt.
-          type: string
-          format: uri
-          minLength: 1
         id:
           description: ID van de resource waarnaar verwezen wordt.
           type: string
           minLength: 1
           maxLength: 40
-        # naam:
-        #   description: Naam van de verwijzing.
-        #   type: string
+        url:
+          description: URL-referentie naar de resource waarnaar verwezen wordt.
+          type: string
+          format: uri
+          minLength: 1
+          readOnly: true
