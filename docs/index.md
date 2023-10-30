@@ -1,12 +1,12 @@
 ---
 layout: page-with-side-nav
-title: Ontwikkelversie Open Raads- en Stateninformatie
+title: Ontwikkelversie Open Raads-, -Staten en Bestuursinformatie
 ---
 
 
-# Open Raads- en Stateninformatie
+# Open Raads-, -Staten en Bestuursinformatie
 
-De Open API Specificatie voor Open Raads- en Stateninformatie beschrijft de standaard voor het ontsluiten van raadsinformatie van gemeenten.
+Om te kunnen voldoen aan de 'Wet open overheid' ontsluit deze API een aantal categorieën overheidsinformatie voor gemeenten, provincies en waterschappen zoals ingekomen (vergader)stukken, agenda's (voor vergaderingen), verslagen en besluiten.
 
 ## Versies op GitHub
 * [v2.0.0](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/tree/v2.0.0)
