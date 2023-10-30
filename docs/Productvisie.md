@@ -1,6 +1,6 @@
 ---
 layout: page-with-side-nav
-title: Ontwikkelversie Open Raadsinformatie
+title: Ontwikkelversie Open Raads- en Stateninformatie
 ---
 
 # Een transparante overheid

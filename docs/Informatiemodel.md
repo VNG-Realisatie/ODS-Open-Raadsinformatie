@@ -1,12 +1,12 @@
 ---
 layout: page-with-side-nav
-title: Ontwikkelversie Open Raadsinformatie
+title: Ontwikkelversie Open Raads- en Stateninformatie
 ---
 
 # Informatiemodel
 
 ## Inleiding
-Open Raadsinformatie heeft als doel om gemeentelijke raadsinformatie, waaronder voorstellen, notulen, moties en stemuitslagen, op herbruikbare wijze als open data te ontsluiten. Dit maakt de raadsinformatie toegankelijker en vergroot de informatiepositie van raadsleden, journalisten, onderzoekers, belangenorganisaties en inwoners. Het vrijgeven van de raadsinformatie als open data maakt het mogelijk dat derden met de raadsinformatie toepassingen maken die de raadsinformatie op nieuwe innovatieve wijzen toegankelijk maken en daarmee de lokale democratie versterken.  
+Open Raads- en Stateninformatie heeft als doel om gemeentelijke raadsinformatie, waaronder voorstellen, notulen, moties en stemuitslagen, op herbruikbare wijze als open data te ontsluiten. Dit maakt de raadsinformatie toegankelijker en vergroot de informatiepositie van raadsleden, journalisten, onderzoekers, belangenorganisaties en inwoners. Het vrijgeven van de raadsinformatie als open data maakt het mogelijk dat derden met de raadsinformatie toepassingen maken die de raadsinformatie op nieuwe innovatieve wijzen toegankelijk maken en daarmee de lokale democratie versterken.  
 
 <!-- ## Doel
 

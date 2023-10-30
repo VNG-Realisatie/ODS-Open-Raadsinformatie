@@ -1,11 +1,11 @@
 ---
 layout: page-with-side-nav
-title: Ontwikkelversie Open Raadsinformatie
+title: Ontwikkelversie Open Raads- en Stateninformatie
 ---
 
-# Design decisions Open Raadsinformatie
+# Design decisions Open Raads- en Stateninformatie
 
-In de onderliggende Design Decisions zijn de inzichten vastgelegd die zijn opgedaan bij het ontwerpen en specificeren van API-specificatie voor Open Raadsinformatie.
+In de onderliggende Design Decisions zijn de inzichten vastgelegd die zijn opgedaan bij het ontwerpen en specificeren van API-specificatie voor Open Raads- en Stateninformatie.
 Mogelijkerwijs zijn deze design desicions onderhavig aan wijzigingen vanwege voortschrijdend inzicht. Dat zal gedocumenteerd worden.
 
 In de releasenotes wordt dan aangegeven of de wijziging breaking is of niet (wat ook gevolgen kan hebben voor het versienummer).
