@@ -15,7 +15,7 @@ De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor 
 
 
 ## Documentatie
-<!-- * [Release notes](./release_notes.md) -->
+* [Release notes](./release_notes.md)
 * [Productvisie](./Productvisie.md)
 * [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues)
 * [Architectuur](./Architectuur.md) 
