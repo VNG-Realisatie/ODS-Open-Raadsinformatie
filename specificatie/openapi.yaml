@@ -9,7 +9,7 @@ info:
   title: "Open Raads-, -Staten en Bestuursinformatie"
   description: "Om te kunnen voldoen aan de 'Wet open overheid' ontsluit deze API een aantal categorieën overheidsinformatie voor gemeenten, provincies en waterschappen 
           zoals ingekomen (vergader)stukken, agenda's (voor vergaderingen), verslagen en besluiten."
-  version: "2.0.0-beta.3"
+  version: "2.0.0-beta.4"
   x-imvertor-generator-version: "2.0.0"
   x-yamlCompiler-stylesheets-version: "20230315"
   contact:
@@ -5693,7 +5693,7 @@ components:
           description: "De tijdsaanduiding naar de aanvang van de audio opname van\
             \ het SPREEKFRAGMENT in seconden."
         audioTijdsaanduidingEinde:
-          type: "string"
+          type: "integer"
           title: "Audio tijdsaanduiding einde"
           description: "Aanduiding van het einde van het spreekfragment in het audiobestand in seconden"
           minLength: 1
@@ -5703,7 +5703,7 @@ components:
           description: "De tijdsaanduiding naar aanvang van het SPREEKFRAGMENT in\
             \ de video opname in seconden."
         videoTijdsaanduidingEinde:
-          type: "string"
+          type: "integer"
           title: "Video tijdsaanduiding einde"
           description: "Tijdsaanduiding van het einde van het SPREEKFRAGMENT op de\
             \ video-opname in seconden."
@@ -6007,13 +6007,18 @@ components:
           description: URL-referenties naar de mediobronnen waarin deze vergadering is vastgelegd.
           title: Mediabronnen
           uniqueItems: true
-        publicatiedatum:
+        wijziging:
+          type: string
+          description: De laatste wijziging die heeft plaatsgevonden.
+          enum:
+            - Toevoeging
+            - Aanpassing
+            - Verwijdering
+        wijzigingsdatum:
           type: "string"
-          title: "Publicatiedatum"
-          description: "De datum waarop de vergadering voor het laatst gepubliceerd is. \ 
-                  \ Het kan zijn dat er wijzigingen hebben plaatsgevonden en dat de vergadering opnieuw is gepubliceerd."
+          title: "Wijzigingsdatum"
+          description: "De datum waarop de vergadering voor het laatst gewijzigd is."
           format: "date"
-          nullable: true
           example: "2021-07-11"
     Gemeente:
       type: "object"
