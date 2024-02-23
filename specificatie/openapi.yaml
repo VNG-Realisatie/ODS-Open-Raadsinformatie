@@ -3486,8 +3486,8 @@ paths:
           format: "date-time"
       - in: "query"
         name: "audioTijdsaanduidingAanvang"
-        description: "De tijdsaanduiding naar de aavang van de audio opname van het\
-          \ SPREEKFRAGMENT"
+        description: "De tijdsaanduiding van de aanvang van \
+            \ het SPREEKFRAGMENT in de audio opname in seconden."
         required: false
         schema:
           type: "integer"
@@ -3521,8 +3521,8 @@ paths:
           maxLength: 100
       - in: "query"
         name: "videoTijdsaanduidingAanvang"
-        description: "De tijdsaanduiding naar aanvang van het SPREEKFRAGMENT in de\
-          \ video opname"
+        description: "De tijdsaanduiding van de aanvang van het SPREEKFRAGMENT in\
+            \ de video opname in seconden."
         required: false
         schema:
           type: "integer"
@@ -5690,23 +5690,24 @@ components:
         audioTijdsaanduidingAanvang:
           type: "integer"
           title: "Audio tijdsaanduiding aanvang"
-          description: "De tijdsaanduiding van de aanvang van \
-            \ het SPREEKFRAGMENT in de audio opname in seconden."
+          description: "De tijdsaanduiding van de aanvang van het SPREEKFRAGMENT in de\
+            \ audio opname in seconden."
         audioTijdsaanduidingEinde:
           type: "integer"
           title: "Audio tijdsaanduiding einde"
-          description: "Aanduiding van het einde van het SPREEKFRAGMENT in het audiobestand in seconden"
+          description: "De tijdsaanduiding van het einde van het SPREEKFRAGMENT in de\
+            \ audio opname in seconden."
           minLength: 1
         videoTijdsaanduidingAanvang:
           type: "integer"
           title: "Video tijdsaanduiding aanvang"
-          description: "De tijdsaanduiding van de aanvang van het SPREEKFRAGMENT in\
-            \ de video opname in seconden."
+          description: "De tijdsaanduiding van de aanvang van het SPREEKFRAGMENT in de\
+            \ video opname in seconden."
         videoTijdsaanduidingEinde:
           type: "integer"
           title: "Video tijdsaanduiding einde"
-          description: "Tijdsaanduiding van het einde van het SPREEKFRAGMENT in de\
-            \ video-opname in seconden."
+          description: "De tijdsaanduiding van het einde van het SPREEKFRAGMENT in de\
+            \ video opname in seconden."
           minLength: 1
         positieNotulen:
           type: "string"
