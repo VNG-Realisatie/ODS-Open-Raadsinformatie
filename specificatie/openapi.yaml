@@ -5697,7 +5697,6 @@ components:
           title: "Audio tijdsaanduiding einde"
           description: "De tijdsaanduiding van het einde van het SPREEKFRAGMENT in de\
             \ audio opname in seconden."
-          minLength: 1
         videoTijdsaanduidingAanvang:
           type: "integer"
           title: "Video tijdsaanduiding aanvang"
@@ -5708,7 +5707,6 @@ components:
           title: "Video tijdsaanduiding einde"
           description: "De tijdsaanduiding van het einde van het SPREEKFRAGMENT in de\
             \ video opname in seconden."
-          minLength: 1
         positieNotulen:
           type: "string"
           title: "Positie notulen"
