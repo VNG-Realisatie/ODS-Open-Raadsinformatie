@@ -18,6 +18,7 @@ De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor 
 * [Architectuur](./docs/Architectuur.md)
 * [Informatiemodel](./docs/Informatiemodel.md)
 * [Technische specificaties](./specificatie) (Open API Specificaties en JSON schema) via [Swagger of Redoc viewer](https://vng-realisatie.github.io/ODS-Open-Raadsinformatie/swagger-ui)
+* [Mini-versie van de ORI API](./mini-ORI-API/readme.md)
 <!-- * Ontwerpkeuzes staan in het document [Design decisions](./docs/Designdecisions.md) -->
 
 ## Bronnen
