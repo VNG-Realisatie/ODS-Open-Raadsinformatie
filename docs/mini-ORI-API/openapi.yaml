@@ -1,0 +1,2403 @@
+openapi: "3.0.0"
+servers:
+# Added by API Auto Mocking Plugin
+- description: "SwaggerHub API Auto Mocking"
+  url: "https://virtserver.swaggerhub.com/VNGRealisatie/api/open_raads__en_stateninformatie/v1"
+- description: "Referentie-implementatie"
+  url: "https://www.voorbeeldgemeente.nl/api/open_raads__en_stateninformatie/v1"
+info:
+  title: "Open Raads-, -Staten en Bestuursinformatie"
+  description: "Om te kunnen voldoen aan de 'Wet open overheid' ontsluit deze API een aantal categorieën overheidsinformatie voor gemeenten, provincies en waterschappen 
+          zoals ingekomen (vergader)stukken, agenda's (voor vergaderingen), verslagen en besluiten."
+  version: "0.0.1-mini-ori"
+  x-imvertor-generator-version: "2.0.0"
+  x-yamlCompiler-stylesheets-version: "20230315"
+  contact:
+    url: "https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie"
+  license:
+    name: "European Union Public License, version 1.2 (EUPL-1.2)"
+    url: "https://eupl.eu/1.2/nl/"
+paths:
+  /agendapunten:
+    get:
+      operationId: "getagendapunten"
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie\
+        \ agendapunten retourneert."
+      parameters:
+      - in: "query"
+        name: "agendapuntOmschrijving"
+        description: "De omschrijving van het agendapunt"
+        required: false
+        schema:
+          type: "string"
+      - in: "query"
+        name: "bovenliggendAgendapuntIdentificatie"
+        description: "Het nummer van het agendapunt op de agenda.\n\nDe identificatie\
+          \ die verwijst naar het agendapunt waar dit agendapunt een subagendapunt\
+          \ van is."
+        required: false
+        schema:
+          type: "string"
+          maxLength: 10
+      - in: "query"
+        name: "gemeentecode"
+        description: De code van een gemeente in de landelijke tabel.
+        required: false
+        schema:
+          type: "string"
+      - in: "query"
+        name: "provincie"
+        required: false
+        schema:
+          $ref: "#/components/schemas/ProvincieInQuery"
+      - in: "query"
+        name: "waterschapcode"
+        description: De code van het waterschap in de CBS tabel.
+        required: false
+        schema:
+          type: string
+      - in: "query"
+        name: "gewijzigdSinds"
+        description: "Met deze parameter kunnen vergaderingen opgevraagd worden waarin\
+          \ iets is gewijzigd sinds het opgegeven moment."
+        required: false
+        schema:
+          type: "string"
+          format: "date-time"
+      - in: "query"
+        name: "vergaderingsIdentificatie"
+        description: "De identificatie een VERGADERING\n\nDe identificatie de vergadering\
+          \ waarin dit agendapunt is of wordt behandeld. \n\nDe eerste vier karakter\
+          \ zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen."
+        required: false
+        schema:
+          type: "string"
+          maxLength: 10
+      responses:
+        200:
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/PaginatedAgendapuntList"
+        400:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
+        401:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401"
+        403:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403"
+        409:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409"
+        410:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410"
+        415:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415"
+        429:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429"
+        500:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500"
+        501:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501"
+        503:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503"
+        default:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
+      tags:
+      - "Agendapunten"
+  /agendapunten/{id}:
+    get:
+      operationId: "getagendapunt"
+      description: "Het bericht dat de JSON/REST API voor het ophalen gegevens van\
+        \ een agendapunt retourneert."
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            description: Unieke resource identifier.
+          required: true
+      responses:
+        200:
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Agendapunt"
+        400:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
+        401:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401"
+        403:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403"
+        404:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/404"
+        409:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409"
+        410:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410"
+        415:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415"
+        429:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429"
+        500:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500"
+        501:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501"
+        503:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503"
+        default:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
+      tags:
+      - "Agendapunten"
+  /informatieobjecten:
+    get:
+      operationId: "getinformatieobjecten"
+      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie\
+        \ informatieobjecten retourneert."
+      parameters:
+      - in: "query"
+        name: "agendapuntIdentificatie"
+        description: "Het nummer van het agendapunt op de agenda.\n\nDe identificatie\
+          \ die verwijst naar het agendapunt waar dit informatieobject een bijlage\
+          \ bij is."
+        required: false
+        schema:
+          type: "string"
+          maxLength: 10
+      - in: "query"
+        name: "auteur"
+        description: "De naamgegevens van de auteur zijnde een betrokkene die in een\
+          \ rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in een\
+          \ rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk persoon\
+          \ of organisatie zijnde de auteur. In het laatste geval verdient het aanbeveling\
+          \ om aanvullend te vermelden uit welken hoofde het auteurschap wordt uitgeoefend."
+        required: false
+        schema:
+          type: "string"
+          maxLength: 200
+      - in: "query"
+        name: "bronOrganisatie"
+        description: "bronorganisatie\n\nDe in het NHR voorkomende\
+          \ unieke identificaties van rechtspersonen en samenwerkingsverbanden."
+        required: false
+        schema:
+          type: "integer"
+      - in: "query"
+        name: "creatiedatum"
+        description: "creatiedatum\n\nAlle geldige datums gelegen\
+          \ op of voor de huidige datum en tijd"
+        required: false
+        schema:
+          type: "string"
+          format: "date"
+      - in: "query"
+        name: "datumIngediend"
+        description: "De datum waarop het BESLUITVORMINGSSTUK is ingediend"
+        required: false
+        schema:
+          type: "string"
+          format: "date"
+      - in: "query"
+        name: "gemeentecode"
+        description: De code van een gemeente in de landelijke tabel.
+        required: false
+        schema:
+          type: "string"
+      - in: "query"
+        name: "provincie"
+        required: false
+        schema:
+          $ref: "#/components/schemas/ProvincieInQuery"
+      - in: "query"
+        name: "waterschapcode"
+        description: De code van het waterschap in de CBS tabel.
+        required: false
+        schema:
+          type: string
+      - in: "query"
+        name: "omschrijving"
+        required: false
+        schema:
+          type: "string"  
+      - in: "query"
+        name: "taal"
+        description: "zie RGBZ\n\nbij voorkeur ISO 639-2/B"
+        required: false
+        schema:
+          type: "string"
+          maxLength: 20
+      - in: "query"
+        name: "titel"
+        description: "titel\n\nalle alfanumerieke tekens"
+        required: false
+        schema:
+          type: "string"
+          maxLength: 200
+      - in: "query"
+        name: "vergaderingsIdentificatie"
+        description: "Identificatie(s) die verwijzen naar de vergaderingen waar dit\
+          \ informatieobject een bijlage bij is of waarvan dit de notulen zijn. (Zie\
+          \ ook informatieobjecttype)\n\nIdentificatie(s) die verwijzen naar de vergaderingen\
+          \ waar dit informatieobject een bijlage bij is."
+        required: false
+        schema:
+          type: "string"
+      - in: "query"
+        name: "versie"
+        description: "versie\n\nAlle alfanumerieke tekens m.u.v. diacrieten"
+        required: false
+        schema:
+          type: "string"
+          maxLength: 5
+      responses:
+        200:
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/PaginatedInformatieObjectList"
+        400:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
+        401:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401"
+        403:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403"
+        409:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409"
+        410:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410"
+        415:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415"
+        429:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429"
+        500:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500"
+        501:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501"
+        503:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503"
+        default:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
+      tags:
+      - "Informatieobjecten"
+  /informatieobjecten/{id}:
+    get:
+      operationId: "getinformatieobject"
+      description: "Het bericht dat de JSON/REST API voor het ophalen gegevens van\
+        \ een informatieobject retourneert."
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            description: Unieke resource identifier.
+            title: ID
+          required: true
+          examples:
+            OneValue:
+              value: '"79054025255fb1a26e4bc422aef54eb4"'
+              summary: "E\xE9n ETag-waarde"
+            MultipleValues:
+              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
+              summary: Meerdere ETag-waardes
+      responses:
+        200:
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InformatieObject"
+        400:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
+        401:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401"
+        403:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403"
+        404:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/404"
+        409:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409"
+        410:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410"
+        415:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415"
+        429:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429"
+        500:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500"
+        501:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501"
+        503:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503"
+        default:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
+      tags:
+      - "Informatieobjecten"
+  /vergaderingen:
+    get:
+      operationId: "getvergaderingen"
+      description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens\
+        \ retourneert."
+      parameters:
+      - in: "query"
+        name: "gewijzigdSinds"
+        description: "Met deze parameter kunnen vergaderingen opgevraagd worden waarin\
+          \ iets is gewijzigd sinds het opgegeven moment."
+        required: false
+        schema:
+          type: "string"
+          format: "date-time"
+      - in: "query"
+        name: "naam"
+        description: "De naam van de vergadering"
+        required: false
+        schema:
+          type: "string"
+          maxLength: 100
+      - in: "query"
+        name: "gemeentecode"
+        description: De code van een gemeente in de landelijke tabel.
+        required: false
+        schema:
+          type: "string"
+      - in: "query"
+        name: "provincie"
+        required: false
+        schema:
+          $ref: "#/components/schemas/ProvincieInQuery"
+      - in: "query"
+        name: "waterschapcode"
+        description: De code van het waterschap in de CBS tabel.
+        required: false
+        schema:
+          type: string
+          minLength: 4
+          maxLength: 4
+      - in: "query"
+        name: "status"
+        description: "De status van de vergadering"
+        required: false
+        schema:
+          $ref: "#/components/schemas/VergaderingStatus"
+      - in: "query"
+        name: "vergaderdatum"
+        description: "De datum van de VERGADERING"
+        required: false
+        schema:
+          type: "string"
+          format: "date"
+      - in: "query"
+        name: "vergaderingstype"
+        description: "De type-aanduiding van de vergadering."
+        required: false
+        schema:
+          $ref: "#/components/schemas/VergaderingsType"
+      responses:
+        200:
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedVergaderingList"
+        400:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
+        401:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401"
+        403:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403"
+        409:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409"
+        410:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410"
+        415:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415"
+        429:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429"
+        500:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500"
+        501:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501"
+        503:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503"
+        default:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
+      tags:
+      - "Vergaderingen"
+  /vergaderingen/{id}:
+    get:
+      operationId: "getvergadering"
+      description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens\
+        \ retourneert."
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            description: Unieke resource identifier.
+            title: ID
+          required: true
+      responses:
+        200:
+          description: "Zoekactie geslaagd"
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning"
+            X-Rate-Limit-Limit:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Limit"
+            X-Rate-Limit-Remaining:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Remaining"
+            X-Rate-Limit-Reset:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/X_Rate_Limit_Reset"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vergadering"
+        400:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400"
+        401:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401"
+        403:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403"
+        404:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/404"
+        409:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409"
+        410:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410"
+        415:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415"
+        429:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429"
+        500:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500"
+        501:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501"
+        503:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503"
+        default:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default"
+      tags:
+      - "Vergaderingen"
+components:
+  schemas:
+    AanwezigeDeelnemer:
+      type: "object"
+      description: "De NATUURLIJKe PERSOON die deelneemt aan een VERGADERING."
+      required:
+      - url
+      - id
+      - natuurlijkPersoon
+      - vergadering
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        natuurlijkPersoon:
+          allOf:
+            - description: Verwijzing naar de natuurlijke persoon zijnde de aanwezige deelnemer.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        vergadering:
+          allOf:
+            - description: Verwijzing naar de vergadering waar de deelnemer aanwezig is.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        aanvangAanwezigheid:
+          type: "string"
+          title: "Aanvang aanwezigheid"
+          description: "De aanvang van de aanwezigheid."
+          format: "date-time"
+        eindeAanwezigheid:
+          type: "string"
+          title: "Einde aanwezigheid"
+          description: "De einde van de aanwezigheid."
+          format: "date-time"
+        deelnemerspositie:
+          type: "string"
+          title: "Deelnemerspositie"
+          description: "De plek waar een deelnemer in de zaal zit.\n\nDit kan bijvoorbeeld\
+            \ een stoel of een console zijn. Dit kan o.a. van belang zijn voor de\
+            \ audio/video-verslaggeving."
+        rolnaam:
+          $ref: "#/components/schemas/RolNaam"
+        organisatie:
+          type: "string"
+          title: "Vertegenwoordigde organisatie"
+          description: "De naam van de organisatie die wordt vertegenwoordigd door de aanwezige deelnemer."
+          maxLength: 100
+        stemmen:
+          type: "array"
+          title: "Stemmen"
+          description: URL-referenties naar de stemmen die de 
+            aanwezige deelnemer heeft uitgebracht.
+          items:
+            type: "string"
+            format: "uri"
+            minLength: 1
+          readOnly: true
+          uniqueItems: true
+    Agendapunt:
+      type: "object"
+      description: "Een onderdeel van de agenda dat als één geheel wordt behandeld.\
+        \ Een AGENDAPUNT kan weer onderverdeeld zijn naar subAGENDAPUNTen."
+      required:
+      - "url"
+      - "id"
+      - "vergadering"
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        vergadering:
+          allOf:
+            - description: "Verwijzing naar de vergadering waar dit agendapunt behandeld wordt."
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        hoofdagendapunt:
+          allOf:
+            - description: "Verwijzing naar het hoofdagendapunt waarvan dit het subagendapunt is."
+            - nullable: true
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        agendapuntKenmerk:
+          type: "string"
+          title: "Agendapunt kenmerk"
+          description: "De weergave van het Agendapuntvolgnummer op de agenda. 
+            Dit is de letterlijke volgorde van een Agendapunt wordt bij gehouden d.m.v.\
+            \ attribuut 'Agendapuntvolgnummer'. Hoe het Agendapunt getoond wordt op\
+            \ de Agenda wordt beschreven met attribuut 'Agendapunt kenmerk'."
+          maxLength: 20
+        agendapuntOmschrijving:
+          type: "string"
+          title: "Agendapunt omschrijving"
+          description: "De omschrijving van het agendapunt"
+        agendapuntTitel:
+          type: "string"
+          title: "Agendapunt titel"
+          description: "De titel of onderwerp van het agendapunt"
+          maxLength: 100
+          minLength: 1
+        agendapuntvolgnummer:
+          type: "string"
+          title: "Agendapuntvolgnummer"
+          description: "Dit is het volgnummer van het AGENDAPUNT tijdens de vergadering.\n\
+            \nDit is de letterlijke volgorde en zegt niets over hoe dit volgnummer\
+            \ getoond wordt. Hoe het Agendapunt getoond wordt op de Agenda wordt beschreven\
+            \ met attribuut 'Agendapunt kenmerk'."
+          maxLength: 3
+        subagendapunten:
+          type: array
+          items:
+            type: string
+            format: uri
+          readOnly: true
+          description: URL-referenties naar de subagendapunten.
+          title: Subagendapunten
+          uniqueItems: true
+        eindtijd:
+          type: "string"
+          title: "Eindtijd"
+          description: "De datum en tijdstip waarop de behandeling van de agendapunt\
+            \ is geëindigd. Moet voorkomen als Starttijd voorkomt."
+          format: "date-time"
+        gemeente:
+          $ref: "#/components/schemas/Gemeente"
+        provincie:
+          $ref: "#/components/schemas/Provincie"
+        waterschap:
+          $ref: "#/components/schemas/Waterschap"
+        geplandAgendapuntvolgnummer:
+          type: "string"
+          title: "Gepland agendapuntvolgnummer"
+          description: "Dit is het geplande volgnummer van het AGENDAPUNT van een\
+            \ vergadering."
+          maxLength: 10
+        geplandeEindtijd:
+          type: "string"
+          title: "Geplande eindtijd"
+          description: "De geplande datum en tijdstip waarop de behandeling van de\
+            \ agendapunt eindigt"
+          format: "date-time"
+        geplandeStarttijd:
+          type: "string"
+          title: "Geplande starttijd"
+          description: "De geplande datum en tijdstip waarop de behandeling van de\
+            \ agendapunt start"
+          format: "date-time"
+        indicatieHamerstuk:
+          type: "boolean"
+          title: "Indicatie hamerstuk"
+          description: ""
+          example: "true"
+          nullable: true
+        indicatorBehandeld:
+          type: "boolean"
+          title: "Indicator behandeld"
+          description: "Indicator geeft aan of het AGENDAPUNT is behandeld tijdens\
+            \ de VERGADERING. Is eventueel af te leiden als Starttijd en/of Eindtijd
+            \ zijn ingevuld."
+          nullable: true
+        indicatorBesloten:
+          type: "boolean"
+          title: "Indicator besloten"
+          description: Indicator of een AGENDAPUNT besloten wordt behandeld. 
+          nullable: true
+        informatieobjecten:
+          type: array
+          items:
+            type: string
+            format: uri
+            minLength: 1
+            nullable: true
+            title: Informatieobjecten
+          readOnly: true
+          description: URL-referenties naar de informatieobjecten die een bijlage zijn van dit agendapunt.
+          uniqueItems: true
+        starttijd:
+          type: "string"
+          title: "Starttijd"
+          description: "De datum en tijdstip waarop de behandeling van de agendapunt\
+            \ is gestart"
+          format: "date-time"
+        # stemmingen:
+        #   type: "array"
+        #   title: "hoort bij of kan betrekking hebben op"
+        #   description: Een STEMMING kan betrekking hebben op een AGENDAPUNT of subAGENDAPUNT.
+        #   items:
+        #     type: "string"
+        #     format: "uri"
+        #     minLength: 1
+        #     nullable: true
+        #   readOnly: true
+        #   uniqueItems: true
+    Besluit:
+      type: "object"
+      description: "Een na beraadslaging vastgestelde beslissing\n\nEen na overweging\
+        \ of beraadslaging vastgestelde beslissing voor een individueel of concreet\
+        \ geval."
+      required:
+      - "url"
+      - "id"
+      - besluitresultaat
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        besluitresultaat:
+          type: "string"
+          title: "Besluitresultaat"
+          description: "Het resultaat van het BESLUIT."
+          maxLength: 200
+        besluittoelichting:
+          type: "string"
+          title: "Besluittoelichting"
+          description: Toelichting bij het besluit.
+          maxLength: 200
+        toezegging:
+          type: "string"
+          title: "Toezegging"
+          description: "Bij een BESLUIT kan een additionele toezegging gedaan worden."
+          maxLength: 500
+        stemmingen:
+          type: "array"
+          title: "Stemmingen"
+          description: "URL-referenties naar de stemmingen die tot besluit hebben geleid."
+          items:
+            type: "string"
+            format: "uri"
+            minLength: 1
+          readOnly: true
+          uniqueItems: true
+    DagelijksBestuur:
+      type: "object"
+      description: "Het dagelijkse bestuur van de gemeente (college) of provincie\
+        \ (gedeputeerde staten) bereidt het beleid voor en voert dit beleid uit."
+      required:
+      - "url"
+      - "id"
+      - dagelijksBestuursnaam
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        dagelijksBestuursnaam:
+          type: "string"
+          title: "Dagelijks bestuurnaam"
+          description: "Naam van het dagelijks bestuur."
+        dagelijksBestuurstype:
+          $ref: "#/components/schemas/NaamDagelijksBestuursType"
+        gemeente:
+          $ref: "#/components/schemas/Gemeente"
+        provincie:
+          $ref: "#/components/schemas/Provincie"
+        waterschap:
+          $ref: "#/components/schemas/Waterschap"
+    DagelijksBestuurLidmaatschap:
+      type: "object"
+      description: "De lidmaatschap van het dagelijkse bestuur"
+      required:
+      - "url"
+      - "id"
+      - natuurlijkPersoon
+      - dagelijksBestuur
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        dagelijksBestuur:
+          allOf:
+            - description: Verwijzing naar het dagelijks bestuur.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        natuurlijkPersoon:
+          allOf:
+            - description: Verwijzing naar de natuurlijk persoon die lid is van het dagelijks bestuur.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        datumBeginDagelijksBestuurLidmaatschap:
+          type: "string"
+          title: "Datum begin dagelijkse bestuur lidmaatschap"
+          description: "De datum en tijdstip waarop het lidmaatschap van het dagelijkse\
+            \ bestuur begon"
+          format: "date-time"
+        datumeindeDagelijksBestuurLidmaatschap:
+          type: "string"
+          title: "Datum einde dagelijkse bestuur lidmaatschap"
+          description: "De datum en tijdstip waarop het lidmaatschap van het dagelijkse\
+            \ bestuur geëindigd is."
+          format: "date-time"
+    Fractie:
+      type: "object"
+      description: "Deel van een gekozen volksvertegenwoordiging."
+      required:
+      - "url"
+      - "id"
+      - "fractienaam"
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        fractienaam:
+          type: "string"
+          title: "Fractienaam"
+          description: "De naam van de fractie."
+          maxLength: 100
+          minLength: 1
+        gemeente:
+          $ref: "#/components/schemas/Gemeente"
+        provincie:
+          $ref: "#/components/schemas/Provincie"
+        waterschap:
+          $ref: "#/components/schemas/Waterschap"
+    FractieLidmaatschap:
+      type: "object"
+      description: ""
+      required:
+      - "url"
+      - "id"
+      - "indicatieVoorzitter"
+      - "natuurlijkPersoon"
+      - "fractie"
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        fractie:
+          allOf:
+            - description: Verwijzing naar de fractie.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        # fractie:
+        #   genotuleerdeVergadering:
+        #   title: "Genotuleerde vergadering"
+        #   description: "URL-referentie naar de vergadering waarvan dit informatieobject de notulen zijn."
+        #   type: "string"
+        #   format: "uri"
+        #   minLength: 1
+        #   nullable: true
+        #   readOnly: true
+        natuurlijkPersoon:
+          allOf:
+            - description: Verwijzing naar de natuurlijke persoon die lid is van de fractie.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        datumBeginFractieLidmaatschap:
+          type: "string"
+          title: "Datum begin fractie lidmaatschap"
+          description: "De datum en tijdstip waarop het fractie lidmaatschap begon"
+          format: "date-time"
+        datumEindeFractieLidmaatschap:
+          type: "string"
+          title: "Datum einde fractie lidmaatschap"
+          description: "De datum en tijdstip waarop het fractie lidmaatschap geë\
+            indigd is."
+          format: "date-time"
+        indicatieVoorzitter:
+          type: "boolean"
+          title: "Indicatie voorzitter"
+          description: Indicatie of iemand de voorzitter is van de FRACTIE.
+          default: false
+    InformatieObject:
+      type: "object"
+      description: "Een mededeling die gedaan wordt bij de vergadering Het antwoord\
+        \ dat gegeven is door het college of de burgemeester (in geval van een gemeente)\
+        \ of door de commissaris of gedeputeerde staten (in geval van een provincie)\
+        \ op een gestelde vraag Een toezegging van een gedeputeerde of raadslid Een\
+        \ BESLUITVORMINGSSTUK is een INFORMATIEOBJECT die als basis dient bij een\
+        \ STEMMING. Dit zijn vragen die raadsleden aan het college of de burgemeester\
+        \ stellen (gemeente) of die statenleden aan de gedeputeerde staten of de commissaris\
+        \ stellen (provincie). Een MOTIE is een korte gemotiveerde verklaring over\
+        \ een onderwerp waardoor een mening, wens of verzoek wordt uitgesproken en\
+        \ is ingediend door een raadslid of een statenlid. zie RGBZ Geheel van gegevens\
+        \ met een eigen identiteit ongeacht zijn vorm, met de bijbehorende metadata\
+        \ ontvangen of opgemaakt door een natuurlijke en/of rechtspersoon bij de uitvoering\
+        \ van taken, zijnde een ENKELVOUDIG INFORMATIEOBJECT of een SAMENGESTELD INFORMATIEOBJECT.\n\
+        \nKan vaak een antwoord zijn op een toezegging. Dit kunnen zowel schriftelijke\
+        \ vragen zijn als vragen die gesteld worden bij bijvoorbeeld het vragenuur.\
+        \ Een motie begint met de reden van indiening en eindigt met de uitspraak.\
+        \ Een motie is juridisch niet bindend en wordt eerst ter stemming voorgelegd\
+        \ tijdens de VERGADERING van de gemeenteraad of provinciale staten. Een motie\
+        \ kan zelfstandig zijn of gekoppeld aan een voorstel dat ter bespreking voorligt."
+      required:
+      - "url"
+      - "id"
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        auteur:
+          type: "string"
+          title: "Auteur"
+          description: "De naamgegevens van de auteur zijnde een betrokkene die in\
+            \ een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in\
+            \ een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk\
+            \ persoon of organisatie zijnde de auteur. In het laatste geval verdient\
+            \ het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap\
+            \ wordt uitgeoefend."
+          maxLength: 200
+        bronorganisatie:
+          type: "integer"
+          title: "Bronorganisatie"
+          description: "Bronorganisatie. De in het NHR voorkomende\
+            \ unieke identificaties van rechtspersonen en samenwerkingsverbanden."
+        creatiedatum:
+          type: "string"
+          title: "Creatiedatum"
+          description: "Creatiedatum. Alle geldige datums gelegen\
+            \ op of voor de huidige datum en tijd"
+          format: "date"
+        datumIngediend:
+          type: "string"
+          title: "Datum ingediend"
+          description: "De datum waarop het BESLUITVORMINGSSTUK is ingediend"
+          format: "date"
+        gemeente:
+          $ref: "#/components/schemas/Gemeente"
+        provincie:
+          $ref: "#/components/schemas/Provincie"
+        waterschap:
+          $ref: "#/components/schemas/Waterschap"
+        informatieobjecttype:
+          $ref: "#/components/schemas/Informatieobjecttype"
+        inhoud:
+          type: "string"
+          title: "Inhoud"
+          description: "Inhoud van het document\n\nDe content (data) van het enkelvoudig\
+            \ informatieobject in het formaat zoals gespecificeerd met de attribuutsoort\
+            \ 'Formaat'."
+        link:
+          title: "Link"
+          description: De URL waarmee de inhoud van het informatieobject op te vragen is.
+          type: "string"
+          format: "uri"
+        omschrijving:
+          type: "string"
+          title: "omschrijving"
+          description: "Omschrijving van het informatieobject."
+        taal:
+          type: "string"
+          title: "Taal"
+          description: "De taal van het informatieobject. Bij voorkeur aaangeduid volgens ISO 639-2/B."
+          maxLength: 20
+        titel:
+          type: "string"
+          title: "Titel"
+          description: "De titel van het informatieobject."
+          maxLength: 200
+        motietype:
+          $ref: "#/components/schemas/MotieType"
+        vraagtype:
+          $ref: "#/components/schemas/VraagType"
+        vergaderingen:
+          type: array
+          items:
+            $ref: "#/components/schemas/VerwijzingNaarResource"
+          description: Verwijzingen naar de vergaderingen die dit informatieobject als bijlagen hebben.
+          uniqueItems: true
+        versie:
+          type: "string"
+          title: "Versie"
+          description: "Versie. Alle alfanumerieke tekens m.u.v. diacrieten."
+          maxLength: 5
+        agendapunten:
+          type: "array"
+          title: "Agendapunten"
+          description: Verwijzingen naar de agendapunten die dit informatieobject als bijlagen hebben.
+          items:
+            $ref: "#/components/schemas/VerwijzingNaarResource"
+          uniqueItems: true
+        genotuleerdeVergadering:
+          title: "Genotuleerde vergadering"
+          description: "URL-referentie naar de vergadering waarvan dit informatieobject de notulen zijn."
+          type: "string"
+          format: "uri"
+          minLength: 1
+          nullable: true
+          readOnly: true
+        gerelateerdInformatieobject:
+          $ref: "#/components/schemas/GerelateerdInformatieobject"
+        zaken:
+          title: Zaken
+          description: Zaken die gerelateerd zijn aan dit informatieobject.
+          type: array
+          items:
+            $ref: "#/components/schemas/Zaak"
+          uniqueItems: true
+        natuurlijkePersonen:
+          description: URL-referenties naar één of meer natuurlijke personen die het informatieobject
+            hebben ondertekend.
+          type: array
+          items:
+            type: "string"
+            format: "uri"
+            minLength: 1
+          uniqueItems: true
+          readOnly: true
+        vertrouwelijkheidsaanduiding:
+          title: Vertrouwelijkheidsaanduiding
+          description: Aanduiding van de vertrouwelijkheid.
+          type: string
+        portefeuillehouder:
+          title: Portefeuillehouder
+          description: De naam van de portefeuillehouder van het VOORSTEL.
+          type: string
+          maxLength: 100
+        toelichting:
+          title: Toelichting
+          description: De toelichting op het AMENDEMENT.
+          type: string
+    Zaak:
+      required:
+        - zaakidentificatie
+        - zaakregistratie
+      properties:
+        zaakidentificatie:
+          description: Identificatie van de zaak.
+          type: string
+        zaakregistratie:
+          description: Identificatie van de registratie waar de zaak is vastgelegd.
+          type: integer
+        url: 
+          description: URL-referentie naar de zaak.
+          type: string
+          format: uri
+          minLength: 1
+          nullable: true
+        omschrijving:
+          description: Omschrijving van de zaak.
+          type: string       
+    GerelateerdInformatieobject:
+      type: object
+      title: Gerelateerd informatieobject
+      description: Relevant ander informatieobject dat gerelateerd is aan dit informatieobject.
+      nullable: true
+      required:
+        - informatieobject
+        - rol
+      properties:
+        informatieobject:
+          allOf:
+            - description: Verwijzing naar het gerelateerde informatieobject.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        rol:
+          type: string
+          title: Rol
+          description: "Rol van het gerelateerde informatieobject. Er zijn drie mogelijkheden: 
+
+            1. het gerelateerde informatieobject is het hoofd-amendement van dit informatieobject dat een sub-amendement is.
+
+            2. het gerelateerde informatieobject is het voorstel waarvan dit informatieobject een amendement is.
+
+            3. het gerelateerde informatieobject is de vraag waarvan dit informatieobject het antwoord is.
+            "
+          enum:
+            - hoofd_amendement
+            - voorstel
+            - vraag
+    Mediabron:
+      type: "object"
+      description: ""
+      required:
+      - "url"
+      - "id"
+      - "type"
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        vergadering:
+          allOf:
+            - description: Verwijzing naar de vergadering waarvan deze mediabron de vastlegging is.
+            - nullable: true
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        locatieWebvttbestand:
+          type: "string"
+          title: "Locatie Webvttbestand"
+          description: "De locatie waar het Webvttbestand is opgeslagen"
+        mimetype:
+          type: "string"
+          title: "Mimetype"
+          description: "Het type bestand dat is opgeslagen."
+        mediabrontype:
+          $ref: "#/components/schemas/MediabronType"
+        link:
+          type: string
+          format: uri
+          minLength: 1
+          description: Link naar de mediabron.
+          nullable: true
+    NatuurlijkPersoon:
+      type: "object"
+      description: ""
+      required:
+      - "url"
+      - "id"
+      - "naamNatuurlijkPersoon"
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        functie:
+          $ref: "#/components/schemas/Functie"
+        geslachtsaanduiding:
+          $ref: "#/components/schemas/Geslacht"
+        naamNatuurlijkPersoon:
+          $ref: "#/components/schemas/NaamNatuurlijkPersoon"
+        nevenfunctieNatuurlijkePersoon:
+          type: "array"
+          minItems: 0
+          items:
+            $ref: "#/components/schemas/NevenfunctieNatuurlijkePersoon"
+        informatieobjecten:
+          description: Verwijzingen naar één of meer informatieobjecten die de natuurlijke persoon
+            heeft ondertekend.
+          type: array
+          items:
+            $ref: "#/components/schemas/VerwijzingNaarResource"
+          uniqueItems: true
+        indieners:
+          description: URL-referenties naar de indieners van een informatieobject.
+          type: array
+          items:
+            type: "string"
+            format: "uri"
+            minLength: 1
+          uniqueItems: true
+    Spreekfragment:
+      type: "object"
+      description: "Een AANWEZIGE DEELNEMER spreekt tijdens een AGENDAPUNT"
+      required:
+        - url
+        - id
+        - aanwezigeDeelnemer
+        - agendapunt
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        aanwezigeDeelnemer:
+          allOf:
+            - description: Verwijzing naar de aanwezige deelnemer waarvan het SPREEKFRAGMENT wordt vastgelegd.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        agendapunt:
+          allOf:
+            - description: Verwijzing naar het agendapunt waarover het SPREEKFRAGMENT gaat.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        mediabron:
+          allOf:
+            - description: Verwijzing naar de mediabron waarin het SPREEKFRAGMENT is vastgelegd.
+            - nullable: true
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        aanvangSpreekfragment:
+          type: "string"
+          title: "Aanvang spreekfragment"
+          description: "Het tijdstip en de datum van aanvang van het SPREEKFRAGMENT."
+          format: "date-time"
+        eindeSpreekfragment:
+          type: "string"
+          title: "Einde spreekfragment"
+          description: "Het tijdstip en de datum van einde van het SPREEKFRAGMENT."
+          format: "date-time"
+        audioTijdsaanduidingAanvang:
+          type: "integer"
+          title: "Audio tijdsaanduiding aanvang"
+          description: "De tijdsaanduiding van de aanvang van het SPREEKFRAGMENT in de\
+            \ audio opname in seconden."
+        audioTijdsaanduidingEinde:
+          type: "integer"
+          title: "Audio tijdsaanduiding einde"
+          description: "De tijdsaanduiding van het einde van het SPREEKFRAGMENT in de\
+            \ audio opname in seconden."
+        videoTijdsaanduidingAanvang:
+          type: "integer"
+          title: "Video tijdsaanduiding aanvang"
+          description: "De tijdsaanduiding van de aanvang van het SPREEKFRAGMENT in de\
+            \ video opname in seconden."
+        videoTijdsaanduidingEinde:
+          type: "integer"
+          title: "Video tijdsaanduiding einde"
+          description: "De tijdsaanduiding van het einde van het SPREEKFRAGMENT in de\
+            \ video opname in seconden."
+        positieNotulen:
+          type: "string"
+          title: "Positie notulen"
+          description: "De positie van het SPREEKFRAGMENT binnen de notulen"
+          maxLength: 10
+        titelSpreekfragment:
+          type: "string"
+          title: "Titel spreekfragment"
+          description: "De titel die kenmerkend is voor het SPREEKFRAGMENT of deel\
+            \ van de discussie"
+          maxLength: 100
+        tekstSpreekfragment:
+          type: "string"
+          title: "Tekst spreekfragment"
+          description: "De uitgeschreven weergave van het SPREEKFRAGMENT"
+        taal:
+          type: "string"
+          title: "Taal"
+          description: "De taal van het SPREEKFRAGMENT"
+          maxLength: 20
+    Stem:
+      type: "object"
+      description: "Een STEM is een formele uitdrukking van een keuze die een raadslid\
+        \ (gemeente) of statenlid (provincie) maakt over een bepaald onderwerp."
+      required:
+      - url
+      - id
+      - aanwezigeDeelnemer
+      - stemming
+      - keuzeStemming
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        aanwezigeDeelnemer:
+          allOf:
+            - description: Verwijzing naar de aanwezige deelnemer die een keuze heeft gemaakt in de stemming.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        stemming:
+          allOf:
+            - description: Verwijzing naar de stemming.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        keuzeStemming:
+          $ref: "#/components/schemas/StemKeuze"
+    Stemming:
+      type: "object"
+      description: "Een moment waarop een keuze gemaakt moet worden over een bepaald\
+        \ AGENDAPUNT of VERGADERSTUK, waarbij alle uitgebrachte stemmen geteld worden.\n\
+        \nAlleen aanwezige raadsleden (gemeente) of statenleden (provincie) kunnen\
+        \ een stem uitbrengen."
+      required:
+      - url
+      - id
+      - agendapunt
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        agendapunt:
+          allOf:
+            - description: Verwijzing naar het agendapunt waar deze stemming betrekking op heeft.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        resultaatMondelingeStemming:
+          $ref: "#/components/schemas/StemmingResultaat"
+        resultaatStemmingOverPersonen:
+          type: "string"
+          title: "'Resultaat stemming over personen"
+          description: "Het resultaat van de stemming over één of meerdere personen."
+          maxLength: 200
+        stemmingOverPersonen:
+          type: "array"
+          minItems: 0
+          items:
+            $ref: "#/components/schemas/StemmingOverPersonen"
+        stemmingstype:
+          $ref: "#/components/schemas/StemmingsType"
+        besluit:
+          allOf:
+            - description: Verwijzing naar het besluit waartoe de stemming heeft geleid.
+            - nullable: true
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        informatieobject:
+           allOf:
+            - description: Verwijzing naar het besluitvormingsstuk waar de stemming betrekking op heeft.
+            - nullable: true
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        stemmen:
+          type: array
+          items:
+            type: string
+            format: uri
+            minLength: 1
+          readOnly: true
+          description: URL-referenties naar de stemmen in deze stemming.
+          title: Stemmen
+          uniqueItems: true
+    StemresultaatPerFractie:
+      type: "object"
+      description: "Het resultaat van de STEMMING per FRACTIE en wordt afgeleid van\
+        \ de uitgebrachte STEMmen."
+      required:
+      - url
+      - id
+      - fractie
+      - stemming
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        fractie:
+          allOf:
+            - description: Verwijzing naar de fractie.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        stemming:
+          allOf:
+            - description: Verwijzing naar de stemming.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        fractiestemresultaat:
+          $ref: "#/components/schemas/FractieStemResultaat"
+    Vergadering:
+      type: "object"
+      description: "Een VERGADERING is een bijeenkomst van meerdere mensen die met\
+        \ elkaar spreken en/of afspraken maken over onderwerpen die op de agenda staan."
+      required:
+      - url
+      - id
+      - vergaderingstype
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        aanvangVergadering:
+          type: "string"
+          title: "Aanvang vergadering"
+          description: "De datum en tijdstip waarop de vergadering is gestart\n\n\
+            Komt zeker voor als Einde vergadering ook is ingevuld"
+          format: "date-time"
+          example: "2017-02-10T18:25:00:000Z"
+        agendapunten:
+          type: array
+          items:
+            type: string
+            format: uri
+            minLength: 1
+            nullable: true
+          readOnly: true
+          description: URL-referenties naar de agendapunten van deze vergadering.
+          title: Agendapunten
+          uniqueItems: true
+        hoofdvergadering:
+          allOf:
+            - description: Verwijzing naar de hoofdvergadering waarvan deze vergadering een deelvergadering is.
+            - nullable: true
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        eindeVergadering:
+          type: "string"
+          title: "Einde vergadering"
+          description: "De datum en tijdstip waarop de vergadering is geëindigd"
+          format: "date-time"
+          example: "2017-02-10T21:12:00:000Z"
+        gemeente:
+          $ref: "#/components/schemas/Gemeente"
+        provincie:
+          $ref: "#/components/schemas/Provincie"
+        waterschap:
+          $ref: "#/components/schemas/Waterschap"
+        georganiseerdDoorGremium:
+          allOf:
+          - $ref: "#/components/schemas/Gremium"
+          - title: "georganiseerdDoorGremium"
+            description: "de vergadering is georganiseerd door een gremium"
+        geplandeAanvangVergadering:
+          type: "string"
+          title: "Geplande aanvang vergadering"
+          description: "De geplande datum en tijdstip waarop de vergadering start"
+          format: "date-time"
+          example: "2017-02-09T18:25:00:000Z"
+        geplandeEindeVergadering:
+          type: "string"
+          title: "Geplande einde vergadering"
+          description: "De geplande datum en tijdstip waarop de vergadering eindigt"
+          format: "date-time"
+          example: "2017-02-09T21:25:00:000Z"
+        geplandeVergaderdatum:
+          type: "string"
+          title: "Geplande vergaderdatum"
+          description: "De geplande datum van de VERGADERING"
+          format: "date"
+          example: "2017-02-09"
+        locatie:
+          type: "string"
+          title: "Locatie"
+          description: "Omschrijving van de locatie waar de vergadering wordt gehouden"
+          maxLength: 100
+          example: "Raadszaal, Stadskantoor, Overtoom 2"
+        naam:
+          type: "string"
+          title: "Naam"
+          description: "De naam van de vergadering"
+          maxLength: 100
+          example: "Raadsvergadering"
+        status:
+          $ref: "#/components/schemas/VergaderingStatus"
+        vergadertoelichting:
+          type: "string"
+          title: "Vergadertoelichting"
+          description: "De toelichting of nadere omschrijving van de vergadering."
+          example: "Regulier geplande raadsvergadering van mei"
+        vergaderdatum:
+          type: "string"
+          title: "Vergaderdatum"
+          description: "De datum van de VERGADERING"
+          format: "date"
+          example: "2017-02-10"
+        vergaderingstype:
+          $ref: "#/components/schemas/VergaderingsType"
+        bijlagen:
+          type: "array"
+          title: "Bijlagen"
+          description: "URL-referenties naar de bijlagen van deze vergadering."
+          items:
+            type: "string"
+            format: "uri"
+          readOnly: true
+          uniqueItems: true
+        informatieobject:
+          allOf:
+            - description: Verwijzing naar het informatieobject zijnde de notulen van deze vergadering.
+            - nullable: true
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        deelvergaderingen:
+          type: array
+          items:
+            type: string
+            format: uri
+            minLength: 1
+            nullable: true
+          readOnly: true
+          description: URL-referenties naar de deelvergaderingen van deze vergadering.
+          title: Deelvergaderingen
+          uniqueItems: true
+        # mediabronnen:
+        #   type: array
+        #   items:
+        #     type: string
+        #     format: uri
+        #     minLength: 1
+        #   readOnly: true
+        #   description: URL-referenties naar de mediobronnen waarin deze vergadering is vastgelegd.
+        #   title: Mediabronnen
+        #   uniqueItems: true
+        wijziging:
+          type: string
+          description: De laatste wijziging die heeft plaatsgevonden.
+          enum:
+            - Toevoeging
+            - Aanpassing
+            - Verwijdering
+        wijzigingsdatum:
+          type: "string"
+          title: "Wijzigingsdatum"
+          description: "De datum waarop de vergadering voor het laatst gewijzigd is."
+          format: "date"
+          example: "2021-07-11"
+    Gemeente:
+      type: "object"
+      description: "De referentielijst met alle gemeenten Tabel 33 van de landelijke tabellen.  \n\n
+          **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `provincie` en `waterschap` de waarde `null` hebben."
+      nullable: true
+      required:
+      - "gemeentecode"
+      - "gemeentenaam"
+      properties:
+        gemeentecode:
+          type: "string"
+          title: "Gemeentecode"
+          description: "De code van een gemeente in de landelijke tabel."
+          maxLength: 4
+          minLength: 1
+        gemeentenaam:
+          type: "string"
+          title: "Gemeentenaam"
+          description: "De naam van de gemeente."
+          minLength: 1
+          readOnly: true
+    Gremium:
+      type: "object"
+      description: "De referentielijst met alle gremia in een gemeente. Hier horen ook alle commissies bij van de gemeenteraad."
+      required:
+      - "gremiumidentificatie"
+      - "gremiumnaam"
+      properties:
+        gremiumidentificatie:
+          type: "string"
+          title: "Gremiumidentificatie"
+          description: "De identificatie van een gremium\n\nDe identificatie van een\
+            \ gremium"
+          maxLength: 10
+          minLength: 1
+        gremiumnaam:
+          type: "string"
+          title: "Gremiumnaam"
+          description: "De naam van het gremium. Hier horen ook de (raads- en staten)commissies\
+            \ bij"
+          maxLength: 100
+          minLength: 1
+          readOnly: true
+    NaamNatuurlijkPersoon:
+      type: "object"
+      description: "De naam van een natuurlijk persoon. Wanneer de naam bij het invullen niet \
+               opgesplitst is in voornamen, tussenvoegsel en achternaam kan de naam ook in één keer worden geregistreerd in het veld volledigeNaam."
+      required:
+        - achternaam
+      properties:
+        achternaam:
+          type: "string"
+          title: "Achternaam"
+          description: "De achternaam van een NATUURLIJK PERSOON"
+          maxLength: 200
+          minLength: 1
+        tussenvoegsel:
+          type: "string"
+          title: "Tussenvoegsel"
+          description: "De tussenvoegsel van een NATUURLIJK PERSOON"
+          maxLength: 20
+        voorletters:
+          type: "string"
+          title: "Voorletters"
+          description: "De voorletters van een NATUURLIJK PERSOON"
+          maxLength: 20
+        voornamen:
+          type: "string"
+          title: "Voornamen"
+          description: "De voornamen van een NATUURLIJK PERSOON."
+          maxLength: 200
+        volledigeNaam:
+          type: "string"
+          title: "Volledige naam"
+          description: "De volledige naam van een NATUURLIJK PERSOON."
+          maxLength: 300
+
+    NevenfunctieNatuurlijkePersoon:
+      type: "object"
+      description: ""
+      required:
+      - "datumAanvangNevenfunctie"
+      - "indicatorBezoldigd"
+      - "omschrijvingNevenfuctie"
+      properties:
+        aantalUrenPerMaand:
+          type: "integer"
+          title: "Aantal uren per maand"
+          description: "Het aantal uren dat per maand besteed wordt aan de nevenfunctie"
+        datumAanvangNevenfunctie:
+          type: "string"
+          title: "Datum aanvang nevenfunctie"
+          description: "De datum van aanvang van de nevenfunctie"
+          format: "date"
+        datumEindeNevenfunctie:
+          type: "string"
+          title: "Datum einde nevenfunctie"
+          description: "De datum van het einde van de nevenfunctie"
+          format: "date"
+        datumMelding:
+          type: "string"
+          title: "Datum melding"
+          description: "De datum waarop de nevenfunctie gemeld is bij de griffie."
+          format: "date"
+        indicatorBezoldigd:
+          type: "boolean"
+          title: "Indicator bezoldigd"
+          description: "Indicator of de nevenfunctie uitgevoerd wordt tegen betaling."
+        indicatorNevenunctieVanwegeLidmaatschap:
+          type: "boolean"
+          title: "Indicator nevenfunctie vanwege lidmaatschap"
+          description: "Indicator die aangeeft of de nevenfunctie wordt vervuld vanwege\
+            \ de lidmaatschap van de Raad of de Staten."
+        naamOrganisatieNevenfunctie:
+          type: "string"
+          title: "Naam organisatie nevenfunctie"
+          description: "De naam van de organisatie van de nevenfunctie"
+          maxLength: 100
+        omschrijvingNevenfuctie:
+          type: "string"
+          title: "Omschrijving nevenfunctie"
+          description: "De omschrijving van de nevenfunctie."
+          maxLength: 100
+          minLength: 1
+    StemmingOverPersonen:
+      type: "object"
+      description: "De individuele uitgebrachte STEMmen over personen zijn geheim.\
+        \ Alleen het aantal uitgebrachte stemmen per kandidaat is bekend."
+      required:
+      - "aantalUitgebrachteStemmen"
+      - "naamKandidaat"
+      properties:
+        aantalUitgebrachteStemmen:
+          type: "integer"
+          title: "Aantal uitgebrachte stemmen"
+          description: "Het aantal uitgebracht stemmen behorend bij een kandidaat"
+        naamKandidaat:
+          type: "string"
+          title: "Naam kandidaat"
+          description: "De naam van de kandidaat over wie gestemd is"
+          maxLength: 100
+          minLength: 1
+    FractieStemResultaat:
+      type: "string"
+      description: "<body><ul><li>`aangenomen` - Aangenomen de gehele aanwezige fractie\
+        \ heeft voor gestemd</li><li>`verworpen` - Verworpen de gehele aanwezige fractie\
+        \ heeft tegen gestemd</li><li>`verdeeld` - Verdeeld de stemming in de fractie\
+        \ was verdeeld: een deel was voor en een deel was tegen</li></ul></body>"
+      enum:
+      - "aangenomen"
+      - "verworpen"
+      - "verdeeld"
+    Functie:
+      type: "string"
+      description: "<body><ul><li>`burgemeester` - Burgemeester van de gemeente</li><li>`wethouder`\
+        \ - Wethouder van de gemeente</li><li>`raadslid` - Raadslid van de gemeente</li><li>`burgerlid`\
+        \ - Burgerlid </li><li>`griffier` - Griffier </li><li>`gemeentesecretaris`\
+        \ - Gemeentesecretaris </li><li>`ambtenaar_of_medewerker` - Ambtenaar of medewerker\
+        \ van gemeente of provincie</li><li>`adviseur_of_deskundige` - Adviseur of\
+        \ deskundige </li><li>`overig` - Overig </li><li>`commissaris_van_de_koning`\
+        \ - Commissaris van de koning Commissaris van de Koning of Koningin (hoort\
+        \ bij de provincie)</li><li>`gedeputeerde` - Gedeputeerde van de provincie</li><li>`statenlid`\
+        \ - Statenlid van de provincie</li><li>`provinciesecretaris` - Provinciesecretaris\
+        \ </li><li>`dijkgraaf` - Dijkgraaf Waterschappen</li><li>`dagelijks_bestuurslid`\
+        \ - Dagelijks bestuurslid Waterschappen</li><li>`algemeen_bestuurslid` - Algemeen\
+        \ bestuurslid Waterschappen</li><li>`secretarisdirecteur` - Secretarisdirecteur\
+        \ Waterschappen</li></ul></body>"
+      enum:
+      - "burgemeester"
+      - "wethouder"
+      - "raadslid"
+      - "burgerlid"
+      - "griffier"
+      - "gemeentesecretaris"
+      - "ambtenaar_of_medewerker"
+      - "adviseur_of_deskundige"
+      - "overig"
+      - "commissaris_van_de_koning"
+      - "gedeputeerde"
+      - "statenlid"
+      - "provinciesecretaris"
+      - "dijkgraaf"
+      - "dagelijks_bestuurslid"
+      - "algemeen_bestuurslid"
+      - "secretarisdirecteur"
+    Geslacht:
+      type: "string"
+      description: "<body><ul><li>`man` - Man </li><li>`vrouw` - Vrouw </li><li>`anders`\
+        \ - Anders Is niet een man of vrouw, en het geslacht is wel bekend</li><li>`onbekend`\
+        \ - Onbekend </li></ul></body>"
+      enum:
+      - "man"
+      - "vrouw"
+      - "anders"
+      - "onbekend"
+    Informatieobjecttype:
+      type: "string"
+      description: "Het type van het informatieobject\n\n
+        \ <body><ul><li>`vraag` - Vraag </li><li>`antwoord` - Antwoord </li><li>`motie`\
+        \ - Motie </li><li>`besluitvormingsstuk` - Besluitvormingsstuk </li><li>`ingekomen_stuk`\
+        \ - Ingekomen stuk </li><li>`toezegging` - Toezegging </li><li>`mededeling`\
+        \ - Mededeling </li><li>`amendement` - Amendement </li><li>`voorstel` - Voorstel\
+        \ </li></ul></body>"
+      enum:
+      - "vraag"
+      - "antwoord"
+      - "motie"
+      - "besluitvormingsstuk"
+      - "ingekomen_stuk"
+      - "toezegging"
+      - "mededeling"
+      - "amendement"
+      - "voorstel"
+    MediabronType:
+      type: "string"
+      description: "<body><ul><li>`video` - Video technische vragen over een agendapunt</li><li>`audio`\
+        \ - Audio </li><li>`transcriptie` - Transcriptie </li></ul></body>"
+      enum:
+      - "video"
+      - "audio"
+      - "transcriptie"
+    MotieType:
+      type: "string"
+      description: "Duiding van het type van een MOTIE<body><ul><li>`voorstel` - Voorstel\
+        \ voorstellen van het college van B&amp;W (gemeente) of van de gedeputueerde\
+        \ staten (provincie) en initiatiefvoorstellen van raadsleden (gemeente) of\
+        \ statenleden (provincie)</li><li>`afkeuring` - Afkeuring </li><li>`treurnis`\
+        \ - Treurnis </li><li>`wantrouwen` - Wantrouwen </li><li>`vreemd` - Vreemd\
+        \ </li><li>`overig` - Overig Dit is de standaardwaarde</li></ul></body>"
+      enum:
+      - "voorstel"
+      - "afkeuring"
+      - "treurnis"
+      - "wantrouwen"
+      - "vreemd"
+      - "overig"
+    NaamDagelijksBestuursType:
+      type: "string"
+      description: "<body><ul><li>`college` - College </li><li>`gedeputeerde_staten`\
+        \ - Gedeputeerde staten </li><li>`dagelijks_bestuur` - Dagelijks bestuur Waterschappen</li></ul></body>"
+      enum:
+      - "college"
+      - "gedeputeerde_staten"
+      - "dagelijks_bestuur"
+    Provincie:
+      type: "string"
+      description: "De naam van de provincie volgens de waardenlijst. 
+
+        * drente - Drenthe
+
+        * groningen - Groningen
+
+        * overijsel - Overijsel
+
+        * flevoland - Flevoland
+
+        * friesland - Friesland
+
+        * gelderland - Gelderland
+
+        * utrecht - Utrecht
+
+        * noord_holland - Noord-Holland
+
+        * zuid_holland - Zuid-Holland
+
+        * zeeland - Zeeland
+
+        * noord_brabant - Noord-Brabant
+
+        * limburg - Limburg  
+
+
+        **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `gemeente` en `waterschap` de waarde `null` hebben."
+      nullable: true
+      enum:
+      - "drenthe"
+      - "groningen"
+      - "overijsel"
+      - "flevoland"
+      - "friesland"
+      - "gelderland"
+      - "utrecht"
+      - "noord_holland"
+      - "zuid_holland"
+      - "zeeland"
+      - "noord_brabant"
+      - "limburg"
+    ProvincieInQuery:
+      type: "string"
+      description: De naam van de provincie volgens de waardenlijst.
+      enum:
+      - "drenthe"
+      - "groningen"
+      - "overijsel"
+      - "flevoland"
+      - "friesland"
+      - "gelderland"
+      - "utrecht"
+      - "noord_holland"
+      - "zuid_holland"
+      - "zeeland"
+      - "noord_brabant"
+      - "limburg"
+    Waterschap:
+      type: "object"
+      description: "De referentielijst met alle waterschappen volgens CBS. \n\n
+        **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `gemeente` en `provincie` de waarde `null` hebben."
+      nullable: true
+      required:
+      - "waterschapcode"
+      - "waterschapnaam"
+      properties:
+        waterschapcode:
+          type: "string"
+          description: De code van het waterschap in de CBS tabel.
+          maxLength: 4
+          minLength: 4
+        waterschapnaam:
+          type: "string"
+          description: De naam van het waterschap.
+          readOnly: true
+    RolNaam:
+      type: "string"
+      description: "duiding van de rollen van een natuurlijke persoon tijdens een\
+        \ vergadering<body><ul><li>`voorzitter` - Voorzitter de voorzitter zit de\
+        \ vergadering voor</li><li>`vice_voorzitter` - Vice voorzitter de vice-voorzitter\
+        \ van de vergadering</li><li>`raadslid` - Raadslid Een raadslid is een gekozen\
+        \ volksvertegenwoordiger binnen een gemeente. Alle raadsleden van één gemeente\
+        \ vormen samen de gemeenteraad van de betreffende gemeente.</li><li>`inspreker`\
+        \ - Inspreker Een inspreker is een belanghebbende of betrokkene die wil inspreken\
+        \ bij een agendapunt</li><li>`overig` - Overig </li><li>`portefeuillehouder`\
+        \ - Portefeuillehouder de houder van een bepaalde portefeuille.</li><li>`statenlid`\
+        \ - Statenlid Een statenlid is een gekozen volksvertegenwoordiger binnen een\
+        \ provincie. Alle statenleden van één provincie vormen samen de Provinciale\
+        \ Staten van de betreffende provincie.</li><li>`dagelijks_bestuurslid` - Dagelijks\
+        \ bestuurslid Waterschappen</li><li>`algemeen_bestuurslid` - Algemeen bestuurslid\
+        \ Waterschappen</li><li>`griffier` - Griffier van de vergadering</li></ul></body>"
+      enum:
+      - "voorzitter"
+      - "vice_voorzitter"
+      - "raadslid"
+      - "inspreker"
+      - "overig"
+      - "portefeuillehouder"
+      - "statenlid"
+      - "dagelijks_bestuurslid"
+      - "algemeen_bestuurslid"
+      - "griffier"
+    StemKeuze:
+      type: "string"
+      description: "de mogelijke keuze van een uitgebrachte STEM\n\n <body><ul><li>`voor` - Voor </li><li>`tegen` -\
+        \ Tegen </li><li>`afwezig` - Afwezig </li><li>`onthouden` - Onthouden </li></ul></body>"
+      enum:
+      - "voor"
+      - "tegen"
+      - "afwezig"
+      - "onthouden"
+    StemmingResultaat:
+      type: "string"
+      description: "duiding van het resultaat van een STEMMING<body><ul><li>`voor`\
+        \ - Voor </li><li>`tegen` - Tegen </li><li>`gelijk` - Gelijk </li></ul></body>"
+      enum:
+      - "voor"
+      - "tegen"
+      - "gelijk"
+    StemmingsType:
+      type: "string"
+      description: "duiding van het type van een STEMMING<body><ul><li>`hoofdelijk`\
+        \ - Hoofdelijk </li><li>`regulier` - Regulier </li><li>`schriftelijk` - Schriftelijk\
+        \ </li></ul></body>"
+      enum:
+      - "hoofdelijk"
+      - "regulier"
+      - "schriftelijk"
+    VergaderingStatus:
+      type: "string"
+      description: "duiding van de statussen van een VERGADERING<body><ul><li>`gepland`\
+        \ - Gepland </li><li>`gehouden` - Gehouden </li><li>`geannuleerd` - Geannuleerd\
+        \ </li></ul></body>"
+      enum:
+      - "gepland"
+      - "gehouden"
+      - "geannuleerd"
+    VergaderingsType:
+      type: "string"
+      description: "de mogelijke typen van een VERGADERING behorende bij de gemeenteraad<body><ul><li>`raadsvergadering`\
+        \ - Raadsvergadering is van toepassing bij gemeenten</li><li>`commissievergadering`\
+        \ - Commissievergadering is van toepassing bij gemeenten</li><li>`presidium`\
+        \ - Presidium </li><li>`statenvergadering` - Statenvergadering is van toepassing\
+        \ bij provincies</li><li>`algemene_bestuursvergadering` - Algemene bestuursvergadering\
+        \ is van toepassing bij waterschappen</li></ul></body>"
+      enum:
+      - "raadsvergadering"
+      - "commissievergadering"
+      - "presidium"
+      - "statenvergadering"
+      - "algemene_bestuursvergadering"
+    VraagType:
+      type: "string"
+      description: "de type van de vraag <body><ul><li>`technische_vraag`\
+        \ - Technische vraag technische vragen over een agendapunt</li><li>`mondelinge_politieke_vraag`\
+        \ - Mondelinge politieke vraag </li><li>`schriftelijke_politieke_vraag` -\
+        \ Schriftelijke politieke vraag </li></ul></body>"
+      enum:
+      - "technische_vraag"
+      - "mondelinge_politieke_vraag"
+      - "schriftelijke_politieke_vraag"
+    PaginatedBasis:
+      type: object
+      properties:
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+    PaginatedAanwezigeDeelnemerList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/AanwezigeDeelnemer'
+    PaginatedAgendapuntList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Agendapunt'
+    PaginatedBesluitList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Besluit'
+    PaginatedDagelijksBestuurLidmaatschapList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/DagelijksBestuurLidmaatschap'
+    PaginatedDagelijksBestuurList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/DagelijksBestuur'
+    PaginatedFractieLidmaatschapList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/FractieLidmaatschap'
+    PaginatedFractieList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Fractie'
+    PaginatedIndienerList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Indiener'
+    PaginatedInformatieObjectList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/InformatieObject'
+    PaginatedMediabronList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Mediabron'
+    PaginatedNatuurlijkPersoonList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/NatuurlijkPersoon'
+    PaginatedOrganisatorischeEenheidList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrganisatorischeEenheid'
+    PaginatedSpreekfragmentList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Spreekfragment'
+    PaginatedStemList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Stem'
+    PaginatedStemmingList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Stemming'
+    PaginatedStemresultaatPerFractieList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/StemresultaatPerFractie'
+    PaginatedVergaderingList:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PaginatedBasis'
+        - type: object
+          required: 
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/Vergadering'
+    OrganisatorischeEenheid:
+      type: object
+      title: Organisatorische eenheid
+      description: Het deel van een functioneel afgebakend onderdeel binnen de organisatie dat haar activiteiten 
+        uitvoert binnen een VESTIGING VAN ZAAKBEHANDELENDE ORGANISATIE en die verantwoordelijk is voor de behandeling 
+        van zaken.
+      required:
+        - url
+        - id
+        - naam
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        e-mailadres:
+          type: string
+          title: E-mailadres
+          description: Elektronisch postadres waaronder de organisatorische eenheid in de regel bereikbaar is.
+          maxLength: 254
+        faxnummer:
+          type: string
+          title: Faxnummer
+          description: Faxnummer waaronder de organisatorische eenheid in de regel bereikbaar is.
+          maxLength: 20
+        naam:
+          type: string
+          title: Naam
+          description: De feitelijke naam van de organisatorische eenheid.
+          maxLength: 50
+        naamVerkort:
+          type: string
+          title: Naam verkort
+          description: Een verkorte naam voor de organisatorische eenheid.
+          maxLength: 25
+        omschrijving:
+          type: string
+          title: Omschrijving
+          description: Een omschrijving van de organisatorische eenheid.
+          maxLength: 80
+        telefoonnummer:
+          type: string
+          title: telefoonnummer
+          description: Telefoonnummer waaronder de organisatorische eenheid in de regel bereikbaar is.
+          maxLength: 20
+        toelichting:
+          type: string
+          title: Toelichting
+          description: Toelichting bij de organisatorische eenheid.
+    Indiener:
+      type: object
+      title: Indiener
+      description: De indiener, zijnde een natuurlijk persoon of een organisatorische eenheid, van een informatieobject.
+      required:
+        - url
+        - id
+        - informatieobject
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description:
+            URL-referentie naar dit object. Dit is de unieke identificatie
+            en locatie van dit object.
+          minLength: 1
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
+        naam:
+          type: string
+          title: Naam
+          description: De benaming van de indiener.
+          maxLength: 200
+        adresBinnenland:
+          type: string
+          title: Adres binnenland
+          description: De aanduiding van het adres van de indiener.
+          maxLength: 257
+        informatieobject:
+          allOf:
+            - description: Verwijzing naar het informatieobject dat wordt ingediend.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        natuurlijkPersoon:
+          allOf:
+            - description: Verwijzing naar de natuurlijk persoon die het informatieobject indient.
+            - nullable: true
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        organisatorischeEenheid:
+          allOf:
+            - description: Verwijzing naar de organisatorische eenheid die het informatieobject indient.
+            - nullable: true
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+    VerwijzingNaarResource:
+      type: object
+      required:
+        - url
+        - id
+      properties:
+        id:
+          description: ID van de resource waarnaar verwezen wordt.
+          type: string
+          minLength: 1
+          maxLength: 40
+        url:
+          description: URL-referentie naar de resource waarnaar verwezen wordt.
+          type: string
+          format: uri
+          minLength: 1
+          readOnly: true
