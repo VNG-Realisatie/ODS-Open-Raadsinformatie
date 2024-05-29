@@ -24,26 +24,25 @@ paths:
       summary: Alle agendapunten opvragen.
       description: Deze lijst kan gefilterd worden met behulp van query parameters.
       parameters:
+      # - in: "query"
+      #   name: "agendapuntOmschrijving"
+      #   description: "De omschrijving van het agendapunt."
+      #   required: false
+      #   schema:
+      #     type: "string"
       - in: "query"
-        name: "agendapuntOmschrijving"
-        description: "De omschrijving van het agendapunt."
-        required: false
-        schema:
-          type: "string"
-      - in: "query"
-        name: "bovenliggendAgendapuntIdentificatie"
-        description: "Het nummer van het agendapunt op de agenda. De identificatie
-          die verwijst naar het agendapunt waar dit agendapunt een subagendapunt van is."
+        name: "hoofdagendapunt"
+        description: "ID van het hoofagendapunt."
         required: false
         schema:
           type: "string"
           maxLength: 10
-      - in: "query"
-        name: "organisatie"
-        description: De code van de organisatie.
-        required: false
-        schema:
-          type: "string"
+      # - in: "query"
+      #   name: "organisatie"
+      #   description: De code van de organisatie.
+      #   required: false
+      #   schema:
+      #     type: "string"
       - in: "query"
         name: "gewijzigdSinds"
         description: "Met deze parameter kunnen vergaderingen opgevraagd worden waarin\
@@ -165,14 +164,13 @@ paths:
       description: Deze lijst kan gefilterd worden met behulp van query parameters.
       parameters:
       - in: "query"
-        name: "agendapuntIdentificatie"
-        description: "Het nummer van het agendapunt op de agenda.\n\nDe identificatie\
-          \ die verwijst naar het agendapunt waar dit informatieobject een bijlage\
-          \ bij is."
+        name: "agendapunt"
+        description: "Het id van het agendapunt waar dit informatieobject een bijlage van is."
         required: false
         schema:
           type: "string"
-          maxLength: 10
+          minLength: 1
+          maxLength: 40
       - in: "query"
         name: "auteur"
         description: "De naamgegevens van de auteur zijnde een betrokkene die in een\
@@ -185,23 +183,23 @@ paths:
           type: "string"
           maxLength: 200
       - in: "query"
-        name: "bronOrganisatie"
-        description: "bronorganisatie\n\nDe in het NHR voorkomende\
+        name: "bronorganisatie"
+        description: "Bronorganisatie. De in het NHR voorkomende\
           \ unieke identificaties van rechtspersonen en samenwerkingsverbanden."
         required: false
         schema:
           type: "integer"
       - in: "query"
         name: "creatiedatum"
-        description: "creatiedatum\n\nAlle geldige datums gelegen\
-          \ op of voor de huidige datum en tijd"
+        description: "Creatiedatum. Alle geldige datums gelegen\
+          \ op of voor de huidige datum en tijd."
         required: false
         schema:
           type: "string"
           format: "date"
       - in: "query"
         name: "datumIngediend"
-        description: "De datum waarop het BESLUITVORMINGSSTUK is ingediend"
+        description: "De datum waarop het informatieobject als vergaderstuk is ingediend."
         required: false
         schema:
           type: "string"
@@ -214,35 +212,35 @@ paths:
           type: "string"
       - in: "query"
         name: "omschrijving"
+        description: "De omschrijving van het informatieobject."
         required: false
         schema:
           type: "string"  
       - in: "query"
         name: "taal"
-        description: "zie RGBZ\n\nbij voorkeur ISO 639-2/B"
+        description: "Zie RGBZ, bij voorkeur ISO 639-2/B."
         required: false
         schema:
           type: "string"
           maxLength: 20
       - in: "query"
         name: "titel"
-        description: "titel\n\nalle alfanumerieke tekens"
+        description: "De titel van het informatieobject."
         required: false
         schema:
           type: "string"
           maxLength: 200
       - in: "query"
-        name: "vergaderingsIdentificatie"
-        description: "Identificatie(s) die verwijzen naar de vergaderingen waar dit\
-          \ informatieobject een bijlage bij is of waarvan dit de notulen zijn. (Zie\
-          \ ook informatieobjecttype)\n\nIdentificatie(s) die verwijzen naar de vergaderingen\
-          \ waar dit informatieobject een bijlage bij is."
+        name: "vergadering"
+        description: ID van de vergadering waar dit informatieobject een bijlage van is.
         required: false
         schema:
           type: "string"
+          minLength: 1
+          maxLength: 40
       - in: "query"
         name: "versie"
-        description: "versie\n\nAlle alfanumerieke tekens m.u.v. diacrieten"
+        description: "De versie van het informatieobject."
         required: false
         schema:
           type: "string"
@@ -635,24 +633,6 @@ components:
           description: "De datum en tijdstip waarop de behandeling van de agendapunt\
             \ is geëindigd. Moet voorkomen als Starttijd voorkomt."
           format: "date-time"
-        # gemeente:
-        #   type: string
-        #   title: Gemeente
-        #   description: 'De code van de gemeente volgens [TOOI: Register gemeenten compleet, versie 4](https://identifier.overheid.nl/tooi/set/rwc_gemeenten_compleet/4). 
-        #     Bijvoorbeeld "gm0363" voor gemeente Amsterdam.'
-        #   example: gm0363
-        # provincie:
-        #   type: string
-        #   title: Provincie
-        #   description: 'De code van de provincie volgens [TOOI:Register provincies compleet, versie 1](https://identifier.overheid.nl/tooi/set/rwc_provincies_compleet/1). 
-        #     Bijvoorbeeld "pv27" voor provincie Noord-Holland.'
-        #   example: pv27
-        # waterschap:
-        #   type: string
-        #   title: Waterschap
-        #   description: 'De code van het waterschap volgens [TOOI: Register waterschappen compleet, versie 2](https://identifier.overheid.nl/tooi/set/rwc_waterschappen_compleet/2). 
-        #     Bijvoorbeeld "ws0155" voor het waterschap Amstel, Gooi en Vecht.'
-        #   example: ws0155
         geplandAgendapuntvolgnummer:
           type: "string"
           title: "Gepland agendapuntvolgnummer"
@@ -995,8 +975,7 @@ components:
         bronorganisatie:
           type: "integer"
           title: "Bronorganisatie"
-          description: "Bronorganisatie. De in het NHR voorkomende\
-            \ unieke identificaties van rechtspersonen en samenwerkingsverbanden."
+          description: Bronorganisatie. De in het NHR voorkomende unieke identificaties van rechtspersonen en samenwerkingsverbanden.
         creatiedatum:
           type: "string"
           title: "Creatiedatum"
@@ -1006,31 +985,34 @@ components:
         datumIngediend:
           type: "string"
           title: "Datum ingediend"
-          description: "De datum waarop het BESLUITVORMINGSSTUK is ingediend"
+          description: "De datum waarop het informatieobject als vergaderstuk is ingediend."
           format: "date"
-        # gemeente:
-        #   $ref: "#/components/schemas/Gemeente"
-        # provincie:
-        #   $ref: "#/components/schemas/Provincie"
-        # waterschap:
-        #   $ref: "#/components/schemas/Waterschap"
         informatieobjecttype:
           $ref: "#/components/schemas/Informatieobjecttype"
-        inhoud:
-          type: "string"
-          title: "Inhoud"
-          description: "Inhoud van het document\n\nDe content (data) van het enkelvoudig\
-            \ informatieobject in het formaat zoals gespecificeerd met de attribuutsoort\
-            \ 'Formaat'."
+        formaat:
+          type: string
+          description: >-
+            Het "Media Type" (voorheen "MIME type") voor de wijze waaropde
+            inhoud van het INFORMATIEOBJECT is vastgelegd in een
+            computerbestand. Voorbeeld: `application/msword`. Zie:
+            https://www.iana.org/assignments/media-types/media-types.xhtml
+          title: formaat
+          maxLength: 255
+        # inhoud:
+        #   type: "string"
+        #   title: "Inhoud"
+        #   description: "Inhoud van het document. De content (data) van het enkelvoudig\
+        #     \ informatieobject in het formaat zoals gespecificeerd met de attribuutsoort\
+        #     \ 'Formaat'."
         link:
           title: "Link"
-          description: De URL waarmee de inhoud van het informatieobject op te vragen is.
+          description: De URL waarmee de inhoud van het informatieobject op te vragen is conform het formaat    zoals hier boven is gespecificeerd.
           type: "string"
           format: "uri"
         omschrijving:
           type: "string"
           title: "omschrijving"
-          description: "Omschrijving van het informatieobject."
+          description: "De omschrijving van het informatieobject."
         taal:
           type: "string"
           title: "Taal"
@@ -1580,7 +1562,7 @@ components:
         bijlagen:
           type: "array"
           title: "Bijlagen"
-          description: "URL-referenties naar de bijlagen van deze vergadering."
+          description: "URL-referenties naar de informatieobjecten die als bijlagen zijn toegvoegd aan de vergadering."
           items:
             type: "string"
             format: "uri"
