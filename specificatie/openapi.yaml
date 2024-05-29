@@ -2535,13 +2535,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"

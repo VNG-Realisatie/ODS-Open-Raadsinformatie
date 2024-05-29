@@ -21,41 +21,29 @@ paths:
   /agendapunten:
     get:
       operationId: "getagendapunten"
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie\
-        \ agendapunten retourneert."
+      summary: Alle agendapunten opvragen.
+      description: Deze lijst kan gefilterd worden met behulp van query parameters.
       parameters:
       - in: "query"
         name: "agendapuntOmschrijving"
-        description: "De omschrijving van het agendapunt"
+        description: "De omschrijving van het agendapunt."
         required: false
         schema:
           type: "string"
       - in: "query"
         name: "bovenliggendAgendapuntIdentificatie"
-        description: "Het nummer van het agendapunt op de agenda.\n\nDe identificatie\
-          \ die verwijst naar het agendapunt waar dit agendapunt een subagendapunt\
-          \ van is."
+        description: "Het nummer van het agendapunt op de agenda. De identificatie
+          die verwijst naar het agendapunt waar dit agendapunt een subagendapunt van is."
         required: false
         schema:
           type: "string"
           maxLength: 10
       - in: "query"
-        name: "gemeentecode"
-        description: De code van een gemeente in de landelijke tabel.
+        name: "organisatie"
+        description: De code van de organisatie.
         required: false
         schema:
           type: "string"
-      - in: "query"
-        name: "provincie"
-        required: false
-        schema:
-          $ref: "#/components/schemas/ProvincieInQuery"
-      - in: "query"
-        name: "waterschapcode"
-        description: De code van het waterschap in de CBS tabel.
-        required: false
-        schema:
-          type: string
       - in: "query"
         name: "gewijzigdSinds"
         description: "Met deze parameter kunnen vergaderingen opgevraagd worden waarin\
@@ -65,14 +53,13 @@ paths:
           type: "string"
           format: "date-time"
       - in: "query"
-        name: "vergaderingsIdentificatie"
-        description: "De identificatie een VERGADERING\n\nDe identificatie de vergadering\
-          \ waarin dit agendapunt is of wordt behandeld. \n\nDe eerste vier karakter\
-          \ zijn de gemeentecode, gevolgd door een volgnummer van 7 cijfers met voorloopnullen."
+        name: "vergadering"
+        description: ID van de vergadering waarin het agendapunt wordt behandeld.
         required: false
         schema:
           type: "string"
-          maxLength: 10
+          minLength: 1
+          maxLength: 40
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -118,8 +105,8 @@ paths:
   /agendapunten/{id}:
     get:
       operationId: "getagendapunt"
-      description: "Het bericht dat de JSON/REST API voor het ophalen gegevens van\
-        \ een agendapunt retourneert."
+      summary: Een specifiek agendapunt opvragen.
+      description: Een specifiek agendapunt opvragen op basis van een identifier.
       parameters:
         - in: path
           name: id
@@ -174,8 +161,8 @@ paths:
   /informatieobjecten:
     get:
       operationId: "getinformatieobjecten"
-      description: "Het bericht dat de JSON/REST API voor het ophalen van een collectie\
-        \ informatieobjecten retourneert."
+      summary: Alle informatieobjecten opvragen.
+      description: Deze lijst kan gefilterd worden met behulp van query parameters.
       parameters:
       - in: "query"
         name: "agendapuntIdentificatie"
@@ -220,22 +207,11 @@ paths:
           type: "string"
           format: "date"
       - in: "query"
-        name: "gemeentecode"
-        description: De code van een gemeente in de landelijke tabel.
+        name: "organisatie"
+        description: De code van de organisatie.
         required: false
         schema:
           type: "string"
-      - in: "query"
-        name: "provincie"
-        required: false
-        schema:
-          $ref: "#/components/schemas/ProvincieInQuery"
-      - in: "query"
-        name: "waterschapcode"
-        description: De code van het waterschap in de CBS tabel.
-        required: false
-        schema:
-          type: string
       - in: "query"
         name: "omschrijving"
         required: false
@@ -316,8 +292,8 @@ paths:
   /informatieobjecten/{id}:
     get:
       operationId: "getinformatieobject"
-      description: "Het bericht dat de JSON/REST API voor het ophalen gegevens van\
-        \ een informatieobject retourneert."
+      summary: Een specifiek informatieobject opvragen.
+      description: Een specifiek informatieobject opvragen op basis van een identifier.
       parameters:
         - in: path
           name: id
@@ -326,13 +302,6 @@ paths:
             description: Unieke resource identifier.
             title: ID
           required: true
-          examples:
-            OneValue:
-              value: '"79054025255fb1a26e4bc422aef54eb4"'
-              summary: "E\xE9n ETag-waarde"
-            MultipleValues:
-              value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
-              summary: Meerdere ETag-waardes
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -380,8 +349,8 @@ paths:
   /vergaderingen:
     get:
       operationId: "getvergaderingen"
-      description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens\
-        \ retourneert."
+      summary: Alle vergaderingen opvragen.
+      description: Deze lijst kan gefilterd worden met behulp van query parameters.
       parameters:
       - in: "query"
         name: "gewijzigdSinds"
@@ -399,24 +368,11 @@ paths:
           type: "string"
           maxLength: 100
       - in: "query"
-        name: "gemeentecode"
-        description: De code van een gemeente in de landelijke tabel.
+        name: "organisatie"
+        description: De code van de organisatie.
         required: false
         schema:
           type: "string"
-      - in: "query"
-        name: "provincie"
-        required: false
-        schema:
-          $ref: "#/components/schemas/ProvincieInQuery"
-      - in: "query"
-        name: "waterschapcode"
-        description: De code van het waterschap in de CBS tabel.
-        required: false
-        schema:
-          type: string
-          minLength: 4
-          maxLength: 4
       - in: "query"
         name: "status"
         description: "De status van de vergadering"
@@ -481,8 +437,8 @@ paths:
   /vergaderingen/{id}:
     get:
       operationId: "getvergadering"
-      description: "Het bericht dat de JSON/REST API voor het ophalen van vergaderingsgegevens\
-        \ retourneert."
+      summary: Een specifieke vergadering opvragen.
+      description: Een specifieke vergadering opvragen op basis van een identifier.
       parameters:
         - in: path
           name: id
@@ -612,6 +568,12 @@ components:
       - "id"
       - "vergadering"
       properties:
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
         url:
           type: string
           format: uri
@@ -621,12 +583,8 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        id:
-          type: string
-          maxLength: 40
-          readOnly: true
-          description: Unieke resource identifier.
-          title: ID
+        organisatie:
+          $ref: "#/components/schemas/Organisatie"
         vergadering:
           allOf:
             - description: "Verwijzing naar de vergadering waar dit agendapunt behandeld wordt."
@@ -677,12 +635,24 @@ components:
           description: "De datum en tijdstip waarop de behandeling van de agendapunt\
             \ is geëindigd. Moet voorkomen als Starttijd voorkomt."
           format: "date-time"
-        gemeente:
-          $ref: "#/components/schemas/Gemeente"
-        provincie:
-          $ref: "#/components/schemas/Provincie"
-        waterschap:
-          $ref: "#/components/schemas/Waterschap"
+        # gemeente:
+        #   type: string
+        #   title: Gemeente
+        #   description: 'De code van de gemeente volgens [TOOI: Register gemeenten compleet, versie 4](https://identifier.overheid.nl/tooi/set/rwc_gemeenten_compleet/4). 
+        #     Bijvoorbeeld "gm0363" voor gemeente Amsterdam.'
+        #   example: gm0363
+        # provincie:
+        #   type: string
+        #   title: Provincie
+        #   description: 'De code van de provincie volgens [TOOI:Register provincies compleet, versie 1](https://identifier.overheid.nl/tooi/set/rwc_provincies_compleet/1). 
+        #     Bijvoorbeeld "pv27" voor provincie Noord-Holland.'
+        #   example: pv27
+        # waterschap:
+        #   type: string
+        #   title: Waterschap
+        #   description: 'De code van het waterschap volgens [TOOI: Register waterschappen compleet, versie 2](https://identifier.overheid.nl/tooi/set/rwc_waterschappen_compleet/2). 
+        #     Bijvoorbeeld "ws0155" voor het waterschap Amstel, Gooi en Vecht.'
+        #   example: ws0155
         geplandAgendapuntvolgnummer:
           type: "string"
           title: "Gepland agendapuntvolgnummer"
@@ -995,6 +965,12 @@ components:
       - "url"
       - "id"
       properties:
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
         url:
           type: string
           format: uri
@@ -1004,12 +980,8 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        id:
-          type: string
-          maxLength: 40
-          readOnly: true
-          description: Unieke resource identifier.
-          title: ID
+        organisatie:
+          $ref: "#/components/schemas/Organisatie"
         auteur:
           type: "string"
           title: "Auteur"
@@ -1036,12 +1008,12 @@ components:
           title: "Datum ingediend"
           description: "De datum waarop het BESLUITVORMINGSSTUK is ingediend"
           format: "date"
-        gemeente:
-          $ref: "#/components/schemas/Gemeente"
-        provincie:
-          $ref: "#/components/schemas/Provincie"
-        waterschap:
-          $ref: "#/components/schemas/Waterschap"
+        # gemeente:
+        #   $ref: "#/components/schemas/Gemeente"
+        # provincie:
+        #   $ref: "#/components/schemas/Provincie"
+        # waterschap:
+        #   $ref: "#/components/schemas/Waterschap"
         informatieobjecttype:
           $ref: "#/components/schemas/Informatieobjecttype"
         inhoud:
@@ -1101,13 +1073,13 @@ components:
           readOnly: true
         gerelateerdInformatieobject:
           $ref: "#/components/schemas/GerelateerdInformatieobject"
-        zaken:
-          title: Zaken
-          description: Zaken die gerelateerd zijn aan dit informatieobject.
-          type: array
-          items:
-            $ref: "#/components/schemas/Zaak"
-          uniqueItems: true
+        # zaken:
+        #   title: Zaken
+        #   description: Zaken die gerelateerd zijn aan dit informatieobject.
+        #   type: array
+        #   items:
+        #     $ref: "#/components/schemas/Zaak"
+        #   uniqueItems: true
         natuurlijkePersonen:
           description: URL-referenties naar één of meer natuurlijke personen die het informatieobject
             hebben ondertekend.
@@ -1503,6 +1475,12 @@ components:
       - id
       - vergaderingstype
       properties:
+        id:
+          type: string
+          maxLength: 40
+          readOnly: true
+          description: Unieke resource identifier.
+          title: ID
         url:
           type: string
           format: uri
@@ -1512,12 +1490,8 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
-        id:
-          type: string
-          maxLength: 40
-          readOnly: true
-          description: Unieke resource identifier.
-          title: ID
+        organisatie:
+          $ref: "#/components/schemas/Organisatie"
         aanvangVergadering:
           type: "string"
           title: "Aanvang vergadering"
@@ -1651,27 +1625,27 @@ components:
           description: "De datum waarop de vergadering voor het laatst gewijzigd is."
           format: "date"
           example: "2021-07-11"
-    Gemeente:
-      type: "object"
-      description: "De referentielijst met alle gemeenten Tabel 33 van de landelijke tabellen.  \n\n
-          **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `provincie` en `waterschap` de waarde `null` hebben."
-      nullable: true
-      required:
-      - "gemeentecode"
-      - "gemeentenaam"
-      properties:
-        gemeentecode:
-          type: "string"
-          title: "Gemeentecode"
-          description: "De code van een gemeente in de landelijke tabel."
-          maxLength: 4
-          minLength: 1
-        gemeentenaam:
-          type: "string"
-          title: "Gemeentenaam"
-          description: "De naam van de gemeente."
-          minLength: 1
-          readOnly: true
+    # Gemeente:
+    #   type: "object"
+    #   description: "De referentielijst met alle gemeenten Tabel 33 van de landelijke tabellen.  \n\n
+    #       **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `provincie` en `waterschap` de waarde `null` hebben."
+    #   nullable: true
+    #   required:
+    #   - "gemeentecode"
+    #   - "gemeentenaam"
+    #   properties:
+    #     gemeentecode:
+    #       type: "string"
+    #       title: "Gemeentecode"
+    #       description: "De code van een gemeente in de landelijke tabel."
+    #       maxLength: 4
+    #       minLength: 1
+    #     gemeentenaam:
+    #       type: "string"
+    #       title: "Gemeentenaam"
+    #       description: "De naam van de gemeente."
+    #       minLength: 1
+    #       readOnly: true
     Gremium:
       type: "object"
       description: "De referentielijst met alle gremia in een gemeente. Hier horen ook alle commissies bij van de gemeenteraad."
@@ -1682,15 +1656,13 @@ components:
         gremiumidentificatie:
           type: "string"
           title: "Gremiumidentificatie"
-          description: "De identificatie van een gremium\n\nDe identificatie van een\
-            \ gremium"
+          description: "De identificatie van een gremium\n\nDe identificatie van een gremium."
           maxLength: 10
           minLength: 1
         gremiumnaam:
           type: "string"
           title: "Gremiumnaam"
-          description: "De naam van het gremium. Hier horen ook de (raads- en staten)commissies\
-            \ bij"
+          description: "De naam van het gremium. Hier horen ook de (raads- en staten)commissies bij."
           maxLength: 100
           minLength: 1
           readOnly: true
@@ -1895,50 +1867,50 @@ components:
       - "college"
       - "gedeputeerde_staten"
       - "dagelijks_bestuur"
-    Provincie:
-      type: "string"
-      description: "De naam van de provincie volgens de waardenlijst. 
+    # Provincie:
+    #   type: "string"
+    #   description: "De naam van de provincie volgens de waardenlijst. 
 
-        * drente - Drenthe
+    #     * drente - Drenthe
 
-        * groningen - Groningen
+    #     * groningen - Groningen
 
-        * overijsel - Overijsel
+    #     * overijsel - Overijsel
 
-        * flevoland - Flevoland
+    #     * flevoland - Flevoland
 
-        * friesland - Friesland
+    #     * friesland - Friesland
 
-        * gelderland - Gelderland
+    #     * gelderland - Gelderland
 
-        * utrecht - Utrecht
+    #     * utrecht - Utrecht
 
-        * noord_holland - Noord-Holland
+    #     * noord_holland - Noord-Holland
 
-        * zuid_holland - Zuid-Holland
+    #     * zuid_holland - Zuid-Holland
 
-        * zeeland - Zeeland
+    #     * zeeland - Zeeland
 
-        * noord_brabant - Noord-Brabant
+    #     * noord_brabant - Noord-Brabant
 
-        * limburg - Limburg  
+    #     * limburg - Limburg  
 
 
-        **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `gemeente` en `waterschap` de waarde `null` hebben."
-      nullable: true
-      enum:
-      - "drenthe"
-      - "groningen"
-      - "overijsel"
-      - "flevoland"
-      - "friesland"
-      - "gelderland"
-      - "utrecht"
-      - "noord_holland"
-      - "zuid_holland"
-      - "zeeland"
-      - "noord_brabant"
-      - "limburg"
+    #     **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `gemeente` en `waterschap` de waarde `null` hebben."
+    #   nullable: true
+    #   enum:
+    #   - "drenthe"
+    #   - "groningen"
+    #   - "overijsel"
+    #   - "flevoland"
+    #   - "friesland"
+    #   - "gelderland"
+    #   - "utrecht"
+    #   - "noord_holland"
+    #   - "zuid_holland"
+    #   - "zeeland"
+    #   - "noord_brabant"
+    #   - "limburg"
     ProvincieInQuery:
       type: "string"
       description: De naam van de provincie volgens de waardenlijst.
@@ -1955,24 +1927,24 @@ components:
       - "zeeland"
       - "noord_brabant"
       - "limburg"
-    Waterschap:
-      type: "object"
-      description: "De referentielijst met alle waterschappen volgens CBS. \n\n
-        **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `gemeente` en `provincie` de waarde `null` hebben."
-      nullable: true
-      required:
-      - "waterschapcode"
-      - "waterschapnaam"
-      properties:
-        waterschapcode:
-          type: "string"
-          description: De code van het waterschap in de CBS tabel.
-          maxLength: 4
-          minLength: 4
-        waterschapnaam:
-          type: "string"
-          description: De naam van het waterschap.
-          readOnly: true
+    # Waterschap:
+    #   type: "object"
+    #   description: "De referentielijst met alle waterschappen volgens CBS. \n\n
+    #     **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `gemeente` en `provincie` de waarde `null` hebben."
+    #   nullable: true
+    #   required:
+    #   - "waterschapcode"
+    #   - "waterschapnaam"
+    #   properties:
+    #     waterschapcode:
+    #       type: "string"
+    #       description: De code van het waterschap in de CBS tabel.
+    #       maxLength: 4
+    #       minLength: 4
+    #     waterschapnaam:
+    #       type: "string"
+    #       description: De naam van het waterschap.
+    #       readOnly: true
     RolNaam:
       type: "string"
       description: "duiding van de rollen van een natuurlijke persoon tijdens een\
@@ -2401,3 +2373,35 @@ components:
           format: uri
           minLength: 1
           readOnly: true
+    Gemeente:
+      type: object
+      properties:
+        gemeente: 
+          type: string
+          title: Gemeente
+          description: 'De code van de gemeente volgens [TOOI: Register gemeenten compleet, versie 4](https://identifier.overheid.nl/tooi/set/rwc_gemeenten_compleet/4). 
+            Bijvoorbeeld "gm0363" voor gemeente Amsterdam.'
+          example: gm0363
+    Provincie:
+      type: object
+      properties:
+        provincie:
+          type: string
+          title: Provincie
+          description: 'De code van de provincie volgens [TOOI: Register provincies compleet, versie 1](https://identifier.overheid.nl/tooi/set/rwc_provincies_compleet/1). 
+            Bijvoorbeeld "pv27" voor provincie Noord-Holland.'
+          example: pv27
+    Waterschap:
+      type: object
+      properties:
+        waterschap:
+          type: string
+          title: Waterschap
+          description: 'De code van het waterschap volgens [TOOI: Register waterschappen compleet, versie 2](https://identifier.overheid.nl/tooi/set/rwc_waterschappen_compleet/2). 
+            Bijvoorbeeld "ws0155" voor het waterschap Amstel, Gooi en Vecht.'
+          example: ws0155
+    Organisatie:
+      oneOf:
+        - $ref: "#/components/schemas/Gemeente"
+        - $ref: "#/components/schemas/Provincie"
+        - $ref: "#/components/schemas/Waterschap"
