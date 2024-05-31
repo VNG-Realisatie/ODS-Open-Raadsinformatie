@@ -1,5 +1,6 @@
 # To do
 
+- Links naar website pagina's toevoegen in de api
 - Titel en introtekst van de API aanpassen -> Mini ORI API
 - Versie 0.0.1-mini-ori -> 0.0.1  want mini-ori moet in de titel staan.
 - Van agendapunten een subresource maken van vergadering
