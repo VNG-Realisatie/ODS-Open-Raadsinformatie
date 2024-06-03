@@ -6,10 +6,23 @@ servers:
 - description: "Referentie-implementatie"
   url: "https://www.voorbeeldgemeente.nl/api/open_raads__en_stateninformatie/v1"
 info:
-  title: "Open Raads-, -Staten en Bestuursinformatie"
-  description: "Om te kunnen voldoen aan de 'Wet open overheid' ontsluit deze API een aantal categorieën overheidsinformatie voor gemeenten, provincies en waterschappen 
-          zoals ingekomen (vergader)stukken, agenda's (voor vergaderingen), verslagen en besluiten."
-  version: "0.0.1-mini-ori"
+  title: De mini-ORI API
+  description: "In deze mini-ORI API is de functionaliteit van de ORI API beperkt tot de volgende drie resources:
+
+      - Agendapunten,
+
+      - Informatieobjecten en
+
+      - Vergaderingen.
+
+
+      Bovendien zijn de HTTP-operaties beperkt tot bevragingen en zijn alleen de GET-operaties opgenomen. 
+      
+      
+      Met deze kleine maar representatieve subset van de ORI API kunnen de 
+      RIS-leveranciers eenvoudig en snel beginnen met het implementeren en beproeven van de API. 
+      Gaandeweg zal de set incrementeel uitgebreid worden tot het volledige model."
+  version: "0.0.1"
   x-imvertor-generator-version: "2.0.0"
   x-yamlCompiler-stylesheets-version: "20230315"
   contact:
@@ -581,6 +594,11 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
+        webpaginaLink:
+          title: Webpagina link
+          description: De URL naar de webpagina waar het agendapunt is terug te vinden.
+          type: "string"
+          format: "uri"
         organisatie:
           $ref: "#/components/schemas/Organisatie"
         vergadering:
@@ -965,17 +983,13 @@ components:
         auteur:
           type: "string"
           title: "Auteur"
-          description: "De naamgegevens van de auteur zijnde een betrokkene die in\
-            \ een rol aan de ZAAK gerelateerd is, dan wel, indien de auteur niet in\
-            \ een rol aan de ZAAK gerelateerd is, de naamgegevens van de natuurlijk\
-            \ persoon of organisatie zijnde de auteur. In het laatste geval verdient\
-            \ het aanbeveling om aanvullend te vermelden uit welken hoofde het auteurschap\
-            \ wordt uitgeoefend."
+          description: De naam van de auteur van het document.
           maxLength: 200
         bronorganisatie:
           type: "integer"
           title: "Bronorganisatie"
-          description: Bronorganisatie. De in het NHR voorkomende unieke identificaties van rechtspersonen en samenwerkingsverbanden.
+          description: De in het NHR voorkomende unieke identificatie van de rechtspersoon of 
+            samenwerkingsverband zijnde de bronorganisatie.
         creatiedatum:
           type: "string"
           title: "Creatiedatum"
@@ -991,12 +1005,12 @@ components:
           $ref: "#/components/schemas/Informatieobjecttype"
         formaat:
           type: string
+          title: Formaat
           description: >-
             Het "Media Type" (voorheen "MIME type") voor de wijze waaropde
             inhoud van het INFORMATIEOBJECT is vastgelegd in een
             computerbestand. Voorbeeld: `application/msword`. Zie:
             https://www.iana.org/assignments/media-types/media-types.xhtml
-          title: formaat
           maxLength: 255
         # inhoud:
         #   type: "string"
@@ -1004,14 +1018,19 @@ components:
         #   description: "Inhoud van het document. De content (data) van het enkelvoudig\
         #     \ informatieobject in het formaat zoals gespecificeerd met de attribuutsoort\
         #     \ 'Formaat'."
-        link:
+        inhoudLink:
           title: "Link"
-          description: De URL waarmee de inhoud van het informatieobject op te vragen is conform het formaat    zoals hier boven is gespecificeerd.
+          description: De URL waarmee de inhoud van het informatieobject op te vragen is conform het formaat zoals hier boven is gespecificeerd.
+          type: "string"
+          format: "uri"
+        webpaginaLink:
+          title: Webpagina link
+          description: De URL naar de webpagina waar het informatieobject is terug te vinden.
           type: "string"
           format: "uri"
         omschrijving:
           type: "string"
-          title: "omschrijving"
+          title: "Omschrijving"
           description: "De omschrijving van het informatieobject."
         taal:
           type: "string"
@@ -1062,28 +1081,19 @@ components:
         #   items:
         #     $ref: "#/components/schemas/Zaak"
         #   uniqueItems: true
-        natuurlijkePersonen:
-          description: URL-referenties naar één of meer natuurlijke personen die het informatieobject
-            hebben ondertekend.
-          type: array
-          items:
-            type: "string"
-            format: "uri"
-            minLength: 1
-          uniqueItems: true
-          readOnly: true
+        # natuurlijkePersonen:
+        #   description: URL-referenties naar één of meer natuurlijke personen die het informatieobject
+        #     hebben ondertekend.
+        #   type: array
+        #   items:
+        #     type: "string"
+        #     format: "uri"
+        #     minLength: 1
+        #   uniqueItems: true
+        #   readOnly: true
         vertrouwelijkheidsaanduiding:
           title: Vertrouwelijkheidsaanduiding
           description: Aanduiding van de vertrouwelijkheid.
-          type: string
-        portefeuillehouder:
-          title: Portefeuillehouder
-          description: De naam van de portefeuillehouder van het VOORSTEL.
-          type: string
-          maxLength: 100
-        toelichting:
-          title: Toelichting
-          description: De toelichting op het AMENDEMENT.
           type: string
     Zaak:
       required:
@@ -1133,6 +1143,15 @@ components:
             - hoofd_amendement
             - voorstel
             - vraag
+        toelichting:
+          title: Toelichting
+          description: Toelichting op het gerelateerde informatieobject.
+          type: string
+        portefeuillehouder:
+          title: Portefeuillehouder
+          description: De naam van de portefeuillehouder van het gerelateerde informatieobject.
+          type: string
+          maxLength: 100
     Mediabron:
       type: "object"
       description: ""
@@ -1472,6 +1491,11 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
+        webpaginaLink:
+          title: Webpagina link
+          description: De URL naar de webpagina waar de vergadering is terug te vinden.
+          type: "string"
+          format: "uri"
         organisatie:
           $ref: "#/components/schemas/Organisatie"
         aanvangVergadering:
