@@ -15,4 +15,8 @@ Bovendien zijn de HTTP-operaties beperkt tot bevragingen en zijn alleen de GET-o
 
 Met deze kleine maar representatieve subset van de ORI API kunnen de RIS-leveranciers eenvoudig en snel beginnen met het implementeren en beproeven van de API. Gaandeweg zal de set incrementeel uitgebreid worden tot het volledige model.
 
-Klik [hier](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/master/docs/mini-ORI-API/openapi.yaml) om de mini-ORI API in Redoc te zien.
+DE OAS-specificatie van de mini-ORI API is op drie manieren te bekijken:
+
+- [Redoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/master/docs/mini-ORI-API/openapi.yaml),
+- [Swagger](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/master/docs/mini-ORI-API/openapi.yaml) en
+- [Yaml](https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/master/docs/mini-ORI-API/openapi.yaml).
