@@ -3,7 +3,7 @@ layout: page-with-side-nav
 title: mini-ORI API
 ---
 
-# De mini-ORI API
+# mini-ORI API
 
 In de mini-ORI API is de functionaliteit van de ORI API beperkt tot de volgende drie resources:
 
