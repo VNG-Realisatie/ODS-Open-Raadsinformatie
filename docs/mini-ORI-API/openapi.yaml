@@ -594,6 +594,10 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
+        wooInformatiecategorie:
+          type: string
+          title: Woo wooInformatiecategorie
+          description: 'De code van de informatiecategorie volgens [TOOI: Woo informatiecategorieën, versie 2](https://identifier.overheid.nl/tooi/set/scw_woo_informatiecategorieen/2). Bijvoorbeeld de code "c_db4862c3" voor  "vergaderstuk decentrale overheid".'
         webpaginaLink:
           title: Webpagina link
           description: De URL naar de webpagina waar het agendapunt is terug te vinden.
@@ -980,6 +984,11 @@ components:
           minLength: 1
         organisatie:
           $ref: "#/components/schemas/Organisatie"
+        wooInformatiecategorie:
+          type: string
+          title: Woo wooInformatiecategorie
+          description: 'De code van de informatiecategorie volgens [TOOI: Woo informatiecategorieën, versie 2](https://identifier.overheid.nl/tooi/set/scw_woo_informatiecategorieen/2). Bijvoorbeeld de code "c_db4862c3" voor  "vergaderstuk decentrale overheid".'
+          example: c_db4862c3
         auteur:
           type: "string"
           title: "Auteur"
@@ -1491,6 +1500,11 @@ components:
             URL-referentie naar dit object. Dit is de unieke identificatie
             en locatie van dit object.
           minLength: 1
+        wooInformatiecategorie:
+          type: string
+          title: Woo wooInformatiecategorie
+          description: 'De code van de informatiecategorie volgens [TOOI: Woo informatiecategorieën, versie 2](https://identifier.overheid.nl/tooi/set/scw_woo_informatiecategorieen/2). Bijvoorbeeld de code "c_db4862c3" voor  "vergaderstuk decentrale overheid".'
+          example: c_db4862c3
         webpaginaLink:
           title: Webpagina link
           description: De URL naar de webpagina waar de vergadering is terug te vinden.

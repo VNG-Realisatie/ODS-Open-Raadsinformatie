@@ -21,6 +21,8 @@ In de mini-ORI API zijn alvast een aantal verbeteringen doorgevoerd:
 
 - Voor het refereren naar gemeenten, provincies en waterschappen wordt nu gebruik gemaakt van de waardlijsten van TOOI (zie [issue #93](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/93)).
 
+- Voor het invullen van de Woo informatiecategorie is het attribuut "wooInformatiecategorie" toegevoegd. Ook hier wordt gebruik gemaakt van de waardelijst van TOOI (zie [issue #93](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/93)).
+
 - Het attribuut "webpaginaLink" is toegevoegd aan de resources van de API (zie [issue #92](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/92)).
 
 ## DE OAS-specificatie
