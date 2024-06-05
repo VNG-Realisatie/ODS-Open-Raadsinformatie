@@ -25,6 +25,10 @@ In de mini-ORI API zijn alvast een aantal verbeteringen doorgevoerd:
 
 - Het attribuut "webpaginaLink" is toegevoegd aan de resources van de API (zie [issue #92](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues/92)).
 
+- Aan de resource InformatieObject is het attribuut "formaat" toegevoegd om het MIME-type van de inhoud te specificeren.
+
+- Het attribuut "portefeuillehouder" is gegeneraliseerd voor alle typen gerelateerde informatieobjecten.
+
 ## DE OAS-specificatie
 
 De OAS-specificatie van de mini-ORI API is op drie manieren te bekijken:
@@ -32,7 +36,3 @@ De OAS-specificatie van de mini-ORI API is op drie manieren te bekijken:
 - [Redoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/master/docs/mini-ORI-API/openapi.yaml),
 - [Swagger](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/master/docs/mini-ORI-API/openapi.yaml) en
 - [Yaml](https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/master/docs/mini-ORI-API/openapi.yaml).
-
-
-
-

@@ -966,6 +966,7 @@ components:
       required:
       - "url"
       - "id"
+      - formaat
       properties:
         id:
           type: string
@@ -1622,16 +1623,6 @@ components:
           description: URL-referenties naar de deelvergaderingen van deze vergadering.
           title: Deelvergaderingen
           uniqueItems: true
-        # mediabronnen:
-        #   type: array
-        #   items:
-        #     type: string
-        #     format: uri
-        #     minLength: 1
-        #   readOnly: true
-        #   description: URL-referenties naar de mediobronnen waarin deze vergadering is vastgelegd.
-        #   title: Mediabronnen
-        #   uniqueItems: true
         wijziging:
           type: string
           description: De laatste wijziging die heeft plaatsgevonden.
@@ -1645,27 +1636,6 @@ components:
           description: "De datum waarop de vergadering voor het laatst gewijzigd is."
           format: "date"
           example: "2021-07-11"
-    # Gemeente:
-    #   type: "object"
-    #   description: "De referentielijst met alle gemeenten Tabel 33 van de landelijke tabellen.  \n\n
-    #       **Let op:** Dit attribuut mag alléén gevuld zijn als de attributen `provincie` en `waterschap` de waarde `null` hebben."
-    #   nullable: true
-    #   required:
-    #   - "gemeentecode"
-    #   - "gemeentenaam"
-    #   properties:
-    #     gemeentecode:
-    #       type: "string"
-    #       title: "Gemeentecode"
-    #       description: "De code van een gemeente in de landelijke tabel."
-    #       maxLength: 4
-    #       minLength: 1
-    #     gemeentenaam:
-    #       type: "string"
-    #       title: "Gemeentenaam"
-    #       description: "De naam van de gemeente."
-    #       minLength: 1
-    #       readOnly: true
     Gremium:
       type: "object"
       description: "De referentielijst met alle gremia in een gemeente. Hier horen ook alle commissies bij van de gemeenteraad."
