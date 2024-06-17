@@ -1542,12 +1542,12 @@ components:
           description: "De datum en tijdstip waarop de vergadering is geëindigd"
           format: "date-time"
           example: "2017-02-10T21:12:00:000Z"
-        gemeente:
-          $ref: "#/components/schemas/Gemeente"
-        provincie:
-          $ref: "#/components/schemas/Provincie"
-        waterschap:
-          $ref: "#/components/schemas/Waterschap"
+        # gemeente:
+        #   $ref: "#/components/schemas/Gemeente"
+        # provincie:
+        #   $ref: "#/components/schemas/Provincie"
+        # waterschap:
+        #   $ref: "#/components/schemas/Waterschap"
         georganiseerdDoorGremium:
           allOf:
           - $ref: "#/components/schemas/Gremium"
