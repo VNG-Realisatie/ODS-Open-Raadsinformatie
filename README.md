@@ -1,3 +1,8 @@
+| Eigenaar | Ingevuld door |
+| --- | --- |
+| Kennis Centrum Architectuur | Henri Korver |
+<hr/>
+
 # ODS Open RaadsInformatie
 
 De Open API Specificatie voor Open Raadsinformatie beschrijft de standaard voor het ontsluiten van raadsinformatie van gemeenten.
