@@ -631,9 +631,10 @@ components:
           title: "Agendapunt Naam"
           description: "De weergave van het Agendapunt op de agenda. De letterlijke volgorde van een Agendapunt kan ook worden aangevuld met attribuut 'volgnummer' of 'tussenkop'. Hoe het Agendapunt getoond wordt op de Agenda wordt beschreven met dit attribuut."
         vergadering:
-          allOf:
-            - description: "Verwijzing naar de vergadering waar dit agendapunt behandeld wordt."
-            - $ref: "#/components/schemas/VerwijzingNaarResource"
+          type: string
+          format: uuid
+          title: Vergadering
+          description: "UUID-referentie naar de vergadering waar dit agendapunt behandeld wordt."
         hoofdagendapunt:
           allOf:
             - description: "Verwijzing naar het hoofdagendapunt waarvan dit het subagendapunt is."
