@@ -69,10 +69,10 @@ paths:
       parameters:
         - in: path
           name: id
+          required: true
           schema:
             type: string
             description: "Unieke resource identifier."
-          required: true
       responses:
         200:
           description: "Verwijderactie geslaagd"
@@ -93,10 +93,10 @@ paths:
       parameters:
         - in: path
           name: id
+          required: true
           schema:
             type: string
             description: "Unieke resource identifier."
-          required: true
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -121,10 +121,10 @@ paths:
       parameters:
         - in: path
           name: id
+          required: true
           schema:
             type: string
             description: "Unieke resource identifier."
-          required: true
       requestBody:
         content:
           application/json:
@@ -250,11 +250,11 @@ paths:
       parameters:
         - in: path
           name: id
+          required: true
           schema:
             type: string
             description: "Unieke resource identifier."
             title: ID
-          required: true
       responses:
         200:
           description: "Zoekactie geslaagd"
@@ -491,7 +491,7 @@ components:
         - "organisatie"
         - "dossiertype"
         - "agendapuntnaam"
-        - "vergadering"
+        - "vergaderingen"
       properties:
         id:
           type: string
@@ -808,6 +808,16 @@ components:
         - "wooinformatiecategorie"
         - "datumingediend"
       properties:
+        agendapunt:
+          type: string
+          format: uuid
+          title: Agendapunt
+          description: "UUID-referentie naar het agendapunt waar dit informatieobject als bijlage bij hoort."
+        vergadering:
+          type: string
+          format: uuid
+          title: Vergadering
+          description: "UUID-referentie naar de vergadering waar dit informatieobject als bijlage bij hoort."
         webpaginalink:
           title: Webpagina link
           description: "De URL naar de webpagina waar dit document bij het bestuursorgaan is terug te vinden."
@@ -836,7 +846,7 @@ components:
           description: "Kenmerk van het object binnen het bestuursorgaan zelf."
           title: ID
         auteur:
-          type: "string"
+          type: string
           title: "Auteur"
           description: "De naam van de auteur van het document."
         bronorganisatie:
@@ -861,19 +871,6 @@ components:
           type: "string"
           title: "Taal"
           description: "De taal van het informatieobject. Bij voorkeur aaangeduid volgens ISO 639-2/B."
-        vergaderingen:
-          type: array
-          items:
-            $ref: "#/components/schemas/VerwijzingNaarResource"
-          description: "Verwijzingen naar de vergaderingen die dit informatieobject als bijlagen hebben."
-          uniqueItems: true
-        agendapunten:
-          type: "array"
-          title: "Agendapunten"
-          description: "Verwijzingen naar de agendapunten die dit informatieobject als bijlagen hebben."
-          items:
-            $ref: "#/components/schemas/VerwijzingNaarResource"
-          uniqueItems: true
         gerelateerdinformatieobject:
           $ref: "#/components/schemas/GerelateerdInformatieobject"
     GerelateerdInformatieobject:
