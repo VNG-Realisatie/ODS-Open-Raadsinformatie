@@ -4,43 +4,22 @@ servers:
   - url: /ori-mock
     description: "Mock server voor ontwikkeling en testen"
 info:
-  title: "De ORI API voor Open Overheid (Event-Sourcing Versie)"
+  title: "De ORI API voor Open Overheid (Feed Versie)"
   description: |
-    Event-based API met event sourcing ondersteuning voor het aanleveren van Open Raads Informatie (ORI) gebeurtenissen.
+    Cursorbare feed voor het publiceren van Open Raads Informatie (ORI) wijzigingen.
     
-    ## Event-Driven Architectuur met Event Sourcing
-    Alle CRUD-operaties (Create, Update, Delete) voor vergaderingen, agendapunten en informatieobjecten worden verstuurd als events via POST operaties naar het `/events` endpoint. Deze API werkt asynchroon waarbij:
-    - Events worden direct geaccepteerd (HTTP 202)
-    - Verwerking gebeurt asynchroon
-    - **Alle events worden permanent opgeslagen** voor latere bevraging
-    - Consumers kunnen de volledige event history bevragen via GET `/events`
-    - Real-time event consumption via Server-Sent Events stream op `/events/stream`
-    - Statusupdates worden via webhooks teruggestuurd (optioneel)
+    ## Federatieve publicatiefeed
+    Bronhouders publiceren wijzigingen via `GET /feed`. Feed-items zijn dunne verwijzingen naar canonical ORI-resources. De resource achter `entityUrl` is leidend; de feed introduceert geen tweede datamodel.
     
-    ## Event Sourcing Capabilities
-    De API slaat alle ontvangen events permanent op, waardoor:
-    - **Event History**: Consumers kunnen alle historische events opvragen met filtering op resource type, event type, tijdsperiode, en organisatie
-    - **Audit Trail**: Volledige audit trail van alle wijzigingen in het systeem
-    - **Event Replay**: Mogelijkheid om historical events opnieuw te verwerken
-    - **Real-time Streaming**: Server-Sent Events (SSE) voor real-time event consumption
-    - **Filtering & Paginatie**: Uitgebreide query mogelijkheden voor efficiënt ophalen van events
+    ## Synchronisatie
+    Consumers synchroniseren door de feed bron-specifiek en oudste-eerst te lezen. Iedere response bevat een `nextCursor` waarmee de volgende batch kan worden opgehaald.
     
-    ## Query Endpoints voor Event Sourcing
-    - `GET /events` - Bevraag opgeslagen events met uitgebreide filter opties en paginatie
-    - `GET /events/{eventId}` - Haal een specifiek event op
-    - `GET /events/stream` - Real-time event stream via Server-Sent Events (SSE)
+    ## Verwijderingen
+    Verwijderingen worden expliciet gepubliceerd als `entity.delete`. Dit feed-item fungeert als tombstone; de bijbehorende `entityUrl` mag daarna `404` of `410` retourneren.
     
-    ## Webhooks
-    Deze API ondersteunt webhooks voor asynchrone notificaties over event verwerking. Registreer een webhook URL om updates te ontvangen wanneer events:
-    - Succesvol verwerkt zijn
-    - Gefaald zijn tijdens verwerking
-    - Status updates hebben
-    
-    ## Authenticatie & Beveiliging
-    Bij gebruik door decentrale overheden zal de DigiKoppeling-standaard verplicht worden voor het aanleveren bij Open Overheid (zie Forum Standaardisatie). Nu wordt nog de Client Credentials flow toegepast ([OAuth 2.0](https://swagger.io/docs/specification/authentication/oauth2/)).
-    
-    Deze specificatie wordt met een uitgebreide toelichting onderhouden op https://gitlab.com/koop/woo/aanleveren-ori
-  version: "0.3.1-event-sourcing"
+    ## Cursor verlopen
+    Als een cursor niet meer beschikbaar is, retourneert de server `410 Gone`. De consumer moet dan opnieuw starten vanaf een volledige snapshot of export.
+  version: "0.3.1-feed"
   x-imvertor-generator-version: "2.0.0"
   x-yamlCompiler-stylesheets-version: "20230315"
   contact:
@@ -50,83 +29,38 @@ info:
     url: "https://eupl.eu/1.2/nl/"
 security: []
 paths:
-  /events:
+  /feed:
     get:
-      operationId: "getEvents"
-      summary: "Opgeslagen events bevragen"
+      operationId: "getFeed"
+      summary: "Wijzigingenfeed ophalen"
       description: |
-        Vraag opgeslagen events op van de bronhouder. Deze endpoint ondersteunt filtering op verschillende criteria én paginatie.
-        Dit is essentieel voor event sourcing waarbij consumers de event history kunnen ophalen en verwerken.
+        Vraag een oplopende, bron-specifieke feed van wijzigingen op.
+
+        Feed-items bevatten geen volledige brondata. Een item meldt alleen dat een canonical resource is aangemaakt, gewijzigd of verwijderd.
+
+        Bij `entity.upsert` moet `entityUrl` opvraagbaar zijn via de ORI resource endpoints.
+        Bij `entity.delete` fungeert het feed-item als tombstone; `entityUrl` mag daarna `404` of `410` retourneren.
       parameters:
         - in: query
-          name: resourceType
+          name: cursor
           schema:
             type: string
-            enum:
-              - Agendapunt
-              - Informatieobject
-              - Vergadering
-          description: "Filter events op resource type"
-        - in: query
-          name: eventType
-          schema:
-            type: string
-            enum:
-              - CREATE
-              - UPDATE
-              - DELETE
-          description: "Filter events op event type (CREATE, UPDATE, DELETE)"
-        - in: query
-          name: fromTimestamp
-          schema:
-            type: string
-            format: date-time
-          description: "Filter events vanaf dit tijdstip (ISO 8601)"
-          example: "2026-03-01T00:00:00Z"
-        - in: query
-          name: toTimestamp
-          schema:
-            type: string
-            format: date-time
-          description: "Filter events tot dit tijdstip (ISO 8601)"
-          example: "2026-03-26T23:59:59Z"
-        - in: query
-          name: organisatieCode
-          schema:
-            type: string
-          description: "Filter events op organisatie code (bijv. GM0363 voor Amsterdam)"
-          example: "GM0363"
+          description: "Cursor uit een eerdere feed-response."
         - in: query
           name: limit
           schema:
             type: integer
             minimum: 1
-            maximum: 100
-            default: 20
-          description: "Aantal events per pagina"
-        - in: query
-          name: offset
-          schema:
-            type: integer
-            minimum: 0
-            default: 0
-          description: "Aantal events om over te slaan (voor paginatie)"
-        - in: query
-          name: sortOrder
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-            default: desc
-          description: "Sorteer volgorde op timestamp (asc = oudste eerst, desc = nieuwste eerst)"
+            maximum: 1000
+            default: 100
+          description: "Maximum aantal feed-items in de response."
       responses:
         200:
-          description: "Events succesvol opgehaald"
+          description: "Feed batch"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaginatedEventList"
+                $ref: "#/components/schemas/FeedResponse"
         400:
           description: "Ongeldige query parameters"
           content:
@@ -135,227 +69,14 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
         401:
           description: "Je bent niet geautoriseerd voor deze aanvraag."
-      tags:
-        - "Events"
-    post:
-      operationId: "postEvent"
-      summary: "Event versturen"
-      description: "Verstuur een CRUD-gebeurtenis (Create, Update, Delete) voor een resource (Agendapunt, Informatieobject of Vergadering). De gebeurtenis wordt asynchroon verwerkt én opgeslagen voor latere bevraging."
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Event"
-      responses:
-        202:
-          description: "Event succesvol ontvangen en wordt asynchroon verwerkt."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/EventConfirmation"
-        400:
-          description: "Ongeldige event data"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        401:
-          description: "Je bent niet geautoriseerd voor deze aanvraag."
-        422:
-          description: "Event validatie mislukt"
+        410:
+          description: "De opgegeven cursor is niet meer beschikbaar."
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
       tags:
-        - "Events"
-  /events/{eventId}:
-    get:
-      operationId: "getEvent"
-      summary: "Specifiek event opvragen"
-      description: "Vraag een specifiek opgeslagen event op op basis van het event ID."
-      parameters:
-        - in: path
-          name: eventId
-          schema:
-            type: string
-            format: uuid
-          required: true
-          description: "Het unieke ID van het event"
-      responses:
-        200:
-          description: "Event succesvol opgehaald"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/StoredEvent"
-        401:
-          description: "Je bent niet geautoriseerd voor deze aanvraag."
-        404:
-          description: "Event niet gevonden"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      tags:
-        - "Events"
-  /events/stream:
-    get:
-      operationId: "getEventStream"
-      summary: "Event stream voor real-time consumption"
-      description: |
-        Server-Sent Events (SSE) stream voor het real-time ontvangen van nieuwe events.
-        Consumers kunnen deze stream gebruiken om events te volgen zodra ze binnenkomen.
-        De stream blijft open en stuurt nieuwe events zodra deze worden ontvangen door de bronhouder.
-      parameters:
-        - in: query
-          name: resourceType
-          schema:
-            type: string
-            enum:
-              - Agendapunt
-              - Informatieobject
-              - Vergadering
-          description: "Filter stream op resource type"
-        - in: query
-          name: eventType
-          schema:
-            type: string
-            enum:
-              - CREATE
-              - UPDATE
-              - DELETE
-          description: "Filter stream op event type"
-        - in: query
-          name: fromTimestamp
-          schema:
-            type: string
-            format: date-time
-          description: "Alleen events vanaf dit tijdstip (optioneel, default = nu)"
-      responses:
-        200:
-          description: "Event stream verbinding succesvol"
-          content:
-            text/event-stream:
-              schema:
-                type: object
-                description: |
-                  Server-Sent Events (SSE) stream. Elk event in de stream bevat een 'data:' veld 
-                  gevolgd door een JSON object dat voldoet aan het StoredEvent schema.
-                  De stream volgt het SSE protocol: elke message begint met 'data:' gevolgd door de JSON payload.
-                properties:
-                  data:
-                    $ref: "#/components/schemas/StoredEvent"
-                x-stream-format: "text/event-stream"
-              examples:
-                createEvent:
-                  summary: "CREATE event in SSE stream"
-                  value: |
-                    data: {"eventId":"550e8400-e29b-41d4-a716-446655440000","eventType":"CREATE","resourceType":"Agendapunt","timestamp":"2026-03-26T10:00:00Z","resourceUrl":"https://api.openoverheid.nl/ori/v1/agendapunten/550e8400-e29b-41d4-a716-446655440000","data":{"organisatie":{"gemeente":"GM0363","naam":"Amsterdam"},"dossiertype":"agendapunt","agendapuntnaam":"Opening vergadering","vergadering":{"id":"https://api.openoverheid.nl/ori/v1/vergaderingen/abc-123","url":"https://api.openoverheid.nl/ori/v1/vergaderingen/abc-123"}},"storedAt":"2026-03-26T10:00:01Z","processingStatus":"PROCESSED"}
-                    
-                updateEvent:
-                  summary: "UPDATE event in SSE stream"
-                  value: |
-                    data: {"eventId":"660e8400-e29b-41d4-a716-446655440001","eventType":"UPDATE","resourceType":"Vergadering","timestamp":"2026-03-26T10:05:00Z","resourceUrl":"https://api.openoverheid.nl/ori/v1/vergaderingen/660e8400-e29b-41d4-a716-446655440001","data":{"pid":"https://openoverheid.nl/vergaderingen/xyz-789","organisatie":{"gemeente":"GM0363","naam":"Amsterdam"},"dossiertype":"vergadering","vergadernaam":"Gemeenteraad","starttijd":"2026-03-26T19:00:00Z"},"storedAt":"2026-03-26T10:05:01Z","processingStatus":"PROCESSED"}
-                    
-                multipleEvents:
-                  summary: "Meerdere events in SSE stream"
-                  value: |
-                    data: {"eventId":"550e8400-e29b-41d4-a716-446655440000","eventType":"CREATE","resourceType":"Agendapunt","timestamp":"2026-03-26T10:00:00Z","resourceUrl":"https://api.openoverheid.nl/ori/v1/agendapunten/550e8400-e29b-41d4-a716-446655440000","data":{...},"storedAt":"2026-03-26T10:00:01Z","processingStatus":"PROCESSED"}
-                    
-                    data: {"eventId":"660e8400-e29b-41d4-a716-446655440001","eventType":"UPDATE","resourceType":"Vergadering","timestamp":"2026-03-26T10:05:00Z","resourceUrl":"https://api.openoverheid.nl/ori/v1/vergaderingen/660e8400-e29b-41d4-a716-446655440001","data":{...},"storedAt":"2026-03-26T10:05:01Z","processingStatus":"PROCESSED"}
-                    
-                    data: {"eventId":"770e8400-e29b-41d4-a716-446655440002","eventType":"DELETE","resourceType":"Informatieobject","timestamp":"2026-03-26T10:10:00Z","resourceUrl":"https://api.openoverheid.nl/ori/v1/informatieobjecten/770e8400-e29b-41d4-a716-446655440002","data":{"pid":"https://openoverheid.nl/informatieobjecten/doc-456"},"storedAt":"2026-03-26T10:10:01Z","processingStatus":"PROCESSED"}
-        401:
-          description: "Je bent niet geautoriseerd voor deze aanvraag."
-        400:
-          description: "Ongeldige query parameters"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      tags:
-        - "Events"
-  /webhook-subscriptions:
-    post:
-      operationId: "registerWebhook"
-      summary: "Registreer een webhook URL"
-      description: "Registreer een webhook URL om notificaties te ontvangen over event verwerking."
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WebhookSubscriptionRequest"
-      responses:
-        201:
-          description: "Webhook subscription succesvol geregistreerd"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/WebhookSubscription"
-        400:
-          description: "Ongeldige webhook data"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        401:
-          description: "Je bent niet geautoriseerd voor deze aanvraag."
-      tags:
-        - "Webhooks"
-    get:
-      operationId: "getWebhookSubscriptions"
-      summary: "Alle webhook subscriptions opvragen"
-      description: "Haal alle geregistreerde webhook subscriptions op."
-      responses:
-        200:
-          description: "Zoekactie geslaagd"
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/WebhookSubscription"
-        401:
-          description: "Je bent niet geautoriseerd voor deze aanvraag."
-      tags:
-        - "Webhooks"
-  /webhook-subscriptions/{subscriptionId}:
-    delete:
-      operationId: "deleteWebhookSubscription"
-      summary: "Verwijder een webhook subscription"
-      description: "Verwijder een geregistreerde webhook subscription."
-      parameters:
-        - in: path
-          name: subscriptionId
-          schema:
-            type: string
-            format: uuid
-          required: true
-          description: "De ID van de webhook subscription"
-      responses:
-        200:
-          description: "Webhook subscription succesvol verwijderd"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Webhook subscription succesvol verwijderd"
-        401:
-          description: "Je bent niet geautoriseerd voor deze aanvraag."
-        404:
-          description: "Webhook subscription niet gevonden"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      tags:
-        - "Webhooks"
+        - "Feed"
   /agendapunten:
     get:
       operationId: "getagendapunten"
@@ -513,329 +234,86 @@ paths:
         - "Vergaderingen"
 components:
   schemas:
-    Event:
+    FeedResponse:
       type: object
-      description: "Een gebeurtenis die een CRUD-operatie (Create, Update, Delete) beschrijft op een resource."
+      description: "Een batch feed-items voor een bron-specifieke wijzigingenfeed."
       required:
-        - eventId
-        - eventType
-        - resourceType
-        - timestamp
-        - resourceUrl
+        - source
+        - items
+        - nextCursor
+        - hasMore
       properties:
-        eventId:
-          type: string
-          format: uuid
-          description: "Unieke identifier voor deze gebeurtenis (UUID v4)."
-          example: "550e8400-e29b-41d4-a716-446655440000"
-        eventType:
-          type: string
-          enum:
-            - CREATE
-            - UPDATE
-            - DELETE
-          description: "Het type CRUD-operatie."
-          example: "CREATE"
-        resourceType:
-          type: string
-          enum:
-            - Agendapunt
-            - Informatieobject
-            - Vergadering
-          description: "Het type resource waarop de operatie wordt uitgevoerd."
-          example: "Agendapunt"
-        timestamp:
-          type: string
-          format: date-time
-          description: "Tijdstempel wanneer de gebeurtenis heeft plaatsgevonden (ISO 8601)."
-          example: "2026-03-12T10:00:00Z"
-        resourceUrl:
-          type: string
-          format: uri
-          description: "De URL naar het API endpoint waar de resource te vinden is."
-          example: "https://api.openoverheid.nl/ori/v1/agendapunten/550e8400-e29b-41d4-a716-446655440000"
-        data:
-          oneOf:
-            - $ref: "#/components/schemas/AgendapuntZonderPid"
-            - $ref: "#/components/schemas/InformatieObjectZonderPid"
-            - $ref: "#/components/schemas/VergaderingZonderPid"
-            - type: object
-              properties:
-                pid:
-                  type: string
-                  format: uri
-                  description: "De PID URL van de resource (voor DELETE operaties)."
-                  example: "https://openoverheid.nl/agendapunten/abc-123"
-              required:
-                - pid
-          description: "De resource data. Voor CREATE: object zonder PID. Voor UPDATE: volledige object met PID. Voor DELETE: alleen PID veld of PID URL."
-        metadata:
-          type: object
-          description: "Optionele metadata voor de gebeurtenis."
-          properties:
-            source:
-              type: string
-              description: "Bron systeem dat de gebeurtenis heeft gegenereerd."
-              example: "NotubizConnector"
-            correlationId:
-              type: string
-              format: uuid
-              description: "Correlatie ID voor het traceren van gerelateerde gebeurtenissen."
-            reason:
-              type: string
-              description: "Reden voor de wijziging of verwijdering (verplicht bij DELETE en UPDATE van informatieobjecten)."
-              example: "Document vervangen door nieuwe versie"
-    EventConfirmation:
-      type: object
-      description: "Bevestiging dat een event is ontvangen en wordt verwerkt."
-      required:
-        - eventId
-        - status
-        - receivedAt
-      properties:
-        eventId:
-          type: string
-          format: uuid
-          description: "De ID van het ontvangen event."
-          example: "550e8400-e29b-41d4-a716-446655440000"
-        status:
-          type: string
-          enum:
-            - ACCEPTED
-            - PROCESSING
-          description: "Status van het event."
-          example: "ACCEPTED"
-        receivedAt:
-          type: string
-          format: date-time
-          description: "Tijdstip waarop het event is ontvangen."
-          example: "2026-03-12T10:00:01Z"
-        message:
-          type: string
-          description: "Optionele bevestigingsboodschap."
-          example: "Event succesvol ontvangen en wordt asynchroon verwerkt."
-        trackingUrl:
-          type: string
-          format: uri
-          description: "Optionele URL om de status van de event verwerking te volgen."
-          example: "https://example.com/events/550e8400-e29b-41d4-a716-446655440000/status"
-    StoredEvent:
-      type: object
-      description: |
-        Een opgeslagen event inclusief metadata over de opslag en verwerking.
-        Dit schema breidt het basis Event schema uit met informatie over wanneer het event is opgeslagen
-        en wat de huidige verwerkingsstatus is. Consumers gebruiken dit voor event sourcing queries.
-      required:
-        - eventId
-        - eventType
-        - resourceType
-        - timestamp
-        - resourceUrl
-        - data
-        - storedAt
-        - processingStatus
-      properties:
-        eventId:
-          type: string
-          format: uuid
-          description: "Unieke identifier voor deze gebeurtenis (UUID v4)."
-          example: "550e8400-e29b-41d4-a716-446655440000"
-        eventType:
-          type: string
-          enum:
-            - CREATE
-            - UPDATE
-            - DELETE
-          description: "Het type CRUD-operatie."
-          example: "CREATE"
-        resourceType:
-          type: string
-          enum:
-            - Agendapunt
-            - Informatieobject
-            - Vergadering
-          description: "Het type resource waarop de operatie wordt uitgevoerd."
-          example: "Agendapunt"
-        timestamp:
-          type: string
-          format: date-time
-          description: "Tijdstempel wanneer de gebeurtenis heeft plaatsgevonden bij de bronhouder (ISO 8601)."
-          example: "2026-03-12T10:00:00Z"
-        resourceUrl:
-          type: string
-          format: uri
-          description: "De URL naar het API endpoint waar de resource te vinden is of zal zijn."
-          example: "https://api.openoverheid.nl/ori/v1/agendapunten/550e8400-e29b-41d4-a716-446655440000"
-        data:
-          oneOf:
-            - $ref: "#/components/schemas/AgendapuntZonderPid"
-            - $ref: "#/components/schemas/InformatieObjectZonderPid"
-            - $ref: "#/components/schemas/VergaderingZonderPid"
-            - type: object
-              properties:
-                pid:
-                  type: string
-                  format: uri
-                  description: "De PID URL van de resource (voor DELETE operaties)."
-                  example: "https://openoverheid.nl/agendapunten/abc-123"
-              required:
-                - pid
-          description: "De resource data. Voor CREATE: object zonder PID. Voor UPDATE: volledige object met PID. Voor DELETE: alleen PID veld of PID URL."
-        metadata:
-          type: object
-          description: "Optionele metadata voor de gebeurtenis."
-          properties:
-            source:
-              type: string
-              description: "Bron systeem dat de gebeurtenis heeft gegenereerd."
-              example: "NotubizConnector"
-            correlationId:
-              type: string
-              format: uuid
-              description: "Correlatie ID voor het traceren van gerelateerde gebeurtenissen."
-            reason:
-              type: string
-              description: "Reden voor de wijziging of verwijdering (verplicht bij DELETE en UPDATE van informatieobjecten)."
-              example: "Document vervangen door nieuwe versie"
-        storedAt:
-          type: string
-          format: date-time
-          description: "Tijdstip waarop het event is opgeslagen in de event store."
-          example: "2026-03-12T10:00:01Z"
-        processingStatus:
-          type: string
-          enum:
-            - ACCEPTED
-            - PROCESSING
-            - PROCESSED
-            - FAILED
-            - PARTIAL_SUCCESS
-          description: "Huidige verwerkingsstatus van het event."
-          example: "PROCESSED"
-        processedAt:
-          type: string
-          format: date-time
-          description: "Tijdstip waarop het event is verwerkt (alleen bij status PROCESSED, FAILED of PARTIAL_SUCCESS)."
-          example: "2026-03-12T10:00:05Z"
-        resourcePid:
-          type: string
-          format: uri
-          description: "De PID van de aangemaakte of gewijzigde resource (alleen bij succesvolle CREATE/UPDATE)."
-          example: "https://openoverheid.nl/agendapunten/abc-123"
-        error:
-          type: object
-          description: "Foutinformatie (alleen bij status FAILED)."
-          properties:
-            code:
-              type: string
-              description: "Foutcode"
-              example: "VALIDATION_ERROR"
-            message:
-              type: string
-              description: "Foutmelding"
-              example: "Verplicht veld 'vergadering' ontbreekt"
-            details:
-              type: object
-              description: "Aanvullende details over de fout"
-              additionalProperties: true
-    PaginatedEventList:
-      type: object
-      description: "Gepagineerde lijst van opgeslagen events voor event sourcing queries."
-      required:
-        - results
-        - total
-        - limit
-        - offset
-      properties:
-        results:
+        source:
+          $ref: "#/components/schemas/Source"
+        items:
           type: array
+          description: "De feed-items in oplopende volgorde."
           items:
-            $ref: "#/components/schemas/StoredEvent"
-          description: "De lijst van events op deze pagina."
-        total:
-          type: integer
-          description: "Totaal aantal events dat voldoet aan de filter criteria."
-          example: 157
-        limit:
-          type: integer
-          description: "Aantal events per pagina."
-          example: 20
-        offset:
-          type: integer
-          description: "Aantal events dat is overgeslagen (offset voor paginatie)."
-          example: 0
-        next:
+            $ref: "#/components/schemas/FeedItem"
+        nextCursor:
           type: string
-          format: uri
-          nullable: true
-          description: "URL naar de volgende pagina met events (null als dit de laatste pagina is)."
-          example: "https://openoverheid.nl/events?limit=20&offset=20"
-        previous:
-          type: string
-          format: uri
-          nullable: true
-          description: "URL naar de vorige pagina met events (null als dit de eerste pagina is)."
-          example: null
-    EventStatusNotification:
+          description: "Cursor waarmee de volgende batch kan worden opgehaald."
+          example: "124"
+        hasMore:
+          type: boolean
+          description: "Geeft aan of er direct meer feed-items beschikbaar zijn."
+          example: false
+    Source:
       type: object
-      description: "Notificatie over de status van een event verwerking (verzonden via webhook)"
+      description: "Bronhouder van deze feed."
       required:
-        - eventId
-        - status
-        - processedAt
-        - resourceType
+        - id
+        - name
+        - baseUrl
       properties:
-        eventId:
+        id:
           type: string
-          format: uuid
-          description: "Het ID van het verwerkte event"
-          example: "550e8400-e29b-41d4-a716-446655440000"
-        status:
+          description: "Stabiele identifier van deze bron."
+          example: "gemeente-amsterdam"
+        name:
           type: string
-          enum:
-            - PROCESSED
-            - FAILED
-            - PARTIAL_SUCCESS
-          description: "De status van de event verwerking"
-          example: "PROCESSED"
-        processedAt:
-          type: string
-          format: date-time
-          description: "Tijdstip waarop het event verwerkt is"
-          example: "2026-03-12T10:05:23Z"
-        resourceType:
-          type: string
-          enum:
-            - Agendapunt
-            - Informatieobject
-            - Vergadering
-          description: "Het type resource dat verwerkt is"
-          example: "Agendapunt"
-        resourcePid:
+          description: "Leesbare naam van de bronhouder."
+          example: "Gemeente Amsterdam"
+        baseUrl:
           type: string
           format: uri
-          description: "De PID van de aangemaakte of gewijzigde resource (alleen bij succesvolle CREATE/UPDATE)"
-          example: "https://openoverheid.nl/agendapunten/abc-123"
-        message:
+          description: "Base URL van de ORI API voor deze bron."
+          example: "https://api.openoverheid.nl/ori/v1"
+    FeedItem:
+      type: object
+      description: "Een dun feed-item dat naar een canonical ORI-resource verwijst."
+      required:
+        - sequence
+        - type
+        - entityType
+        - entityUrl
+      properties:
+        sequence:
+          type: integer
+          format: int64
+          minimum: 1
+          description: "Strikt oplopend volgnummer binnen deze bron. Sequences zijn niet globaal uniek over meerdere bronnen."
+          example: 123
+        type:
           type: string
-          description: "Optionele beschrijving van het resultaat"
-          example: "Agendapunt succesvol aangemaakt"
-        error:
-          type: object
-          description: "Foutinformatie (alleen bij status FAILED)"
-          properties:
-            code:
-              type: string
-              description: "Foutcode"
-              example: "VALIDATION_ERROR"
-            message:
-              type: string
-              description: "Foutmelding"
-              example: "Verplicht veld 'vergadering' ontbreekt"
-            details:
-              type: object
-              description: "Aanvullende details over de fout"
-              additionalProperties: true
+          enum:
+            - entity.upsert
+            - entity.delete
+          description: "Type wijziging."
+          example: "entity.upsert"
+        entityType:
+          type: string
+          enum:
+            - agendapunt
+            - informatieobject
+            - vergadering
+          description: "Type ORI-resource waar dit item naar verwijst."
+          example: "informatieobject"
+        entityUrl:
+          type: string
+          format: uri
+          description: "Canonical URL van de gewijzigde of verwijderde resource."
+          example: "https://api.openoverheid.nl/ori/v1/informatieobjecten/550e8400-e29b-41d4-a716-446655440000"
     Agendapunt:
       type: "object"
       description: "Een onderdeel van de agenda dat als één geheel wordt behandeld. Een agendapunt kan weer onderverdeeld zijn naar subagendapunten."
@@ -1616,134 +1094,3 @@ components:
         detail:
           type: string
           description: "Omschrijving van de foutmelding."
-    WebhookSubscriptionRequest:
-      type: object
-      description: "Request om een webhook subscription te registreren"
-      required:
-        - url
-        - events
-      properties:
-        url:
-          type: string
-          format: uri
-          description: "De webhook URL waar notificaties naartoe gestuurd moeten worden"
-          example: "https://mijn-gemeente.nl/webhooks/ori-events"
-        events:
-          type: array
-          description: "De event typen waarvoor notificaties ontvangen moeten worden"
-          items:
-            type: string
-            enum:
-              - eventProcessed
-              - eventFailed
-          minItems: 1
-          example: ["eventProcessed", "eventFailed"]
-        description:
-          type: string
-          description: "Optionele beschrijving van deze webhook subscription"
-          example: "Webhook voor gemeente Amsterdam ORI events"
-        secret:
-          type: string
-          description: "Optionele secret voor het valideren van webhook authenticiteit (HMAC signing)"
-          format: password
-    WebhookSubscription:
-      type: object
-      description: "Een geregistreerde webhook subscription"
-      required:
-        - subscriptionId
-        - url
-        - events
-        - createdAt
-        - active
-      properties:
-        subscriptionId:
-          type: string
-          format: uuid
-          description: "Unieke identifier van de webhook subscription"
-          example: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
-        url:
-          type: string
-          format: uri
-          description: "De webhook URL"
-          example: "https://mijn-gemeente.nl/webhooks/ori-events"
-        events:
-          type: array
-          description: "De event typen waarvoor deze webhook geregistreerd is"
-          items:
-            type: string
-            enum:
-              - eventProcessed
-              - eventFailed
-          example: ["eventProcessed", "eventFailed"]
-        description:
-          type: string
-          description: "Beschrijving van deze webhook subscription"
-          example: "Webhook voor gemeente Amsterdam ORI events"
-        createdAt:
-          type: string
-          format: date-time
-          description: "Tijdstip waarop de subscription is aangemaakt"
-          example: "2026-03-12T09:00:00Z"
-        active:
-          type: boolean
-          description: "Of de webhook subscription actief is"
-          example: true
-        lastTriggeredAt:
-          type: string
-          format: date-time
-          description: "Tijdstip waarop de webhook voor het laatst is aangeroepen"
-          example: "2026-03-12T10:05:23Z"
-webhooks:
-  eventProcessed:
-    post:
-      summary: "Event succesvol verwerkt"
-      description: "Deze webhook wordt aangeroepen wanneer een event succesvol is verwerkt. De client moet bij registratie een webhook URL opgeven."
-      operationId: "onEventProcessed"
-      tags:
-        - "Webhooks"
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/EventStatusNotification"
-            example:
-              eventId: "550e8400-e29b-41d4-a716-446655440000"
-              status: "PROCESSED"
-              processedAt: "2026-03-12T10:05:23Z"
-              resourceType: "Agendapunt"
-              resourcePid: "https://openoverheid.nl/agendapunten/abc-123"
-              message: "Agendapunt succesvol aangemaakt"
-      responses:
-        "200":
-          description: "Webhook notificatie ontvangen"
-        "204":
-          description: "Webhook notificatie ontvangen (geen content)"
-  eventFailed:
-    post:
-      summary: "Event verwerking mislukt"
-      description: "Deze webhook wordt aangeroepen wanneer een event niet succesvol verwerkt kon worden."
-      operationId: "onEventFailed"
-      tags:
-        - "Webhooks"
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/EventStatusNotification"
-            example:
-              eventId: "550e8400-e29b-41d4-a716-446655440000"
-              status: "FAILED"
-              processedAt: "2026-03-12T10:05:23Z"
-              resourceType: "Agendapunt"
-              error:
-                code: "VALIDATION_ERROR"
-                message: "Verplicht veld 'vergadering' ontbreekt"
-                details:
-                  field: "vergadering"
-      responses:
-        "200":
-          description: "Webhook notificatie ontvangen"
-        "204":
-          description: "Webhook notificatie ontvangen (geen content)"
