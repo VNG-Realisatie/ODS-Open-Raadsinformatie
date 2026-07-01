@@ -1,1 +1,1 @@
-Experimentele versie waarin de ORI API gebruik maakt van event polling.
+Experimentele versie waarin de ORI API gebruik maakt van event polling, zie [Redoc](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/refs/heads/master/docs/event%20polling/versie%200.0.1/openapi.yaml#tag/Webhooks).
