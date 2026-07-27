@@ -20,7 +20,8 @@ Om te kunnen voldoen aan de 'Wet open overheid' ontsluit deze API een aantal cat
 * [Hoe u kunt bijdragen](https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues)
 * [Architectuur](./Architectuur.md)
 * [Informatiemodel](./Informatiemodel)
-* [Mini-versie van de ORI API](./mini-ORI-API/readme.md)
+* [Mini-versie van de ORI API](./mini-ORI-API/readme)
+* [Event Pulling versie van de ORI API (concept)](./event%20polling/versie%200.0.1/readme)
 
 
 ## Bronnen
