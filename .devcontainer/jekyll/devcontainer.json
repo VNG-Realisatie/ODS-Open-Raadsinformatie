@@ -1,0 +1,22 @@
+{
+  "name": "Jekyll GitHub Pages",
+  "image": "mcr.microsoft.com/devcontainers/ruby:3.2",
+  "forwardPorts": [4000],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "sissel.shopify-liquid"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/ruby:1": {
+      "version": "3.2"
+    }
+  },
+  "postCreateCommand": "cd docs && bundle install",
+  "remoteUser": "vscode"
+}

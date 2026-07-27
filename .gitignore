@@ -1,0 +1,13 @@
+# Jekyll
+docs/_site/
+docs/.jekyll-cache/
+docs/.sass-cache/
+
+# Ruby
+docs/Gemfile.lock
+.bundle/
+vendor/
+
+# OS
+.DS_Store
+Thumbs.db
