@@ -21,8 +21,7 @@ Om te kunnen voldoen aan de 'Wet open overheid' ontsluit deze API een aantal cat
 * [Architectuur](./Architectuur.md)
 * [Informatiemodel](./Informatiemodel)
 * [Mini-versie van de ORI API](./mini-ORI-API/readme)
-* [Event Pulling versie van de ORI API (concept)](./event%20polling/versie%200.0.1/readme)
-* [Event Pulling versie 0.0.2 van de ORI API (concept, ter discussie)](./event%20polling/versie%200.0.2/readme)
+* [Event Pulling versie van de ORI API (concept, ter discussie)](./event%20polling/versie%200.0.2/readme)
 
 
 ## Bronnen
