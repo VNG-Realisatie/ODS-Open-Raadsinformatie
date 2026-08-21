@@ -4,7 +4,7 @@ layout: page-with-side-nav
 
 # Event polling — concept 0.0.2
 
-Concept-doorontwikkeling van [versie 0.0.1](../versie%200.0.1/readme.md), bedoeld
+Concept-doorontwikkeling van [versie 0.0.1](../versie%200.0.1/readme), bedoeld
 als gespreksstuk. Versie 0.0.1 blijft ongewijzigd staan, zodat de twee naast
 elkaar te vergelijken zijn:
 
