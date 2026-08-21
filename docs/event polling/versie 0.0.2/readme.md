@@ -8,7 +8,7 @@ Concept-doorontwikkeling van [versie 0.0.1](../versie%200.0.1/readme.md), bedoel
 als gespreksstuk. Versie 0.0.1 blijft ongewijzigd staan, zodat de twee naast
 elkaar te vergelijken zijn:
 
-- [Redoc — 0.0.2](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/feedback/event-polling-sync-contract/docs/event%20polling/versie%200.0.2/openapi.yaml)
+- [Redoc — 0.0.2](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/master/docs/event%20polling/versie%200.0.2/openapi.yaml)
 - [Redoc — 0.0.1](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/VNG-Realisatie/ODS-Open-Raadsinformatie/master/docs/event%20polling/versie%200.0.1/openapi.yaml)
 
 De opzet van 0.0.1 — een afnemer laten synchroniseren op verschillen in plaats
