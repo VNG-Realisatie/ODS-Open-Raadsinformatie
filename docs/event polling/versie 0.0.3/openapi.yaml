@@ -1,0 +1,1481 @@
+openapi: "3.1.0"
+jsonSchemaDialect: "https://spec.openapis.org/oas/3.1/dialect/base"
+info:
+  title: "ORI publicatiefeed — event polling (concept 0.0.2)"
+  version: "0.0.2-concept"
+  description: |
+    Concept-doorontwikkeling van [event polling 0.0.1](../versie%200.0.1/openapi.yaml).
+    Doel is hetzelfde: een afnemer moet altijd kunnen synchroniseren op basis van
+    de verschillen. Zie [readme.md](./readme.md) voor de onderbouwing per wijziging.
+
+    ## Wat deze specificatie beschrijft
+    Deze specificatie beschrijft wat een **bronhouder aanbiedt**: een leesbare,
+    doorlopende feed van wijzigingen in zijn eigen raadsinformatie, plus een
+    snapshot om die feed vanaf de huidige stand op te pakken. Iedere afnemer —
+    een landelijk register, een journalistiek platform, een onderzoeker, een
+    andere overheid — haalt op wat hij nodig heeft en aggregeert zelf.
+
+    Er wordt niets aangeleverd, en er is geen centrale partij die identifiers
+    toekent. Dat is de belangrijkste wijziging ten opzichte van 0.0.1, dat het
+    `POST /events`-patroon uit de [aanlever-ORI-API van KOOP](https://gitlab.com/koop/woo/aanleveren-ori)
+    had overgenomen en tegelijk bij `GET /events` schreef dat je events "van de
+    bronhouder" opvraagt. Die twee topologieën gaan niet samen. Het aanleveren
+    hoort in de aanlever-specificatie waar het vandaan komt; deze specificatie
+    beschrijft alleen de publicatiekant — wat de mapnaam *event polling* ook
+    belooft.
+
+    Dat sluit een landelijk register niet uit: dat wordt gewoon een afnemer als
+    alle andere. Wat het wél doet, is de aansluitlast bij de bronhouder
+    beperken tot één ding dat hij toch al moet kunnen — zijn eigen gegevens
+    ontsluiten — in plaats van een integratie per landelijk platform.
+
+    ## Rollen: bronhouder, aggregator, register
+    Dit contract kent drie rollen, en dezelfde specificatie dient ze allemaal.
+
+    Een **bronhouder** publiceert de feed van zijn eigen raadsinformatie.
+
+    Een **aggregator** consumeert feeds van meerdere bronhouders, voegt ze samen
+    en publiceert het resultaat als *weer een feed volgens deze specificatie*.
+    Dat is geen uitzondering op het model maar een eigenschap ervan: omdat
+    `sequenceNumber` en `cursor` per feed gelden, kan een aggregator zijn eigen
+    reeks toekennen zonder de bovenliggende feeds te vertalen. Een afnemer merkt
+    niet of hij met een bronhouder of een aggregator praat — het
+    servicedocument (`rol`) vertelt het hem als hij het wil weten. Zo kunnen
+    hergebruikers kiezen: rechtstreeks bij één gemeente, of in één keer bij een
+    aggregator die er honderden bundelt en bijvoorbeeld zoeken of tekstextractie
+    toevoegt. Bestaande aggregatoren zoals
+    [OpenBesluitvorming](https://openbesluitvorming.nl) (opvolger van
+    openraadsinformatie.nl) blijven in dit model dus gewoon werken, en worden
+    tegelijk aanspreekbaar volgens dezelfde afspraken als de bronnen zelf.
+
+    Een **register** houdt alleen bij *waar* feeds staan, en kopieert geen
+    inhoud. Het servicedocument hieronder is wat een register nodig heeft.
+
+    Vier afspraken die een aggregator moet nakomen, zodat een keten van hops
+    dezelfde garanties houdt als één stap:
+
+    1. **Identiteit blijft van de bron.** Geef `resource`
+       (`organisatiecode` + `bronidentificatie`) onveranderd door. Eigen
+       identifiers mogen ernaast staan, niet in de plaats. Alleen zo kan een
+       afnemer gegevens van een aggregator en van de bron zelf naast elkaar
+       leggen zonder dubbel te tellen.
+    2. **`redact` propageert.** Krijg je een `redact` binnen, dan verwijder je de
+       inhoud ook uit je eigen historie én publiceer je zelf een `redact`. Zonder
+       die afspraak stopt een intrekking bij de eerste hop, en dat is precies het
+       geval waarin het niet mag stoppen.
+    3. **Geen `delete` bij eigen blindheid.** Kun je een bovenliggende feed niet
+       bereiken, dan zijn zijn resources niet verdwenen — jij bent tijdelijk
+       blind. Publiceer dan niets in plaats van tombstones. Meld de achterstand
+       via `laatstBijgewerkt` in het servicedocument.
+    4. **Verrijking hoort in je eigen API.** Afgeleide gegevens (geëxtraheerde
+       tekst, thumbnails, zoekindexen) passen niet in dit model en horen niet in
+       de feed geperst te worden. Publiceer ze naast de feed, met de
+       resource-sleutel als verwijzing.
+
+    Deze rollen maken ook een geleidelijke overgang mogelijk: een aggregator kan
+    per organisatie een 0.0.2-feed gebruiken zodra die bestaat, en zolang dat
+    niet zo is de bestaande leveranciers-API blijven benutten. `herkomst` en
+    `laatstBijgewerkt` maken per organisatie zichtbaar welke route is gebruikt en
+    hoe actueel die is.
+
+    ## Garanties van de feed
+    Deze vier afspraken maken de feed bruikbaar voor synchronisatie:
+
+    1. Elk feedrecord heeft een `sequenceNumber` dat de bronhouder **bij
+       vastlegging** toekent en dat per feed monotoon oploopt.
+    2. Er wordt nooit een record ingevoegd vóór een `sequenceNumber` dat een
+       afnemer al heeft kunnen lezen. Wijzigingen die later bekend worden
+       krijgen een nieuw, hoger nummer.
+    3. De feed wordt altijd oplopend uitgeleverd. Er is geen `sortOrder`: een
+       aflopende weergave is een presentatiekwestie, geen synchronisatiemechanisme.
+    4. Gaten in de reeks komen alleen voor als expliciet `redact`-record
+       (zie *Verwijderen en redactie*), nooit stilzwijgend.
+
+    Tijdstempels zijn géén synchronisatiesleutel. Ze zijn niet monotoon, ze
+    kennen klokverschillen, en een wijziging die met terugwerkende kracht bekend
+    wordt heeft een tijdstempel in het verleden. Filter en sorteer daarom nooit
+    op tijd om bij te blijven; gebruik de cursor.
+
+    ## Cursors
+    Een `cursor` is een opake tekenreeks die een positie in de feed aanduidt.
+    Bewaar de `cursor` uit het antwoord en geef hem mee bij de volgende aanroep.
+
+    De cursor duidt een positie in de **volledige** feed van dit endpoint aan;
+    het filter `organisatiecode` wordt daarná toegepast. Een cursor blijft dus
+    geldig als een afnemer zijn filter wijzigt.
+
+    `head` geeft het hoogste `sequenceNumber` in de feed op het moment van
+    antwoorden, zodat een afnemer kan zien hoeveel hij achterloopt.
+    `hasMore: false` betekent: je bent bij.
+
+    ## Initiële synchronisatie
+    Een nieuwe afnemer begint bij `GET /snapshot` (de huidige stand) en neemt van
+    de **eerste** pagina de `feedCursor` mee. Die cursor wordt vastgesteld
+    vóórdat de snapshotrijen worden gelezen, zodat wijzigingen tijdens het
+    doorlopen van de snapshot niet tussen wal en schip vallen. Daarna volstaat
+    pollen op `GET /feed`.
+
+    ## Identificatie
+    Zonder centrale partij is identiteit een afspraak tussen bron en afnemer:
+
+    - `organisatiecode` — de TOOI-code van de organisatie. Landelijk uniek.
+    - `bronidentificatie` — de sleutel van het object bij het bestuursorgaan
+      zelf (het ID in het raadsinformatiesysteem).
+
+    Samen zijn die twee de identiteit van een resource, en ze blijven geldig als
+    een organisatie van leverancier wisselt of als een feed van domein
+    verhuist. Een aggregator die zelf identifiers uitgeeft, kan die
+    deterministisch afleiden uit (`organisatiecode`, `resourceType`,
+    `bronidentificatie`) en houdt ze daarmee stabiel over herindexaties heen.
+
+    `resourceUrl` is de plek waar de resource bij de bronhouder te vinden is.
+    Dat is een adres, geen identiteit: sleutel als afnemer op de twee velden
+    hierboven, niet op de URL.
+
+    Dit is ook het GEMMA-uitgangspunt uit [Architectuur.md](../../Architectuur.md):
+    eenmalig vastleggen, meervoudig gebruiken, en voor publicatie verwijzen naar
+    de opslaglocatie in het bronregister.
+
+    ## Wijzigingen: upsert en delete
+    De bronsystemen kunnen zelden onderscheiden of iets nieuw is of gewijzigd, en
+    voor een afnemer maakt het geen verschil: hij moet beide gevallen als
+    "vervang de toestand die ik had" behandelen. Daarom kent deze versie
+    `upsert` (volledige toestand, replace-semantiek) en `delete`.
+
+    Leg geen nieuw record vast wanneer de `contentHash` gelijk is aan de vorige
+    toestand van dezelfde resource. Zonder die afspraak levert een herindexatie
+    aan de bronkant een storm van no-op-records op, en haalt iedere afnemer bij
+    elke herverwerking de hele dataset opnieuw op.
+
+    `contentHash` is tevens de ordeningssleutel per resource: bij twijfel geldt
+    het record met het hoogste `sequenceNumber`.
+
+    ## Verwijderen en redactie
+    Verwijderen is bij een Woo-publicatie kernfunctionaliteit, geen randgeval.
+    Daarom is `verwijderreden` verplicht en gecodeerd, en zijn er twee operaties:
+
+    - `delete` — de resource is niet langer openbaar of bestond niet. De afnemer
+      verwijdert hem uit zijn kopie, index, caches en afgeleide producten.
+    - `redact` — hetzelfde, plus: de bronhouder heeft de inhoud van eerdere
+      records over deze resource uit de feedhistorie verwijderd. Nodig wanneer
+      de inhoud zelf niet had mogen worden gepubliceerd (bijvoorbeeld
+      onrechtmatig openbaar gemaakte persoonsgegevens). Alleen dan mogen er
+      gaten in de reeks `sequenceNumber` zitten, en het `redact`-record benoemt
+      ze expliciet.
+
+    Om redactie werkbaar te houden bevatten feedrecords metadata en
+    verwijzingen, niet de inhoud van bijlagen: het bestand zelf staat achter
+    `bestandsurl`.
+
+    ## Openbaarheid en vindbaarheid
+    De feed ontsluit uitsluitend gegevens die openbaar zijn, en vereist daarom
+    geen authenticatie. Er is dus ook geen `401` in deze specificatie.
+
+    Om een feed vindbaar te maken publiceert een bronhouder een servicedocument
+    op `GET /` (zie hieronder), en bij voorkeur ook een verwijzing daarnaar op
+    `/.well-known/ori-feed` van het eigen domein. Een landelijk register van
+    feedlocaties — precies wat de Woo-index is — maakt de verzameling
+    doorzoekbaar zonder de inhoud te centraliseren.
+
+    ## Taalafspraak
+    Eén bewuste grens, in plaats van de gemengde naamgeving van 0.0.1: de
+    **envelope** (transportlaag: `sequenceNumber`, `cursor`, `head`, `storedAt`)
+    is Engels, het **domeinmodel** (`vergaderdatum`, `agendapuntnaam`,
+    `bronidentificatie`) is Nederlands en volgt TOOI.
+
+    ## Nog open
+    Zie de sectie "Open punten" in [readme.md](./readme.md): onder meer het
+    gebruik van CloudEvents als recordvorm, onveranderlijke archiefpagina's, en
+    de vraag of `GET /feed/stream` in de standaard thuishoort.
+  contact:
+    url: "https://github.com/VNG-Realisatie/ODS-Open-Raadsinformatie/issues"
+  license:
+    name: "European Union Public License, version 1.2 (EUPL-1.2)"
+    url: "https://eupl.eu/1.2/nl/"
+servers:
+  - url: https://ris.gemeente-voorbeeld.nl/ori/v1
+    description: |
+      De feed wordt door de bronhouder zelf aangeboden; deze URL is een
+      voorbeeld. Een raadsinformatiesysteem dat meerdere organisaties bedient,
+      kan één feed aanbieden waarin `organisatiecode` per record verschilt.
+      De majorversie staat in de URI, conform de Landelijke API-strategie.
+  - url: /ori-mock/v1
+    description: "Mock server voor ontwikkeling en testen"
+security: []
+tags:
+  - name: "Discovery"
+    description: "Wat biedt deze feed aan, en voor welke organisaties?"
+  - name: "Feed"
+    description: "Synchroniseren op wijzigingen."
+  - name: "Resources"
+    description: "De huidige stand van een individuele resource."
+paths:
+  /:
+    get:
+      operationId: "getServicedocument"
+      summary: "Servicedocument: wat biedt deze feed aan?"
+      description: |
+        Maakt een feed self-describing, zodat een afnemer met één aanroep weet
+        welke organisaties erin zitten, welke resourcetypes worden ondersteund
+        en hoe lang de historie teruggaat.
+
+        Publiceer bij voorkeur ook een verwijzing naar dit document op
+        `/.well-known/ori-feed` van het eigen domein, zodat een afnemer die
+        alleen de organisatie kent de feed kan vinden zonder register.
+      responses:
+        200:
+          description: "Servicedocument."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Servicedocument"
+      tags:
+        - "Discovery"
+  /feed:
+    get:
+      operationId: "getFeed"
+      summary: "Feed van wijzigingen"
+      description: |
+        Levert feedrecords op vanaf de meegegeven `cursor`, altijd oplopend op
+        `sequenceNumber`. Laat `cursor` weg om vanaf het begin van de bewaarde
+        historie te beginnen; gebruik `GET /snapshot` als je niet de hele
+        historie wilt herspelen.
+
+        Bewaar de `cursor` uit het antwoord voor de volgende aanroep. Bij
+        `hasMore: false` ben je bij: bewaar de cursor en poll later opnieuw.
+      parameters:
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/OrganisatiecodeFilter"
+        - $ref: "#/components/parameters/ResourceTypeFilter"
+      responses:
+        200:
+          description: "Feedpagina succesvol opgehaald."
+          headers:
+            Cache-Control:
+              description: "Kortdurend cachebaar; de kop van de feed verandert continu."
+              schema:
+                type: string
+                example: "public, max-age=30"
+            Link:
+              description: "Bevat minimaal `rel=\"next\"` (RFC 8288)."
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeedPage"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+        503:
+          $ref: "#/components/responses/ServiceUnavailable"
+      tags:
+        - "Feed"
+  /feed/stream:
+    get:
+      operationId: "getFeedStream"
+      summary: "Feed als Server-Sent Events stream (optioneel)"
+      description: |
+        Optionele gemaksvoorziening bovenop `GET /feed`, voor afnemers die
+        wijzigingen zo snel mogelijk willen zien.
+
+        Elk bericht heeft een `id:`-veld met het `sequenceNumber`, zodat een
+        client bij een verbroken verbinding automatisch hervat via de
+        `Last-Event-ID` header. Zonder dat mechanisme levert elke reconnect een
+        gat op.
+
+        Deze stroom biedt géén synchronisatiegarantie: hij kan berichten missen
+        bij overbelasting of onderhoud. `GET /feed` blijft het contract waarop
+        een afnemer zich verlaat. Zie readme.md: het is een open vraag of deze
+        operatie in de standaard thuishoort.
+      parameters:
+        - in: header
+          name: Last-Event-ID
+          schema:
+            type: string
+          description: "Het laatst ontvangen `sequenceNumber`. Wordt door SSE-clients automatisch meegestuurd bij een reconnect."
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/OrganisatiecodeFilter"
+        - $ref: "#/components/parameters/ResourceTypeFilter"
+      responses:
+        200:
+          description: |
+            Een `text/event-stream` volgens het SSE-protocol. Per bericht: een
+            `id:`-regel met het `sequenceNumber` en een `data:`-regel met één
+            FeedRecord als JSON.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+              examples:
+                twee:
+                  summary: "Twee records in de stream"
+                  value: |
+                    id: 41
+                    data: {"sequenceNumber":41,"op":"upsert","resourceType":"Vergadering","resource":{"organisatiecode":"gm0363","bronidentificatie":"vg-2026-0412"},"resourceUrl":"https://ris.gemeente-voorbeeld.nl/ori/v1/organisaties/gm0363/vergaderingen/vg-2026-0412","contentHash":"sha256:9f2c...","storedAt":"2026-03-26T10:05:01Z"}
+
+                    id: 42
+                    data: {"sequenceNumber":42,"op":"delete","resourceType":"Informatieobject","resource":{"organisatiecode":"gm0363","bronidentificatie":"doc-456"},"verwijderreden":"ingetrokken","storedAt":"2026-03-26T10:10:01Z"}
+        400:
+          $ref: "#/components/responses/BadRequest"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+        503:
+          $ref: "#/components/responses/ServiceUnavailable"
+      tags:
+        - "Feed"
+  /snapshot:
+    get:
+      operationId: "getSnapshot"
+      summary: "Huidige stand (initiële synchronisatie)"
+      description: |
+        Levert de laatste bekende toestand per resource, zodat een nieuwe afnemer
+        niet de volledige historie hoeft te herspelen.
+
+        Neem van de **eerste** pagina de `feedCursor` over: daarmee pak je na het
+        doorlopen van de snapshot de feed op zonder gat. Pagineer verder met
+        `cursor`.
+
+        Records hebben altijd `op: "upsert"`; verwijderde resources komen in een
+        snapshot niet voor.
+      parameters:
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/OrganisatiecodeFilter"
+        - $ref: "#/components/parameters/ResourceTypeFilter"
+      responses:
+        200:
+          description: "Snapshotpagina succesvol opgehaald."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SnapshotPage"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        429:
+          $ref: "#/components/responses/TooManyRequests"
+        503:
+          $ref: "#/components/responses/ServiceUnavailable"
+      tags:
+        - "Feed"
+  /organisaties/{organisatiecode}/vergaderingen:
+    get:
+      operationId: "getVergaderingen"
+      summary: "Vergaderingen opvragen"
+      description: "Huidige stand. Pagineer met `cursor`. Gebruik voor synchronisatie `GET /feed`, niet deze collectie."
+      parameters:
+        - $ref: "#/components/parameters/OrganisatiecodePath"
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        200:
+          description: "Zoekactie geslaagd."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VergaderingPage"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/NotFound"
+      tags:
+        - "Resources"
+  /organisaties/{organisatiecode}/vergaderingen/{bronidentificatie}:
+    get:
+      operationId: "getVergadering"
+      summary: "Eén vergadering opvragen"
+      parameters:
+        - $ref: "#/components/parameters/OrganisatiecodePath"
+        - $ref: "#/components/parameters/BronidentificatiePath"
+      responses:
+        200:
+          description: "Zoekactie geslaagd."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vergadering"
+        404:
+          $ref: "#/components/responses/NotFound"
+      tags:
+        - "Resources"
+  /organisaties/{organisatiecode}/agendapunten:
+    get:
+      operationId: "getAgendapunten"
+      summary: "Agendapunten opvragen"
+      description: "Huidige stand. Pagineer met `cursor`. Gebruik voor synchronisatie `GET /feed`, niet deze collectie."
+      parameters:
+        - $ref: "#/components/parameters/OrganisatiecodePath"
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        200:
+          description: "Zoekactie geslaagd."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgendapuntPage"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/NotFound"
+      tags:
+        - "Resources"
+  /organisaties/{organisatiecode}/agendapunten/{bronidentificatie}:
+    get:
+      operationId: "getAgendapunt"
+      summary: "Eén agendapunt opvragen"
+      parameters:
+        - $ref: "#/components/parameters/OrganisatiecodePath"
+        - $ref: "#/components/parameters/BronidentificatiePath"
+      responses:
+        200:
+          description: "Zoekactie geslaagd."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Agendapunt"
+        404:
+          $ref: "#/components/responses/NotFound"
+      tags:
+        - "Resources"
+  /organisaties/{organisatiecode}/informatieobjecten:
+    get:
+      operationId: "getInformatieobjecten"
+      summary: "Informatieobjecten opvragen"
+      description: "Huidige stand. Pagineer met `cursor`. Gebruik voor synchronisatie `GET /feed`, niet deze collectie."
+      parameters:
+        - $ref: "#/components/parameters/OrganisatiecodePath"
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        200:
+          description: "Zoekactie geslaagd."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InformatieObjectPage"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/NotFound"
+      tags:
+        - "Resources"
+  /organisaties/{organisatiecode}/informatieobjecten/{bronidentificatie}:
+    get:
+      operationId: "getInformatieobject"
+      summary: "Eén informatieobject opvragen"
+      parameters:
+        - $ref: "#/components/parameters/OrganisatiecodePath"
+        - $ref: "#/components/parameters/BronidentificatiePath"
+      responses:
+        200:
+          description: "Zoekactie geslaagd."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InformatieObject"
+        404:
+          $ref: "#/components/responses/NotFound"
+      tags:
+        - "Resources"
+components:
+  parameters:
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: |
+        Opake positie-aanduiding uit een eerder antwoord. Laat weg om bij het
+        begin te starten. Behandel de waarde als ondeelbaar: het formaat is geen
+        contract en kan wijzigen.
+      example: "c2VxOjEyMzQ1"
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 500
+      description: "Maximum aantal records per pagina."
+    OrganisatiecodeFilter:
+      name: organisatiecode
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/Organisatiecode"
+      description: "Filter op organisatie. Relevant wanneer één feed meerdere organisaties bedient. Kleine letters zijn normatief; de bronhouder normaliseert hoofdletters."
+      example: "gm0363"
+    OrganisatiecodePath:
+      name: organisatiecode
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/Organisatiecode"
+      description: "De TOOI-code van de organisatie."
+      example: "gm0363"
+    BronidentificatiePath:
+      name: bronidentificatie
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+      description: "De sleutel van de resource bij het bestuursorgaan zelf. URL-encodeer waarden met bijzondere tekens."
+      example: "vg-2026-0412"
+    ResourceTypeFilter:
+      name: resourceType
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/ResourceType"
+      description: "Filter op resourcetype."
+  responses:
+    BadRequest:
+      description: "Ongeldig verzoek, bijvoorbeeld een onbekende of verlopen cursor."
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    NotFound:
+      description: "De gevraagde resource is niet gevonden."
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    TooManyRequests:
+      description: "Te veel verzoeken."
+      headers:
+        Retry-After:
+          description: "Aantal seconden voordat een nieuw verzoek zinvol is."
+          schema:
+            type: integer
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    ServiceUnavailable:
+      description: "Tijdelijk niet beschikbaar. Een afnemer bewaart zijn cursor en probeert het later opnieuw."
+      headers:
+        Retry-After:
+          description: "Aantal seconden voordat een nieuw verzoek zinvol is."
+          schema:
+            type: integer
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+  schemas:
+    Problem:
+      type: object
+      description: "Foutantwoord volgens RFC 9457 (`application/problem+json`), conform de API-strategie-extensies."
+      required:
+        - status
+        - title
+      properties:
+        type:
+          type: string
+          format: uri
+          description: "URI die het fouttype identificeert."
+          example: "https://ris.gemeente-voorbeeld.nl/problems/ongeldige-cursor"
+        title:
+          type: string
+          description: "Korte, mensleesbare samenvatting van het fouttype."
+          example: "Ongeldige cursor"
+        status:
+          type: integer
+          format: int32
+          description: "De HTTP-statuscode."
+          example: 400
+        detail:
+          type: string
+          description: "Uitleg specifiek voor dit voorval."
+          example: "De meegegeven cursor valt buiten de bewaarde historie; start opnieuw vanaf /snapshot."
+        instance:
+          type: string
+          format: uri
+          description: "URI van dit specifieke voorval."
+        invalidParams:
+          type: array
+          description: "Per veld of parameter wat er ontbreekt of niet klopt."
+          items:
+            type: object
+            required:
+              - name
+              - reason
+            properties:
+              name:
+                type: string
+                example: "limit"
+              reason:
+                type: string
+                example: "Moet tussen 1 en 1000 liggen."
+    Servicedocument:
+      type: object
+      description: "Beschrijft wat deze feed aanbiedt, zodat een afnemer zich kan aansluiten zonder buitenboord-documentatie."
+      required:
+        - rol
+        - organisaties
+        - resourceTypes
+        - feedUrl
+        - snapshotUrl
+      properties:
+        rol:
+          type: string
+          enum:
+            - bronhouder
+            - aggregator
+          description: |
+            Publiceert deze feed de eigen raadsinformatie van de organisatie(s),
+            of bundelt hij feeds van anderen? Beide zijn geldig en gebruiken
+            hetzelfde contract; een afnemer die de kortste weg naar de bron wil,
+            kan hierop kiezen.
+          example: "bronhouder"
+        organisaties:
+          type: array
+          description: "De organisaties waarvan deze feed wijzigingen publiceert."
+          minItems: 1
+          items:
+            type: object
+            required:
+              - organisatiecode
+              - naam
+            properties:
+              organisatiecode:
+                $ref: "#/components/schemas/Organisatiecode"
+              naam:
+                type: string
+                example: "Gemeente Amsterdam"
+              laatstBijgewerkt:
+                type: string
+                format: date-time
+                description: |
+                  Tot welk moment deze feed voor deze organisatie bij is. Voor
+                  een bronhouder is dat vrijwel altijd nu; een aggregator maakt
+                  hiermee zichtbaar dat hij achterloopt of een bron tijdelijk
+                  niet kan bereiken. Voorkomt dat een afnemer een achterstand
+                  aanziet voor "er is niets gebeurd".
+                example: "2026-03-26T10:12:00Z"
+              herkomst:
+                type: string
+                format: uri
+                description: "Alleen bij `rol: aggregator`: uit welke feed de gegevens van deze organisatie komen. Ontbreekt zolang een aggregator een andere route gebruikt, bijvoorbeeld een leveranciers-API die nog geen feed aanbiedt."
+                example: "https://ris.gemeente-voorbeeld.nl/ori/v1/feed"
+        resourceTypes:
+          type: array
+          description: "De resourcetypes die in deze feed voorkomen."
+          items:
+            $ref: "#/components/schemas/ResourceType"
+        feedUrl:
+          type: string
+          format: uri
+          example: "https://ris.gemeente-voorbeeld.nl/ori/v1/feed"
+        snapshotUrl:
+          type: string
+          format: uri
+          example: "https://ris.gemeente-voorbeeld.nl/ori/v1/snapshot"
+        streamUrl:
+          type: string
+          format: uri
+          description: "Aanwezig als deze feed ook een SSE-stream aanbiedt."
+        historieVanaf:
+          type: string
+          format: date
+          description: "Vanaf welke datum de feedhistorie teruggaat. Ouder materiaal is alleen via de snapshot te krijgen."
+          example: "2010-01-01"
+        retentie:
+          type: string
+          description: "Hoe lang feedrecords bewaard blijven; `permanent` als er niets wordt opgeruimd. Een afnemer die langer wegblijft, herstart via de snapshot."
+          example: "permanent"
+        contact:
+          type: string
+          format: uri
+          description: "Waar een afnemer terecht kan bij problemen."
+          example: "mailto:opendata@gemeente-voorbeeld.nl"
+        licentie:
+          type: string
+          format: uri
+          description: "De licentie waaronder de gegevens worden gepubliceerd."
+          example: "https://creativecommons.org/publicdomain/zero/1.0/deed.nl"
+    Organisatiecode:
+      type: string
+      pattern: "^(gm[0-9]{4}|pv[0-9]{2}|ws[0-9]{4})$"
+      description: "De code van de organisatie volgens TOOI, in kleine letters. Bijvoorbeeld `gm0363` (Amsterdam), `pv27` (Noord-Holland), `ws0654` (Aa en Maas)."
+      example: "gm0363"
+    ResourceType:
+      type: string
+      enum:
+        - Vergadering
+        - Agendapunt
+        - Informatieobject
+      description: "Het type resource."
+      example: "Agendapunt"
+    ResourceSleutel:
+      type: object
+      description: |
+        De identiteit van een resource: landelijk uniek, en houdbaar als een
+        organisatie van leverancier wisselt of een feed van domein verhuist.
+      required:
+        - organisatiecode
+        - bronidentificatie
+      properties:
+        organisatiecode:
+          $ref: "#/components/schemas/Organisatiecode"
+        bronidentificatie:
+          type: string
+          minLength: 1
+          description: "De sleutel van dit object bij het bestuursorgaan zelf (het ID in het raadsinformatiesysteem)."
+          example: "vg-2026-0412"
+    Operatie:
+      type: string
+      enum:
+        - upsert
+        - delete
+        - redact
+      description: |
+        - `upsert`: volledige toestand van de resource (replace-semantiek).
+        - `delete`: de resource is niet langer openbaar of bestond niet.
+        - `redact`: als `delete`, plus: eerdere inhoud over deze resource is uit
+          de feedhistorie verwijderd.
+      example: "upsert"
+    VerwijderReden:
+      type: string
+      enum:
+        - ingetrokken
+        - correctie
+        - niet_langer_openbaar
+        - persoonsgegevens
+        - overig
+      description: |
+        - `ingetrokken`: het bestuursorgaan heeft het object ingetrokken.
+        - `correctie`: onjuist of dubbel gepubliceerd.
+        - `niet_langer_openbaar`: valt onder een uitzonderingsgrond van de Woo.
+        - `persoonsgegevens`: moet worden verwijderd omdat er persoonsgegevens
+          onrechtmatig openbaar zijn gemaakt. Leidt doorgaans tot `redact`.
+        - `overig`: alleen met een toelichting in `toelichting`.
+
+        Een TOOI-waardelijst is hier te verkiezen boven een enum in de OAS; zie
+        readme.md.
+      example: "ingetrokken"
+    FeedRecord:
+      type: object
+      description: |
+        Één wijziging in de feed. Compact van opzet: metadata en verwijzingen,
+        niet de inhoud van bijlagen. Het bestand zelf staat achter
+        `data.bestandsurl`.
+      required:
+        - sequenceNumber
+        - op
+        - resourceType
+        - resource
+        - storedAt
+      properties:
+        sequenceNumber:
+          type: integer
+          minimum: 1
+          description: "Door de bronhouder toegekend, per feed monotoon oplopend. De ordeningssleutel van de feed."
+          example: 42
+        op:
+          $ref: "#/components/schemas/Operatie"
+        resourceType:
+          $ref: "#/components/schemas/ResourceType"
+        resource:
+          $ref: "#/components/schemas/ResourceSleutel"
+        resourceUrl:
+          type: string
+          format: uri
+          description: "Waar deze resource bij de bronhouder te vinden is. Een adres, geen identiteit: sleutel op `resource`."
+          example: "https://ris.gemeente-voorbeeld.nl/ori/v1/organisaties/gm0363/vergaderingen/vg-2026-0412"
+        contentHash:
+          type: string
+          pattern: "^sha256:[0-9a-f]{64}$"
+          description: |
+            Hash over de inhoud van `data`. Leg geen nieuw record vast wanneer de
+            hash gelijk is aan de vorige toestand van dezelfde resource, zodat
+            een herindexatie geen storm van no-op-records oplevert. Aanwezig bij
+            `op: upsert`.
+          example: "sha256:9f2c1e0b7d4a5c6e8f0a1b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60"
+        storedAt:
+          type: string
+          format: date-time
+          description: "Tijdstip waarop de bronhouder deze wijziging in de feed heeft vastgelegd."
+          example: "2026-03-12T10:00:05Z"
+        gewijzigdOp:
+          type: string
+          format: date-time
+          description: "Tijdstip van de wijziging in het bronsysteem, als dat wordt bijgehouden. Informatief: niet monotoon, dus niet geschikt om op te synchroniseren."
+          example: "2026-03-12T10:00:00Z"
+        herkomst:
+          type: object
+          description: |
+            Alleen door een aggregator gevuld: uit welke feed dit record komt.
+            Maakt de keten traceerbaar en laat een afnemer zien of twee
+            aggregatoren dezelfde bron doorgeven. Een bronhouder laat dit weg.
+          required:
+            - feedUrl
+          properties:
+            feedUrl:
+              type: string
+              format: uri
+              description: "De feed waaruit dit record is overgenomen."
+              example: "https://ris.gemeente-voorbeeld.nl/ori/v1/feed"
+            sequenceNumber:
+              type: integer
+              description: "Het `sequenceNumber` dat dit record in die feed had. Geldt alleen daar: gebruik voor deze feed het `sequenceNumber` hierboven."
+              example: 42
+        data:
+          description: "De volledige toestand van de resource. Aanwezig bij `op: upsert`."
+          oneOf:
+            - $ref: "#/components/schemas/Vergadering"
+            - $ref: "#/components/schemas/Agendapunt"
+            - $ref: "#/components/schemas/InformatieObject"
+          discriminator:
+            propertyName: dossiertype
+            mapping:
+              vergadering: "#/components/schemas/Vergadering"
+              agendapunt: "#/components/schemas/Agendapunt"
+              informatieobject: "#/components/schemas/InformatieObject"
+        verwijderreden:
+          allOf:
+            - $ref: "#/components/schemas/VerwijderReden"
+            - description: "Aanwezig bij `op: delete` en `op: redact`."
+        toelichting:
+          type: string
+          description: "Vrije toelichting, bijvoorbeeld bij `verwijderreden: overig`."
+          example: "Document vervangen door een nieuwe versie."
+        geredigeerdeSequenceNumbers:
+          type: array
+          description: |
+            Alleen bij `op: redact`: de `sequenceNumber`s waarvan de inhoud uit de
+            feedhistorie is verwijderd. Een afnemer die deze records eerder heeft
+            opgehaald, verwijdert de betreffende gegevens ook uit zijn eigen
+            kopie, caches en afgeleide producten. Dit zijn de enige toegestane
+            gaten in de reeks.
+          items:
+            type: integer
+          example: [17, 29]
+    FeedPage:
+      type: object
+      description: "Eén pagina uit de feed."
+      required:
+        - records
+        - cursor
+        - head
+        - hasMore
+      properties:
+        records:
+          type: array
+          description: "De records op deze pagina, oplopend op `sequenceNumber`. Leeg wanneer de afnemer bij is."
+          items:
+            $ref: "#/components/schemas/FeedRecord"
+        cursor:
+          type: string
+          description: "Positie ná de laatste record op deze pagina. Bewaar deze en geef hem mee bij de volgende aanroep."
+          example: "c2VxOjEyMzQ1"
+        head:
+          type: integer
+          description: "Het hoogste `sequenceNumber` in de feed op het moment van antwoorden. Het verschil met het laatste record is de achterstand."
+          example: 120345
+        hasMore:
+          type: boolean
+          description: "`false` betekent: je bent bij. Bewaar de cursor en poll later opnieuw."
+          example: true
+        next:
+          type:
+            - string
+            - "null"
+          format: uri
+          description: "Volledige URL voor de volgende pagina, of `null` bij `hasMore: false`."
+    SnapshotPage:
+      type: object
+      description: "Eén pagina uit de huidige stand."
+      required:
+        - records
+        - feedCursor
+        - hasMore
+      properties:
+        records:
+          type: array
+          description: "De laatste toestand per resource; altijd `op: upsert`."
+          items:
+            $ref: "#/components/schemas/FeedRecord"
+        feedCursor:
+          type: string
+          description: |
+            De cursor waarmee je na het doorlopen van deze snapshot verdergaat op
+            `GET /feed`. Neem de waarde van de **eerste** pagina: die is
+            vastgesteld vóórdat de snapshotrijen werden gelezen, zodat
+            wijzigingen tijdens het doorlopen niet worden gemist. Hij wordt op
+            elke pagina meegegeven om hervatten eenvoudig te houden.
+          example: "c2VxOjEyMDAwMA"
+        cursor:
+          type:
+            - string
+            - "null"
+          description: "Positie voor de volgende snapshotpagina, of `null` als dit de laatste is."
+        hasMore:
+          type: boolean
+          example: true
+        next:
+          type:
+            - string
+            - "null"
+          format: uri
+          description: "Volledige URL voor de volgende pagina."
+    VergaderingPage:
+      type: object
+      required:
+        - results
+        - hasMore
+      properties:
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/Vergadering"
+        cursor:
+          type:
+            - string
+            - "null"
+        hasMore:
+          type: boolean
+        next:
+          type:
+            - string
+            - "null"
+          format: uri
+    AgendapuntPage:
+      type: object
+      required:
+        - results
+        - hasMore
+      properties:
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/Agendapunt"
+        cursor:
+          type:
+            - string
+            - "null"
+        hasMore:
+          type: boolean
+        next:
+          type:
+            - string
+            - "null"
+          format: uri
+    InformatieObjectPage:
+      type: object
+      required:
+        - results
+        - hasMore
+      properties:
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/InformatieObject"
+        cursor:
+          type:
+            - string
+            - "null"
+        hasMore:
+          type: boolean
+        next:
+          type:
+            - string
+            - "null"
+          format: uri
+    VerwijzingNaarResource:
+      type: object
+      description: |
+        Verwijzing naar een andere resource, primair via `bronidentificatie`.
+        `organisatiecode` alleen invullen bij een verwijzing naar een andere
+        organisatie; anders geldt die van de verwijzende resource.
+      required:
+        - bronidentificatie
+      properties:
+        bronidentificatie:
+          type: string
+          minLength: 1
+          description: "De sleutel van de doelresource bij het bestuursorgaan zelf."
+          example: "vg-2026-0412"
+        organisatiecode:
+          $ref: "#/components/schemas/Organisatiecode"
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          description: "Waar de doelresource te vinden is. Een adres, geen identiteit."
+    Gemeente:
+      type: object
+      required:
+        - gemeente
+        - naam
+      properties:
+        gemeente:
+          type: string
+          title: Gemeente
+          description: 'De code van de gemeente volgens TOOI. Bijvoorbeeld "gm0363" voor gemeente Amsterdam.'
+          example: gm0363
+        naam:
+          type: string
+          description: "De naam van de organisatie."
+          example: "Gemeente Amsterdam"
+    Provincie:
+      type: object
+      required:
+        - provincie
+        - naam
+      properties:
+        provincie:
+          type: string
+          title: Provincie
+          description: 'De code van de provincie volgens TOOI. Bijvoorbeeld "pv27" voor provincie Noord-Holland.'
+          example: pv27
+        naam:
+          type: string
+          description: "De naam van de organisatie."
+          example: "Provincie Noord-Holland"
+    Waterschap:
+      type: object
+      required:
+        - waterschap
+        - naam
+      properties:
+        waterschap:
+          type: string
+          title: Waterschap
+          description: 'De code van het waterschap volgens TOOI. Bijvoorbeeld "ws0654" voor het waterschap Aa en Maas.'
+          example: ws0654
+        naam:
+          type: string
+          description: "De naam van de organisatie."
+          example: "Waterschap Aa en Maas"
+    Organisatie:
+      description: |
+        Ongewijzigd overgenomen uit 0.0.1. Merk op dat deze `oneOf` geen
+        discriminator heeft en dat `resource.organisatiecode` dezelfde informatie
+        compacter uitdrukt; zie de open punten in readme.md.
+      oneOf:
+        - $ref: "#/components/schemas/Gemeente"
+        - $ref: "#/components/schemas/Provincie"
+        - $ref: "#/components/schemas/Waterschap"
+    Gremium:
+      type: object
+      description: "De referentielijst met alle gremia in een organisatie, inclusief de commissies."
+      required:
+        - gremiumidentificatie
+        - gremiumnaam
+      properties:
+        gremiumidentificatie:
+          type: string
+          title: "Gremiumidentificatie"
+          description: "De identificatie van een gremium."
+          minLength: 1
+        gremiumnaam:
+          type: string
+          title: "Gremiumnaam"
+          description: "De naam van het gremium. Hier horen ook de (raads- en staten)commissies bij."
+          minLength: 1
+    Informatieobjecttype:
+      type: string
+      description: "Het type van het informatieobject, gebruikt om zoekresultaten te filteren en gebruikers snel inzicht te geven in de aard van het document."
+    VergaderingStatus:
+      type: string
+      description: "Mogelijke status van een vergadering."
+    VergaderingsType:
+      type: string
+      description: "De mogelijke typen van een vergadering."
+    GerelateerdInformatieobject:
+      type:
+        - object
+        - "null"
+      title: Gerelateerd informatieobject
+      description: "Relevant ander informatieobject dat gerelateerd is aan dit informatieobject."
+      required:
+        - informatieobject
+        - rol
+      properties:
+        informatieobject:
+          allOf:
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+            - description: "Het gerelateerde informatieobject."
+        rol:
+          type: string
+          title: Rol
+          description: "Het type van de relatie, bijvoorbeeld bijlage_van: https://identifier.overheid.nl/tooi/def/thes/kern/c_4d1ea9ba"
+    Vergadering:
+      type: object
+      description: |
+        Een bijeenkomst van meerdere mensen die met elkaar spreken en/of
+        afspraken maken over onderwerpen die op de agenda staan.
+
+        Eén schema in plaats van het paar `Vergadering`/`VergaderingZonderPid`
+        uit 0.0.1: er is geen centraal toegekende PID meer, dus geen tweede
+        variant nodig.
+      required:
+        - bronidentificatie
+        - organisatie
+        - dossiertype
+        - naam
+      properties:
+        bronidentificatie:
+          type: string
+          minLength: 1
+          description: "De sleutel van deze vergadering bij het bestuursorgaan zelf. Samen met de organisatiecode de identiteit van de resource."
+          example: "vg-2026-0412"
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          description: "Waar deze vergadering bij de bronhouder te vinden is."
+          example: "https://ris.gemeente-voorbeeld.nl/ori/v1/organisaties/gm0363/vergaderingen/vg-2026-0412"
+        dossiertype:
+          type: string
+          const: vergadering
+          title: Dossiertype
+          description: "Het type dossier; hier altijd `vergadering`. Dient tevens als discriminator van `data`."
+          example: "vergadering"
+        webpaginalink:
+          type: string
+          format: uri
+          title: Webpagina link
+          description: "De URL naar de webpagina waar de vergadering voor mensen is terug te vinden."
+          example: "https://example.com/mijn-pagina.html"
+        organisatie:
+          $ref: "#/components/schemas/Organisatie"
+        naam:
+          type: string
+          title: "Naam"
+          description: "De naam van de vergadering."
+          example: "Raadsvergadering"
+        gewijzigdop:
+          type: string
+          format: date-time
+          description: "Tijdstip van de laatste wijziging bij de bron, als de bron dat bijhoudt. Informatief."
+          example: "2026-03-12T09:58:00Z"
+        aanvang:
+          type: string
+          title: "Aanvang vergadering"
+          description: "De datum en tijd waarop de vergadering is gestart. Komt zeker voor als `einde` is ingevuld."
+          format: date-time
+          example: "2017-02-10T18:25:00Z"
+        einde:
+          type: string
+          title: "Einde"
+          description: "De datum en tijd waarop de vergadering is geëindigd."
+          format: date-time
+          example: "2017-02-10T21:12:00Z"
+        hoofdvergadering:
+          allOf:
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+            - description: "Verwijzing naar de hoofdvergadering waarvan deze vergadering een deelvergadering is."
+        georganiseerddoorgremium:
+          allOf:
+            - $ref: "#/components/schemas/Gremium"
+            - title: "georganiseerddoorgremium"
+              description: "Het gremium dat de vergadering organiseert."
+        geplandeaanvang:
+          type: string
+          title: "Geplande aanvang"
+          description: "De geplande datum en tijd waarop de vergadering start."
+          format: date-time
+          example: "2017-02-09T18:25:00Z"
+        geplandeeinde:
+          type: string
+          title: "Geplande einde"
+          description: "De geplande datum en tijd waarop de vergadering eindigt."
+          format: date-time
+          example: "2017-02-09T21:25:00Z"
+        geplandedatum:
+          type: string
+          title: "Geplande vergaderdatum"
+          description: "De geplande datum van de vergadering."
+          format: date
+          example: "2017-02-09"
+        vergaderdatum:
+          type: string
+          title: "Vergaderdatum"
+          description: "De datum van de vergadering."
+          format: date
+          example: "2017-02-10"
+        locatie:
+          type: string
+          title: "Locatie"
+          description: "Omschrijving van de locatie waar de vergadering wordt gehouden."
+          example: "Raadszaal, Stadskantoor, Overtoom 2"
+        vergaderstatus:
+          $ref: "#/components/schemas/VergaderingStatus"
+        vergaderingstype:
+          $ref: "#/components/schemas/VergaderingsType"
+        vergadertoelichting:
+          type: string
+          title: "Vergadertoelichting"
+          description: "De toelichting of nadere omschrijving van de vergadering."
+          example: "Regulier geplande raadsvergadering van mei"
+        deelvergaderingen:
+          type: array
+          title: Deelvergaderingen
+          description: "Verwijzingen naar de deelvergaderingen van deze vergadering."
+          items:
+            $ref: "#/components/schemas/VerwijzingNaarResource"
+          uniqueItems: true
+        agendapunten:
+          type: array
+          title: Agendapunten
+          description: "Verwijzingen naar de agendapunten van deze vergadering."
+          items:
+            $ref: "#/components/schemas/VerwijzingNaarResource"
+          uniqueItems: true
+    Agendapunt:
+      type: object
+      description: |
+        Een onderdeel van de agenda dat als één geheel wordt behandeld. Een
+        agendapunt kan onderverdeeld zijn in subagendapunten.
+      required:
+        - bronidentificatie
+        - organisatie
+        - dossiertype
+        - agendapuntnaam
+        - vergadering
+      properties:
+        bronidentificatie:
+          type: string
+          minLength: 1
+          description: "De sleutel van dit agendapunt bij het bestuursorgaan zelf."
+          example: "ap-2026-0412-03"
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          description: "Waar dit agendapunt bij de bronhouder te vinden is."
+        dossiertype:
+          type: string
+          const: agendapunt
+          title: Dossiertype
+          description: "Het type dossier; hier altijd `agendapunt`. Dient tevens als discriminator van `data`."
+          example: "agendapunt"
+        webpaginalink:
+          type: string
+          format: uri
+          title: Webpagina link
+          description: "De URL naar de webpagina waar het agendapunt voor mensen is terug te vinden."
+          example: "https://example.com/mijn-pagina.html"
+        organisatie:
+          $ref: "#/components/schemas/Organisatie"
+        agendapuntnaam:
+          type: string
+          title: "Agendapunt naam"
+          description: "De weergave van het agendapunt op de agenda."
+        vergadering:
+          allOf:
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+            - description: "Verwijzing naar de vergadering waar dit agendapunt behandeld wordt."
+        hoofdagendapunt:
+          allOf:
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+            - description: "Verwijzing naar het hoofdagendapunt waarvan dit het subagendapunt is."
+        gewijzigdop:
+          type: string
+          format: date-time
+          description: "Tijdstip van de laatste wijziging bij de bron, als de bron dat bijhoudt. Informatief."
+        omschrijving:
+          type: string
+          title: "Agendapunt omschrijving"
+          description: "De omschrijving van het agendapunt."
+        volgnummer:
+          type: string
+          title: "Agendapuntvolgnummer"
+          description: "Het volgnummer van het agendapunt tijdens de vergadering: de letterlijke volgorde. Hoe het agendapunt wordt getoond staat in `agendapuntnaam`."
+        subagendapunten:
+          type: array
+          title: Subagendapunten
+          description: "Verwijzingen naar de subagendapunten."
+          items:
+            $ref: "#/components/schemas/VerwijzingNaarResource"
+          uniqueItems: true
+        tussenkop:
+          type: string
+          title: "Tussenkop"
+          description: "Eventuele andere sorteringsmechanismen om de agendapunten te rangschikken."
+        overig:
+          type: string
+          title: "Overig"
+          description: "Vrij veld, bijvoorbeeld voor een status of aanvullende informatie."
+        starttijd:
+          type: string
+          title: "Starttijd"
+          description: "De datum en tijd waarop de behandeling van het agendapunt is gestart."
+          format: date-time
+          example: "2017-02-10T18:25:00Z"
+        eindtijd:
+          type: string
+          title: "Eindtijd"
+          description: "De datum en tijd waarop de behandeling van het agendapunt is geëindigd. Komt voor als `starttijd` voorkomt."
+          format: date-time
+          example: "2017-02-10T18:25:00Z"
+        locatie:
+          type: string
+          title: "Locatie"
+          description: "Omschrijving van de locatie waar het agendapunt wordt behandeld."
+        geplandvolgnummer:
+          type: string
+          title: "Gepland volgnummer"
+          description: "Het geplande volgnummer van het agendapunt."
+        geplandestarttijd:
+          type: string
+          title: "Geplande starttijd"
+          description: "De geplande datum en tijd waarop de behandeling start."
+          format: date-time
+          example: "2017-02-10T18:25:00Z"
+        geplandeeindtijd:
+          type: string
+          title: "Geplande eindtijd"
+          description: "De geplande datum en tijd waarop de behandeling eindigt."
+          format: date-time
+          example: "2017-02-10T18:25:00Z"
+        indicatiehamerstuk:
+          type:
+            - boolean
+            - "null"
+          title: "Indicatie hamerstuk"
+          description: "Indicatie of het agendapunt als hamerstuk is behandeld."
+          example: true
+        indicatiebehandeld:
+          type:
+            - boolean
+            - "null"
+          title: "Indicatie behandeld"
+          description: "Indicatie of het agendapunt is behandeld tijdens de vergadering."
+        indicatiebesloten:
+          type:
+            - boolean
+            - "null"
+          title: "Indicatie besloten"
+          description: "Indicatie of een agendapunt besloten wordt behandeld."
+    InformatieObject:
+      type: object
+      description: |
+        Een (document-)object dat tijdens een vergadering is besproken of
+        behandeld.
+      required:
+        - bronidentificatie
+        - dossiertype
+        - webpaginalink
+        - organisatie
+        - titel
+        - wooinformatiecategorie
+        - datumingediend
+      properties:
+        bronidentificatie:
+          type: string
+          minLength: 1
+          description: "De sleutel van dit informatieobject bij het bestuursorgaan zelf. Vervangt het dubbelzinnige `id` uit 0.0.1."
+          example: "doc-456"
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          description: "Waar dit informatieobject bij de bronhouder te vinden is."
+        dossiertype:
+          type: string
+          const: informatieobject
+          title: Dossiertype
+          description: "Het type dossier; hier altijd `informatieobject`. Toegevoegd ten opzichte van 0.0.1 om `data` van een discriminator te kunnen voorzien."
+          example: "informatieobject"
+        id:
+          type: string
+          title: ID
+          deprecated: true
+          description: "Deprecated: gebruik `bronidentificatie`."
+        webpaginalink:
+          type: string
+          format: uri
+          title: Webpagina link
+          description: "De URL naar de webpagina waar dit document voor mensen is terug te vinden."
+          example: "https://example.com/mijn-pagina.html"
+        bestandsurl:
+          type: string
+          format: uri
+          description: |
+            Stabiele, directe URL naar het bestand zelf. Nodig voor afnemers die
+            documenten moeten indexeren; zonder deze URL blijft alleen het
+            scrapen van `webpaginalink` over.
+          example: "https://ris.gemeente-voorbeeld.nl/documenten/doc-456.pdf"
+        formaat:
+          type: string
+          title: Formaat
+          description: "Het mediatype van de inhoud, bijvoorbeeld `application/pdf`."
+          example: "application/pdf"
+        omvang:
+          type: integer
+          description: "De grootte van het bestand in bytes."
+          example: 482913
+        checksum:
+          type: string
+          pattern: "^sha256:[0-9a-f]{64}$"
+          description: "Checksum over het bestand, zodat een afnemer kan zien of zijn kopie nog actueel is zonder hem opnieuw te downloaden."
+          example: "sha256:1b7d4a5c6e8f0a1b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f607182c3"
+        organisatie:
+          $ref: "#/components/schemas/Organisatie"
+        titel:
+          type: string
+          title: "Titel"
+          description: "De titel van het informatieobject."
+        wooinformatiecategorie:
+          type: string
+          title: Woo informatiecategorie
+          description: "De code van de informatiecategorie volgens TOOI, bijvoorbeeld `c_db4862c3` voor 'vergaderstuk decentrale overheid'."
+          example: "c_db4862c3"
+        datumingediend:
+          type: string
+          title: "Datum ingediend"
+          description: "De datum waarop het informatieobject als vergaderstuk is ingediend."
+          format: date
+          example: "2017-02-09"
+        gewijzigdop:
+          type: string
+          format: date-time
+          description: "Tijdstip van de laatste wijziging bij de bron, als de bron dat bijhoudt. Informatief."
+        auteur:
+          type: string
+          title: "Auteur"
+          description: "De naam van de auteur van het document."
+        bronorganisatie:
+          type: string
+          title: "Bronorganisatie"
+          description: "De organisatie die verantwoordelijk is voor de inhoud van een document. Kan met een TOOI-URI worden aangeduid, maar het kan ook een niet-publieke organisatie betreffen."
+        creatiedatum:
+          type: string
+          title: "Creatiedatum"
+          description: "Moment waarop het document is gemaakt."
+        informatieobjecttype:
+          $ref: "#/components/schemas/Informatieobjecttype"
+        omschrijving:
+          type: string
+          title: "Omschrijving"
+          description: "De omschrijving van het informatieobject."
+        taal:
+          type: string
+          title: "Taal"
+          description: "De taal van het informatieobject, bij voorkeur volgens ISO 639-2/B."
+        vergaderingen:
+          type: array
+          description: "Verwijzingen naar de vergaderingen die dit informatieobject als bijlage hebben."
+          items:
+            $ref: "#/components/schemas/VerwijzingNaarResource"
+          uniqueItems: true
+        agendapunten:
+          type: array
+          title: "Agendapunten"
+          description: "Verwijzingen naar de agendapunten die dit informatieobject als bijlage hebben."
+          items:
+            $ref: "#/components/schemas/VerwijzingNaarResource"
+          uniqueItems: true
+        gerelateerdinformatieobject:
+          $ref: "#/components/schemas/GerelateerdInformatieobject"
