@@ -834,12 +834,14 @@ components:
             - $ref: "#/components/schemas/Vergadering"
             - $ref: "#/components/schemas/Agendapunt"
             - $ref: "#/components/schemas/InformatieObject"
+            - $ref: "#/components/schemas/AanwezigeDeelnemer"
           discriminator:
             propertyName: dossiertype
             mapping:
               vergadering: "#/components/schemas/Vergadering"
               agendapunt: "#/components/schemas/Agendapunt"
               informatieobject: "#/components/schemas/InformatieObject"
+              aanwezigeDeelnemer: "#/components/schemas/AanwezigeDeelnemer"
         verwijderreden:
           allOf:
             - $ref: "#/components/schemas/VerwijderReden"
@@ -1232,6 +1234,97 @@ components:
           items:
             $ref: "#/components/schemas/VerwijzingNaarResource"
           uniqueItems: true
+    AanwezigeDeelnemer:
+      type: "object"
+      description: "De NATUURLIJKe PERSOON die deelneemt aan een VERGADERING."
+      required:
+      - bronidentificatie
+      - organisatie
+      - dossiertype
+      - natuurlijkPersoon
+      - vergadering
+      properties:
+        organisatie:
+          $ref: "#/components/schemas/Organisatie"
+        bronidentificatie:
+          type: string
+          minLength: 1
+          description: "De sleutel van deze resource bij de bronhouder zelf. Samen met de organisatiecode de identiteit van de resource."
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          description: De URL-locatie waar deze resource bij de bronhouder te vinden is.
+        dossiertype:
+          type: string
+          const: aanwezigeDeelnemer
+          title: Dossiertype
+          description: "Het type dossier; hier altijd `aanwezigeDeelnemer`. Dient tevens als discriminator van `data`."
+          example: "aanwezigeDeelnemer"
+        natuurlijkPersoon:
+          allOf:
+            - description: Verwijzing naar de natuurlijke persoon zijnde de aanwezige deelnemer.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        vergadering:
+          allOf:
+            - description: Verwijzing naar de vergadering waar de deelnemer aanwezig is.
+            - $ref: "#/components/schemas/VerwijzingNaarResource"
+        aanvangAanwezigheid:
+          type: "string"
+          title: "Aanvang aanwezigheid"
+          description: "De aanvang van de aanwezigheid."
+          format: "date-time"
+        eindeAanwezigheid:
+          type: "string"
+          title: "Einde aanwezigheid"
+          description: "De einde van de aanwezigheid."
+          format: "date-time"
+        deelnemerspositie:
+          type: "string"
+          title: "Deelnemerspositie"
+          description: "De plek waar een deelnemer in de zaal zit.\n\nDit kan bijvoorbeeld\
+            \ een stoel of een console zijn. Dit kan o.a. van belang zijn voor de\
+            \ audio/video-verslaggeving."
+        rolnaam:
+          $ref: "#/components/schemas/RolNaam"
+        stemmen:
+          type: "array"
+          title: "Stemmen"
+          description: URL-referenties naar de stemmen die de 
+            aanwezige deelnemer heeft uitgebracht.
+          items:
+            type: "string"
+            format: "uri"
+            minLength: 1
+          readOnly: true
+          uniqueItems: true
+    RolNaam:
+      type: "string"
+      description: "duiding van de rollen van een natuurlijke persoon tijdens een\
+        \ vergadering<body><ul><li>`voorzitter` - Voorzitter de voorzitter zit de\
+        \ vergadering voor</li><li>`vice_voorzitter` - Vice voorzitter de vice-voorzitter\
+        \ van de vergadering</li><li>`raadslid` - Raadslid Een raadslid is een gekozen\
+        \ volksvertegenwoordiger binnen een gemeente. Alle raadsleden van één gemeente\
+        \ vormen samen de gemeenteraad van de betreffende gemeente.</li><li>`inspreker`\
+        \ - Inspreker Een inspreker is een belanghebbende of betrokkene die wil inspreken\
+        \ bij een agendapunt</li><li>`overig` - Overig </li><li>`portefeuillehouder`\
+        \ - Portefeuillehouder de houder van een bepaalde portefeuille.</li><li>`statenlid`\
+        \ - Statenlid Een statenlid is een gekozen volksvertegenwoordiger binnen een\
+        \ provincie. Alle statenleden van één provincie vormen samen de Provinciale\
+        \ Staten van de betreffende provincie.</li><li>`dagelijks_bestuurslid` - Dagelijks\
+        \ bestuurslid Waterschappen</li><li>`algemeen_bestuurslid` - Algemeen bestuurslid\
+        \ Waterschappen</li><li>`griffier` - Griffier van de vergadering</li></ul></body>"
+      enum:
+      - "voorzitter"
+      - "vice_voorzitter"
+      - "raadslid"
+      - "inspreker"
+      - "overig"
+      - "portefeuillehouder"
+      - "statenlid"
+      - "dagelijks_bestuurslid"
+      - "algemeen_bestuurslid"
+      - "griffier"    
     Agendapunt:
       type: object
       description: |
